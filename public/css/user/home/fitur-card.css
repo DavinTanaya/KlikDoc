@@ -1,0 +1,60 @@
+.home_fitur-card {
+    background-color: rgb(var(--white));
+    border: 1px solid rgb(var(--blue4));
+    border-radius: 10px;
+    align-items: center;
+    gap: 25px;
+    height: 90px;
+    padding: 15px 25px;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    box-shadow: 0 4px rgb(var(--blue4));
+}
+
+.home_fitur-card:hover {
+    transform: translateY(-2px);
+}
+
+.home_fitur-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.home_fitur-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.home_fitur-info {
+    max-width: 300px;
+}
+
+.home_fitur-info h6 {
+    color: rgb(var(--grey3));
+    font-size: 20px;
+}
+
+.home_fitur-info p {
+    color: rgb(var(--grey2));
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.home_fitur-arrow {
+    width: 25px;
+    height: 25px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home_fitur-arrow img {
+    width: 100%;
+    height: 100%;
+}

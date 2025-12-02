@@ -1,0 +1,379 @@
+@layer utilities {
+    .flex {
+        display: flex;
+    }
+
+    .size-full {
+        width: 100%;
+        height: 100%;
+    }
+
+    .items-center {
+        align-items: center;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.home_information {
+    padding: 60px 120px;
+    align-items: center;
+}
+
+.home_information_blue {
+    width: 1200px;
+    height: 350px;
+    border-radius: 20px;
+    background-color: rgb(var(--blue3));
+}
+
+.home_section-title h2 {
+    color: rgb(var(--grey3));
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.home_section-title p {
+    color: rgb(var(--grey2));
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.home_solusi-kesehatan {
+    padding: 20px 120px;
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--blue4), 0.3),
+        rgba(var(--white), 0.5)
+    );
+}
+
+.home_fitur-grid {
+  margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 60px;
+    display: grid;
+}
+
+.home_promo-section {
+    padding: 60px 120px;
+}
+
+.promo-cards {
+  margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px;
+    display: grid;
+}
+
+.promo-card {
+    border-radius: 15px;
+    height: 300px;
+}
+
+.dark-promo {
+    background-color: #1c274c;
+}
+
+.red-promo {
+    background-color: #ff4867;
+}
+
+.home_board-section {
+    background-color: rgb(var(--red1), 0.5);
+    justify-content: space-between;
+    align-items: center;
+    gap: 80px;
+    height: 400px;
+    padding: 0 120px;
+    display: flex;
+    position: relative;
+}
+
+.home_board-image {
+    width: 411px;
+    height: 398px;
+}
+
+.home_dukungan-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 60px 120px;
+    gap: 40px;
+}
+
+.home_lebih-lengkap {
+    color: rgb(var(--red2));
+    align-items: center;
+    gap: 10px;
+    font-family: Mulish, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: gap 0.3s;
+    display: inline-flex;
+}
+
+.home_lebih-lengkap:hover {
+    gap: 15px;
+}
+
+.home_lebih-lengkap svg {
+    width: 15px;
+    height: 8px;
+    transform: rotate(90deg);
+}
+
+.home_dukungan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 25px;
+    justify-items: center;
+}
+
+.home_mandiri-section {
+    background: linear-gradient(to bottom, rgba(var(--red1), 0.5), rgba(var(--white), 0.1));
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 60px 120px;
+    gap: 40px;
+}
+
+.home_mandiri-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 25px;
+    justify-items: center;
+}
+
+.home_artikel-section {
+    padding: 80px 120px;
+}
+
+.home_artikel-grid {
+  margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+    margin-bottom: 40px;
+    display: grid;
+}
+
+.home_artikel-card {
+    flex-direction: column;
+    gap: 20px;
+    display: flex;
+}
+
+.home_artikel-image {
+    background: linear-gradient(135deg, #4fc3f7 0%, #f35164 100%);
+    border-radius: 15px;
+    width: 100%;
+    height: 309px;
+}
+
+.home_artikel-card h3 {
+    color: rgb(var(--grey3));
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+@media (width <= 1440px) {
+    .solusi-kesehatan,
+    .promo-section,
+    .board-section,
+    .dukungan-section,
+    .mandiri-section,
+    .artikel-section {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    .carousel-container {
+        width: calc(100% - 120px);
+    }
+
+    .carousel-slide {
+        min-width: calc(100% - 120px);
+    }
+}
+
+@media (width <= 1024px) {
+    .fitur-grid,
+    .promo-cards,
+    .artikel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dukungan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mandiri-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .board-section {
+        flex-direction: column;
+        height: auto;
+        padding: 40px;
+    }
+
+    .footer-content,
+    .footer-middle {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+@media (width <= 768px) {
+    .solusi-kesehatan h2,
+    .promo-section h2,
+    .board-content h2,
+    .dukungan-header h2,
+    .mandiri-header h2,
+    .artikel-header h2 {
+        font-size: 32px;
+    }
+
+    .board-content p,
+    .dukungan-header p,
+    .mandiri-header p,
+    .artikel-header p {
+        font-size: 18px;
+    }
+    .dukungan-grid,
+    .mandiri-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .promo-cards,
+    .artikel-grid {
+        gap: 40px;
+    }
+}
+
+@media (width <= 480px) {
+    .account {
+        margin-left: auto;
+    }
+
+    .solusi-kesehatan,
+    .promo-section,
+    .board-section,
+    .dukungan-section,
+    .mandiri-section,
+    .artikel-section {
+        padding: 40px 20px;
+    }
+
+    .fitur-card {
+        padding: 10px 15px;
+    }
+
+    .fitur-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .dukungan-grid,
+    .mandiri-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+:root {
+    --font-size: 16px;
+    --background: #fff;
+    --foreground: oklch(0.145 0 0);
+    --card: #fff;
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: #030213;
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.95 0.0058 264.53);
+    --secondary-foreground: #030213;
+    --muted: #ececf0;
+    --muted-foreground: #717182;
+    --accent: #e9ebef;
+    --accent-foreground: #030213;
+    --destructive: #d4183d;
+    --destructive-foreground: #fff;
+    --border: #0000001a;
+    --input: transparent;
+    --input-background: #f3f3f5;
+    --switch-background: #cbced4;
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: #030213;
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.145 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.145 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+    --border: oklch(0.269 0 0);
+    --input: oklch(0.269 0 0);
+    --ring: oklch(0.439 0 0);
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(0.269 0 0);
+    --sidebar-ring: oklch(0.439 0 0);
+}
+
+html {
+    font-size: var(--font-size);
+}
