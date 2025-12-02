@@ -75,6 +75,9 @@
                 </a>
             </div>
             <div class="home_mandiri-grid">
+                <a href="{{ route('bmi') }}">
+                    @include('home.components.mandiri-item')
+                </a>
                 @include('home.components.mandiri-item')
                 @include('home.components.mandiri-item')
                 @include('home.components.mandiri-item')

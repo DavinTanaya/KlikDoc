@@ -1,0 +1,106 @@
+.bmi h1 {
+    font-size: 48px;
+    color: rgb(var(--grey3));
+    font-weight: bold;
+}
+
+.bmi p {
+    font-size: 18px;
+    color: rgb(var(--grey2));
+}
+
+.bmi h5 {
+    font-size: 24px;
+    color: rgb(var(--grey3));
+    font-weight: bold;
+}
+
+.bmi_form h4 {
+    font-size: 32px;
+    color: rgb(var(--grey3));
+    font-weight: 700;
+}
+
+.bmi .form-control {
+    border-right: 0;
+    padding: 12px 20px;
+}
+
+.bmi .form-control:focus {
+    box-shadow: none;
+    border-color: #dee2e6;
+}
+
+.bmi_gender-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.bmi_gender-option {
+    flex: 1;
+    position: relative;
+}
+
+.bmi_gender-option input[type="radio"] {
+    display: none;
+}
+
+.bmi_gender-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #6c757d;
+    height: 100%;
+}
+
+.bmi_gender-label i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.bmi_gender-option-male input[type="radio"]:checked + .bmi_gender-label {
+    border-color: rgb(var(--blue4));
+    background-color: rgb(var(--blue3));
+    color: rgb(var(--blue1));
+    font-weight: bold;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+}
+
+.bmi_gender-option-female input[type="radio"]:checked + .bmi_gender-label {
+    border-color: rgb(var(--red3));
+    background-color: rgb(var(--red1));
+    color: rgb(var(--red4));
+    font-weight: bold;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+}
+
+.bmi_input-label {
+    font-size: 18px;
+    color: rgb(var(--grey3));
+    font-weight: 600;
+}
+
+.bmi_submit-button {
+    width: 100%;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: rgb(var(--blue4));
+    color: rgb(var(--white));
+    border: none;
+}
+
+.bmi_submit-button:hover {
+    background-color: rgb(var(--blue1));
+}

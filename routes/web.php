@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BmiController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,5 @@ Route::prefix('auth')->group(function () {
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::get('/bmi', [BmiController::class, 'index'])->name('bmi');
