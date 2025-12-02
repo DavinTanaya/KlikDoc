@@ -33,6 +33,11 @@ body {
     flex-direction: column;
 }
 
+.no-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .text-custom-blue {
     color: rgb(var(--blue4));
 }

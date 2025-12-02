@@ -1,0 +1,55 @@
+.reminder h1 {
+    font-size: 48px;
+    color: rgb(var(--grey3));
+    font-weight: 700;
+}
+
+.reminder p {
+    font-size: 18px;
+    color: rgb(var(--grey2));
+}
+
+.reminder h5 {
+    font-size: 24px;
+    color: rgb(var(--grey3));
+    font-weight: 700;
+}
+
+.reminder_form h4 {
+    font-size: 32px;
+    color: rgb(var(--grey3));
+    font-weight: 700;
+}
+
+.reminder .form-control {
+    padding: 12px 20px;
+}
+
+.reminder .form-control:focus {
+    box-shadow: none;
+    border-color: rgb(var(--blue3));
+}
+
+.reminder_input-label {
+    font-size: 16px;
+    color: rgb(var(--grey3));
+    font-weight: 600;
+}
+
+.reminder_submit-button {
+    width: 100%;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: rgb(var(--blue4));
+    color: rgb(var(--white));
+    border: none;
+    transition: 0.25s ease;
+}
+
+.reminder_submit-button:hover {
+    background-color: rgb(var(--blue1));
+    color: rgb(var(--white));
+}
