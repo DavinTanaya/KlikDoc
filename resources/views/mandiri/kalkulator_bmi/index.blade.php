@@ -3,7 +3,7 @@
 @section('title', 'KlikDoc | BMI')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/user/mandiri/bmi/bmi.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/mandiri/kalkulator_bmi/kalkulator_bmi.css') }}">
 @endpush
 
 @section('body')

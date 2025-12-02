@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BmiController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KalkulatorBmiContoller;
+use App\Http\Controllers\PengingatObatController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
@@ -18,4 +20,5 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/bmi', [BmiController::class, 'index'])->name('bmi');
+Route::get('/kalkulator-bmi', [KalkulatorBmiContoller::class, 'index'])->name('kalkulator_bmi');
+Route::get('/pengingat-obat', [PengingatObatController::class, 'index'])->name('pengingat_obat');

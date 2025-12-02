@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BmiController extends Controller
+class KalkulatorBmiContoller extends Controller
 {
     public function index() {
-        return view('mandiri.bmi.index');
+        return view('mandiri.kalkulator_bmi.index');
     }
 }
