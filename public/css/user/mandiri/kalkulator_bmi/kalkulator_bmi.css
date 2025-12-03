@@ -21,16 +21,6 @@
     font-weight: 700;
 }
 
-.bmi .form-control {
-    border-right: 0;
-    padding: 12px 20px;
-}
-
-.bmi .form-control:focus {
-    box-shadow: none;
-    border-color: #dee2e6;
-}
-
 .bmi_gender-selector {
     display: flex;
     gap: 15px;
@@ -80,7 +70,7 @@
     color: rgb(var(--red4));
     font-weight: bold;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2); 
 }
 
 .bmi_input-label {

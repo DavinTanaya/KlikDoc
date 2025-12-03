@@ -49,29 +49,26 @@
                 <div class="col-lg-5 offset-lg-1">
                     <div class="reminder_form">
                         <h4 class="mb-4">Atur Pengingat Obat</h4>
-
                         <form action="" method="POST">@csrf
-
                             <div class="mb-3">
-                                <label class="reminder_input-label form-label small text-muted">
+                                <label class="klik_form-label form-label small text-muted">
                                     Nama Obat
                                 </label>
-                                <input type="text" name="medicine_name" class="form-control" placeholder="Masukkan nama obat">
+                                <input type="text" name="medicine_name" class="klik_form-input form-control" placeholder="Masukkan nama obat">
                             </div>
 
                             <div class="mb-3">
-                                <label class="reminder_input-label form-label small text-muted">
+                                <label class="klik_form-label form-label small text-muted">
                                     Dosis
                                 </label>
-                                <input type="text" name="dosage" class="form-control" placeholder="Masukkan dosis obat">
+                                <input type="text" name="dosage" class="klik_form-input form-control" placeholder="Masukkan dosis obat">
                             </div>
 
                             <div class="mb-3">
-                                <label class="reminder_input-label form-label small text-muted">
+                                <label class="klik_form-label form-label small text-muted">
                                     Frekuensi Minum
                                 </label>
-
-                                <select name="frequency" class="form-control">
+                                <select name="frequency" class="klik_form-input form-control">
                                     <option value="1">1x sehari</option>
                                     <option value="2">2x sehari</option>
                                     <option value="3">3x sehari</option>
@@ -80,13 +77,13 @@
                             </div>
 
                             <div class="mb-4">
-                                <label class="reminder_input-label form-label small text-muted">
+                                <label class="klik_form-label form-label small text-muted">
                                     Waktu Minum
                                 </label>
-                                <input type="time" name="time" class="form-control">
+                                <input type="time" name="time" class="klik_form-input form-control">
                             </div>
 
-                            <button type="submit" class="reminder_submit-button btn shadow">
+                            <button type="submit" class="klik_form-button btn shadow">
                                 Simpan Pengingat
                             </button>
 

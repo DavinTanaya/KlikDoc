@@ -52,7 +52,7 @@
                         <form action="" method="POST"> @csrf
 
                             <div class="mb-2">
-                                <label class="bmi_input-label form-label small text-muted">Jenis Kelamin</label>
+                                <label class="klik_form-label form-label small text-muted">Jenis Kelamin</label>
                                 <div class="bmi_gender-selector">
                                     <div class="bmi_gender-option bmi_gender-option-male">
                                         <input type="radio" name="gender" id="bmi_gender-male" value="male" checked>
@@ -72,25 +72,24 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="bmi_tinggi-badan" class="bmi_input-label form-label small text-muted">Tinggi
+                                <label for="bmi_tinggi-badan" class="klik_form-label form-label small text-muted">Tinggi
                                     Badan</label>
                                 <div class="input-group">
-                                    <input id="bmi_tinggi-badan" name="height" type="number" class="form-control">
+                                    <input id="bmi_tinggi-badan" name="height" type="number" class="form-control klik_form-input">
                                     <span class="input-group-text text-muted">cm</span>
                                 </div>
                             </div>
-
                             <div class="mb-4">
                                 <label for="bmi_berat-badan"
-                                    class="bmi_input-label form-label small text-muted">Berat
+                                    class="klik_form-label form-label small text-muted">Berat
                                     Badan</label>
                                 <div class="input-group">
-                                    <input id="bmi_berat-badan" name="weight" type="number" class="form-control">
+                                    <input id="bmi_berat-badan" name="weight" type="number" class="form-control klik_form-input">
                                     <span class="input-group-text text-muted">kg</span>
                                 </div>
                             </div>
 
-                            <button type="submit" class="bmi_submit-button btn btn-primary shadow">
+                            <button type="submit" class="btn btn-primary shadow klik_form-button">
                                 Hitung Sekarang
                             </button>
                         </form>
