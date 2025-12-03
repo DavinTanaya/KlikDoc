@@ -1,3 +1,42 @@
+<style>
+    .text-custom-blue {
+        color: rgb(var(--blue4));
+    }
+
+    .text-custom-gray {
+        color: rgb(var(--grey2));
+    }
+
+    .footer-link {
+        color: rgb(var(--grey3));
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-link:hover {
+        color: rgb(var(--blue4));
+        text-decoration: none;
+    }
+
+    .social-btn {
+        width: 30px;
+        color: rgb(var(--grey2));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+    .section-title {
+        color: rgb(var(--blue1));
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+    }
+</style>
 <footer class="pt-5 pb-4 mt-auto"
     style="background: linear-gradient(
         to bottom,
@@ -10,8 +49,7 @@
                 <div class="d-flex flex-column align-items-start gap-3">
                     <div class="mb-2">
                         <img src="{{ asset('image/KlikDoc.png') }}" alt="Logo KlikDoc"
-                            style="height: 60px; object-fit: contain;"
-                            href="{{ route('home') }}">
+                            style="height: 60px; object-fit: contain;" href="{{ route('home') }}">
                     </div>
                     <div class="fw-medium" style="color: rgb(var(--grey2));">
                         <div class="d-flex flex-grow gap-3 align-items-center mb-3">

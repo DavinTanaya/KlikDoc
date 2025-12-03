@@ -74,7 +74,10 @@
                     </svg>
                 </a>
             </div>
-            <div class="home_mandiri-grid">
+            <div class="home_mandiri-grid ">
+                <a href="{{ route('kalkulator_bmi') }}" class="no-link">
+                    @include('home.components.mandiri-item')
+                </a>
                 @include('home.components.mandiri-item')
                 @include('home.components.mandiri-item')
                 @include('home.components.mandiri-item')

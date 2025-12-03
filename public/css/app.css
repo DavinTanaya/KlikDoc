@@ -22,9 +22,11 @@
     font-family: "Lato", sans-serif;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
+    padding: 0;
 }
 
 body {
@@ -32,40 +34,41 @@ body {
     flex-direction: column;
 }
 
-.text-custom-blue {
-    color: rgb(var(--blue4));
+.no-link {
+    text-decoration: none;
+    color: inherit;
 }
 
-.text-custom-gray {
-    color: rgb(var(--grey2));
-}
-
-.footer-link {
+.klik_form-label {
+    font-size: 18px;
     color: rgb(var(--grey3));
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: block;
-    margin-bottom: 0.75rem;
-}
-
-.footer-link:hover {
-    color: rgb(var(--blue4));
-    text-decoration: none;
-}
-
-.social-btn {
-    width: 30px;
-    color: rgb(var(--grey2));
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    text-decoration: none;
-}
-
-.section-title {
-    color: rgb(var(--blue1));
     font-weight: 600;
-    font-size: 1.125rem;
-    margin-bottom: 1.5rem;
+}
+
+.klik_form-input {
+    border-right: 0;
+    padding: 12px 20px;
+}
+
+.klik_form-input:focus {
+    border-color: rgb(var(--blue4)) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--blue4), 0.35) !important; 
+    outline: none !important;
+}
+
+.klik_form-button {
+    width: 100%;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: rgb(var(--blue4));
+    color: rgb(var(--white));
+    border: none;
+}
+
+.klik_form-button:hover {
+    background-color: rgb(var(--blue1));
+    color: rgb(var(--white));
 }

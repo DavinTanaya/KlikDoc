@@ -3,6 +3,6 @@
         <img src="{{ asset('icons/home/mandiri-bmi.svg') }}" alt="dukungan">
     </div>
     <div class="home_mandiri-text">
-        <p>Perawatan Diabetes</p>
+        <p>Kalkulator BMI</p>
     </div>
 </div>

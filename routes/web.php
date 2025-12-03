@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BmiController;
+use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KalenderMenstruasiController;
+use App\Http\Controllers\KalkulatorBmiContoller;
+use App\Http\Controllers\PengingatObatController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
@@ -17,6 +22,12 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+Route::get('/chat-dokter', [ChatDokterController::class, 'index'])->name('chat_dokter');
+
+Route::get('/kalkulator-bmi', [KalkulatorBmiContoller::class, 'index'])->name('kalkulator_bmi');
+Route::get('/pengingat-obat', [PengingatObatController::class, 'index'])->name('pengingat_obat');
+Route::get('/kalender-menstruasi', [KalenderMenstruasiController::class, 'index'])->name('kalender_menstruasi');
+
 Route::get('/admin', function () {
     return view('admin.index');
-})->name('admin.dashboard');
+})->name('admin.index');
