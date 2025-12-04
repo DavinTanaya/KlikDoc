@@ -170,8 +170,8 @@
 
   <script>
     /* ===========================================================
-           INITIAL VARIABLES
-        =========================================================== */
+             INITIAL VARIABLES
+          =========================================================== */
     console.log("[INIT] ChatDokter script loaded");
 
     const authUserId = {{ $authUser->id }};
@@ -198,18 +198,16 @@
     let currentCallType = "video";
     let isCaller = false;
 
-    // ==== PENTING: hidupkan log pusher dulu biar kelihatan error ====
     window.Pusher = Pusher;
 
     window.Echo = new Echo({
       broadcaster: "pusher",
-      key: "{{ config('broadcasting.connections.pusher.key') }}",
+      key: "f3a311073d99680b7bc03fde10e2b8af",
 
       wsHost: "ws.cheapdl.online",
       wsPort: 443,
       wssPort: 443,
 
-      // Cloudflare Tunnel = SSL HANDLED by Cloudflare
       forceTLS: true,
       encrypted: true,
 
@@ -217,8 +215,7 @@
       disableStats: true,
       cluster: null,
 
-      // Soketi default path
-      wsPath: "/app",
+      wsPath: "/app/f3a311073d99680b7bc03fde10e2b8af",
 
       authEndpoint: "/broadcasting/auth",
       auth: {
@@ -227,6 +224,7 @@
         }
       }
     });
+
 
 
 
