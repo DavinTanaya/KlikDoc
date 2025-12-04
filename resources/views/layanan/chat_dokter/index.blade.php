@@ -170,9 +170,9 @@
 
   <script>
     /* ===========================================================
-     INITIAL VARIABLES
-  =========================================================== */
-    console.log("%c[INIT] ChatDokter script loaded", "color:#4ade80;font-weight:bold");
+       INITIAL VARIABLES
+    =========================================================== */
+    console.log("[INIT] ChatDokter script loaded");
 
     const authUserId = {{ $authUser->id }};
     const authRole = "{{ $authUser->role }}";
@@ -198,31 +198,31 @@
     let currentCallType = "video";
     let isCaller = false;
 
-    /* ===========================================================
-       ECHO CONFIG — WSS MODE (Cloudflare Tunnel)
-    =========================================================== */
-    console.log("%c[ECHO] Initializing connection...", "color:#38bdf8");
-
+    // ==== PENTING: hidupkan log pusher dulu biar kelihatan error ====
     window.Pusher = Pusher;
-    Pusher.logToConsole = false; // matikan verbose log
+    Pusher.logToConsole = true;
 
+    // ==== CONFIG ECHO SESUAI URL WSS YANG KAMU TEST ====
     window.Echo = new Echo({
       broadcaster: "pusher",
       key: "{{ config('broadcasting.connections.pusher.key') }}",
 
-      // WSS dari cloudflare tunnel
+      // ini MUSTI sama host-nya
       wsHost: "ws.cheapdl.online",
+
+      // kamu nembak WSS tanpa port → berarti 443
       wsPort: 443,
       wssPort: 443,
 
+      // karena pakai WSS, ini HARUS true
       forceTLS: true,
       encrypted: true,
-      enabledTransports: ["wss"],
 
+      enabledTransports: ["wss"],
       disableStats: true,
       cluster: null,
 
-      // penting! harus app/<key>
+      // path harus /app/<key>, ini juga sama dengan yang kamu test
       wsPath: "/app/{{ config('broadcasting.connections.pusher.key') }}",
 
       authEndpoint: "/broadcasting/auth",
@@ -233,23 +233,27 @@
       }
     });
 
-    /* ===========================================================
-       ECHO CONNECTION EVENTS
-    =========================================================== */
-    window.Echo.connector.pusher.connection.bind("connected", () => {
-      console.log("%c[ECHO] CONNECTED — subscribing...", "color:#4ade80");
+    // ==== LOG STATE PERUBAHAN SUPAYA KELIHATAN APA YANG TERJADI ====
+    const pusherConn = window.Echo.connector.pusher.connection;
 
+    pusherConn.bind("state_change", (states) => {
+      console.log("[ECHO] state_change:", states.previous, "→", states.current);
+    });
+
+    pusherConn.bind("connected", () => {
+      console.log("%c[ECHO] CONNECTED ✔", "color:#22c55e;font-weight:bold");
       subscribeChat(activeChatId);
       subscribeCall(activeChatId);
     });
 
-    window.Echo.connector.pusher.connection.bind("error", e => {
-      console.error("[ECHO] ERROR:", e);
+    pusherConn.bind("error", (err) => {
+      console.error("[ECHO] ERROR:", err);
     });
 
-    window.Echo.connector.pusher.connection.bind("failed", e => {
-      console.error("[ECHO] FAILED:", e);
+    pusherConn.bind("failed", (err) => {
+      console.error("[ECHO] FAILED:", err);
     });
+
 
     /* ===========================================================
        SELECT CHAT (GLOBAL)
@@ -385,15 +389,13 @@
     async function getLocalStream(type) {
       if (localStream) return localStream;
 
-      const constraints = type === "audio" ?
-        {
-          audio: true,
-          video: false
-        } :
-        {
-          audio: true,
-          video: true
-        };
+      const constraints = type === "audio" ? {
+        audio: true,
+        video: false
+      } : {
+        audio: true,
+        video: true
+      };
 
       console.log("[RTC] getUserMedia:", constraints);
 
