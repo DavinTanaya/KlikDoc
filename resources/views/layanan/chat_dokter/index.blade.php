@@ -5,7 +5,6 @@
 @push('styles')
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/user/layanan/chat_dokter/chat_dokter.css') }}">
-  </style>
 @endpush
 
 @section('body')
@@ -170,16 +169,28 @@
   <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
 
   <script>
+    /* ===========================================================
+     INITIAL VARIABLES
+  =========================================================== */
+    console.log("%c[INIT] ChatDokter script loaded", "color:#4ade80;font-weight:bold");
+
     const authUserId = {{ $authUser->id }};
     const authRole = "{{ $authUser->role }}";
     let activeChatId = {{ $activechat?->id ?? 'null' }};
     const chatUserId = {{ $activechat?->user_id ?? 'null' }};
     const chatDoctorId = {{ $activechat?->doctor_id ?? 'null' }};
 
+    console.table({
+      authUserId,
+      authRole,
+      activeChatId,
+      chatUserId,
+      chatDoctorId
+    });
+
     const msgContainer = document.getElementById("messageContainer");
     const incomingModal = document.getElementById("incomingCallModal");
     const incomingAvatar = document.getElementById("incomingCallAvatar");
-    const incomingTitle = document.getElementById("incomingCallTitle");
     const incomingText = document.getElementById("incomingCallSubtitle");
 
     let callChannel = null;
@@ -187,20 +198,31 @@
     let currentCallType = "video";
     let isCaller = false;
 
+    /* ===========================================================
+       ECHO CONFIG — WSS MODE (Cloudflare Tunnel)
+    =========================================================== */
+    console.log("%c[ECHO] Initializing connection...", "color:#38bdf8");
+
+    window.Pusher = Pusher;
+    Pusher.logToConsole = false; // matikan verbose log
+
     window.Echo = new Echo({
       broadcaster: "pusher",
       key: "{{ config('broadcasting.connections.pusher.key') }}",
 
+      // WSS dari cloudflare tunnel
       wsHost: "ws.cheapdl.online",
-
       wsPort: 443,
       wssPort: 443,
 
       forceTLS: true,
       encrypted: true,
       enabledTransports: ["wss"],
+
       disableStats: true,
       cluster: null,
+
+      // penting! harus app/<key>
       wsPath: "/app/{{ config('broadcasting.connections.pusher.key') }}",
 
       authEndpoint: "/broadcasting/auth",
@@ -211,17 +233,53 @@
       }
     });
 
-
+    /* ===========================================================
+       ECHO CONNECTION EVENTS
+    =========================================================== */
     window.Echo.connector.pusher.connection.bind("connected", () => {
+      console.log("%c[ECHO] CONNECTED — subscribing...", "color:#4ade80");
+
       subscribeChat(activeChatId);
       subscribeCall(activeChatId);
     });
 
+    window.Echo.connector.pusher.connection.bind("error", e => {
+      console.error("[ECHO] ERROR:", e);
+    });
+
+    window.Echo.connector.pusher.connection.bind("failed", e => {
+      console.error("[ECHO] FAILED:", e);
+    });
+
+    /* ===========================================================
+       SELECT CHAT (GLOBAL)
+    =========================================================== */
+    window.selectChat = function(el, chatId, partnerName) {
+      console.log("%c[CHAT] Switching chat → " + chatId, "color:#fb923c");
+
+      document.querySelectorAll(".chat-item").forEach(i => i.classList.remove("active"));
+      el.classList.add("active");
+
+      document.getElementById("headerName").innerText = partnerName;
+      activeChatId = chatId;
+
+      subscribeChat(chatId);
+      subscribeCall(chatId);
+    };
+
+    /* ===========================================================
+       SUBSCRIBE TO CHAT CHANNEL
+    =========================================================== */
     function subscribeChat(chatId) {
-      if (!chatId) return;
+      if (!chatId) return console.warn("[CHAT] No chat ID");
+
+      console.log("[CHAT] Subscribing chats." + chatId);
 
       window.Echo.private("chats." + chatId)
-        .listen("NewMessage", (e) => {
+        .subscribed(() => console.log("[CHAT] ✔ Subscribed chats." + chatId))
+        .listen("NewMessage", e => {
+          console.log("[CHAT] Received:", e);
+
           if (e.message.sender_id === authUserId) return;
           appendMessage(e.message, "received");
         });
@@ -265,27 +323,25 @@
       e.target.value = "";
     }
 
-    window.selectChat = function(el, chatId, partnerName) {
-      document.querySelectorAll(".chat-item").forEach(i => i.classList.remove("active"));
-
-      el.classList.add("active");
-
-      document.getElementById("headerName").innerText = partnerName;
-
-      activeChatId = chatId;
-
-      subscribeChat(chatId);
-      subscribeCall(chatId);
-    };
-
+    /* ===========================================================
+       CALL SIGNAL CHANNEL
+    =========================================================== */
     function subscribeCall(chatId) {
-      if (!chatId) return;
+      if (!chatId) return console.warn("[CALL] No chatId");
+
+      console.log("[CALL] Subscribing calls." + chatId);
 
       callChannel = window.Echo.private("calls." + chatId);
 
-      callChannel.listenForWhisper("rtc-signal", async (payload) => {
+      callChannel.subscribed(() => console.log("[CALL] ✔ Subscribed calls." + chatId));
+
+      callChannel.error(e => console.error("[CALL] Channel error:", e));
+
+      callChannel.listenForWhisper("rtc-signal", async payload => {
+        console.log("[CALL] Signal:", payload);
 
         if (payload.to && String(payload.to) !== String(authUserId)) {
+          console.log("[CALL] Signal ignored (not for me)");
           return;
         }
 
@@ -306,17 +362,11 @@
             return endCallLocal();
         }
       });
-
     }
 
-    function getParticipants() {
-      const arr = [];
-      if (chatUserId && chatUserId != authUserId) arr.push(chatUserId);
-      if (chatDoctorId && chatDoctorId != authUserId) arr.push(chatDoctorId);
-
-      return arr;
-    }
-
+    /* ===========================================================
+       WEBRTC
+    =========================================================== */
     const rtcConfig = {
       iceServers: [{
         urls: "stun:stun.l.google.com:19302"
@@ -335,17 +385,21 @@
     async function getLocalStream(type) {
       if (localStream) return localStream;
 
-      const constraints = (type === "audio") ? {
-        audio: true,
-        video: false
-      } : {
-        audio: true,
-        video: true
-      };
+      const constraints = type === "audio" ?
+        {
+          audio: true,
+          video: false
+        } :
+        {
+          audio: true,
+          video: true
+        };
+
+      console.log("[RTC] getUserMedia:", constraints);
 
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
-
       localVideo.srcObject = localStream;
+
       return localStream;
     }
 
@@ -357,6 +411,8 @@
 
     function createPC(remoteId) {
       if (pcs[remoteId]) return pcs[remoteId];
+
+      console.log("[RTC] Creating PC for", remoteId);
 
       const pc = new RTCPeerConnection(rtcConfig);
       pcs[remoteId] = pc;
@@ -373,9 +429,7 @@
       };
 
       pc.ontrack = (e) => {
-        if (!remoteStreams[remoteId]) {
-          remoteStreams[remoteId] = new MediaStream();
-        }
+        if (!remoteStreams[remoteId]) remoteStreams[remoteId] = new MediaStream();
 
         e.streams[0].getTracks().forEach(t => {
           remoteStreams[remoteId].addTrack(t);
@@ -385,13 +439,14 @@
       };
 
       if (localStream) {
-        localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
       }
 
       return pc;
     }
 
     async function startCall(type = "video") {
+      console.log("%c[CALL] Start Call", "color:#60a5fa");
 
       isCaller = true;
       currentCallType = type;
@@ -399,9 +454,11 @@
       await getLocalStream(type);
       callContainer.style.display = "block";
 
-      const targets = getParticipants();
+      const targets = [chatUserId, chatDoctorId].filter(id => id && id != authUserId);
 
       targets.forEach(rid => {
+        console.log("[CALL] Whisper incoming-call →", rid);
+
         callChannel.whisper("rtc-signal", {
           type: "incoming-call",
           from: authUserId,
@@ -412,21 +469,20 @@
     }
 
     function onIncomingCall(payload) {
-      if (authRole === "admin") return;
+      console.log("[CALL] Incoming call from", payload.from);
 
       incomingCall = payload;
       currentCallType = payload.call_type;
 
-      incomingAvatar.src =
-        `https://ui-avatars.com/api/?name=${encodeURIComponent(headerName.innerText)}&background=random`;
-
-      incomingText.textContent =
-        `Panggilan ${currentCallType === "audio" ? "Suara" : "Video"} Masuk`;
+      incomingText.textContent = currentCallType === "audio" ?
+        "Panggilan Suara Masuk" :
+        "Panggilan Video Masuk";
 
       incomingModal.style.display = "flex";
     }
 
     async function acceptIncomingCall() {
+      console.log("[CALL] Accepting call");
 
       incomingModal.style.display = "none";
 
@@ -441,8 +497,10 @@
     }
 
     function rejectIncomingCall() {
+      console.log("[CALL] Reject call");
 
       incomingModal.style.display = "none";
+
       callChannel.whisper("rtc-signal", {
         type: "reject-call",
         from: authUserId,
@@ -452,18 +510,12 @@
 
     async function onRemoteAccept(payload) {
       if (!isCaller) return;
+      console.log("[CALL] Remote accepted:", payload.from);
 
       await getLocalStream(currentCallType);
       callContainer.style.display = "block";
 
       makeOffer(payload.from);
-    }
-
-    function onRemoteReject() {
-      if (!isCaller) return;
-
-      alert("Panggilan ditolak");
-      endCallLocal();
     }
 
     async function makeOffer(remoteId) {
@@ -481,6 +533,7 @@
     }
 
     async function onOffer(payload) {
+      console.log("[CALL] OFFER from", payload.from);
 
       await getLocalStream(currentCallType);
       callContainer.style.display = "block";
@@ -500,6 +553,7 @@
     }
 
     async function onAnswer(payload) {
+      console.log("[CALL] ANSWER from", payload.from);
 
       const pc = pcs[payload.from];
       if (!pc) return;
@@ -517,14 +571,14 @@
     function hangupCall() {
       callChannel.whisper("rtc-signal", {
         type: "end",
-        from: authUserId,
-        to: null
+        from: authUserId
       });
 
       endCallLocal();
     }
 
     function endCallLocal() {
+      console.log("[CALL] Ending call");
 
       Object.values(pcs).forEach(pc => pc.close());
       pcs = {};
