@@ -24,6 +24,17 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function conversationsAsUser()
+    {
+        return $this->hasMany(Chat::class, 'user_id');
+    }
+
+    public function conversationsAsDoctor()
+    {
+        return $this->hasMany(Chat::class, 'doctor_id');
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
