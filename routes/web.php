@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BmiController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalenderMenstruasiController;
 use App\Http\Controllers\KalkulatorBmiContoller;
 use App\Http\Controllers\PengingatObatController;
+use App\Http\Controllers\SuccessController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
@@ -25,6 +30,13 @@ Route::prefix('auth')->group(function () {
 Route::get('/kalkulator-bmi', [KalkulatorBmiContoller::class, 'index'])->name('kalkulator_bmi');
 Route::get('/pengingat-obat', [PengingatObatController::class, 'index'])->name('pengingat_obat');
 Route::get('/kalender-menstruasi', [KalenderMenstruasiController::class, 'index'])->name('kalender_menstruasi');
+
+Route::get('/apotek', [ApotekController::class, 'index'])->name('apotek');
+Route::get('/apotek/keranjang', [CartController::class, 'index'])->name('apotek_keranjang');
+Route::get('/apotek/checkout', [CheckoutController::class, 'index'])->name('apotek_checkout');
+Route::get('/apotek/success', [SuccessController::class, 'index'])->name('success');
+Route::get('/apotek/riwayat', [HistoryController::class, 'index'])->name('riwayat');
+Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
 
 Route::get('/admin', function () {
     return view('admin.index');

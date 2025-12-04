@@ -1,0 +1,453 @@
+/* --- Scope Wrapper --- */
+.detail-page {
+    --bg-page: #f4f7fe;
+    --bg-white: #ffffff;
+    --primary: #1c274c;
+    --accent: #ff4867;
+    --accent-hover: #dc2626;
+    --text-main: #333;
+    --text-grey: #888;
+    --border: #e0e0e0;
+    --green: #2e7d32;
+    --red: #d32f2f;
+
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    overflow: hidden; /* Mencegah scroll di body */
+}
+
+/* --- Header --- */
+.detail-page .detail-header {
+    background: transparent;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.detail-page .header-container {
+    width: 70vw;
+    max-width: 1200px;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail-page .header-container h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 800;
+}
+
+.detail-page .btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.detail-page .btn-back:hover {
+    transform: translateX(-3px);
+}
+
+.detail-page .spacer {
+    width: 100px;
+}
+
+/* --- Main Layout --- */
+.detail-page .detail-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 80vh; /* Fixed height agar container scrollable */
+}
+
+/* Container Putih Utama */
+.detail-page .detail-container {
+    width: 70vw;
+    max-width: 1200px;
+    min-width: 600px;
+
+    background: var(--bg-white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden; /* Penting untuk rounded corner */
+}
+
+/* Area Scrollable */
+.detail-page .detail-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+}
+
+.detail-page .detail-scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+.detail-page .detail-scroll-area::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+/* --- Section Blocks --- */
+.detail-page .section-block {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 1.5rem;
+}
+
+.detail-page .section-block:last-child {
+    border-bottom: none;
+}
+
+.detail-page h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+/* Status Banner */
+.detail-page .status-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed var(--border);
+}
+
+.detail-page .status-info .label {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+}
+
+.detail-page .status-text {
+    margin: 5px 0 0 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+.detail-page .text-red {
+    color: var(--red);
+}
+.detail-page .text-green {
+    color: var(--green);
+}
+
+.detail-page .countdown-timer {
+    background: #fff0f0;
+    color: var(--red);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* Payment Code Section */
+.detail-page .payment-code-section {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 1.2rem;
+    border-radius: 12px;
+}
+
+.detail-page .bank-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.detail-page .logo-box {
+    width: 50px;
+    height: 30px;
+    background: white;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    color: #005e9e; /* Warna BCA */
+}
+
+.detail-page .info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-page .info-text .method {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.detail-page .info-text .check-auto {
+    font-size: 0.8rem;
+    color: var(--green);
+}
+
+.detail-page .va-box .label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-grey);
+    margin-bottom: 4px;
+}
+
+.detail-page .code-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-page .code-row .code {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 1px;
+}
+
+.detail-page .btn-copy {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+}
+.detail-page .btn-copy:hover {
+    background: #f0f0f0;
+}
+
+/* Shipping Section */
+.detail-page .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.detail-page .info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-page .info-item.full-width {
+    grid-column: span 2;
+    margin-top: 5px;
+}
+
+.detail-page .info-item .label {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+    margin-bottom: 3px;
+}
+
+.detail-page .info-item .value {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Products Section */
+.detail-page .product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-page .product-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.detail-page .thumb {
+    width: 48px;
+    height: 48px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-page .details {
+    flex: 1;
+}
+
+.detail-page .details h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--primary);
+}
+
+.detail-page .details .meta {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+}
+
+.detail-page .subtotal {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Cost Section */
+.detail-page .cost-section {
+    background: #fcfcfc;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: none; /* Override default section border */
+}
+
+.detail-page .cost-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.detail-page .voucher-row {
+    color: var(--green);
+}
+
+.detail-page .voucher-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.detail-page .divider {
+    height: 1px;
+    background: #ddd;
+    margin: 1rem 0;
+    border-style: dashed;
+}
+
+.detail-page .total-row {
+    margin-bottom: 0;
+    align-items: flex-end;
+}
+
+.detail-page .total-row span:first-child {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.detail-page .total-amount {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+/* --- Footer Actions --- */
+.detail-page .detail-footer {
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.03);
+    z-index: 5;
+}
+
+.detail-page .btn-help {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--text-grey);
+    cursor: pointer;
+}
+
+.detail-page .btn-primary-action {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 72, 103, 0.25);
+    transition: transform 0.2s;
+}
+
+.detail-page .btn-primary-action:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .detail-page .header-container,
+    .detail-page .detail-container {
+        width: 95vw;
+        min-width: 0;
+    }
+
+    .detail-page .detail-content {
+        height: auto;
+        min-height: 80vh;
+    }
+
+    .detail-page .detail-container {
+        height: auto;
+        overflow: visible;
+    }
+
+    .detail-page .detail-scroll-area {
+        overflow: visible;
+        padding: 1.5rem;
+    }
+
+    .detail-page .info-grid {
+        grid-template-columns: 1fr; /* Stack shipping info */
+    }
+
+    .detail-page .info-item.full-width {
+        grid-column: auto;
+    }
+
+    .detail-page .detail-footer {
+        position: sticky;
+        bottom: 0;
+        padding: 1rem;
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+
+    .detail-page .detail-footer button {
+        width: 100%;
+    }
+}

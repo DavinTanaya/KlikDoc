@@ -3,7 +3,7 @@
 @section('title', 'KlikDoc | Home')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/user/home/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/home/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/user/home/fitur-card.css') }}">
     <link rel="stylesheet" href="{{ asset('css/user/home/dukungan-item.css') }}">
     <link rel="stylesheet" href="{{ asset('css/user/home/mandiri-item.css') }}">

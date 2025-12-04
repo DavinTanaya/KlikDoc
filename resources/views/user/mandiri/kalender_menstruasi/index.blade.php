@@ -20,10 +20,6 @@
     <main class="bmi py-5">
         <div class="bmi_container container">
             <div class="row">
-
-                <!-- ================================ -->
-                <!-- INFORMASI KIRI                   -->
-                <!-- ================================ -->
                 <div class="col-lg-6 mb-4">
                     <div class="bmi_information mb-4">
                         <h1 class="mb-3">Pelacak Menstruasi</h1>
