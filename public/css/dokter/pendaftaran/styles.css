@@ -26,9 +26,10 @@
     }
 }
 
+/* --- Left Side (Hero) --- */
 .pendaftaran-dokter .split-left {
-    background-color: rgb(var(--blue1));
-    color: rgb(var(--white));
+    background-color: var(--bg-left);
+    color: var(--text-left);
     padding: 3rem 2rem;
     position: relative;
     overflow: hidden;
@@ -55,7 +56,7 @@
     line-height: 1.2;
     margin-bottom: 1rem;
     font-weight: 700;
-    color: rgb(var(--white));
+    color: var(--text-left);
 }
 
 .pendaftaran-dokter .hero-text p {
@@ -64,7 +65,7 @@
     line-height: 1.6;
     margin-bottom: 3rem;
     max-width: 400px;
-    color: rgb(var(--white));
+    color: var(--text-left);
 }
 
 .pendaftaran-dokter .benefits-list {
@@ -83,7 +84,7 @@
     background: rgba(255, 255, 255, 0.1);
     padding: 10px;
     border-radius: 12px;
-    color: rgb(var(--red2));
+    color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,14 +93,14 @@
 .pendaftaran-dokter .benefit-item .text h4 {
     margin: 0 0 4px 0;
     font-size: 1.1rem;
-    color: rgb(var(--white));
+    color: var(--text-left);
 }
 
 .pendaftaran-dokter .benefit-item .text p {
     margin: 0;
     font-size: 0.9rem;
     opacity: 0.7;
-    color: rgb(var(--white));
+    color: var(--text-left);
 }
 
 /* Decoration */
@@ -281,4 +282,111 @@
 .pendaftaran-dokter .disclaimer a {
     color: var(--accent);
     text-decoration: none;
+}
+
+
+/* ------------------------------------------- */
+/* POPUP MODAL STYLES            */
+/* ------------------------------------------- */
+
+.pendaftaran-dokter .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65); /* Overlay Gelap */
+    backdrop-filter: blur(5px); /* Efek Blur di belakang */
+    z-index: 9999; /* Pastikan di atas semua elemen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.pendaftaran-dokter .popup-content {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 480px;
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Icon Lingkaran Checkmark */
+.pendaftaran-dokter .popup-icon {
+    width: 90px;
+    height: 90px;
+    background-color: #DEF7EC; /* Hijau Pastel */
+    color: #0E9F6E; /* Hijau Sukses */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.pendaftaran-dokter .popup-content h2 {
+    font-size: 1.75rem;
+    color: var(--bg-left); /* Pakai warna biru brand */
+    margin: 0;
+    font-weight: 700;
+}
+
+.pendaftaran-dokter .popup-content p {
+    color: #4B5563;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.pendaftaran-dokter .popup-content .sub-text {
+    font-size: 0.9rem;
+    color: #9CA3AF;
+    margin-bottom: 1.5rem;
+}
+
+/* Tombol Kembali ke Home */
+.pendaftaran-dokter .btn-popup-home {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--bg-left); /* Konsisten dengan warna brand */
+    color: white;
+    text-decoration: none;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.pendaftaran-dokter .btn-popup-home:hover {
+    background-color: #141d38; /* Warna hover sedikit lebih gelap */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(28, 39, 76, 0.2);
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }

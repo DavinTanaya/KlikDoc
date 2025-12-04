@@ -5,11 +5,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardDokterController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalenderMenstruasiController;
 use App\Http\Controllers\KalkulatorBmiContoller;
+use App\Http\Controllers\PendaftaranDokterController;
 use App\Http\Controllers\PengingatObatController;
 use App\Http\Controllers\SuccessController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +39,9 @@ Route::get('/apotek/checkout', [CheckoutController::class, 'index'])->name('apot
 Route::get('/apotek/success', [SuccessController::class, 'index'])->name('success');
 Route::get('/apotek/riwayat', [HistoryController::class, 'index'])->name('riwayat');
 Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
+
+Route::get('/dokter', [DashboardDokterController::class, 'index'])->name('dashboard_dokter');
+Route::get('/dokter/pendaftaran', [PendaftaranDokterController::class, 'index'])->name('pendaftaran_dokter');
 
 Route::get('/admin', function () {
     return view('admin.index');
