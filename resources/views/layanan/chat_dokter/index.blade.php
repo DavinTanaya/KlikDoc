@@ -192,7 +192,7 @@
       key: "{{ config('broadcasting.connections.pusher.key') }}",
 
       wsHost: "ws.cheapdl.online",
-      
+
       wsPort: 443,
       wssPort: 443,
 
@@ -264,6 +264,19 @@
 
       e.target.value = "";
     }
+
+    window.selectChat = function(el, chatId, partnerName) {
+      document.querySelectorAll(".chat-item").forEach(i => i.classList.remove("active"));
+
+      el.classList.add("active");
+
+      document.getElementById("headerName").innerText = partnerName;
+
+      activeChatId = chatId;
+
+      subscribeChat(chatId);
+      subscribeCall(chatId);
+    };
 
     function subscribeCall(chatId) {
       if (!chatId) return;
