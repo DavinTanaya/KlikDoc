@@ -170,8 +170,8 @@
 
   <script>
     /* ===========================================================
-         INITIAL VARIABLES
-      =========================================================== */
+           INITIAL VARIABLES
+        =========================================================== */
     console.log("[INIT] ChatDokter script loaded");
 
     const authUserId = {{ $authUser->id }};
@@ -209,14 +209,16 @@
       wsPort: 443,
       wssPort: 443,
 
-      forceTLS: false,
-      encrypted: false,
+      // Cloudflare Tunnel = SSL HANDLED by Cloudflare
+      forceTLS: true,
+      encrypted: true,
 
       enabledTransports: ["wss"],
       disableStats: true,
       cluster: null,
 
-      wsPath: "/app/{{ config('broadcasting.connections.pusher.key') }}",
+      // Soketi default path
+      wsPath: "/app",
 
       authEndpoint: "/broadcasting/auth",
       auth: {
@@ -225,6 +227,7 @@
         }
       }
     });
+
 
 
     // ==== LOG STATE PERUBAHAN SUPAYA KELIHATAN APA YANG TERJADI ====
