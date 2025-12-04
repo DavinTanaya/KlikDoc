@@ -170,8 +170,8 @@
 
   <script>
     /* ===========================================================
-       INITIAL VARIABLES
-    =========================================================== */
+         INITIAL VARIABLES
+      =========================================================== */
     console.log("[INIT] ChatDokter script loaded");
 
     const authUserId = {{ $authUser->id }};
@@ -200,29 +200,22 @@
 
     // ==== PENTING: hidupkan log pusher dulu biar kelihatan error ====
     window.Pusher = Pusher;
-    Pusher.logToConsole = true;
 
-    // ==== CONFIG ECHO SESUAI URL WSS YANG KAMU TEST ====
     window.Echo = new Echo({
       broadcaster: "pusher",
       key: "{{ config('broadcasting.connections.pusher.key') }}",
 
-      // ini MUSTI sama host-nya
       wsHost: "ws.cheapdl.online",
-
-      // kamu nembak WSS tanpa port → berarti 443
       wsPort: 443,
       wssPort: 443,
 
-      // karena pakai WSS, ini HARUS true
-      forceTLS: true,
-      encrypted: true,
+      forceTLS: false,
+      encrypted: false,
 
       enabledTransports: ["wss"],
       disableStats: true,
       cluster: null,
 
-      // path harus /app/<key>, ini juga sama dengan yang kamu test
       wsPath: "/app/{{ config('broadcasting.connections.pusher.key') }}",
 
       authEndpoint: "/broadcasting/auth",
@@ -232,6 +225,7 @@
         }
       }
     });
+
 
     // ==== LOG STATE PERUBAHAN SUPAYA KELIHATAN APA YANG TERJADI ====
     const pusherConn = window.Echo.connector.pusher.connection;
