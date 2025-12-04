@@ -198,25 +198,15 @@
     let currentCallType = "video";
     let isCaller = false;
 
-    window.Pusher = Pusher;
-
-    window.Echo = new Echo({
+     window.Echo = new Echo({
       broadcaster: "pusher",
-      key: "f3a311073d99680b7bc03fde10e2b8af",
-
+      key: "{{ config('broadcasting.connections.pusher.key') }}",
       wsHost: "ws.cheapdl.online",
       wsPort: 443,
-      wssPort: 443,
-
-      forceTLS: true,
-      encrypted: true,
-
-      enabledTransports: ["wss"],
+      forceTLS: false,
+      encrypted: false,
       disableStats: true,
-      cluster: null,
-
-      wsPath: "/app/f3a311073d99680b7bc03fde10e2b8af",
-
+      enabledTransports: ["ws"],
       authEndpoint: "/broadcasting/auth",
       auth: {
         headers: {
@@ -224,8 +214,6 @@
         }
       }
     });
-
-
 
 
     // ==== LOG STATE PERUBAHAN SUPAYA KELIHATAN APA YANG TERJADI ====
