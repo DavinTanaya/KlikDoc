@@ -190,12 +190,19 @@
     window.Echo = new Echo({
       broadcaster: "pusher",
       key: "{{ config('broadcasting.connections.pusher.key') }}",
-      wsHost: "5.175.183.160",
-      wsPort: 6001,
-      forceTLS: false,
-      encrypted: false,
+
+      wsHost: "ws.cheapdl.online",
+      
+      wsPort: 443,
+      wssPort: 443,
+
+      forceTLS: true,
+      encrypted: true,
+      enabledTransports: ["wss"],
       disableStats: true,
-      enabledTransports: ["ws"],
+      cluster: null,
+      wsPath: "/app/{{ config('broadcasting.connections.pusher.key') }}",
+
       authEndpoint: "/broadcasting/auth",
       auth: {
         headers: {
@@ -203,6 +210,7 @@
         }
       }
     });
+
 
     window.Echo.connector.pusher.connection.bind("connected", () => {
       subscribeChat(activeChatId);
