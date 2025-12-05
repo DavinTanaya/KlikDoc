@@ -1,0 +1,440 @@
+/* =========================================
+   DOCTOR DETAIL PAGE
+   Namespace: .doctor-detail-page
+   ========================================= */
+
+.doctor-detail-page {
+    --bg-page: #F4F7FE;
+    --card-bg: #FFFFFF;
+    --text-primary: #1C274C;
+    --text-body: #555;
+    --accent: #FF4867;
+    --accent-hover: #e0405b;
+    --border-color: #E0E0E0;
+    --blue-soft: #e3f2fd;
+    
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    padding-bottom: 4rem;
+}
+
+.doctor-detail-page .detail-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* 1. NAVIGATION
+   ========================================= */
+.doctor-detail-page .top-nav {
+    padding: 2rem 0;
+}
+
+.doctor-detail-page .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.doctor-detail-page .btn-back:hover {
+    color: var(--text-primary);
+}
+
+/* 2. LAYOUT GRID
+   ========================================= */
+.doctor-detail-page .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .doctor-detail-page .content-grid {
+        grid-template-columns: 1.8fr 1fr; /* Kiri lebih lebar */
+        gap: 3rem;
+        align-items: start;
+    }
+}
+
+/* 3. MAIN CONTENT (LEFT COLUMN)
+   ========================================= */
+
+/* Content Wrapper Styling */
+.doctor-detail-page .main-content {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(28, 39, 76, 0.03);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+/* Doctor Profile Section */
+.doctor-detail-page .profile-flex {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.doctor-detail-page .avatar-lg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--blue-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.doctor-detail-page .status-indicator {
+    width: 16px;
+    height: 16px;
+    background: #4caf50;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.doctor-detail-page .info-wrapper h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+}
+
+.doctor-detail-page .name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.doctor-detail-page .badge-verification {
+    font-size: 0.75rem;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.doctor-detail-page .specialist {
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.doctor-detail-page .hospital {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+/* Stats Grid */
+.doctor-detail-page .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 1.2rem;
+    border-radius: 12px;
+}
+
+.doctor-detail-page .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+}
+.doctor-detail-page .stat-item:last-child { border-right: none; }
+
+.doctor-detail-page .stat-item .val {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.doctor-detail-page .stat-item .lbl {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.doctor-detail-page .divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+/* Tabs */
+.doctor-detail-page .content-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 5px; /* For scrollbar */
+}
+
+.doctor-detail-page .tab-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: var(--text-body);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.doctor-detail-page .tab-btn.active,
+.doctor-detail-page .tab-btn:hover {
+    background: var(--text-primary);
+    color: white;
+    border-color: var(--text-primary);
+}
+
+/* Schedule Section */
+.doctor-detail-page .section-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+.doctor-detail-page .mt-4 { margin-top: 2rem; }
+
+/* Date Strip */
+.doctor-detail-page .date-strip-wrapper {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.doctor-detail-page .date-strip {
+    display: flex;
+    gap: 12px;
+}
+
+.doctor-detail-page .date-item {
+    min-width: 70px;
+    padding: 12px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.doctor-detail-page .date-item .day { font-size: 0.8rem; color: #888; }
+.doctor-detail-page .date-item .date { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+
+.doctor-detail-page .date-item.active {
+    background: var(--blue-soft);
+    border-color: #2196f3;
+}
+.doctor-detail-page .date-item.active .day,
+.doctor-detail-page .date-item.active .date { color: #1976d2; }
+
+.doctor-detail-page .date-item.disabled {
+    opacity: 0.5;
+    background: #f5f5f5;
+    cursor: not-allowed;
+}
+
+/* Time Grid */
+.doctor-detail-page .time-period h4 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.doctor-detail-page .slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.doctor-detail-page .slot-btn {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.doctor-detail-page .slot-btn.active {
+    background: var(--text-primary);
+    color: white;
+    border-color: var(--text-primary);
+}
+
+.doctor-detail-page .slot-btn.disabled {
+    background: #f5f5f5;
+    color: #ccc;
+    cursor: not-allowed;
+    border-color: #eee;
+}
+
+/* Bio & Review (Simple Styles) */
+.doctor-detail-page .bio-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.5rem 0;
+}
+.doctor-detail-page .bio-text p, 
+.doctor-detail-page .bio-text li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-body);
+}
+.doctor-detail-page .check-list { padding-left: 1.2rem; }
+
+.doctor-detail-page .review-item {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+}
+.doctor-detail-page .review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.doctor-detail-page .reviewer { font-weight: 700; }
+.doctor-detail-page .rating { color: #fbc02d; font-weight: 700; }
+.doctor-detail-page .comment { font-size: 0.9rem; color: #666; margin: 0; }
+
+
+/* 4. BOOKING SIDEBAR (RIGHT COLUMN)
+   ========================================= */
+.doctor-detail-page .booking-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.doctor-detail-page .booking-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 50px rgba(28, 39, 76, 0.08);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.doctor-detail-page .price-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+}
+
+.doctor-detail-page .price-header .label {
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.doctor-detail-page .price-header .price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* Summary List */
+.doctor-detail-page .booking-summary-list {
+    margin-bottom: 2rem;
+}
+
+.doctor-detail-page .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.doctor-detail-page .summary-item .label { color: #888; }
+.doctor-detail-page .summary-item .value { font-weight: 600; color: var(--text-primary); text-align: right; }
+
+.doctor-detail-page .summary-item.highlight .value { color: var(--accent); }
+
+.doctor-detail-page .card-divider {
+    border: 0;
+    border-top: 2px dashed #eee;
+    margin: 1.5rem 0;
+}
+
+/* Price Breakdown */
+.doctor-detail-page .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.doctor-detail-page .summary-row.total {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Button */
+.doctor-detail-page .btn-payment {
+    width: 100%;
+    background: var(--text-primary);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(28, 39, 76, 0.2);
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.doctor-detail-page .btn-payment:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 72, 103, 0.3);
+}
+
+.doctor-detail-page .secure-text {
+    font-size: 0.8rem;
+    color: #999;
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 500;
+}

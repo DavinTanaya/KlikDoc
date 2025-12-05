@@ -1,0 +1,376 @@
+/* --- Scope Wrapper --- */
+.klikhome-history-page {
+    --bg-page: #f4f7fe;
+    --bg-white: #ffffff;
+    --primary: #1c274c;
+    --accent: #ff4867;
+    --accent-hover: #dc2626;
+    --text-main: #333;
+    --text-grey: #888;
+    --border: #e0e0e0;
+    --status-red-bg: #ffebeb;
+    --status-red-text: #d32f2f;
+    --status-blue-bg: #e3f2fd;
+    --status-blue-text: #1976d2;
+    --status-orange-bg: #fff3e0;
+    --status-orange-text: #ef6c00;
+    --status-green-bg: #e8f5e9;
+    --status-green-text: #2e7d32;
+
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    overflow: hidden;
+}
+
+/* --- Header --- */
+.klikhome-history-page .history-header {
+    background: transparent;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.klikhome-history-page .header-container {
+    width: 70vw;
+    max-width: 1200px;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.klikhome-history-page .header-container h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 800;
+}
+
+.klikhome-history-page .btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.klikhome-history-page .btn-back:hover {
+    transform: translateX(-3px);
+}
+
+.klikhome-history-page .spacer {
+    width: 100px;
+}
+
+/* --- Main Content --- */
+.klikhome-history-page .history-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+}
+
+.klikhome-history-page .history-container {
+    width: 70vw;
+    max-width: 1200px;
+    min-width: 600px;
+
+    background: var(--bg-white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* --- Tabs --- */
+.klikhome-history-page .status-tabs {
+    background: var(--bg-white);
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.klikhome-history-page .tab {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--text-grey);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.klikhome-history-page .tab.active,
+.klikhome-history-page .tab:hover {
+    background: #f4f7fe;
+    color: var(--primary);
+}
+
+/* --- Order List --- */
+.klikhome-history-page .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    background: #fcfcfc;
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+}
+
+.klikhome-history-page .order-list::-webkit-scrollbar {
+    width: 6px;
+}
+.klikhome-history-page .order-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.klikhome-history-page .order-card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.klikhome-history-page .order-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Card Header */
+.klikhome-history-page .card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.klikhome-history-page .meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+}
+
+.klikhome-history-page .meta .date {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.klikhome-history-page .meta .order-id {
+    color: var(--text-grey);
+}
+
+/* Badges */
+.klikhome-history-page .badge {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.klikhome-history-page .badge.red { background: var(--status-red-bg); color: var(--status-red-text); }
+.klikhome-history-page .badge.blue { background: var(--status-blue-bg); color: var(--status-blue-text); }
+.klikhome-history-page .badge.orange { background: var(--status-orange-bg); color: var(--status-orange-text); }
+.klikhome-history-page .badge.green { background: var(--status-green-bg); color: var(--status-green-text); }
+
+/* Card Body */
+.klikhome-history-page .card-body {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.klikhome-history-page .product-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px; /* Lebih rounded */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Icon Background Colors Helpers */
+.klikhome-history-page .bg-orange-soft { background: #fff3e0; }
+.klikhome-history-page .bg-purple-soft { background: #f3e5f5; }
+.klikhome-history-page .bg-cyan-soft { background: #e0f7fa; }
+.klikhome-history-page .bg-green-soft { background: #e8f5e9; }
+
+.klikhome-history-page .product-info {
+    flex: 1;
+}
+
+.klikhome-history-page .product-info h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 5px 0;
+    font-weight: 700;
+}
+
+.klikhome-history-page .product-info .extra-items {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    margin: 0;
+}
+
+.klikhome-history-page .bill-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.klikhome-history-page .bill-info .label {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+}
+
+.klikhome-history-page .bill-info .price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* Card Footer */
+.klikhome-history-page .card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.klikhome-history-page .card-footer.footer-action {
+    justify-content: space-between;
+    background: #fffafa;
+}
+
+.klikhome-history-page .payment-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.klikhome-history-page .shipping-info {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Buttons */
+.klikhome-history-page button {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.klikhome-history-page .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(255, 72, 103, 0.2);
+}
+.klikhome-history-page .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.klikhome-history-page .btn-outline {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+}
+.klikhome-history-page .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .klikhome-history-page .header-container,
+    .klikhome-history-page .history-container {
+        width: 95vw;
+        min-width: 0;
+    }
+
+    .klikhome-history-page .history-content {
+        height: auto;
+        min-height: 80vh;
+    }
+
+    .klikhome-history-page .history-container {
+        height: auto;
+        overflow: visible;
+    }
+
+    .klikhome-history-page .order-list {
+        overflow: visible;
+        padding: 1rem;
+    }
+
+    .klikhome-history-page .card-body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .klikhome-history-page .bill-info {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        text-align: left;
+        padding-top: 10px;
+        border-top: 1px dashed #eee;
+    }
+
+    .klikhome-history-page .card-footer.footer-action {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .klikhome-history-page .card-footer button {
+        width: 100%;
+    }
+}

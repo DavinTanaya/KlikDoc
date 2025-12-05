@@ -1,0 +1,514 @@
+/* =========================================
+   ARTIKEL PAGE SPECIFIC STYLES
+   Namespace: .artikel-page
+   ========================================= */
+
+/* 1. MAIN LAYOUT STRUCTURE (Fixing the "Broken" Look)
+   Meniru struktur layout halaman Konsultasi
+   ========================================= */
+
+.artikel-page {
+    --bg-sidebar: #1C274C;
+    --text-sidebar: #FFFFFF;
+    --accent: #FF4867;
+    --bg-content: #F4F7FE;
+    --card-bg: #FFFFFF;
+    
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-content);
+}
+
+.artikel-page .split-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Sidebar Layout */
+.artikel-page .split-sidebar {
+    background-color: var(--bg-sidebar);
+    color: var(--text-sidebar);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Content Layout */
+.artikel-page .split-content {
+    background-color: var(--bg-content);
+    flex: 1;
+    padding: 2rem;
+}
+
+/* RESPONSIVE DESKTOP (Split Screen) */
+@media (min-width: 1024px) {
+    .artikel-page .split-container {
+        flex-direction: row;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .artikel-page .split-sidebar {
+        width: 300px; /* Sedikit lebih lebar untuk artikel */
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        flex-shrink: 0;
+        border-right: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .artikel-page .split-content {
+        padding: 3rem 4rem;
+        overflow-y: auto;
+    }
+}
+
+
+/* 2. SIDEBAR COMPONENTS
+   ========================================= */
+
+/* Header */
+.artikel-page .sidebar-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+    color: white;
+}
+.artikel-page .sidebar-header .dot {
+    color: var(--accent);
+}
+.artikel-page .sidebar-header p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 0.25rem;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Search Widget */
+.artikel-page .search-widget {
+    margin-bottom: 0.5rem;
+}
+
+.artikel-page .input-icon-wrapper {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.artikel-page .input-icon-wrapper:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.artikel-page .input-icon-wrapper svg {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.artikel-page .search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 12px 10px;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.artikel-page .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Sidebar Section Headers */
+.artikel-page .widget-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* Topic Cloud (Tags) */
+.artikel-page .topic-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.artikel-page .topic-tag {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.artikel-page .topic-tag:hover, 
+.artikel-page .topic-tag.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 72, 103, 0.3);
+}
+
+/* Trending List */
+.artikel-page .trending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.artikel-page .trending-item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    transition: background 0.2s;
+    background: rgba(255,255,255,0.03);
+}
+
+.artikel-page .trending-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.artikel-page .trending-item .count {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.15);
+    line-height: 1;
+    min-width: 20px;
+}
+
+.artikel-page .trending-item:hover .count {
+    color: var(--accent);
+}
+
+.artikel-page .trending-item .trending-info {
+    flex: 1;
+}
+
+.artikel-page .trending-item .trending-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: white;
+}
+
+.artikel-page .trending-item .trending-info small {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Sidebar CTA (Newsletter) */
+.artikel-page .sidebar-banner {
+    background: linear-gradient(135deg, var(--accent), #ff8a80);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+    box-shadow: 0 10px 20px rgba(255, 72, 103, 0.2);
+}
+
+.artikel-page .sidebar-banner h3 { 
+    margin: 0 0 5px 0; 
+    font-size: 1.1rem; 
+    font-weight: 700;
+}
+
+.artikel-page .sidebar-banner p { 
+    font-size: 0.85rem; 
+    margin-bottom: 1.2rem; 
+    opacity: 0.9; 
+}
+
+.artikel-page .btn-subscribe {
+    background: white;
+    color: var(--accent);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.artikel-page .btn-subscribe:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.artikel-page .sidebar-divider {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 0;
+}
+
+
+/* 3. MAIN CONTENT AREA
+   ========================================= */
+
+/* Header Content */
+.artikel-page .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.artikel-page .content-header h1 {
+    font-size: 1.8rem;
+    color: #1C274C;
+    margin: 0;
+    font-weight: 700;
+}
+
+.artikel-page .sort-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.artikel-page .sort-wrapper select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Article Grid */
+.artikel-page .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px;
+}
+
+.artikel-page .article-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.artikel-page .article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(28, 39, 76, 0.08);
+    border-color: rgba(28, 39, 76, 0.05);
+}
+
+/* 4. ARTICLE CARD COMPONENTS
+   ========================================= */
+
+/* Thumbnail */
+.artikel-page .article-thumb {
+    height: 190px;
+    position: relative;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.artikel-page .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+.artikel-page .article-card:hover .img-placeholder {
+    transform: scale(1.08);
+}
+
+/* Card Placeholder Colors */
+.artikel-page .bg-blue-light { background: #e3f2fd; }
+.artikel-page .bg-pink-light { background: #fce4ec; }
+.artikel-page .bg-green-light { background: #e8f5e9; }
+.artikel-page .bg-orange-light { background: #fff3e0; }
+
+/* Category Badge */
+.artikel-page .category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px; /* Pindah ke kiri agar lebih rapi */
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 30px;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    backdrop-filter: blur(4px);
+}
+
+.artikel-page .cat-blue { color: #1565c0; }
+.artikel-page .cat-pink { color: #c2185b; }
+.artikel-page .cat-green { color: #2e7d32; }
+.artikel-page .cat-orange { color: #ef6c00; }
+
+/* Card Body */
+.artikel-page .article-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Meta Info */
+.artikel-page .article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: 500;
+}
+
+.artikel-page .meta-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Title & Excerpt */
+.artikel-page .article-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1C274C;
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+    /* Limit 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.artikel-page .article-excerpt {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    flex: 1;
+    /* Limit 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Footer: Author & Action */
+.artikel-page .article-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid #f5f5f5;
+}
+
+.artikel-page .author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.artikel-page .author-avatar {
+    width: 32px;
+    height: 32px;
+    background: #1C274C;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.artikel-page .author span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.artikel-page .btn-read-more {
+    background: transparent;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 72, 103, 0.3);
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.artikel-page .btn-read-more:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 4px 10px rgba(255, 72, 103, 0.2);
+}
+
+/* Pagination */
+.artikel-page .pagination-wrapper { 
+    margin-top: 3rem; 
+    display: flex; 
+    justify-content: center; 
+    gap: 8px; 
+}
+.artikel-page .page-btn { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 8px; 
+    border: 1px solid #E0E0E0; 
+    background: white; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #666;
+    transition: all 0.2s;
+}
+.artikel-page .page-btn:hover:not([disabled]) {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.artikel-page .page-btn.active { 
+    background: var(--accent); 
+    color: white; 
+    border-color: var(--accent); 
+}

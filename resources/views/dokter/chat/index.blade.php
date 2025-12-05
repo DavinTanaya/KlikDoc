@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('dokter.layout')
 
 @section('title', 'KlikDoc | Chat Dokter')
 
