@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         ChatSeeder::class,
         MessageSeeder::class,
         DrugSeeder::class,
+        ProvinceSeeder::class,
+        CitySeeder::class,
+        VoucherSeeder::class,
     ]);
     }
 }

@@ -395,3 +395,58 @@
         width: 100%;
     }
 }
+/* Fix tombol di history page */
+.history-page .btn-primary {
+    background-color: #ff4d6d;
+    color: white;
+    padding: 0.55rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+    transition: 0.2s ease;
+}
+
+.history-page .btn-primary:hover {
+    background-color: #ff3756;
+    transform: translateY(-2px);
+}
+
+/* Timer & button alignment */
+.footer-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.8rem;
+}
+
+/* Red timer */
+.payment-timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ff4d6d;
+    font-size: 0.85rem;
+}
+
+.payment-timer svg {
+    stroke: #ff4d6d;
+}
+
+/* Fix btn-outline spacing for detail */
+.history-page .btn-outline {
+    border: 1px solid #1c274c;
+    padding: 0.5rem 1.2rem;
+    background: var(--status-blue-bg);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #1c274c;
+    transition: 0.2s;
+}
+
+.history-page .btn-outline:hover {
+    background-color: #f0f2ff;
+}

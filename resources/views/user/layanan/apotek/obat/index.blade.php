@@ -26,7 +26,7 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" placeholder="Cari obat, vitamin..." class="search-input">
+            <input type="text" placeholder="Cari obat, vitamin..." class="search-input" id="searchInput">
           </div>
         </div>
 
@@ -39,14 +39,14 @@
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg> Keranjang Saya</span>
-            <span class="badge">3</span>
+            <span class="badge">{{ $cartBadge }}</span>
           </div>
           <div class="cart-summary">
             <div class="cart-total">
               <small>Total Estimasi</small>
-              <strong>Rp 145.000</strong>
+              <strong>Rp {{ number_format($totalEstimation, 0, ',', '.') }}</strong>
             </div>
-            <button class="btn-cart">Lihat</button>
+            <a href="{{ route('apotek_keranjang') }}" style="text-decoration: none;" class="btn-cart">Lihat</a>
           </div>
         </div>
 
@@ -64,31 +64,42 @@
           </div>
           <div class="history-list">
 
-            <div class="history-item">
-              <div class="history-info">
-                <span class="history-date">24 Okt 2023</span>
-                <span class="history-name">Amoxicillin, dll.</span>
-              </div>
-              <span class="status-pill success">Selesai</span>
-            </div>
+            @forelse ($recentOrders as $order)
+              @php
+                $firstItem = $order->items->first();
+                $productName = $firstItem ? $firstItem->drug->name : 'Produk';
 
-            <div class="history-item">
-              <div class="history-info">
-                <span class="history-date">10 Okt 2023</span>
-                <span class="history-name">Vitamin C 1000mg</span>
-              </div>
-              <span class="status-pill success">Selesai</span>
-            </div>
+                if ($order->items->count() > 1) {
+                    $productName .= ', dll.';
+                }
 
-            <div class="history-item">
-              <div class="history-info">
-                <span class="history-date">01 Okt 2023</span>
-                <span class="history-name">Panadol Extra</span>
-              </div>
-              <span class="status-pill info">Dikirim</span>
-            </div>
+                $badgeClass = match ($order->status) {
+                    'SELESAI' => 'success',
+                    'DIPROSES' => 'info',
+                    'BELUM_BAYAR' => 'warning',
+                    default => 'neutral',
+                };
+              @endphp
+
+              <a href="{{ route('orders.detail', $order->order_code) }}" style="text-decoration: none;color:inherit;" class="history-item">
+                <div class="history-info">
+                  <span class="history-date">{{ $order->created_at->format('d M Y') }}</span>
+                  <span class="history-name">{{ $productName }}</span>
+                </div>
+
+                <span class="status-pill {{ $badgeClass }}">
+                  {{ ucfirst(strtolower(str_replace('_', ' ', $order->status))) }}
+                </span>
+              </a>
+
+            @empty
+              <p class="text-muted small">Belum ada pesanan.</p>
+            @endforelse
+
           </div>
-          <a href="#" class="btn-history-more">Lihat Semua</a>
+
+          <a href="{{ route('orders.history') }}" class="btn-history-more">Lihat Semua</a>
+
         </div>
 
         <hr class="sidebar-divider">
@@ -96,37 +107,40 @@
         <div class="sidebar-filters">
           <div class="filter-group">
             <h3>Kategori Obat</h3>
+
+            @php
+              $selectedCategories = (array) request()->get('kategori', []);
+              $isAll = count($selectedCategories) === 0;
+            @endphp
+
             <label class="checkbox-item">
-              <input type="checkbox" checked>
+              <input type="checkbox" class="cat-all" {{ $isAll ? 'checked' : '' }}>
               <span class="checkmark"></span>
               Semua
             </label>
-            <label class="checkbox-item">
-              <input type="checkbox">
-              <span class="checkmark"></span>
-              Obat Bebas
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox">
-              <span class="checkmark"></span>
-              Obat Resep
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox">
-              <span class="checkmark"></span>
-              Vitamin & Suplemen
-            </label>
+
+            @foreach ($categories as $cat)
+              <label class="checkbox-item">
+                <input type="checkbox" class="cat-check" value="{{ $cat }}"
+                  {{ in_array($cat, $selectedCategories) ? 'checked' : '' }}>
+                <span class="checkmark"></span>
+                {{ $cat }}
+              </label>
+            @endforeach
+
+
           </div>
 
           <div class="filter-group">
             <h3>Rentang Harga</h3>
             <div class="price-range">
-              <input type="number" placeholder="Min" class="price-input">
+              <input type="number" placeholder="Min" class="price-input" id="minPrice">
               <span>-</span>
-              <input type="number" placeholder="Max" class="price-input">
+              <input type="number" placeholder="Max" class="price-input" id="maxPrice">
             </div>
           </div>
         </div>
+
       </aside>
 
       <main class="split-content">
@@ -134,30 +148,29 @@
           <h1>Rekomendasi Kesehatan</h1>
           <div class="sort-wrapper">
             <span>Urutkan:</span>
-            <select>
-              <option>Paling Relevan</option>
-              <option>Harga Terendah</option>
-              <option>Harga Tertinggi</option>
+            <select id="sortSelect">
+              <option value="relevan">Paling Relevan</option>
+              <option value="harga-terendah">Harga Terendah</option>
+              <option value="harga-tertinggi">Harga Tertinggi</option>
             </select>
           </div>
+
         </div>
 
         <div class="product-grid">
 
           @foreach ($drugs as $drug)
-            <div class="product-card" data-bs-toggle="modal" data-bs-target="#productDetailModal"
-              data-name="{{ $drug->name }}" data-unit="{{ $drug->short_description }}"
-              data-price="{{ number_format($drug->price, 0, ',', '.') }}" data-category="{{ $drug->category }}"
+            <div class="product-card" data-bs-toggle="modal" data-id="{{ $drug->id }}"
+              data-bs-target="#productDetailModal" data-name="{{ $drug->name }}"
+              data-unit="{{ $drug->short_description }}" data-price="{{ number_format($drug->price, 0, ',', '.') }}"
+              data-category="{{ $drug->category }}"
               data-description="{{ $drug->description ?? 'Tidak ada deskripsi.' }}"
               data-dosage="{{ $drug->dosis ?? 'Tidak ada informasi dosis.' }}" data-type="{{ $drug->type ?? '-' }}"
-              data-image="{{ $drug->image ? asset('images/drugs/' . $drug->image) : '' }}">
+              data-image="{{ $drug->image ? asset('images/drugs/' . $drug->image) : '' }}"
+              data-submit-route="{{ route('apotek_keranjang.post', ['id' => $drug->id]) }}">
 
               <div class="product-image">
-                <div
-                  class="tag-badge @if ($drug->category == 'Obat Bebas') blue
-                    @elseif($drug->category == 'Vitamin') green
-                    @elseif($drug->category == 'Resep Dokter') red
-                    @else gray @endif">
+                <div class="tag-badge gray">
                   {{ $drug->category }}
                 </div>
 
@@ -253,13 +266,16 @@
 
               <div class="modal-actions">
                 <div class="qty-selector">
-                  <button>-</button>
-                  <input type="text" value="1" readonly>
-                  <button>+</button>
+                  <button class="qty-minus">-</button>
+                  <input type="text" class="qty-input" value="1" readonly>
+                  <button class="qty-plus">+</button>
                 </div>
-                <button class="btn-add-cart-modal">
-                  + Keranjang
-                </button>
+
+                <form id="addToCartForm" method="POST" action="">
+                  @csrf
+                  <input type="hidden" name="quantity" id="quantityField" value="1">
+                  <button type="submit" class="btn-add-cart-modal">+ Keranjang</button>
+                </form>
               </div>
 
             </div>

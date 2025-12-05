@@ -22,4 +22,14 @@ class Drug extends Model
         'type',
         'is_active',
     ];
+
+    public function userCarts()
+    {
+        return $this->hasMany(UserCart::class, 'drug_id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'drug_id');
+    }
 }

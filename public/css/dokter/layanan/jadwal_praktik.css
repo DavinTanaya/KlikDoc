@@ -1,0 +1,600 @@
+/* --- SCOPED STYLES (RENAMED) --- */
+.jadwal-praktik {
+    --primary-navy: #0f172a;
+    --secondary-navy: #1e293b;
+    --accent-blue: #2563eb;
+    --accent-purple: #7c3aed;
+    --warning-amber: #d97706;
+    --warning-bg: #fffbeb;
+    --success-green: #10b981;
+    --bg-page: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --shadow-float: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
+        0 4px 6px -2px rgba(0, 0, 0, 0.025);
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.jadwal-praktik * {
+    box-sizing: border-box;
+}
+
+.jadwal-praktik .main-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- HEADER --- */
+.jadwal-praktik .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.jadwal-praktik .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.jadwal-praktik .btn-back-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    width: fit-content;
+}
+.jadwal-praktik .btn-back-pill:hover {
+    color: var(--primary-navy);
+}
+
+.jadwal-praktik .title-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.jadwal-praktik .title-block h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-navy);
+    margin: 0;
+    letter-spacing: -1px;
+}
+.jadwal-praktik .date-capsule {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- TABLE SECTION --- */
+.jadwal-praktik .table-head-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+.jadwal-praktik .table-head-info h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--primary-navy);
+}
+.jadwal-praktik .count-bubble {
+    background: #e2e8f0;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+/* Floating Table Styling */
+.jadwal-praktik .floating-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 16px; /* Space between rows */
+}
+
+.jadwal-praktik .floating-table thead th {
+    text-align: left;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0 1.5rem;
+    padding-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+/* Patient Row (Card Style) */
+.jadwal-praktik .patient-row td {
+    background: var(--white);
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    transition: all 0.2s ease;
+}
+
+.jadwal-praktik .patient-row td:first-child {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-left: 1px solid var(--border-color);
+}
+.jadwal-praktik .patient-row td:last-child {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-right: 1px solid var(--border-color);
+}
+
+.jadwal-praktik .patient-row:hover td {
+    background: #fdfdfd;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-float);
+    border-color: #cbd5e1;
+}
+
+/* --- Referral Highlight Logic --- */
+.jadwal-praktik .patient-row.is-referral td {
+    background: #fffbf0; /* Light amber bg */
+    border-top-color: #fcd34d;
+    border-bottom-color: #fcd34d;
+}
+.jadwal-praktik .patient-row.is-referral td:first-child {
+    border-left: 4px solid var(--warning-amber); /* Thick left border */
+}
+.jadwal-praktik .patient-row.is-referral td:last-child {
+    border-right-color: #fcd34d;
+}
+
+/* Cell Contents */
+.jadwal-praktik .time-stamp {
+    font-weight: 700;
+    color: var(--primary-navy);
+    background: var(--bg-page);
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+.jadwal-praktik .time-stamp.done {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.jadwal-praktik .profile-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.jadwal-praktik .avatar-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.jadwal-praktik .gradient-blue {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+.jadwal-praktik .gradient-purple {
+    background: linear-gradient(135deg, #a855f7, #7e22ce);
+}
+.jadwal-praktik .gray {
+    background: #94a3b8;
+}
+
+.jadwal-praktik .p-name {
+    font-weight: 700;
+    color: var(--primary-navy);
+    font-size: 1rem;
+}
+.jadwal-praktik .p-id {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Badge Rujukan Styling */
+.jadwal-praktik .referral-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--warning-amber);
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+.jadwal-praktik .gender-pill {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.jadwal-praktik .gender-pill span {
+    font-weight: 600;
+}
+.jadwal-praktik .gender-pill.male span {
+    color: #0ea5e9;
+}
+.jadwal-praktik .gender-pill.female span {
+    color: #ec4899;
+}
+
+.jadwal-praktik .complaint {
+    font-weight: 500;
+    color: var(--text-main);
+}
+.jadwal-praktik .complaint.gray {
+    color: var(--text-muted);
+}
+
+.jadwal-praktik .status-pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.jadwal-praktik .status-pill.waiting {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #ffedd5;
+}
+.jadwal-praktik .status-pill.done {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #dcfce7;
+}
+
+.jadwal-praktik .done-row {
+    opacity: 0.7;
+}
+
+/* Actions */
+.jadwal-praktik .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+.jadwal-praktik .btn-primary-pill {
+    background: var(--primary-navy);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.jadwal-praktik .btn-primary-pill:hover {
+    background: #020617;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+.jadwal-praktik .btn-primary-pill.disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- MODAL --- */
+.jadwal-praktik .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.jadwal-praktik .modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s;
+}
+
+.jadwal-praktik .modal-card {
+    background: white;
+    width: 95%;
+    max-width: 900px;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: scale(0.95);
+    transition: transform 0.3s;
+}
+.jadwal-praktik .modal-overlay.active .modal-card {
+    transform: scale(1);
+}
+
+.jadwal-praktik .modal-flex {
+    display: flex;
+    min-height: 550px;
+}
+
+.jadwal-praktik .modal-sidebar {
+    flex: 1;
+    background: var(--primary-navy);
+    color: white;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.jadwal-praktik .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.jadwal-praktik .avatar-xl {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.jadwal-praktik .patient-tag {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 6px;
+    display: inline-block;
+}
+.jadwal-praktik .divider-line {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+.jadwal-praktik .info-block {
+    margin-bottom: 1.5rem;
+}
+.jadwal-praktik .info-block label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+.jadwal-praktik .info-block p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+.jadwal-praktik .text-alert {
+    color: #fca5a5;
+}
+.jadwal-praktik .visual-bottom {
+    margin-top: auto;
+    text-align: center;
+    opacity: 0.3;
+}
+
+.jadwal-praktik .modal-main {
+    flex: 1.5;
+    padding: 2.5rem;
+    background: white;
+}
+.jadwal-praktik .main-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.jadwal-praktik .icon-wrap {
+    width: 42px;
+    height: 42px;
+    background: #eff6ff;
+    color: var(--accent-blue);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.jadwal-praktik .main-header h3 {
+    margin: 0;
+    color: var(--primary-navy);
+}
+.jadwal-praktik .main-header p {
+    margin: 4px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.jadwal-praktik .form-item {
+    margin-bottom: 1.5rem;
+}
+.jadwal-praktik .form-item label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-navy);
+    font-size: 0.9rem;
+}
+.jadwal-praktik .input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-family: inherit;
+    background: #f8fafc;
+}
+.jadwal-praktik .input-field:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    background: white;
+}
+
+/* Referral Box */
+.jadwal-praktik .referral-box {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 12px;
+}
+.jadwal-praktik .checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 32px;
+    font-weight: 700;
+    color: #d97706;
+    font-size: 0.95rem;
+}
+.jadwal-praktik .checkbox-container input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+.jadwal-praktik .checkmark {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border: 2px solid #d97706;
+    border-radius: 5px;
+}
+.jadwal-praktik .checkbox-container:hover input ~ .checkmark {
+    background-color: #fff7ed;
+}
+.jadwal-praktik .checkbox-container input:checked ~ .checkmark {
+    background-color: #d97706;
+}
+.jadwal-praktik .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.jadwal-praktik .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.jadwal-praktik .form-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.jadwal-praktik .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--primary-navy);
+    font-size: 0.9rem;
+}
+.jadwal-praktik .btn-wrap {
+    display: flex;
+    gap: 10px;
+}
+.jadwal-praktik .btn-ghost {
+    background: transparent;
+    border: none;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 10px 20px;
+}
+.jadwal-praktik .btn-solid {
+    background: var(--primary-navy);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.jadwal-praktik .btn-close-absolute {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 850px) {
+    .jadwal-praktik .modal-flex {
+        flex-direction: column;
+    }
+    .jadwal-praktik .modal-sidebar {
+        padding: 1.5rem;
+        flex: none;
+    }
+    .jadwal-praktik .modal-main {
+        padding: 1.5rem;
+    }
+}

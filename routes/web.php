@@ -6,16 +6,22 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\DashboardDokterController;
+use App\Http\Controllers\DokterChatController;
+use App\Http\Controllers\DokterDashboardController;
+use App\Http\Controllers\DokterHistoryController;
+use App\Http\Controllers\DokterJadwalPraktikController;
+use App\Http\Controllers\DokterPendaftaranController;
+use App\Http\Controllers\DokterRujukanController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalenderMenstruasiController;
 use App\Http\Controllers\KalkulatorBmiContoller;
-use App\Http\Controllers\PendaftaranDokterController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PengingatObatController;
 use App\Http\Controllers\SuccessController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
@@ -37,13 +43,24 @@ Route::get('/kalender-menstruasi', [KalenderMenstruasiController::class, 'index'
 
 Route::get('/apotek', [ApotekController::class, 'index'])->name('apotek');
 Route::get('/apotek/keranjang', [CartController::class, 'index'])->name('apotek_keranjang');
-Route::get('/apotek/checkout', [CheckoutController::class, 'index'])->name('apotek_checkout');
-Route::get('/apotek/success', [SuccessController::class, 'index'])->name('success');
-Route::get('/apotek/riwayat', [HistoryController::class, 'index'])->name('riwayat');
+Route::post('/apotek/keranjang/selected', [CartController::class, 'removeSelectedCart'])->name('apotek_keranjang.delete_selected');
+Route::post('/apotek/keranjang/{id}', [CartController::class, 'addCart'])->name('apotek_keranjang.post');
+Route::patch('/apotek/keranjang/{id}', [CartController::class, 'updateCart'])->name('apotek_keranjang.update');
+Route::delete('/apotek/keranjang/{id}', [CartController::class, 'removeCart'])->name('apotek_keranjang.delete');
+Route::get('/apotek/checkout', [CheckoutController::class, 'index'])->name('apotek.checkout');
+Route::post('/apotek/checkout/pay', [CheckoutController::class, 'pay'])->name('apotek.checkout.pay');
+Route::get('/apotek/checkout/retry/{code}', [CheckoutController::class, 'retry'])->name('apotek.checkout.retry');
+Route::get('/apotek/checkout/success/{code}', [CheckoutController::class, 'success'])->name('apotek.checkout.success');
+Route::post('/apotek/checkout/use-voucher', [CheckoutController::class, 'useVoucher'])->name('apotek.checkout.use_voucher');
+
 Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
 
-Route::get('/dokter', [DashboardDokterController::class, 'index'])->name('dashboard_dokter');
-Route::get('/dokter/pendaftaran', [PendaftaranDokterController::class, 'index'])->name('pendaftaran_dokter');
+Route::get('/dokter', [DokterDashboardController::class, 'index'])->name('dokter.dashboard');
+Route::get('/dokter/pendaftaran', [DokterPendaftaranController::class, 'index'])->name('dokter.pendaftaran');
+Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
+Route::get('/dokter/rujukan', [DokterRujukanController::class, 'index'])->name('dokter.rujukan');
+Route::get('/dokter/riwayat', [DokterHistoryController::class, 'index'])->name('dokter.riwayat');
+Route::get('/dokter/chat', [DokterChatController::class, 'index'])->name('dokter.chat');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin', function () {
@@ -65,3 +82,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/admin/apotek/html',[AdminController::class, 'getApotekHtml']);
+
+
+Route::post('/address', [UserController::class, 'storeAddress'])->name('address.store');
+Route::post('/address/set-default', [UserController::class, 'setDefaultAddress'])->name('address.set_default');
+
+Route::put('/address/{id}', [UserController::class, 'editAddress'])->name('address.update');
+
+Route::get('/orders/history', [OrderController::class, 'history'])->name('orders.history');
+Route::get('/orders/{code}', [OrderController::class, 'detail'])->name('orders.detail');

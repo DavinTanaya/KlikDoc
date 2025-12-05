@@ -112,7 +112,7 @@
                     {{-- Menu Cepat --}}
                     <h3 class="section-title">Akses Cepat</h3>
                     <div class="quick-menu-grid">
-                        <div class="menu-item">
+                        {{-- <div class="menu-item">
                             <div class="icon-box">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -123,18 +123,20 @@
                                 </svg>
                             </div>
                             <span>Buat Resep</span>
-                        </div>
-                        <div class="menu-item">
-                            <div class="icon-box">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                    <path d="M12 18v-6"></path>
-                                    <path d="M9 15l3 3 3-3"></path>
-                                </svg>
+                        </div> --}}
+                        <a href="{{ route('rujukan') }}">
+                            <div class="menu-item">
+                                <div class="icon-box">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <path d="M12 18v-6"></path>
+                                        <path d="M9 15l3 3 3-3"></path>
+                                    </svg>
+                                </div>
+                                <span>Buat Rujukan</span>
                             </div>
-                            <span>Buat Rujukan</span>
-                        </div>
+                        </a>
                         <div class="menu-item">
                             <div class="icon-box">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -144,15 +146,17 @@
                             </div>
                             <span>Tulis Artikel</span>
                         </div>
-                        <div class="menu-item">
-                            <div class="icon-box">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
+                        <a href="{{ route('riwayat_dokter') }}">
+                            <div class="menu-item">
+                                <div class="icon-box">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Riwayat</span>
                             </div>
-                            <span>Riwayat</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -161,7 +165,7 @@
                     <div class="schedule-panel">
                         <div class="panel-header">
                             <h3>Jadwal Tatap Muka</h3>
-                            <a href="#" class="view-all">Lihat Semua</a>
+                            <a href="{{ route('jadwal_praktik') }}" class="view-all">Lihat Semua</a>
                         </div>
 
                         <div class="date-selector">

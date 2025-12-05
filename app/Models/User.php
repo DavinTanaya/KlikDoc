@@ -34,6 +34,21 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class, 'doctor_id');
     }
 
+    public function userCarts()
+    {
+        return $this->hasMany(UserCart::class, 'user_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

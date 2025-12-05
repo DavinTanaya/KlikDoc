@@ -1,0 +1,340 @@
+/* --- SCOPED STYLES: HISTORY (FINAL POLISH) --- */
+.history-dashboard {
+    /* Menggunakan palet warna yang sama dengan Rujukan Dashboard */
+    --primary-navy: #0f172a;
+    --secondary-navy: #1e293b;
+    --accent-blue: #2563eb;
+    --accent-teal: #0f766e;
+    --accent-purple: #7c3aed;
+    --bg-page: #f1f5f9;
+    --border-color: #e2e8f0;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --success-green: #10b981;
+    --warning-amber: #d97706;
+    
+    /* Shadow & Radius */
+    --radius-xl: 16px;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.history-dashboard * { box-sizing: border-box; }
+
+.history-dashboard .main-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- HEADER --- */
+.history-dashboard .top-header { margin-bottom: 2rem; }
+
+/* FIX: Added header-left layout for Back Button */
+.history-dashboard .header-left {
+    display: flex; flex-direction: column; gap: 1rem;
+}
+
+/* FIX: Added Back Button Style */
+.history-dashboard .btn-back-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none; color: var(--text-muted);
+    font-weight: 600; font-size: 0.9rem; transition: color 0.2s;
+    width: fit-content;
+}
+.history-dashboard .btn-back-pill:hover { color: var(--primary-navy); }
+
+.history-dashboard .title-block h1 {
+    font-size: 2rem; font-weight: 800; color: var(--primary-navy); margin: 0;
+    letter-spacing: -0.02em;
+}
+.history-dashboard .subtitle {
+    color: var(--text-muted); margin-top: 5px; font-size: 1rem;
+}
+
+/* --- FILTER BAR --- */
+.history-dashboard .filter-bar {
+    background: var(--white);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
+    flex-wrap: wrap;
+}
+
+.history-dashboard .filter-group {
+    display: flex; flex-direction: column; gap: 8px;
+}
+.history-dashboard .filter-group label {
+    font-size: 0.85rem; font-weight: 700; color: var(--primary-navy);
+}
+
+.history-dashboard .date-range-box {
+    display: flex; align-items: center; gap: 10px;
+    background: #f8fafc; border: 1px solid var(--border-color);
+    padding: 10px 14px; border-radius: 10px;
+}
+.history-dashboard .date-input {
+    border: none; background: transparent; font-family: inherit;
+    color: var(--primary-navy); font-weight: 600; cursor: pointer; outline: none;
+}
+.history-dashboard .separator { color: var(--text-muted); font-size: 0.8rem; font-weight: 600;}
+
+.history-dashboard .select-input {
+    padding: 10px 16px; border: 1px solid var(--border-color);
+    border-radius: 10px; font-family: inherit; font-size: 0.95rem;
+    color: var(--primary-navy); background: #f8fafc; outline: none;
+    min-width: 200px; cursor: pointer; height: 44px;
+}
+
+.history-dashboard .btn-filter {
+    padding: 0 24px; background: var(--primary-navy); color: white;
+    border: none; border-radius: 10px; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    height: 44px; box-shadow: 0 4px 6px rgba(15, 23, 42, 0.2);
+}
+.history-dashboard .btn-filter:hover { 
+    background: #1e293b; transform: translateY(-1px); 
+}
+
+/* --- TABS --- */
+.history-dashboard .tabs-wrapper {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem;
+}
+.history-dashboard .tab-pill {
+    background: transparent; border: 1px solid transparent;
+    padding: 10px 24px; border-radius: 50px;
+    font-weight: 600; color: var(--text-muted);
+    cursor: pointer; transition: all 0.2s;
+}
+.history-dashboard .tab-pill:hover { background: #e2e8f0; }
+.history-dashboard .tab-pill.active {
+    background: var(--primary-navy); color: white;
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.2);
+}
+
+/* --- TABLE STYLES (FIXED ALIGNMENT) --- */
+.history-dashboard .floating-table {
+    width: 100%; border-collapse: separate; 
+    border-spacing: 0 16px; /* Spasi antar baris */
+}
+.history-dashboard .floating-table thead th {
+    text-align: left; color: var(--text-muted); font-size: 0.75rem;
+    text-transform: uppercase; font-weight: 700; padding: 0 1.5rem 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.history-dashboard .history-row td {
+    background: var(--white); 
+    padding: 1rem 1.5rem; /* Padding standar */
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle; /* Kunci untuk alignment vertikal */
+    transition: all 0.2s;
+    white-space: nowrap; 
+    height: 88px; /* Tinggi baris tetap agar semua kolom sejajar */
+}
+.history-dashboard .history-row td:first-child {
+    border-top-left-radius: 16px; border-bottom-left-radius: 16px;
+    border-left: 1px solid var(--border-color);
+}
+.history-dashboard .history-row td:last-child {
+    border-top-right-radius: 16px; border-bottom-right-radius: 16px;
+    border-right: 1px solid var(--border-color);
+}
+.history-dashboard .history-row:hover td {
+    background: #fdfdfd; transform: translateY(-2px);
+    box-shadow: var(--shadow-hover); border-color: #cbd5e1;
+}
+
+/* Cell Content */
+.history-dashboard .date-text { font-weight: 700; color: var(--primary-navy); font-size: 0.95rem; }
+.history-dashboard .time-text { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+.history-dashboard .profile-group { display: flex; align-items: center; gap: 14px; }
+.history-dashboard .avatar-box {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: white; font-size: 1rem;
+    flex-shrink: 0;
+}
+.history-dashboard .gradient-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.history-dashboard .gradient-purple { background: linear-gradient(135deg, #a855f7, #7e22ce); }
+.history-dashboard .gradient-teal { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+
+.history-dashboard .p-name { 
+    font-weight: 700; font-size: 1rem; color: var(--primary-navy);
+    overflow: hidden; text-overflow: ellipsis; max-width: 180px;
+}
+.history-dashboard .p-id { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+.history-dashboard .type-badge {
+    padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+}
+.history-dashboard .type-badge.offline { background: #f1f5f9; color: var(--text-main); }
+.history-dashboard .type-badge.online { background: #f0fdfa; color: var(--accent-teal); }
+
+.history-dashboard .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.85rem; font-weight: 700; padding: 4px 0;
+}
+.history-dashboard .status-badge.success { color: var(--success-green); }
+.history-dashboard .status-badge.warning { color: var(--warning-amber); }
+
+.history-dashboard .count-pill {
+    background: #e2e8f0; padding: 4px 12px; border-radius: 20px; 
+    font-size: 0.85rem; font-weight: 600;
+}
+.history-dashboard .status-text.closed { color: var(--text-muted); font-weight: 600; }
+
+/* FIX: Button Alignment & Height */
+.history-dashboard .text-right { 
+    text-align: right; 
+    /* Hapus display:flex dari TD agar vertical-align table berfungsi */
+}
+.history-dashboard .btn-detail {
+    width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--border-color);
+    background: white; color: var(--text-muted); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; 
+    transition: all 0.2s;
+    vertical-align: middle; /* Pastikan tombol di tengah secara inline */
+}
+.history-dashboard .btn-detail:hover {
+    background: var(--primary-navy); color: white; border-color: var(--primary-navy);
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.15);
+}
+.history-dashboard .btn-text-action {
+    background: none; border: none; color: var(--accent-blue); font-weight: 700; 
+    cursor: pointer; font-size: 0.9rem;
+}
+
+/* --- MODAL (WIDER & FIXED CLOSE BUTTON) --- */
+.history-dashboard .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+    z-index: 1000; display: none; justify-content: center; align-items: center;
+}
+.history-dashboard .modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
+
+.history-dashboard .modal-card {
+    background: white; 
+    width: 95%; max-width: 1100px; /* FIX: Modal lebih lebar */
+    border-radius: 24px; position: relative; overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.history-dashboard .modal-overlay.active .modal-card { transform: scale(1); }
+
+.history-dashboard .modal-flex { display: flex; min-height: 550px; }
+
+.history-dashboard .modal-sidebar {
+    flex: 1; background: var(--primary-navy); color: white;
+    padding: 3rem 2.5rem; /* Tambah padding atas agar tidak nabrak tombol close */
+    display: flex; flex-direction: column; position: relative;
+    background-image: radial-gradient(#1e293b 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+.history-dashboard .avatar-xl {
+    width: 64px; height: 64px; background: rgba(255,255,255,0.1);
+    border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+.history-dashboard .sidebar-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.history-dashboard .patient-tag {
+    background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 700; margin-top: 6px; display: inline-block;
+}
+.history-dashboard .divider-line { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 2rem; }
+.history-dashboard .info-block { margin-bottom: 1.5rem; }
+.history-dashboard .info-block label { 
+    display: block; font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; 
+    margin-bottom: 6px; letter-spacing: 0.05em;
+}
+.history-dashboard .info-block p { font-size: 1.1rem; }
+.history-dashboard .text-highlight { color: #38bdf8; font-weight: 700; font-size: 1.15rem; }
+
+/* FIX: Status Stamp Tegak (Tidak Miring) */
+.history-dashboard .status-stamp {
+    margin-top: auto; 
+    border: 2px solid; 
+    padding: 12px 0; 
+    text-align: center;
+    font-weight: 800; 
+    font-size: 1.25rem; 
+    letter-spacing: 2px; 
+    border-radius: 12px;
+    text-transform: uppercase;
+    transform: none; /* Rotasi dihapus agar terlihat profesional */
+    background: rgba(255,255,255,0.05);
+}
+
+.history-dashboard .modal-main { 
+    flex: 1.5; 
+    padding: 3rem 3rem 2rem 3rem; /* Padding lebih besar */
+    background: white; 
+}
+.history-dashboard .main-header {
+    border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    /* FIX: Padding kanan agar judul tidak tertutup tombol close */
+    padding-right: 40px; 
+}
+.history-dashboard .main-header h3 { margin: 0; color: var(--primary-navy); font-size: 1.25rem; font-weight: 800; }
+.history-dashboard .date-chip { 
+    font-size: 0.85rem; color: var(--text-main); background: #f1f5f9; 
+    padding: 6px 12px; border-radius: 8px; font-weight: 600;
+}
+
+.history-dashboard .detail-section { margin-bottom: 2rem; }
+.history-dashboard .section-label {
+    display: block; font-weight: 700; color: var(--primary-navy); margin-bottom: 10px; font-size: 0.9rem;
+}
+.history-dashboard .read-only-box {
+    background: #f8fafc; border: 1px solid var(--border-color);
+    padding: 1.25rem; border-radius: 12px; font-size: 0.95rem; line-height: 1.6;
+    color: var(--text-main);
+}
+.history-dashboard .read-only-box.highlight-bg { background: #eff6ff; border-color: #dbeafe; }
+.history-dashboard .ref-box { color: var(--warning-amber); font-weight: 600; }
+
+.history-dashboard .btn-solid {
+    width: 100%; background: var(--primary-navy); color: white; border: none;
+    padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer;
+    font-size: 0.95rem; transition: background 0.2s;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
+}
+.history-dashboard .btn-solid:hover { background: #020617; transform: translateY(-2px); }
+
+/* FIX: Posisi Tombol Close Lebih Aman */
+.history-dashboard .btn-close-absolute {
+    position: absolute; top: 20px; right: 20px; width: 36px; height: 36px;
+    background: #f1f5f9; border: none; border-radius: 50%;
+    cursor: pointer; font-size: 1.2rem; z-index: 20; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+}
+.history-dashboard .btn-close-absolute:hover { 
+    background: #e2e8f0; color: var(--primary-navy); transform: rotate(90deg);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 900px) {
+    .history-dashboard .modal-flex { flex-direction: column; }
+    .history-dashboard .modal-sidebar { padding: 1.5rem; flex: none; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .history-dashboard .modal-main { padding: 1.5rem; }
+    .history-dashboard .filter-bar { flex-direction: column; align-items: stretch; gap: 1rem; }
+    .history-dashboard .btn-filter { width: 100%; justify-content: center; }
+}
