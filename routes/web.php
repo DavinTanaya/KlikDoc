@@ -50,6 +50,7 @@ Route::get('/admin', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/chat-dokter', [ChatDokterController::class, 'index'])->name('chat.index');
     Route::post('/chat-dokter/send', [ChatDokterController::class, 'sendMessage'])->name('chat.send');
+    Route::get('/chat/messages/{chat}', [ChatDokterController::class, 'messages'])->name('chat.messages');
     Route::post('/chats/{chat}/call/start', [ChatDokterController::class, 'start'])->name('chats.call.start');
     Route::post('/chats/{chat}/call/end', [ChatDokterController::class, 'end'])->name('chats.call.end');
 });

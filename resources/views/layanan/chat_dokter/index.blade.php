@@ -169,9 +169,6 @@
   <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
 
   <script>
-    /* ===========================================================
-             INITIAL VARIABLES
-          =========================================================== */
     console.log("[INIT] ChatDokter script loaded");
 
     const authUserId = {{ $authUser->id }};
@@ -198,7 +195,7 @@
     let currentCallType = "video";
     let isCaller = false;
 
-     window.Echo = new Echo({
+    window.Echo = new Echo({
       broadcaster: "pusher",
       key: "{{ config('broadcasting.connections.pusher.key') }}",
       wsHost: "ws.cheapdl.online",
@@ -216,7 +213,6 @@
     });
 
 
-    // ==== LOG STATE PERUBAHAN SUPAYA KELIHATAN APA YANG TERJADI ====
     const pusherConn = window.Echo.connector.pusher.connection;
 
     pusherConn.bind("state_change", (states) => {
@@ -237,13 +233,7 @@
       console.error("[ECHO] FAILED:", err);
     });
 
-
-    /* ===========================================================
-       SELECT CHAT (GLOBAL)
-    =========================================================== */
     window.selectChat = function(el, chatId, partnerName) {
-      console.log("%c[CHAT] Switching chat → " + chatId, "color:#fb923c");
-
       document.querySelectorAll(".chat-item").forEach(i => i.classList.remove("active"));
       el.classList.add("active");
 
@@ -252,11 +242,20 @@
 
       subscribeChat(chatId);
       subscribeCall(chatId);
+
+      fetch(`/chat/messages/${chatId}`)
+        .then(res => res.json())
+        .then(data => {
+          msgContainer.innerHTML = "";
+
+          data.messages.forEach(msg => {
+            appendMessage(msg, msg.sender_id === authUserId ? "sent" : "received");
+          });
+
+          msgContainer.scrollTop = msgContainer.scrollHeight;
+        });
     };
 
-    /* ===========================================================
-       SUBSCRIBE TO CHAT CHANNEL
-    =========================================================== */
     function subscribeChat(chatId) {
       if (!chatId) return console.warn("[CHAT] No chat ID");
 
@@ -275,14 +274,14 @@
     function appendMessage(msg, type) {
       msgContainer.insertAdjacentHTML("beforeend", `
         <div class="message-row ${type}">
-            <div class="bubble">
-                ${msg.body}
-                <span class="bubble-time">${msg.created_at}</span>
-            </div>
+          <div class="bubble">
+            ${msg.body}
+            <span class="bubble-time">${new Date(msg.created_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>
+          </div>
         </div>
-    `);
-      msgContainer.scrollTop = msgContainer.scrollHeight;
+      `);
     }
+
 
     function handleEnter(e) {
       if (e.key !== "Enter") return;
@@ -292,7 +291,7 @@
 
       appendMessage({
         body: text,
-        created_at: "Barusan"
+        created_at: "Now"
       }, "sent");
 
       fetch("{{ route('chat.send') }}", {
@@ -310,9 +309,6 @@
       e.target.value = "";
     }
 
-    /* ===========================================================
-       CALL SIGNAL CHANNEL
-    =========================================================== */
     function subscribeCall(chatId) {
       if (!chatId) return console.warn("[CALL] No chatId");
 
@@ -351,9 +347,6 @@
       });
     }
 
-    /* ===========================================================
-       WEBRTC
-    =========================================================== */
     const rtcConfig = {
       iceServers: [{
         urls: "stun:stun.l.google.com:19302"

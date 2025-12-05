@@ -1,21 +1,17 @@
 <nav class="navbar navbar-expand-lg sticky-top border-bottom bg-white shadow-sm py-2">
     <div class="container">
         
-        {{-- 1. Brand / Logo --}}
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <img src="{{ asset('image/KlikDoc.png') }}" alt="KlikDoc" height="35">
         </a>
 
-        {{-- 2. Toggler Mobile --}}
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar"
             aria-controls="userNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- 3. Menu Collapse --}}
         <div class="navbar-collapse collapse" id="userNavbar">
             
-            {{-- Menu Navigasi (Tengah - mx-auto) --}}
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
                 <li class="nav-item px-2">
                     <a class="nav-link {{ request()->is('konsultasi*') ? 'active text-primary fw-bold' : '' }}" href="#">Konsultasi</a>
@@ -24,7 +20,7 @@
                     <a class="nav-link {{ request()->is('booking*') ? 'active text-primary fw-bold' : '' }}" href="#">Booking</a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->is('apotek*') ? 'active text-primary fw-bold' : '' }}" href="#">Apotek</a>
+                    <a class="nav-link {{ request()->is('apotek*') ? 'active text-primary fw-bold' : '' }}" href="{{ route('apotek') }}">Apotek</a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link {{ request()->is('layanan*') ? 'active text-primary fw-bold' : '' }}" href="#">Layanan Kesehatan</a>
@@ -34,10 +30,8 @@
                 </li>
             </ul>
 
-            {{-- Bagian Kanan (Search, Notif, Auth) --}}
             <div class="d-flex align-items-center justify-content-end gap-3">
 
-                {{-- Search Bar (Desktop Only) --}}
                 <form class="d-none d-lg-block" role="search">
                     <div class="input-group">
                         <span class="input-group-text bg-light border-end-0 rounded-start-pill text-muted py-1">
@@ -48,7 +42,6 @@
                     </div>
                 </form>
 
-                {{-- Notifikasi (Style sama dengan Dokter) --}}
                 <div class="dropdown">
                     <button class="btn btn-light position-relative rounded-circle text-secondary" 
                             type="button" data-bs-toggle="dropdown" style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
@@ -65,10 +58,8 @@
                     </ul>
                 </div>
 
-                {{-- Divider --}}
                 <div class="vr d-none d-lg-block mx-1" style="height: 25px; align-self: center;"></div>
 
-                {{-- Auth Buttons / Profile --}}
                 @guest
                     <div class="d-flex gap-2">
                         <a href="{{ route('login') }}" class="btn btn-outline-primary rounded-pill px-4 fw-semibold">Masuk</a>
@@ -79,18 +70,15 @@
                         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle gap-2"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             
-                            {{-- Nama (Desktop Only) - Posisi di Kiri Avatar --}}
                             <div class="d-none d-lg-block text-end lh-1">
                                 <span class="d-block fw-bold text-dark" style="font-size: 0.9rem;">{{ Str::limit(Auth::user()->name, 15) }}</span>
                             </div>
                             
-                            {{-- Avatar - Posisi di Kanan --}}
                             <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode(Auth::user()->name).'&background=random' }}" 
                                  class="rounded-circle border" width="40" height="40" alt="User">
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
-                            {{-- Info Mobile (Muncul di dalam menu saat mobile) --}}
                             <li class="d-lg-none px-3 py-2 border-bottom mb-2 bg-light">
                                 <span class="fw-bold d-block">{{ Auth::user()->name }}</span>
                                 <small class="text-muted">{{ Auth::user()->email }}</small>
@@ -114,7 +102,6 @@
             </div>
         </div>
 
-        {{-- Search Bar Mobile (Muncul di bawah saat layar kecil) --}}
         <div class="w-100 d-lg-none mt-3 collapse show" id="mobileSearch">
             <form role="search">
                 <div class="input-group">

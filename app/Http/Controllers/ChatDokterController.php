@@ -69,6 +69,15 @@ class ChatDokterController extends Controller
         ]);
     }
 
+    public function messages(Chat $chat)
+    {
+        return response()->json([
+            'messages' => $chat->messages()->orderBy('created_at')->get()
+        ]);
+    }
+
+
+
     public function start(Chat $chat, Request $request)
     {
         $user = $request->user();
