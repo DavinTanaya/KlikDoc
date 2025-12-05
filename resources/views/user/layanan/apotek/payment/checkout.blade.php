@@ -3,7 +3,7 @@
 @section('title', 'KlikDoc | Pengiriman & Pembayaran')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/checkout/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/payment/checkout.css') }}">
 @endpush
 
 @section('body')

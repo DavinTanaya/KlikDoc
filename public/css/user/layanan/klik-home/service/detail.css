@@ -1,0 +1,654 @@
+/* =========================================
+   KLIKHOME DETAIL PAGE
+   Namespace: .klikhome-detail-page
+   ========================================= */
+
+.klikhome-detail-page {
+    --bg-page: #F4F7FE;
+    --card-bg: #FFFFFF;
+    --text-primary: #1C274C;
+    --text-body: #555;
+    --accent: #FF4867;
+    --accent-hover: #e0405b;
+    --border-color: #E0E0E0;
+    
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    padding-bottom: 4rem;
+}
+
+.klikhome-detail-page .detail-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* 1. NAVIGATION
+   ========================================= */
+.klikhome-detail-page .top-nav {
+    padding: 2rem 0;
+}
+
+.klikhome-detail-page .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.klikhome-detail-page .btn-back:hover {
+    color: var(--text-primary);
+}
+
+/* 2. LAYOUT GRID
+   ========================================= */
+.klikhome-detail-page .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .klikhome-detail-page .content-grid {
+        grid-template-columns: 1.8fr 1fr; /* Kiri lebih lebar */
+        gap: 3rem;
+        align-items: start;
+    }
+}
+
+/* 3. MAIN CONTENT (LEFT COLUMN)
+   ========================================= */
+
+/* Content Wrapper Styling */
+.klikhome-detail-page .main-content {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(28, 39, 76, 0.03);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+/* Hero Image */
+.klikhome-detail-page .service-hero-image {
+    width: 100%;
+    height: 250px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.klikhome-detail-page .bg-orange-light { background: #fff3e0; }
+
+.klikhome-detail-page .category-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #f57c00;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Header Info */
+.klikhome-detail-page .service-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.klikhome-detail-page .service-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.klikhome-detail-page .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.klikhome-detail-page .icon-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+}
+
+.klikhome-detail-page .divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+/* Sections */
+.klikhome-detail-page .info-section {
+    margin-bottom: 2.5rem;
+}
+
+.klikhome-detail-page .info-section h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.klikhome-detail-page .info-section p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-body);
+}
+
+/* Check List */
+.klikhome-detail-page .check-list {
+    list-style: none;
+    padding: 0;
+}
+
+.klikhome-detail-page .check-list li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: var(--text-body);
+}
+
+.klikhome-detail-page .check-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: #4caf50;
+    font-weight: 900;
+}
+
+/* Inclusion Card */
+.klikhome-detail-page .inclusion-card {
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.klikhome-detail-page .inc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.klikhome-detail-page .inc-item:last-child { margin-bottom: 0; }
+
+.klikhome-detail-page .inc-item .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+/* Safety Box */
+.klikhome-detail-page .safety-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+@media (min-width: 640px) {
+    .klikhome-detail-page .safety-box { grid-template-columns: 1fr 1fr; }
+}
+
+.klikhome-detail-page .safety-item {
+    background: #e8f5e9;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #c8e6c9;
+}
+
+.klikhome-detail-page .safety-item strong {
+    display: block;
+    color: #2e7d32;
+    margin-bottom: 6px;
+}
+
+.klikhome-detail-page .safety-item p {
+    font-size: 0.85rem;
+    margin: 0;
+    color: #1b5e20;
+}
+
+/* 4. BOOKING SIDEBAR (RIGHT COLUMN)
+   ========================================= */
+.klikhome-detail-page .booking-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.klikhome-detail-page .booking-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 50px rgba(28, 39, 76, 0.08);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.klikhome-detail-page .price-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+}
+
+.klikhome-detail-page .price-header .label {
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.klikhome-detail-page .price-header .price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* Forms */
+.klikhome-detail-page .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.klikhome-detail-page .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.klikhome-detail-page .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0;
+}
+
+/* Add Address Button */
+.klikhome-detail-page .btn-add-address {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    transition: color 0.2s;
+}
+.klikhome-detail-page .btn-add-address:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* Inputs */
+.klikhome-detail-page .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    background: #fdfdfd;
+}
+
+.klikhome-detail-page .form-control:focus {
+    border-color: var(--text-primary);
+    background: white;
+}
+
+/* Textarea Specific */
+.klikhome-detail-page textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Location Preview Box */
+.klikhome-detail-page .location-preview {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.klikhome-detail-page .loc-icon {
+    flex-shrink: 0;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+}
+
+.klikhome-detail-page .loc-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.klikhome-detail-page .loc-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.klikhome-detail-page .loc-detail {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Button Ubah (di dalam box) */
+.klikhome-detail-page .btn-change {
+    background: white;
+    border: 1px solid #ddd;
+    font-size: 0.75rem;
+    color: #333;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.klikhome-detail-page .btn-change:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+}
+
+/* Button Pilih Alamat Lain (di bawah box) */
+.klikhome-detail-page .btn-select-other {
+    width: 100%;
+    background: white;
+    border: 1px dashed #ccc;
+    color: #666;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.klikhome-detail-page .btn-select-other:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #fff5f7;
+}
+
+.klikhome-detail-page .card-divider {
+    border: 0;
+    border-top: 2px dashed #eee;
+    margin: 2rem 0;
+}
+
+/* Summary */
+.klikhome-detail-page .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.klikhome-detail-page .summary-row.total {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Payment Button */
+.klikhome-detail-page .btn-payment {
+    width: 100%;
+    background: var(--text-primary);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(28, 39, 76, 0.2);
+}
+
+.klikhome-detail-page .btn-payment:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 72, 103, 0.3);
+}
+
+.klikhome-detail-page .secure-text {
+    font-size: 0.8rem;
+    color: #999;
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+/* 5. MODAL POPUP STYLES
+   ========================================= */
+.klikhome-detail-page .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 1;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(4px);
+}
+
+.klikhome-detail-page .modal-overlay.hidden {
+    display: none;
+}
+
+.klikhome-detail-page .modal-content {
+    background: white;
+    width: 100%;
+    max-width: 700px; /* Lebar diperbesar dari 500px ke 700px */
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.klikhome-detail-page .modal-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.klikhome-detail-page .modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.klikhome-detail-page .btn-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+.klikhome-detail-page .btn-close:hover { color: #333; }
+
+.klikhome-detail-page .modal-body {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Address List Item */
+.klikhome-detail-page .address-item {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: all 0.2s;
+}
+
+.klikhome-detail-page .address-item:hover {
+    border-color: #ccc;
+    background: #fafafa;
+}
+
+.klikhome-detail-page .address-item.selected {
+    border-color: var(--accent);
+    background: #fff0f3;
+}
+
+.klikhome-detail-page .addr-info { flex: 1; margin-right: 10px; }
+
+.klikhome-detail-page .addr-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: #333;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+.klikhome-detail-page .addr-tag.secondary { background: #999; }
+
+.klikhome-detail-page .addr-text {
+    font-size: 0.9rem;
+    color: #333;
+    margin: 0 0 4px 0;
+    line-height: 1.4;
+}
+
+.klikhome-detail-page .addr-phone {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.klikhome-detail-page .addr-check {
+    color: var(--accent);
+}
+
+.klikhome-detail-page .btn-use-addr {
+    background: var(--text-primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.klikhome-detail-page .btn-use-addr:hover { background: var(--accent); }
+
+/* Edit Form Layout */
+.klikhome-detail-page .form-row.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Footer Actions */
+.klikhome-detail-page .modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+.klikhome-detail-page .btn-new-addr-modal,
+.klikhome-detail-page .btn-save-addr {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.klikhome-detail-page .btn-new-addr-modal {
+    border: 1px dashed #ccc;
+    background: white;
+    color: var(--accent);
+}
+.klikhome-detail-page .btn-new-addr-modal:hover {
+    border-color: var(--accent);
+    background: white;
+}
+
+.klikhome-detail-page .btn-save-addr {
+    background: var(--text-primary);
+    color: white;
+    border: none;
+}
+.klikhome-detail-page .btn-save-addr:hover {
+    background: var(--accent);
+}

@@ -3,7 +3,7 @@
 @section('title', 'KlikDoc | Keranjang Saya')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/keranjang/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/payment/cart.css') }}">
 @endpush
 
 @section('body')

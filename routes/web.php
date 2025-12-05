@@ -17,6 +17,9 @@ use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalenderMenstruasiController;
 use App\Http\Controllers\KalkulatorBmiContoller;
+use App\Http\Controllers\KlikHomeController;
+use App\Http\Controllers\KlikHomeHistoryController;
+use App\Http\Controllers\KlikHomePaymentController;
 use App\Http\Controllers\KonsultasiDokterController;
 use App\Http\Controllers\KonsultasiDokterDetailController;
 use App\Http\Controllers\KonsultasiDokterSuccessController;
@@ -58,6 +61,13 @@ Route::get('/konsultasi/riwayat/detail', [KonsultasiHistoryController::class, 'd
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 Route::get('/artikel/detail', [ArtikelController::class, 'detail'])->name('artikel.detail');
+
+Route::get('/klik-home', [KlikHomeController::class, 'index'])->name('klik-home');
+Route::get('/klik-home/detail', [KlikHomeController::class, 'detail'])->name('klik-home.detail');
+Route::get('/klik-home/pembayaran', [KlikHomePaymentController::class, 'payment'])->name('klik-home.payment');
+Route::get('/klik-home/sukses', [KlikHomePaymentController::class, 'success'])->name('klik-home.payment.success');
+Route::get('klik-home/riwayat', [KlikHomeHistoryController::class, 'index'])->name('klik-home.riwayat');
+Route::get('klik-home/riwayat/detail', [KlikHomeHistoryController::class, 'detail'])->name('klik-home.riwayat.detail');
 
 
 Route::get('/dokter', [DokterDashboardController::class, 'index'])->name('dokter.dashboard');

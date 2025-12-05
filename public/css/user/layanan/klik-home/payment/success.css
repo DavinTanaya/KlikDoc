@@ -1,0 +1,207 @@
+/* --- Scope Wrapper --- */
+.klikhome-success-page {
+    --bg-page: #F4F7FE;
+    --bg-white: #ffffff;
+    --primary: #1C274C;
+    --accent: #FF4867;
+    --green-success: #4caf50;
+    --text-main: #333;
+    --text-grey: #888;
+    --border: #e0e0e0;
+
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* --- Main Card --- */
+.klikhome-success-page .success-card {
+    background: var(--bg-white);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(28, 39, 76, 0.08); /* Shadow sedikit diperhalus */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Animasi Card Muncul */
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Animated Icon --- */
+.klikhome-success-page .success-icon-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.klikhome-success-page .success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--green-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+    transform: scale(0); /* Start hidden */
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+/* Ripple Effect Animation */
+.klikhome-success-page .ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: 50%;
+    z-index: 1;
+    animation: rippleEffect 2s infinite;
+}
+
+@keyframes rippleEffect {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* --- Text Content --- */
+.klikhome-success-page .text-content h1 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin: 0 0 0.8rem 0;
+    font-weight: 800;
+}
+
+.klikhome-success-page .text-content p {
+    color: var(--text-grey);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+/* --- Receipt Box --- */
+.klikhome-success-page .receipt-box {
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.klikhome-success-page .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    align-items: center; /* Align items center jika multiline */
+}
+
+.klikhome-success-page .receipt-row:last-child {
+    margin-bottom: 0;
+}
+
+.klikhome-success-page .receipt-row .label {
+    color: var(--text-grey);
+    text-align: left;
+}
+.klikhome-success-page .receipt-row .value {
+    color: var(--text-main);
+    font-weight: 600;
+    text-align: right;
+    max-width: 60%; /* Mencegah teks terlalu panjang */
+}
+
+/* Highlight jadwal agar user notice */
+.klikhome-success-page .receipt-row .value.highlight {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.klikhome-success-page .divider {
+    height: 1px;
+    border-bottom: 2px dashed #ddd; /* Dashed lebih tebal */
+    margin: 1.2rem 0;
+    opacity: 0.6;
+}
+
+.klikhome-success-page .receipt-row.total .value {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+/* --- Buttons --- */
+.klikhome-success-page .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.klikhome-success-page .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: block;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(28, 39, 76, 0.2);
+}
+
+.klikhome-success-page .btn-primary:hover {
+    background-color: #2a3b6e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(28, 39, 76, 0.3);
+}
+
+.klikhome-success-page .btn-secondary {
+    background-color: transparent;
+    color: var(--text-grey);
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: block;
+    width: 100%;
+    border: 1px solid transparent;
+}
+
+.klikhome-success-page .btn-secondary:hover {
+    color: var(--primary);
+    background-color: #f0f4f8;
+    border-color: #dbe4ef;
+}
