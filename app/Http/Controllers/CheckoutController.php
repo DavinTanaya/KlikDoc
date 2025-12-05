@@ -86,6 +86,10 @@ class CheckoutController extends Controller
 
         $subtotal = $cartItems->sum(fn ($item) => $item->quantity * $item->drug->price);
 
+        if($voucher->min_order_amount && $subtotal < $voucher->min_order_amount) {
+            return back()->with('error', 'Subtotal tidak memenuhi syarat minimum untuk voucher ini.');
+        }
+
         $discount = 0;
 
         if ($voucher->discount_percentage) {
@@ -172,6 +176,37 @@ class CheckoutController extends Controller
         Config::$isProduction = config('midtrans.is_production');
         Config::$isSanitized = true;
         Config::$is3ds = true;
+        $itemDetails = $order->items->map(function ($item) {
+            return [
+                'id' => $item->drug_id,
+                'price' => $item->price,
+                'quantity' => $item->quantity,
+                'name' => $item->drug->name,
+            ];
+        })->toArray();
+
+        $itemDetails[] = [
+            'id' => 'shipping_fee',
+            'price' => $shipping_fee,
+            'quantity' => 1,
+            'name' => 'Biaya Pengiriman',
+        ];
+
+        $itemDetails[] = [
+            'id' => 'service_fee',
+            'price' => $service_fee,
+            'quantity' => 1,
+            'name' => 'Biaya Layanan',
+        ];
+
+        if ($voucher_discount > 0) {
+            $itemDetails[] = [
+                'id' => 'voucher_discount',
+                'price' => -$voucher_discount,
+                'quantity' => 1,
+                'name' => 'Voucher Discount',
+            ];
+        }
 
         $params = [
             'transaction_details' => [
@@ -183,14 +218,7 @@ class CheckoutController extends Controller
                 'email' => $user->email,
                 'phone' => $user->phone ?? "08123456789",
             ],
-            'item_details' => $order->items->map(function ($item) {
-                return [
-                    'id' => $item->drug_id,
-                    'price' => $item->price,
-                    'quantity' => $item->quantity,
-                    'name' => $item->drug->name,
-                ];
-            })->toArray(),
+            'item_details' => $itemDetails,
             'callbacks' => [
                 'finish' => route('apotek.checkout.success', $order->order_code),
             ]
@@ -239,6 +267,42 @@ class CheckoutController extends Controller
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
+        $voucher = session('voucher');
+        $voucher_discount = $voucher['discount'] ?? 0;
+        $shipping_fee = 15000;
+        $service_fee = 1000;
+        $itemDetails = $order->items->map(function ($item) {
+            return [
+                'id' => $item->drug_id,
+                'price' => $item->price,
+                'quantity' => $item->quantity,
+                'name' => $item->drug->name,
+            ];
+        })->toArray();
+
+        $itemDetails[] = [
+            'id' => 'shipping_fee',
+            'price' => $shipping_fee,
+            'quantity' => 1,
+            'name' => 'Biaya Pengiriman',
+        ];
+
+        $itemDetails[] = [
+            'id' => 'service_fee',
+            'price' => $service_fee,
+            'quantity' => 1,
+            'name' => 'Biaya Layanan',
+        ];
+
+        if ($voucher_discount > 0) {
+            $itemDetails[] = [
+                'id' => 'voucher_discount',
+                'price' => -$voucher_discount,
+                'quantity' => 1,
+                'name' => 'Voucher Discount',
+            ];
+        }
+
         $params = [
             'transaction_details' => [
                 'order_id' => $order->order_code,
@@ -248,12 +312,7 @@ class CheckoutController extends Controller
                 'first_name' => $order->user->name,
                 'email' => $order->user->email,
             ],
-            'item_details' => $order->items->map(fn($i) => [
-                'id' => $i->drug_id,
-                'price' => $i->price,
-                'quantity' => $i->quantity,
-                'name' => $i->drug->name,
-            ])->toArray(),
+            'item_details' => $itemDetails,
             'callbacks' => [
                 'finish' => route('apotek.checkout.success', $order->order_code),
             ]
