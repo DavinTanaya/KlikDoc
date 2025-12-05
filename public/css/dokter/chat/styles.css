@@ -1,0 +1,431 @@
+:root {
+  /* Color Palette */
+  --chat-primary: #0088cc;
+  --chat-primary-light: #e3f2fd;
+  --chat-bg-body: #f0f2f5;
+  --chat-bg-white: #ffffff;
+  --chat-text-dark: #111b21;
+  --chat-text-grey: #667781;
+  --chat-border: #e9edef;
+  --chat-bubble-in: #ffffff;
+  --chat-bubble-out: #d9fdd3;
+  
+  /* Doctor Specific Colors */
+  --btn-finish: #ef4444;    /* Merah Legacy (Fallback) */
+  --btn-recipe: #10b981;    /* Hijau Legacy (Fallback) */
+
+  /* New Colors Requested */
+  --primary-navy: #0f172a;
+  --accent: #ff4867;
+  --accent-hover: #e03552;
+}
+
+/* Reset Box Sizing dalam Scope */
+.dokter-chat * {
+  box-sizing: border-box;
+}
+
+/* --- LAYOUT UTAMA --- */
+.dokter-chat .chat-wrapper {
+  background-color: rgb(var(--white));
+  padding: 20px;
+  height: 85vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dokter-chat .app-container {
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  background: rgb(var(--white));
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+}
+
+/* --- SIDEBAR --- */
+.dokter-chat .sidebar {
+  background: rgb(var(--white));
+  border-right: 1px solid rgb(var(--grey1));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.dokter-chat .sidebar-header {
+  padding: 16px;
+  background-color: rgba(var(--blue3), 0.3);
+  border-bottom: 1px solid rgb(var(--grey1));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.dokter-chat .sidebar-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dokter-chat .btn-home-back {
+  color: rgb(var(--blue1));
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.dokter-chat .sidebar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgb(var(--blue1));
+  margin: 0;
+}
+
+.dokter-chat .sidebar-tools {
+  display: flex;
+  gap: 1rem;
+  color: #64748b;
+}
+
+.dokter-chat .sidebar-tools i {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.dokter-chat .search-box {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--chat-border);
+  flex-shrink: 0;
+}
+
+.dokter-chat .search-input-wrapper {
+  background: var(--chat-bg-body);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dokter-chat .search-input-wrapper input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: var(--chat-text-dark);
+}
+
+.dokter-chat .chat-list {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dokter-chat .chat-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid #f5f6f6;
+  gap: 12px;
+}
+
+.dokter-chat .chat-item:hover { background-color: #f5f6f6; }
+.dokter-chat .chat-item.active { background-color: var(--chat-primary-light); }
+
+.dokter-chat .avatar-container { position: relative; }
+.dokter-chat .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+
+.dokter-chat .chat-info { flex: 1; min-width: 0; }
+.dokter-chat .chat-header-info { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.dokter-chat .chat-name { font-weight: 600; font-size: 15px; color: var(--chat-text-dark); }
+.dokter-chat .chat-time { font-size: 11px; color: var(--chat-text-grey); }
+.dokter-chat .chat-preview { display: flex; justify-content: space-between; align-items: center; }
+.dokter-chat .last-message { font-size: 13px; color: var(--chat-text-grey); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dokter-chat .unread-badge { background: var(--chat-primary); color: white; font-size: 10px; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; padding: 0 4px; }
+
+/* --- MAIN CHAT AREA --- */
+.dokter-chat .chat-area {
+  display: flex;
+  flex-direction: column;
+  background-color: #efeae2;
+  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  background-blend-mode: overlay;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dokter-chat .chat-room-header {
+  padding: 10px 16px;
+  background: var(--chat-bg-white);
+  border-bottom: 1px solid var(--chat-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+.dokter-chat .header-left { display: flex; align-items: center; }
+.dokter-chat .header-profile { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.dokter-chat .header-avatar { width: 40px; height: 40px; }
+.dokter-chat .header-name { font-weight: 600; font-size: 14px; margin: 0; color: var(--chat-text-dark); }
+.dokter-chat .header-status { color: #16a34a; font-size: 12px; font-weight: 500; }
+.dokter-chat .header-actions { display: flex; gap: 20px; color: var(--chat-primary); font-size: 18px; }
+.dokter-chat .header-actions i { cursor: pointer; transition: 0.2s; }
+
+/* --- STATUS BAR (MODIFIED) --- */
+.dokter-chat .chat-status-bar {
+  padding: 14px 24px; /* Padding lebih besar */
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 15px; /* Font lebih besar */
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Shadow halus */
+  z-index: 4;
+}
+
+.dokter-chat .status-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600; /* Font tebal */
+}
+
+/* Status Active: Biru (Tetap/Dikembalikan ke Biru) */
+.dokter-chat .status-active {
+  background: #e6f7ff;
+  border-bottom: 1px solid #b5e2ff;
+  color: #0369a1;
+}
+
+.dokter-chat .status-active i { 
+    color: #0284c7; 
+    font-size: 18px; /* Icon lebih besar */
+    animation: pulse 2s infinite;
+}
+
+/* Status Closed: Abu-abu netral */
+.dokter-chat .status-closed {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #64748b;
+}
+
+.dokter-chat .status-closed i {
+    font-size: 18px;
+}
+
+/* Tombol Khusus Dokter di Status Bar */
+.dokter-chat .doctor-controls {
+    display: flex;
+    gap: 12px; /* Jarak antar tombol lebih lega */
+}
+
+.dokter-chat .btn-doc-action {
+    border: none;
+    padding: 10px 24px; /* Tombol lebih besar dan lebar */
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dokter-chat .btn-doc-action:hover { 
+    transform: translateY(-2px); /* Efek naik saat hover */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* Rule khusus agar icon di dalam button tetap putih dan tidak ikut style status bar */
+.dokter-chat .btn-doc-action i {
+    color: #ffffff !important;
+    animation: none; /* Hilangkan animasi pulse dari status bar */
+}
+
+/* Button Resep: Navy Blue */
+.dokter-chat .btn-resep {
+    background: var(--primary-navy);
+}
+.dokter-chat .btn-resep:hover {
+    background-color: #1e293b; /* Sedikit lebih terang dari navy saat hover */
+}
+
+/* Button Selesai: Accent Red/Pink */
+.dokter-chat .btn-selesai {
+    background: var(--accent);
+}
+.dokter-chat .btn-selesai:hover {
+    background: var(--accent-hover);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* --- MESSAGES --- */
+.dokter-chat .messages-container {
+  flex: 1;
+  min-height: 0;
+  padding: 20px 5%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dokter-chat .message-row { display: flex; margin-bottom: 4px; }
+.dokter-chat .message-row.sent { justify-content: flex-end; }
+
+.dokter-chat .bubble {
+  max-width: 65%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  position: relative;
+  font-size: 14.2px;
+  line-height: 1.4;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+  color: #111;
+}
+
+.dokter-chat .message-row.received .bubble {
+  background: rgb(var(--white));
+  border-top-left-radius: 0;
+}
+
+.dokter-chat .message-row.sent .bubble {
+  background: rgba(var(--blue4), 0.5); 
+  border-top-right-radius: 0;
+}
+
+.dokter-chat .bubble-time {
+  float: right;
+  font-size: 10px;
+  color: #999;
+  margin-top: 4px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dokter-chat .date-divider { text-align: center; margin: 16px 0; }
+.dokter-chat .date-divider span {
+  background: rgba(225, 245, 254, 0.9);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: #555;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* --- INPUT AREA --- */
+.dokter-chat .input-area {
+  background: rgb(var(--white));
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 5;
+  border-top: 1px solid var(--chat-border);
+  flex-shrink: 0;
+}
+
+.dokter-chat .input-wrapper-active { display: flex; align-items: center; width: 100%; gap: 12px; }
+.dokter-chat .input-actions { display: flex; gap: 16px; color: rgba(var(--blue1), 0.5); font-size: 20px; }
+.dokter-chat .input-actions i:hover { color: rgb(var(--blue1)); cursor: pointer; }
+
+.dokter-chat .chat-input {
+  flex: 1;
+  background: rgba(var(--grey1), 0.2);
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+.dokter-chat .chat-input:focus { background: rgb(var(--white)); box-shadow: inset 0 0 0 1px rgb(var(--grey1)); }
+
+.dokter-chat .btn-send { color: var(--chat-primary); font-size: 20px; background: none; border: none; cursor: pointer; padding: 0; }
+.dokter-chat .btn-back { display: none; margin-right: 10px; color: var(--chat-text-dark); font-size: 18px; background: none; border: none; cursor: pointer; }
+
+.dokter-chat .input-closed-message {
+  display: none;
+  width: 100%;
+  padding: 12px 16px;
+  background: #f3f4f6; 
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* MODAL RESEP SCOPED */
+.dokter-chat .modal-overlay {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+}
+.dokter-chat .modal-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    font-family: "Inter", sans-serif;
+}
+.dokter-chat .modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.dokter-chat .modal-title { font-weight: 600; font-size: 18px; }
+.dokter-chat .close-modal { cursor: pointer; font-size: 24px; color: #aaa; }
+.dokter-chat .form-group { margin-bottom: 15px; }
+.dokter-chat .form-group label { display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px; }
+.dokter-chat .form-group input, 
+.dokter-chat .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
+.dokter-chat .btn-submit-resep { width: 100%; background: var(--btn-recipe); color: white; padding: 10px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dokter-chat .chat-wrapper { padding: 0; height: calc(100vh - 56px); }
+  .dokter-chat .app-container { max-width: 100%; border-radius: 0; grid-template-columns: 1fr; }
+  .dokter-chat .sidebar { width: 100%; display: flex; }
+  .dokter-chat .chat-area { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; }
+  .dokter-chat .app-container.chat-active .sidebar { display: none; }
+  .dokter-chat .app-container.chat-active .chat-area { display: flex; }
+  .dokter-chat .btn-back { display: block; }
+}

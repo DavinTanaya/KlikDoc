@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DashboardDokterController extends Controller
+class DokterChatController extends Controller
 {
     public function index() {
-        return view('dokter.dashboard.index');
+        return view('dokter.chat.index');
     }
 }
