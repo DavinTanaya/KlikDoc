@@ -63,7 +63,7 @@
                 @guest
                     <div class="d-flex gap-2">
                         <a href="{{ route('login') }}" class="btn btn-outline-primary rounded-pill px-4 fw-semibold">Masuk</a>
-                        <a href="{{ route('register') }}" class="btn btn-primary rounded-pill px-4 fw-semibold">Daftar</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-semibold">Daftar</a>
                     </div>
                 @else
                     <div class="dropdown">

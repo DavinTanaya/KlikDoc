@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         ChatSeeder::class,
         MessageSeeder::class,
+        DrugSeeder::class,
     ]);
     }
 }

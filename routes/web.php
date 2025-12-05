@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardDokterController;
+use App\Http\Controllers\DrugController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
@@ -43,9 +45,16 @@ Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])-
 Route::get('/dokter', [DashboardDokterController::class, 'index'])->name('dashboard_dokter');
 Route::get('/dokter/pendaftaran', [PendaftaranDokterController::class, 'index'])->name('pendaftaran_dokter');
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin.index');
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.index');
+    })->name('admin.index');
+    Route::post('/admin/drugs/create', [DrugController::class, 'createDrug'])->name('admin.drugs.create');
+    Route::put('/admin/drugs/{id}', [DrugController::class, 'editDrug'])->name('admin.drugs.update');
+    Route::delete('/admin/drugs/{id}', [DrugController::class, 'deleteDrug'])->name('admin.drugs.delete');
+});
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/chat-dokter', [ChatDokterController::class, 'index'])->name('chat.index');
@@ -54,3 +63,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/chats/{chat}/call/start', [ChatDokterController::class, 'start'])->name('chats.call.start');
     Route::post('/chats/{chat}/call/end', [ChatDokterController::class, 'end'])->name('chats.call.end');
 });
+
+Route::get('/admin/apotek/html',[AdminController::class, 'getApotekHtml']);

@@ -3,27 +3,25 @@
 @section('title', 'KlikDoc | Keranjang Saya')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/keranjang/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/payment/cart.css') }}">
 @endpush
 
 @section('body')
     <div class="cart-page">
-        {{-- Header Sederhana --}}
         <header class="cart-header">
             <div class="header-container">
-                <a href="{{ url()->previous() }}" class="btn-back">
+                <a href="{{ route('apotek') }}" class="btn-back">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                     Kembali
                 </a>
                 <h1>Keranjang Saya</h1>
-                <div class="spacer"></div> {{-- Spacer untuk centering title --}}
+                <div class="spacer"></div>
             </div>
         </header>
 
         <main class="cart-content">
             <div class="cart-container">
                 
-                {{-- Opsi Pilih Semua --}}
                 <div class="cart-actions-bar">
                     <label class="custom-checkbox">
                         <input type="checkbox" checked>
@@ -33,10 +31,8 @@
                     <button class="btn-delete-selected">Hapus</button>
                 </div>
 
-                {{-- List Item Keranjang --}}
                 <div class="cart-items-list">
                     
-                    {{-- Item 1 --}}
                     <div class="cart-item">
                         <div class="item-select">
                             <label class="custom-checkbox">
@@ -45,7 +41,6 @@
                             </label>
                         </div>
                         <div class="item-image">
-                            {{-- Placeholder Image --}}
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                         </div>
                         <div class="item-details">
@@ -68,7 +63,6 @@
                         </div>
                     </div>
 
-                    {{-- Item 2 --}}
                     <div class="cart-item">
                         <div class="item-select">
                             <label class="custom-checkbox">

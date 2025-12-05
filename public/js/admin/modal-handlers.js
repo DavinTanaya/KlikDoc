@@ -4,216 +4,237 @@
 // Sample Data
 const sampleData = {
     patients: {
-        'P001': {
-            id: 'P001',
-            name: 'Andi Wijaya',
-            initials: 'AW',
-            gender: 'Laki-laki',
+        P001: {
+            id: "P001",
+            name: "Andi Wijaya",
+            initials: "AW",
+            gender: "Laki-laki",
             age: 35,
-            email: 'andi.wijaya@email.com',
-            phone: '081234567890',
-            city: 'Jakarta',
+            email: "andi.wijaya@email.com",
+            phone: "081234567890",
+            city: "Jakarta",
             consultations: 12,
-            status: 'Aktif',
-            lastVisit: '2 hari lalu'
+            status: "Aktif",
+            lastVisit: "2 hari lalu",
         },
-        'P002': {
-            id: 'P002',
-            name: 'Budi Santoso',
-            initials: 'BS',
-            gender: 'Laki-laki',
+        P002: {
+            id: "P002",
+            name: "Budi Santoso",
+            initials: "BS",
+            gender: "Laki-laki",
             age: 42,
-            email: 'budi.santoso@email.com',
-            phone: '081234567891',
-            city: 'Bandung',
+            email: "budi.santoso@email.com",
+            phone: "081234567891",
+            city: "Bandung",
             consultations: 8,
-            status: 'Aktif',
-            lastVisit: '1 minggu lalu'
-        }
+            status: "Aktif",
+            lastVisit: "1 minggu lalu",
+        },
     },
     doctors: {
-        'D001': {
-            id: 'D001',
-            name: 'Dr. Sarah Johnson',
-            specialty: 'Kardiologi',
-            experience: '15 tahun',
+        D001: {
+            id: "D001",
+            name: "Dr. Sarah Johnson",
+            specialty: "Kardiologi",
+            experience: "15 tahun",
             rating: 4.9,
             consultations: 245,
-            price: 'Rp 150.000',
-            email: 'sarah.johnson@klikdoc.com',
-            phone: '081234560001',
-            status: 'online',
-            image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=120&h=120&fit=crop'
-        }
+            price: "Rp 150.000",
+            email: "sarah.johnson@klikdoc.com",
+            phone: "081234560001",
+            status: "online",
+            image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=120&h=120&fit=crop",
+        },
     },
     consultations: {
-        'C001': {
-            id: 'C001',
-            patient: 'Andi Wijaya',
-            doctor: 'Dr. Sarah Johnson',
-            specialty: 'Kardiologi',
-            startTime: '09:00',
-            duration: '15 menit',
-            status: 'ongoing',
-            type: 'CHAT',
-            complaint: 'Nyeri dada sebelah kiri'
+        C001: {
+            id: "C001",
+            patient: "Andi Wijaya",
+            doctor: "Dr. Sarah Johnson",
+            specialty: "Kardiologi",
+            startTime: "09:00",
+            duration: "15 menit",
+            status: "ongoing",
+            type: "CHAT",
+            complaint: "Nyeri dada sebelah kiri",
         },
-        'C002': {
-            id: 'C002',
-            patient: 'Budi Santoso',
-            doctor: 'Dr. Michael Chen',
-            specialty: 'Dermatologi',
-            startTime: '09:15',
-            duration: '8 menit',
-            status: 'waiting',
-            type: 'CHAT',
-            complaint: 'Ruam kulit di tangan'
+        C002: {
+            id: "C002",
+            patient: "Budi Santoso",
+            doctor: "Dr. Michael Chen",
+            specialty: "Dermatologi",
+            startTime: "09:15",
+            duration: "8 menit",
+            status: "waiting",
+            type: "CHAT",
+            complaint: "Ruam kulit di tangan",
         },
-        'C003': {
-            id: 'C003',
-            patient: 'Citra Dewi',
-            doctor: 'Dr. Lisa Anderson',
-            specialty: 'Pediatri',
-            startTime: '09:30',
-            duration: '20 menit',
-            status: 'ongoing',
-            type: 'VIDEO',
-            complaint: 'Demam anak 2 hari'
-        }
+        C003: {
+            id: "C003",
+            patient: "Citra Dewi",
+            doctor: "Dr. Lisa Anderson",
+            specialty: "Pediatri",
+            startTime: "09:30",
+            duration: "20 menit",
+            status: "ongoing",
+            type: "VIDEO",
+            complaint: "Demam anak 2 hari",
+        },
     },
     products: {
-        'PR001': {
-            id: 'PR001',
-            name: 'Paracetamol 500mg',
-            category: 'Analgesik',
-            manufacturer: 'Kimia Farma',
+        PR001: {
+            id: "PR001",
+            name: "Paracetamol 500mg",
+            category: "Analgesik",
+            manufacturer: "Kimia Farma",
             stock: 1250,
             sold: 456,
-            price: 'Rp 5.000',
-            expiryDate: 'Dec 2025',
-            status: 'available',
-            statusText: 'Tersedia',
-            stockPercentage: 100
+            price: "Rp 5.000",
+            expiryDate: "Dec 2025",
+            status: "available",
+            statusText: "Tersedia",
+            stockPercentage: 100,
         },
-        'PR002': {
-            id: 'PR002',
-            name: 'Amoxicillin 500mg',
-            category: 'Antibiotik',
-            manufacturer: 'Kalbe Farma',
+        PR002: {
+            id: "PR002",
+            name: "Amoxicillin 500mg",
+            category: "Antibiotik",
+            manufacturer: "Kalbe Farma",
             stock: 45,
             sold: 234,
-            price: 'Rp 15.000',
-            expiryDate: 'Mar 2025',
-            status: 'low',
-            statusText: 'Stok Rendah',
-            stockPercentage: 22.5
-        }
-    }
+            price: "Rp 15.000",
+            expiryDate: "Mar 2025",
+            status: "low",
+            statusText: "Stok Rendah",
+            stockPercentage: 22.5,
+        },
+    },
 };
 
 // Patient Functions
-window.showPatientDetail = function(patientId) {
-    const patient = sampleData.patients[patientId] || sampleData.patients['P001'];
+window.showPatientDetail = function (patientId) {
+    const patient =
+        sampleData.patients[patientId] || sampleData.patients["P001"];
     ModalFunctions.showPatientDetail(patient);
 };
 
-window.showPatientForm = function(patientId = null) {
+window.showPatientForm = function (patientId = null) {
     const patient = patientId ? sampleData.patients[patientId] : null;
     ModalFunctions.showPatientForm(patient);
 };
 
-window.deletePatient = function(patientId) {
-    ModalFunctions.showConfirmDelete('pasien ini', () => {
-        ModalFunctions.showSuccess('Pasien berhasil dihapus!');
+window.deletePatient = function (patientId) {
+    ModalFunctions.showConfirmDelete("pasien ini", () => {
+        ModalFunctions.showSuccess("Pasien berhasil dihapus!");
     });
 };
 
 // Doctor Functions
-window.showDoctorDetail = function(doctorId) {
-    const doctor = sampleData.doctors[doctorId] || sampleData.doctors['D001'];
+window.showDoctorDetail = function (doctorId) {
+    const doctor = sampleData.doctors[doctorId] || sampleData.doctors["D001"];
     ModalFunctions.showDoctorDetail(doctor);
 };
 
-window.showDoctorForm = function(doctorId = null) {
+window.showDoctorForm = function (doctorId = null) {
     const doctor = doctorId ? sampleData.doctors[doctorId] : null;
     ModalFunctions.showDoctorForm(doctor);
 };
 
-window.deleteDoctor = function(doctorId) {
-    ModalFunctions.showConfirmDelete('dokter ini', () => {
-        ModalFunctions.showSuccess('Dokter berhasil dihapus!');
+window.deleteDoctor = function (doctorId) {
+    ModalFunctions.showConfirmDelete("dokter ini", () => {
+        ModalFunctions.showSuccess("Dokter berhasil dihapus!");
     });
 };
 
 // Consultation Functions
-window.showConsultationMonitor = function(consultationId) {
-    const consultation = sampleData.consultations[consultationId] || sampleData.consultations['C001'];
+window.showConsultationMonitor = function (consultationId) {
+    const consultation =
+        sampleData.consultations[consultationId] ||
+        sampleData.consultations["C001"];
     ModalFunctions.showConsultationMonitor(consultation);
 };
 
 // Product Functions
-window.showProductDetail = function(productId) {
-    const product = sampleData.products[productId] || sampleData.products['PR001'];
+window.showProductDetail = function (productId) {
+    const product =
+        sampleData.products[productId] || sampleData.products["PR001"];
     ModalFunctions.showProductDetail(product);
 };
 
-window.showProductForm = function(productId = null) {
-    const modal = new bootstrap.Modal(document.getElementById('formModal'));
-    document.getElementById('formModalTitle').textContent = productId ? 'Edit Produk' : 'Tambah Produk Baru';
-    document.getElementById('formModalBody').innerHTML = `
-        <form id="productForm">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label">Nama Produk *</label>
-                    <input type="text" class="form-control" name="name" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Kategori *</label>
-                    <select class="form-select" name="category" required>
-                        <option value="">Pilih...</option>
-                        <option value="Analgesik">Analgesik</option>
-                        <option value="Antibiotik">Antibiotik</option>
-                        <option value="Vitamin">Vitamin & Suplemen</option>
-                        <option value="Antasida">Antasida</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Manufacturer *</label>
-                    <input type="text" class="form-control" name="manufacturer" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Harga *</label>
-                    <input type="text" class="form-control" name="price" placeholder="Rp 5.000" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Stok Awal *</label>
-                    <input type="number" class="form-control" name="stock" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Tanggal Kadaluarsa *</label>
-                    <input type="date" class="form-control" name="expiry" required>
-                </div>
-            </div>
-        </form>
-    `;
+window.showAddForm = function () {
+    const modal = new bootstrap.Modal(document.getElementById("formModal"));
+
+    document.getElementById("formModalTitle").textContent =
+        "Tambah Produk Baru";
+    document.getElementById("formModalBody").innerHTML =
+        document.getElementById("hiddenFormAdd").innerHTML;
+    const saveBtn = document.getElementById("saveFormBtn");
+    saveBtn.onclick = function () {
+        const form = document.querySelector("#formModalBody form");
+        if (form) form.submit();
+    };
     modal.show();
 };
 
-window.deleteProduct = function(productId) {
-    ModalFunctions.showConfirmDelete('produk ini', () => {
-        ModalFunctions.showSuccess('Produk berhasil dihapus!');
+window.showEditForm = function (product) {
+    const modal = new bootstrap.Modal(document.getElementById("formModal"));
+    document.getElementById("formModalTitle").textContent = "Edit Produk";
+
+    let template = document.getElementById("hiddenFormEdit").innerHTML;
+
+    template = template
+        .replace("__ID__", product.id)
+        .replace("__NAME__", product.name)
+        .replace("__PRICE__", product.price)
+        .replace("__STOCK__", product.stock)
+        .replace(
+            "__CAT_ANALGESIK__",
+            product.category === "Analgesik" ? "selected" : ""
+        )
+        .replace("__TYPE_TABLET__", product.type === "Tablet" ? "selected" : "")
+        .replace("__DOSIS__", product.dosis ?? "")
+        .replace("__SHORT__", product.short_description ?? "")
+        .replace("__DESC__", product.description ?? "");
+
+    document.getElementById("formModalBody").innerHTML = template;
+    const saveBtn = document.getElementById("saveFormBtn");
+    saveBtn.onclick = function () {
+        const form = document.querySelector("#formModalBody form");
+        if (form) form.submit();
+    };
+    modal.show();
+};
+
+window.showDeleteForm = function (product) {
+    const modal = new bootstrap.Modal(document.getElementById("formModal"));
+    document.getElementById("formModalTitle").textContent = "Hapus Produk";
+
+    let template = document.getElementById("hiddenFormDelete").innerHTML;
+
+    template = template
+        .replace("__ID__", product.id)
+        .replace("__NAME__", product.name);
+
+    document.getElementById("formModalBody").innerHTML = template;
+
+    modal.show();
+};
+
+window.deleteProduct = function (productId) {
+    ModalFunctions.showConfirmDelete("produk ini", () => {
+        ModalFunctions.showSuccess("Produk berhasil dihapus!");
     });
 };
 
 // Article Functions
-window.showArticleForm = function(articleId = null) {
+window.showArticleForm = function (articleId = null) {
     ModalFunctions.showArticleForm(articleId ? {} : null);
 };
 
-window.showArticleDetail = function(articleId) {
-    const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-    document.getElementById('detailModalTitle').textContent = 'Detail Artikel';
-    document.getElementById('detailModalBody').innerHTML = `
+window.showArticleDetail = function (articleId) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+    document.getElementById("detailModalTitle").textContent = "Detail Artikel";
+    document.getElementById("detailModalBody").innerHTML = `
         <div class="mb-3">
             <div class="bg-secondary rounded mb-3" style="height: 200px;"></div>
             <h4>10 Tips Menjaga Kesehatan Jantung di Usia Muda</h4>
@@ -234,17 +255,18 @@ window.showArticleDetail = function(articleId) {
     modal.show();
 };
 
-window.deleteArticle = function(articleId) {
-    ModalFunctions.showConfirmDelete('artikel ini', () => {
-        ModalFunctions.showSuccess('Artikel berhasil dihapus!');
+window.deleteArticle = function (articleId) {
+    ModalFunctions.showConfirmDelete("artikel ini", () => {
+        ModalFunctions.showSuccess("Artikel berhasil dihapus!");
     });
 };
 
 // Service Functions
-window.showServiceDetail = function(serviceId) {
-    const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-    document.getElementById('detailModalTitle').textContent = 'Detail Layanan KlikHome';
-    document.getElementById('detailModalBody').innerHTML = `
+window.showServiceDetail = function (serviceId) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+    document.getElementById("detailModalTitle").textContent =
+        "Detail Layanan KlikHome";
+    document.getElementById("detailModalBody").innerHTML = `
         <div class="row g-4">
             <div class="col-md-6">
                 <h6 class="mb-3">Informasi Layanan</h6>
@@ -292,10 +314,11 @@ window.showServiceDetail = function(serviceId) {
     modal.show();
 };
 
-window.showServiceForm = function() {
-    const modal = new bootstrap.Modal(document.getElementById('formModal'));
-    document.getElementById('formModalTitle').textContent = 'Jadwalkan Layanan KlikHome';
-    document.getElementById('formModalBody').innerHTML = `
+window.showServiceForm = function () {
+    const modal = new bootstrap.Modal(document.getElementById("formModal"));
+    document.getElementById("formModalTitle").textContent =
+        "Jadwalkan Layanan KlikHome";
+    document.getElementById("formModalBody").innerHTML = `
         <form id="serviceForm">
             <div class="row g-3">
                 <div class="col-md-6">
@@ -348,10 +371,10 @@ window.showServiceForm = function() {
 };
 
 // Program Functions
-window.showProgramDetail = function(programId) {
-    const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-    document.getElementById('detailModalTitle').textContent = 'Detail Program';
-    document.getElementById('detailModalBody').innerHTML = `
+window.showProgramDetail = function (programId) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+    document.getElementById("detailModalTitle").textContent = "Detail Program";
+    document.getElementById("detailModalBody").innerHTML = `
         <h5 class="mb-3">Program Diabetes Management</h5>
         <div class="row g-3">
             <div class="col-md-6">
@@ -395,10 +418,11 @@ window.showProgramDetail = function(programId) {
     modal.show();
 };
 
-window.showProgramForm = function() {
-    const modal = new bootstrap.Modal(document.getElementById('formModal'));
-    document.getElementById('formModalTitle').textContent = 'Buat Program Kesehatan';
-    document.getElementById('formModalBody').innerHTML = `
+window.showProgramForm = function () {
+    const modal = new bootstrap.Modal(document.getElementById("formModal"));
+    document.getElementById("formModalTitle").textContent =
+        "Buat Program Kesehatan";
+    document.getElementById("formModalBody").innerHTML = `
         <form id="programForm">
             <div class="row g-3">
                 <div class="col-12">
@@ -438,10 +462,11 @@ window.showProgramForm = function() {
 };
 
 // Medical Record Functions
-window.showMedicalRecordDetail = function(recordId) {
-    const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-    document.getElementById('detailModalTitle').textContent = 'Detail Rekam Medis';
-    document.getElementById('detailModalBody').innerHTML = `
+window.showMedicalRecordDetail = function (recordId) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+    document.getElementById("detailModalTitle").textContent =
+        "Detail Rekam Medis";
+    document.getElementById("detailModalBody").innerHTML = `
         <div class="row g-4">
             <div class="col-md-4 text-center">
                 <div class="avatar mx-auto mb-3" style="width: 100px; height: 100px; font-size: 40px;">AW</div>
@@ -493,4 +518,4 @@ window.showMedicalRecordDetail = function(recordId) {
     modal.show();
 };
 
-console.log('Modal handlers loaded successfully!');
+console.log("Modal handlers loaded successfully!");

@@ -1,16 +1,16 @@
 /* --- Wrapper Scope --- */
 .apotek-online {
-    --bg-sidebar: #1C274C; /* Blue1 */
-    --text-sidebar: #FFFFFF;
-    --accent: #FF4867; /* Red2 */
-    --accent-hover: #DC2626; /* Red3 */
-    --bg-content: #F4F7FE; /* Very Light Blue/Grey */
-    --card-bg: #FFFFFF;
+    --bg-sidebar: #1c274c; /* Blue1 */
+    --text-sidebar: #ffffff;
+    --accent: #ff4867; /* Red2 */
+    --accent-hover: #dc2626; /* Red3 */
+    --bg-content: #f4f7fe; /* Very Light Blue/Grey */
+    --card-bg: #ffffff;
     --text-primary: #333;
     --text-secondary: #888;
-    --border-color: #E0E0E0;
+    --border-color: #e0e0e0;
 
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     width: 100%;
     min-height: 100vh;
 }
@@ -58,7 +58,9 @@
     margin: 0;
     font-weight: 700;
 }
-.apotek-online .sidebar-header .dot { color: var(--accent); }
+.apotek-online .sidebar-header .dot {
+    color: var(--accent);
+}
 .apotek-online .sidebar-header p {
     font-size: 0.85rem;
     opacity: 0.7;
@@ -68,7 +70,7 @@
 /* Search Widget */
 .apotek-online .input-icon-wrapper {
     position: relative;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 0 12px;
     display: flex;
@@ -79,7 +81,7 @@
 
 .apotek-online .input-icon-wrapper:focus-within {
     border-color: var(--accent);
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .apotek-online .input-icon-wrapper svg {
@@ -95,7 +97,9 @@
     outline: none;
     font-size: 0.95rem;
 }
-.apotek-online .search-input::placeholder { color: rgba(255,255,255,0.5); }
+.apotek-online .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 
 /* Cart Widget */
 .apotek-online .cart-widget {
@@ -132,8 +136,14 @@
     flex-direction: column;
 }
 
-.apotek-online .cart-total small { font-size: 0.75rem; opacity: 0.8; }
-.apotek-online .cart-total strong { font-size: 1rem; color: var(--accent); }
+.apotek-online .cart-total small {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+.apotek-online .cart-total strong {
+    font-size: 1rem;
+    color: var(--accent);
+}
 
 .apotek-online .btn-cart {
     background: white;
@@ -146,11 +156,13 @@
     cursor: pointer;
     transition: all 0.2s;
 }
-.apotek-online .btn-cart:hover { background: #ffebee; }
+.apotek-online .btn-cart:hover {
+    background: #ffebee;
+}
 
 .apotek-online .sidebar-divider {
     border: 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin: 0;
 }
 
@@ -228,7 +240,9 @@
     margin-top: 1rem;
     text-decoration: none;
 }
-.apotek-online .btn-history-more:hover { color: var(--accent); }
+.apotek-online .btn-history-more:hover {
+    color: var(--accent);
+}
 
 /* Filtering */
 .apotek-online .filter-group h3 {
@@ -249,13 +263,17 @@
     opacity: 0.9;
     transition: opacity 0.2s;
 }
-.apotek-online .checkbox-item:hover { opacity: 1; }
+.apotek-online .checkbox-item:hover {
+    opacity: 1;
+}
 
-.apotek-online .checkbox-item input { display: none; }
+.apotek-online .checkbox-item input {
+    display: none;
+}
 .apotek-online .checkmark {
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(255,255,255,0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     position: relative;
     transition: all 0.2s;
@@ -265,10 +283,12 @@
     border-color: var(--accent);
 }
 .apotek-online .checkbox-item input:checked + .checkmark::after {
-    content: '';
+    content: "";
     position: absolute;
-    left: 5px; top: 1px;
-    width: 4px; height: 8px;
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -281,7 +301,7 @@
 }
 .apotek-online .price-input {
     width: 100%;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid transparent;
     border-radius: 6px;
     padding: 8px;
@@ -321,7 +341,7 @@
 
 .apotek-online .content-header h1 {
     font-size: 1.8rem;
-    color: #1C274C;
+    color: #1c274c;
     margin: 0;
 }
 
@@ -382,9 +402,18 @@
     padding: 4px 8px;
     border-radius: 4px;
 }
-.apotek-online .tag-badge.blue { background: #e3f2fd; color: #1976d2; }
-.apotek-online .tag-badge.green { background: #e8f5e9; color: #2e7d32; }
-.apotek-online .tag-badge.red { background: #ffebee; color: #c62828; }
+.apotek-online .tag-badge.blue {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+.apotek-online .tag-badge.green {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+.apotek-online .tag-badge.red {
+    background: #ffebee;
+    color: #c62828;
+}
 
 .apotek-online .product-info {
     padding: 1.2rem;
@@ -418,7 +447,7 @@
 }
 
 .apotek-online .btn-add {
-    background-color: #1C274C;
+    background-color: #1c274c;
     color: white;
     border: none;
     width: 36px;
@@ -444,6 +473,22 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+.pagination-wrapper nav {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .page-link {
+    border-radius: 8px;
+    margin: 0 4px;
+    padding: 8px 14px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff5a79;
+    border-color: #ff5a79;
+    color: #fff;
 }
 
 .apotek-online .page-btn {
@@ -499,7 +544,7 @@
     overflow: hidden;
     position: relative;
     /* Pastikan warna teks mewarisi atau didefinisikan ulang jika keluar dari wrapper */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .btn-close-modal {
@@ -516,10 +561,12 @@
     justify-content: center;
     z-index: 10;
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
-.btn-close-modal:hover { transform: scale(1.1); }
+.btn-close-modal:hover {
+    transform: scale(1.1);
+}
 
 .product-modal-grid {
     display: flex;
@@ -560,7 +607,10 @@
     font-weight: 600;
 }
 /* Re-define colors for global scope if vars are missing */
-.tag-badge.blue { background: #e3f2fd; color: #1976d2; }
+.tag-badge.blue {
+    background: #e3f2fd;
+    color: #1976d2;
+}
 
 /* Modal Right: Info */
 .modal-info-wrapper {
@@ -586,7 +636,7 @@
 .modal-price {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #FF4867; /* Fallback Accent */
+    color: #ff4867; /* Fallback Accent */
 }
 
 .modal-divider {
@@ -640,7 +690,9 @@
     cursor: pointer;
     color: #333;
 }
-.qty-selector button:hover { background: #f9f9f9; }
+.qty-selector button:hover {
+    background: #f9f9f9;
+}
 
 .qty-selector input {
     width: 40px;
@@ -653,7 +705,7 @@
 
 .btn-add-cart-modal {
     flex: 1;
-    background: #FF4867; /* Fallback Accent */
+    background: #ff4867; /* Fallback Accent */
     color: white;
     border: none;
     border-radius: 8px;
@@ -664,5 +716,74 @@
 }
 
 .btn-add-cart-modal:hover {
-    background: #DC2626; /* Fallback Accent Hover */
+    background: #dc2626;
+}
+
+.product-image .img-placeholder {
+    width: 100%;
+    height: 160px; /* atur sesuai desain */
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f8f8f8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image .img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ✨ KUNCI UTAMA */
+    object-position: center;
+}
+
+.modal-img-wrapper {
+    position: relative; /* wajib untuk overlay badge */
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f4f7fb;
+}
+
+#modalCategoryBadge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    background: white;
+
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+
+    backdrop-filter: blur(4px);
+}
+
+.modal-img-wrapper img.modal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.product-image {
+    position: relative; /* penting untuk overlay badge */
+}
+
+.product-image .tag-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 5;
+
+    padding: 4px 10px;
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    background: white;
 }

@@ -1,8 +1,8 @@
 // Page Templates
 const pages = {
     dashboard: {
-        title: 'Dashboard Admin',
-        subtitle: 'Kelola dan pantau dashboard',
+        title: "Dashboard Admin",
+        subtitle: "Kelola dan pantau dashboard",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -195,12 +195,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     pasien: {
-        title: 'Pasien',
-        subtitle: 'Kelola dan pantau pasien',
+        title: "Pasien",
+        subtitle: "Kelola dan pantau pasien",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -346,12 +346,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     dokter: {
-        title: 'Dokter',
-        subtitle: 'Kelola dan pantau dokter',
+        title: "Dokter",
+        subtitle: "Kelola dan pantau dokter",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -522,12 +522,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     konsultasi: {
-        title: 'Konsultasi Chat',
-        subtitle: 'Kelola dan pantau konsultasi chat',
+        title: "Konsultasi Chat",
+        subtitle: "Kelola dan pantau konsultasi chat",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -660,12 +660,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     klikhome: {
-        title: 'KlikHome Service',
-        subtitle: 'Kelola dan pantau layanan home service',
+        title: "KlikHome Service",
+        subtitle: "Kelola dan pantau layanan home service",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -819,185 +819,195 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     apotek: {
-        title: 'Apotek Online',
-        subtitle: 'Kelola dan pantau apotek online',
-        content: `
-            <div class="row g-4 mb-4 fade-in">
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Total Produk</p>
-                            <h2 class="stat-value">1,245</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Pesanan Hari Ini</p>
-                            <h2 class="stat-value text-primary">567</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Revenue Hari Ini</p>
-                            <h2 class="stat-value text-success">28.5M</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Stok Rendah</p>
-                            <h2 class="stat-value text-warning">34</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <div class="card fade-in">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Daftar Produk</h5>
-                            <button class="btn btn-primary">
-                                <i class="bi bi-plus-lg"></i> Tambah Produk
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="list-item">
-                                <div class="d-flex gap-3 align-items-start">
-                                    <div class="bg-light rounded p-3" style="width: 64px; height: 64px;">
-                                        <i class="bi bi-capsule-pill" style="font-size: 32px; color: #4fc3f7;"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <div>
-                                                <h6 class="mb-1">Paracetamol 500mg</h6>
-                                                <p class="text-muted mb-0 small">Analgesik • Kimia Farma</p>
-                                            </div>
-                                            <span class="badge badge-success-custom">Tersedia</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <div class="d-flex justify-content-between small mb-1">
-                                                <span class="text-muted">Stok</span>
-                                                <span>1250 / 1000</span>
-                                            </div>
-                                            <div class="progress" style="height: 6px;">
-                                                <div class="progress-bar" style="width: 100%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex gap-3 small text-muted">
-                                                <span>ID: PR001</span>
-                                                <span>Exp: Dec 2025</span>
-                                                <span class="text-primary fw-semibold">Rp 5.000</span>
-                                            </div>
-                                            <div class="btn-group btn-group-sm">
-                                                <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                                <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="list-item">
-                                <div class="d-flex gap-3 align-items-start">
-                                    <div class="bg-light rounded p-3" style="width: 64px; height: 64px;">
-                                        <i class="bi bi-capsule-pill" style="font-size: 32px; color: #4fc3f7;"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <div>
-                                                <h6 class="mb-1">Amoxicillin 500mg</h6>
-                                                <p class="text-muted mb-0 small">Antibiotik • Kalbe Farma</p>
-                                            </div>
-                                            <span class="badge badge-warning-custom">Stok Rendah</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <div class="d-flex justify-content-between small mb-1">
-                                                <span class="text-muted">Stok</span>
-                                                <span>45 / 200</span>
-                                            </div>
-                                            <div class="progress" style="height: 6px;">
-                                                <div class="progress-bar bg-warning" style="width: 22.5%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex gap-3 small text-muted">
-                                                <span>ID: PR002</span>
-                                                <span>Exp: Mar 2025</span>
-                                                <span class="text-primary fw-semibold">Rp 15.000</span>
-                                            </div>
-                                            <div class="btn-group btn-group-sm">
-                                                <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                                <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="card fade-in">
-                        <div class="card-header">
-                            <h5 class="mb-0">Pesanan Terbaru</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="p-3 mb-2 rounded bg-light">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <div>
-                                        <h6 class="mb-1">Andi Wijaya</h6>
-                                        <p class="text-muted mb-0 small">3 item • Rp 125.000</p>
-                                    </div>
-                                    <span class="badge badge-info-custom">Diproses</span>
-                                </div>
-                                <small class="text-muted">5 menit lalu</small>
-                            </div>
-
-                            <div class="p-3 mb-2 rounded bg-light">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <div>
-                                        <h6 class="mb-1">Budi Santoso</h6>
-                                        <p class="text-muted mb-0 small">5 item • Rp 250.000</p>
-                                    </div>
-                                    <span class="badge" style="background: #f3e5f5; color: #9c27b0;">Dikirim</span>
-                                </div>
-                                <small class="text-muted">15 menit lalu</small>
-                            </div>
-
-                            <div class="p-3 rounded bg-light">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <div>
-                                        <h6 class="mb-1">Citra Dewi</h6>
-                                        <p class="text-muted mb-0 small">2 item • Rp 75.000</p>
-                                    </div>
-                                    <span class="badge badge-success-custom">Selesai</span>
-                                </div>
-                                <small class="text-muted">1 jam lalu</small>
-                            </div>
-
-                            <button class="btn btn-outline-primary w-100 mt-3">Lihat Semua Pesanan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
+        title: "Apotek Online",
+        subtitle: "Kelola dan pantau apotek online",
+        content: "", // kosong dulu
+        load: async function () {
+            const res = await fetch("/admin/apotek/html");
+            return await res.text();
+        },
     },
 
+    // apotek: {
+    //     title: 'Apotek Online',
+    //     subtitle: 'Kelola dan pantau apotek online',
+    //     content: `
+    //         <div class="row g-4 mb-4 fade-in">
+    //             <div class="col-xl-3 col-md-6">
+    //                 <div class="card stat-card">
+    //                     <div class="card-body">
+    //                         <p class="text-muted mb-2">Total Produk</p>
+    //                         <h2 class="stat-value">1,245</h2>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div class="col-xl-3 col-md-6">
+    //                 <div class="card stat-card">
+    //                     <div class="card-body">
+    //                         <p class="text-muted mb-2">Pesanan Hari Ini</p>
+    //                         <h2 class="stat-value text-primary">567</h2>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div class="col-xl-3 col-md-6">
+    //                 <div class="card stat-card">
+    //                     <div class="card-body">
+    //                         <p class="text-muted mb-2">Revenue Hari Ini</p>
+    //                         <h2 class="stat-value text-success">28.5M</h2>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div class="col-xl-3 col-md-6">
+    //                 <div class="card stat-card">
+    //                     <div class="card-body">
+    //                         <p class="text-muted mb-2">Stok Rendah</p>
+    //                         <h2 class="stat-value text-warning">34</h2>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+
+    //         <div class="row g-4">
+    //             <div class="col-lg-8">
+    //                 <div class="card fade-in">
+    //                     <div class="card-header d-flex justify-content-between align-items-center">
+    //                         <h5 class="mb-0">Daftar Produk</h5>
+    //                         <button class="btn btn-primary">
+    //                             <i class="bi bi-plus-lg"></i> Tambah Produk
+    //                         </button>
+    //                     </div>
+    //                     <div class="card-body">
+    //                         <div class="list-item">
+    //                             <div class="d-flex gap-3 align-items-start">
+    //                                 <div class="bg-light rounded p-3" style="width: 64px; height: 64px;">
+    //                                     <i class="bi bi-capsule-pill" style="font-size: 32px; color: #4fc3f7;"></i>
+    //                                 </div>
+    //                                 <div class="flex-grow-1">
+    //                                     <div class="d-flex justify-content-between align-items-start mb-2">
+    //                                         <div>
+    //                                             <h6 class="mb-1">Paracetamol 500mg</h6>
+    //                                             <p class="text-muted mb-0 small">Analgesik • Kimia Farma</p>
+    //                                         </div>
+    //                                         <span class="badge badge-success-custom">Tersedia</span>
+    //                                     </div>
+    //                                     <div class="mb-2">
+    //                                         <div class="d-flex justify-content-between small mb-1">
+    //                                             <span class="text-muted">Stok</span>
+    //                                             <span>1250 / 1000</span>
+    //                                         </div>
+    //                                         <div class="progress" style="height: 6px;">
+    //                                             <div class="progress-bar" style="width: 100%;"></div>
+    //                                         </div>
+    //                                     </div>
+    //                                     <div class="d-flex justify-content-between align-items-center">
+    //                                         <div class="d-flex gap-3 small text-muted">
+    //                                             <span>ID: PR001</span>
+    //                                             <span>Exp: Dec 2025</span>
+    //                                             <span class="text-primary fw-semibold">Rp 5.000</span>
+    //                                         </div>
+    //                                         <div class="btn-group btn-group-sm">
+    //                                             <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+    //                                             <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+    //                                         </div>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+
+    //                         <div class="list-item">
+    //                             <div class="d-flex gap-3 align-items-start">
+    //                                 <div class="bg-light rounded p-3" style="width: 64px; height: 64px;">
+    //                                     <i class="bi bi-capsule-pill" style="font-size: 32px; color: #4fc3f7;"></i>
+    //                                 </div>
+    //                                 <div class="flex-grow-1">
+    //                                     <div class="d-flex justify-content-between align-items-start mb-2">
+    //                                         <div>
+    //                                             <h6 class="mb-1">Amoxicillin 500mg</h6>
+    //                                             <p class="text-muted mb-0 small">Antibiotik • Kalbe Farma</p>
+    //                                         </div>
+    //                                         <span class="badge badge-warning-custom">Stok Rendah</span>
+    //                                     </div>
+    //                                     <div class="mb-2">
+    //                                         <div class="d-flex justify-content-between small mb-1">
+    //                                             <span class="text-muted">Stok</span>
+    //                                             <span>45 / 200</span>
+    //                                         </div>
+    //                                         <div class="progress" style="height: 6px;">
+    //                                             <div class="progress-bar bg-warning" style="width: 22.5%;"></div>
+    //                                         </div>
+    //                                     </div>
+    //                                     <div class="d-flex justify-content-between align-items-center">
+    //                                         <div class="d-flex gap-3 small text-muted">
+    //                                             <span>ID: PR002</span>
+    //                                             <span>Exp: Mar 2025</span>
+    //                                             <span class="text-primary fw-semibold">Rp 15.000</span>
+    //                                         </div>
+    //                                         <div class="btn-group btn-group-sm">
+    //                                             <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+    //                                             <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+    //                                         </div>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+
+    //             <div class="col-lg-4">
+    //                 <div class="card fade-in">
+    //                     <div class="card-header">
+    //                         <h5 class="mb-0">Pesanan Terbaru</h5>
+    //                     </div>
+    //                     <div class="card-body">
+    //                         <div class="p-3 mb-2 rounded bg-light">
+    //                             <div class="d-flex justify-content-between align-items-start mb-2">
+    //                                 <div>
+    //                                     <h6 class="mb-1">Andi Wijaya</h6>
+    //                                     <p class="text-muted mb-0 small">3 item • Rp 125.000</p>
+    //                                 </div>
+    //                                 <span class="badge badge-info-custom">Diproses</span>
+    //                             </div>
+    //                             <small class="text-muted">5 menit lalu</small>
+    //                         </div>
+
+    //                         <div class="p-3 mb-2 rounded bg-light">
+    //                             <div class="d-flex justify-content-between align-items-start mb-2">
+    //                                 <div>
+    //                                     <h6 class="mb-1">Budi Santoso</h6>
+    //                                     <p class="text-muted mb-0 small">5 item • Rp 250.000</p>
+    //                                 </div>
+    //                                 <span class="badge" style="background: #f3e5f5; color: #9c27b0;">Dikirim</span>
+    //                             </div>
+    //                             <small class="text-muted">15 menit lalu</small>
+    //                         </div>
+
+    //                         <div class="p-3 rounded bg-light">
+    //                             <div class="d-flex justify-content-between align-items-start mb-2">
+    //                                 <div>
+    //                                     <h6 class="mb-1">Citra Dewi</h6>
+    //                                     <p class="text-muted mb-0 small">2 item • Rp 75.000</p>
+    //                                 </div>
+    //                                 <span class="badge badge-success-custom">Selesai</span>
+    //                             </div>
+    //                             <small class="text-muted">1 jam lalu</small>
+    //                         </div>
+
+    //                         <button class="btn btn-outline-primary w-100 mt-3">Lihat Semua Pesanan</button>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `
+    // },
+
     artikel: {
-        title: 'Artikel Kesehatan',
-        subtitle: 'Kelola dan pantau artikel kesehatan',
+        title: "Artikel Kesehatan",
+        subtitle: "Kelola dan pantau artikel kesehatan",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -1130,12 +1140,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
-    'cek-kesehatan': {
-        title: 'Cek Kesehatan',
-        subtitle: 'Monitor pengecekan kesehatan mandiri',
+    "cek-kesehatan": {
+        title: "Cek Kesehatan",
+        subtitle: "Monitor pengecekan kesehatan mandiri",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -1296,12 +1306,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     program: {
-        title: 'Program Kesehatan',
-        subtitle: 'Kelola program kesehatan',
+        title: "Program Kesehatan",
+        subtitle: "Kelola program kesehatan",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -1440,12 +1450,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     obat: {
-        title: 'Manajemen Obat',
-        subtitle: 'Kelola inventori obat',
+        title: "Manajemen Obat",
+        subtitle: "Kelola inventori obat",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -1609,12 +1619,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
-    'rekam-medis': {
-        title: 'Rekam Medis',
-        subtitle: 'Database rekam medis pasien',
+    "rekam-medis": {
+        title: "Rekam Medis",
+        subtitle: "Database rekam medis pasien",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -1742,12 +1752,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     laporan: {
-        title: 'Laporan & Analitik',
-        subtitle: 'Analitik dan laporan keuangan',
+        title: "Laporan & Analitik",
+        subtitle: "Analitik dan laporan keuangan",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -1913,12 +1923,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     notifikasi: {
-        title: 'Notifikasi',
-        subtitle: 'Pusat notifikasi sistem',
+        title: "Notifikasi",
+        subtitle: "Pusat notifikasi sistem",
         content: `
             <div class="row g-4 mb-4 fade-in">
                 <div class="col-xl-3 col-md-6">
@@ -2053,12 +2063,12 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
+        `,
     },
 
     pengaturan: {
-        title: 'Pengaturan',
-        subtitle: 'Konfigurasi sistem dan profil',
+        title: "Pengaturan",
+        subtitle: "Konfigurasi sistem dan profil",
         content: `
             <div class="row g-4 fade-in">
                 <div class="col-lg-8">
@@ -2196,58 +2206,48 @@ const pages = {
                     </div>
                 </div>
             </div>
-        `
-    }
+        `,
+    },
 };
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.list-group-item[data-page]');
-    const contentEl = document.getElementById('content');
-    const pageTitleEl = document.getElementById('pageTitle');
-    const pageSubtitleEl = document.getElementById('pageSubtitle');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebarWrapper = document.getElementById('sidebar-wrapper');
+document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll(".list-group-item[data-page]");
+    const contentEl = document.getElementById("content");
+    const pageTitleEl = document.getElementById("pageTitle");
+    const pageSubtitleEl = document.getElementById("pageSubtitle");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebarWrapper = document.getElementById("sidebar-wrapper");
 
-    // Load page function
-    function loadPage(pageName) {
+    async function loadPage(pageName) {
         const page = pages[pageName];
-        if (page) {
+
+        if (page.load) {
+            contentEl.innerHTML = await page.load();
+        } else {
             contentEl.innerHTML = page.content;
-            pageTitleEl.textContent = page.title;
-            pageSubtitleEl.textContent = page.subtitle;
-
-            // Update active nav
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.dataset.page === pageName) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Close sidebar on mobile
-            if (window.innerWidth < 992) {
-                sidebarWrapper.classList.remove('show');
-            }
         }
+
+        pageTitleEl.textContent = page.title;
+        pageSubtitleEl.textContent = page.subtitle;
     }
 
-    // Navigation clicks
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
             e.preventDefault();
             const pageName = link.dataset.page;
+
+            localStorage.setItem("lastPage", pageName);
+
             loadPage(pageName);
         });
     });
 
-    // Sidebar toggle for mobile
     if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', () => {
-            sidebarWrapper.classList.toggle('show');
+        sidebarToggle.addEventListener("click", () => {
+            sidebarWrapper.classList.toggle("show");
         });
     }
 
-    // Load initial page
-    loadPage('dashboard');
+    const lastPage = localStorage.getItem("lastPage") || "dashboard";
+    loadPage(lastPage);
 });

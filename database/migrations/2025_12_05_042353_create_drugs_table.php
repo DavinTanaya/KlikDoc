@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('drugs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('category');
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
+            $table->string('short_description')->nullable();
+            $table->string('dosis')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->integer('stock');
+            $table->string('type');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
