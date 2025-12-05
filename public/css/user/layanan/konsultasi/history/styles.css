@@ -1,0 +1,442 @@
+/* --- Scope Wrapper --- */
+.history-page {
+    --bg-page: #f4f7fe;
+    --bg-white: #ffffff;
+    --primary: #1c274c;
+    --accent: #ff4867;
+    --accent-hover: #dc2626;
+    --text-main: #333;
+    --text-grey: #888;
+    --border: #e0e0e0;
+    --status-red-bg: #ffebeb;
+    --status-red-text: #d32f2f;
+    --status-blue-bg: #e3f2fd;
+    --status-blue-text: #1976d2;
+    --status-orange-bg: #fff3e0;
+    --status-orange-text: #ef6c00;
+    --status-green-bg: #e8f5e9;
+    --status-green-text: #2e7d32;
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    /* Mencegah scroll pada body utama karena scroll akan pindah ke container */
+    overflow: hidden;
+}
+
+/* --- Header --- */
+.history-page .history-header {
+    background: transparent;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.history-page .header-container {
+    width: 70vw;
+    max-width: 1200px;
+    min-width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.history-page .header-container h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 800;
+}
+
+.history-page .btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.history-page .btn-back:hover {
+    transform: translateX(-3px);
+}
+
+.history-page .spacer {
+    width: 100px;
+}
+
+/* --- Main Content --- */
+.history-page .history-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Pastikan tinggi content cukup untuk menampung container fixed height */
+    height: 80vh;
+}
+
+.history-page .history-container {
+    width: 70vw;
+    max-width: 1200px;
+    min-width: 350px;
+
+    background: var(--bg-white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+    /* Layout Flex untuk Header (Tabs) dan Body (List) */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Mengikuti tinggi parent (80vh) */
+    overflow: hidden; /* Mencegah elemen keluar dari radius */
+}
+
+/* --- Tabs --- */
+.history-page .status-tabs {
+    background: var(--bg-white);
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0; /* Header tidak boleh mengecil */
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    overflow-x: auto;
+}
+
+.history-page .tab {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--text-grey);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.history-page .tab.active,
+.history-page .tab:hover {
+    background: #f4f7fe;
+    color: var(--primary);
+}
+
+/* --- Order List & Cards (Scrollable Area) --- */
+.history-page .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    /* Logic Scroll */
+    flex: 1; /* Mengisi sisa ruang container */
+    overflow-y: auto; /* Scroll vertikal aktif */
+
+    /* Padding di dalam scroll area */
+    padding: 1.5rem 2rem;
+    background: #fcfcfc;
+
+    /* Scrollbar Styling */
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+}
+
+.history-page .order-list::-webkit-scrollbar {
+    width: 6px;
+}
+.history-page .order-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.history-page .order-card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.history-page .order-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px); /* Efek naik */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Card Header */
+.history-page .card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.history-page .meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.history-page .meta .date {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.history-page .meta .order-id {
+    color: var(--text-grey);
+}
+
+/* Status Badges */
+.history-page .badge {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+.history-page .badge.red {
+    background: var(--status-red-bg);
+    color: var(--status-red-text);
+}
+.history-page .badge.blue {
+    background: var(--status-blue-bg);
+    color: var(--status-blue-text);
+}
+.history-page .badge.orange {
+    background: var(--status-orange-bg);
+    color: var(--status-orange-text);
+}
+.history-page .badge.green {
+    background: var(--status-green-bg);
+    color: var(--status-green-text);
+}
+
+/* Card Body */
+.history-page .card-body {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.history-page .product-thumb {
+    width: 60px;
+    height: 60px;
+    background: #f0f4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--primary);
+}
+
+.history-page .product-info {
+    flex: 1;
+}
+
+.history-page .product-info h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 5px 0;
+    font-weight: 700;
+}
+
+.history-page .product-info .specialist {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    font-weight: 500;
+}
+
+.history-page .product-info .extra-items {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.history-page .bill-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-page .bill-info .label {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+}
+
+.history-page .bill-info .price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* Card Footer */
+.history-page .card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.history-page .card-footer.footer-action {
+    justify-content: space-between;
+    background: #fffafa;
+}
+
+/* Payment Timer & Info */
+.history-page .payment-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.history-page .consultation-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--status-blue-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Buttons */
+.history-page button, 
+.history-page .btn-back {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.history-page .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(255, 72, 103, 0.2);
+}
+.history-page .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.history-page .btn-blue {
+    background: var(--status-blue-text);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(25, 118, 210, 0.2);
+}
+.history-page .btn-blue:hover {
+    background: #1565c0;
+    transform: translateY(-1px);
+}
+
+.history-page .btn-outline {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+}
+.history-page .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Empty State */
+.history-page .empty-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--text-grey);
+    text-align: center;
+}
+.history-page .empty-state svg {
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .history-page .header-container,
+    .history-page .history-container {
+        width: 95vw;
+        min-width: 0;
+    }
+    
+    .history-page .header-container .spacer {
+        display: none;
+    }
+
+    .history-page .history-content {
+        height: auto; /* Mobile height auto */
+        min-height: 80vh;
+    }
+
+    .history-page .history-container {
+        height: auto;
+        overflow: visible; /* Biarkan scroll page utama handle */
+    }
+
+    .history-page .order-list {
+        overflow: visible;
+        padding: 1rem;
+    }
+
+    .history-page .card-body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .history-page .product-thumb {
+        margin-bottom: 0.5rem;
+    }
+
+    .history-page .bill-info {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        text-align: left;
+        padding-top: 10px;
+        border-top: 1px dashed #eee;
+    }
+
+    .history-page .card-footer.footer-action, 
+    .history-page .card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .history-page .card-footer button {
+        width: 100%;
+    }
+}

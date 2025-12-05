@@ -124,7 +124,7 @@
                             </div>
                             <span>Buat Resep</span>
                         </div> --}}
-                        <a href="{{ route('rujukan') }}">
+                        <a href="{{ route('dokter.rujukan') }}">
                             <div class="menu-item">
                                 <div class="icon-box">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -146,7 +146,7 @@
                             </div>
                             <span>Tulis Artikel</span>
                         </div>
-                        <a href="{{ route('riwayat_dokter') }}">
+                        <a href="{{ route('dokter.riwayat') }}">
                             <div class="menu-item">
                                 <div class="icon-box">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -165,7 +165,7 @@
                     <div class="schedule-panel">
                         <div class="panel-header">
                             <h3>Jadwal Tatap Muka</h3>
-                            <a href="{{ route('jadwal_praktik') }}" class="view-all">Lihat Semua</a>
+                            <a href="{{ route('dokter.jadwal-praktik') }}" class="view-all">Lihat Semua</a>
                         </div>
 
                         <div class="date-selector">

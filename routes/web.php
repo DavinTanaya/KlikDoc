@@ -16,6 +16,11 @@ use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalenderMenstruasiController;
 use App\Http\Controllers\KalkulatorBmiContoller;
+use App\Http\Controllers\KonsultasiDokterController;
+use App\Http\Controllers\KonsultasiDokterDetailController;
+use App\Http\Controllers\KonsultasiDokterSuccessController;
+use App\Http\Controllers\KonsultasiHistoryController;
+use App\Http\Controllers\KonsultasiHistoryDetailController;
 use App\Http\Controllers\PengingatObatController;
 use App\Http\Controllers\SuccessController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +48,13 @@ Route::get('/apotek/checkout', [CheckoutController::class, 'index'])->name('apot
 Route::get('/apotek/success', [SuccessController::class, 'index'])->name('success');
 Route::get('/apotek/riwayat', [HistoryController::class, 'index'])->name('riwayat');
 Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
+
+Route::get('/konsultasi', [KonsultasiDokterController::class, 'index'])->name('konsultasi.dokter');
+Route::get('/konsultasi/detail', [KonsultasiDokterDetailController::class, 'index'])->name('konsultasi.detail');
+Route::get('/konsultasi/success', [KonsultasiDokterSuccessController::class, 'index'])->name('konsultasi.success');
+Route::get('/konsultasi/riwayat', [KonsultasiHistoryController::class, 'index'])->name('konsultasi.riwayat');
+Route::get('/konsultasi/riwayat/detail', [KonsultasiHistoryDetailController::class, 'index'])->name('konsultasi.riwayat.detail');
+
 
 Route::get('/dokter', [DokterDashboardController::class, 'index'])->name('dokter.dashboard');
 Route::get('/dokter/pendaftaran', [DokterPendaftaranController::class, 'index'])->name('dokter.pendaftaran');
