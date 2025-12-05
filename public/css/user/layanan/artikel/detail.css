@@ -1,0 +1,392 @@
+/* =========================================
+   ARTICLE DETAIL PAGE
+   Layout: Centered, Reading Mode
+   ========================================= */
+
+.article-detail-page {
+    --bg-page: #F4F7FE;
+    --card-bg: #FFFFFF;
+    --text-primary: #1C274C;
+    --text-body: #374151; /* Dark Grey for easier reading */
+    --accent: #FF4867;
+    --link-color: #2563EB;
+    
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    padding-bottom: 4rem;
+    font-family: 'Inter', sans-serif; /* Menggunakan font Inter/Sans-serif yang bersih */
+}
+
+/* 1. NAVIGATION / BREADCRUMB
+   ========================================= */
+.article-nav-container {
+    max-width: 900px; /* Samakan max-width dengan wrapper artikel */
+    margin: 0 auto;
+    padding: 2rem 1rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.btn-back:hover { color: var(--accent); }
+
+.breadcrumb-separator { color: #ccc; }
+.breadcrumb-current { color: #888; }
+
+
+/* 2. MAIN WRAPPER (The 60vw Container)
+   ========================================= */
+.article-wrapper {
+    background: var(--card-bg);
+    width: 100%;
+    /* Logic: Pada layar besar lebar 65vw, tapi dibatasi max 900px agar tidak terlalu lebar */
+    max-width: 900px; 
+    margin: 0 auto;
+    padding: 3rem 4rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(28, 39, 76, 0.05);
+    position: relative;
+}
+
+/* Responsive Width adjustments */
+@media (min-width: 1200px) {
+    .article-wrapper {
+        width: 65vw; /* Sedikit lebih dari 60vw untuk breathing room */
+    }
+}
+
+@media (max-width: 1024px) {
+    .article-wrapper {
+        width: 85vw;
+        padding: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .article-wrapper {
+        width: 95vw;
+        padding: 1.5rem;
+        border-radius: 0; /* Full width on mobile */
+    }
+    .article-nav-container { padding-left: 1.5rem; }
+}
+
+
+/* 3. HEADER SECTION
+   ========================================= */
+.category-pill {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1565c0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.main-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+
+/* Author & Meta */
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-info .avatar img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info .text {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-info .name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.author-info .name a { text-decoration: none; color: inherit; }
+.author-info .name a:hover { text-decoration: underline; color: var(--accent); }
+
+.author-info .date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* Share Buttons */
+.share-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.share-actions button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    background: white;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.share-actions button:hover {
+    background: #f8f9fa;
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* 4. FEATURED IMAGE
+   ========================================= */
+.featured-image-container {
+    margin: 0 0 3rem 0;
+    width: 100%;
+}
+
+.img-placeholder {
+    width: 100%;
+    height: 400px; /* Fixed height for consistency */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1C274C, #2c3e50);
+}
+.img-placeholder.bg-gradient {
+     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+figcaption {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+
+/* 5. ARTICLE CONTENT TYPOGRAPHY
+   ========================================= */
+.article-content {
+    font-size: 1.125rem; /* 18px for better readability */
+    line-height: 1.8;
+    color: var(--text-body);
+}
+
+.article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.article-content .lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #1C274C;
+    margin-bottom: 2rem;
+}
+
+.article-content h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+.article-content ul, .article-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.article-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Highlight Box (Quote/Note) */
+.highlight-box {
+    background: #f0fdf4; /* Light green */
+    border-left: 4px solid #22c55e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.highlight-box strong {
+    display: block;
+    color: #15803d;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-box p { margin-bottom: 0; font-size: 1rem; }
+
+
+/* 6. FOOTER COMPONENTS
+   ========================================= */
+
+/* Tags */
+.article-tags {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.article-tags a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.85rem;
+    background: #f1f3f5;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.article-tags a:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 2rem 0;
+}
+
+/* Author Bio Box */
+.author-bio-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.bio-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.bio-text h4 { margin: 0 0 5px 0; font-size: 1.1rem; color: #1C274C; }
+.bio-text p { font-size: 0.9rem; color: #555; margin-bottom: 1rem; line-height: 1.5; }
+.btn-consult {
+    display: inline-block;
+    background: var(--text-primary);
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.btn-consult:hover { background: var(--accent); }
+
+
+/* 7. RELATED ARTICLES (Outside wrapper)
+   ========================================= */
+.related-articles-section {
+    margin-top: 3rem;
+    padding: 0 1rem;
+}
+
+.related-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.related-container h3 {
+    font-size: 1.2rem;
+    color: #1C274C;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.related-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-card:hover { transform: translateY(-4px); }
+
+.rel-thumb { height: 120px; width: 100%; }
+.bg-pink-soft { background: #fce4ec; }
+.bg-blue-soft { background: #e3f2fd; }
+.bg-orange-soft { background: #fff3e0; }
+
+.rel-info { padding: 12px; }
+.rel-cat { 
+    font-size: 0.7rem; 
+    color: #888; 
+    text-transform: uppercase; 
+    font-weight: 600; 
+    display: block; 
+    margin-bottom: 4px; 
+}
+.rel-info h5 { 
+    margin: 0; 
+    font-size: 0.95rem; 
+    color: #333; 
+    line-height: 1.4; 
+}

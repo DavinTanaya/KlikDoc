@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApotekController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
@@ -49,11 +50,14 @@ Route::get('/apotek/success', [SuccessController::class, 'index'])->name('succes
 Route::get('/apotek/riwayat', [HistoryController::class, 'index'])->name('riwayat');
 Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
 
-Route::get('/konsultasi', [KonsultasiDokterController::class, 'index'])->name('konsultasi.dokter');
-Route::get('/konsultasi/detail', [KonsultasiDokterDetailController::class, 'index'])->name('konsultasi.detail');
-Route::get('/konsultasi/success', [KonsultasiDokterSuccessController::class, 'index'])->name('konsultasi.success');
+Route::get('/konsultasi', [KonsultasiDokterController::class, 'index'])->name('konsultasi');
+Route::get('/konsultasi/detail', [KonsultasiDokterController::class, 'detail'])->name('konsultasi.detail');
+Route::get('/konsultasi/success', [KonsultasiDokterController::class, 'success'])->name('konsultasi.success');
 Route::get('/konsultasi/riwayat', [KonsultasiHistoryController::class, 'index'])->name('konsultasi.riwayat');
-Route::get('/konsultasi/riwayat/detail', [KonsultasiHistoryDetailController::class, 'index'])->name('konsultasi.riwayat.detail');
+Route::get('/konsultasi/riwayat/detail', [KonsultasiHistoryController::class, 'detail'])->name('konsultasi.riwayat.detail');
+
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+Route::get('/artikel/detail', [ArtikelController::class, 'detail'])->name('artikel.detail');
 
 
 Route::get('/dokter', [DokterDashboardController::class, 'index'])->name('dokter.dashboard');

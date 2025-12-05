@@ -14,7 +14,7 @@
             
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->is('konsultasi*') ? 'active text-primary fw-bold' : '' }}" href="#">Konsultasi</a>
+                    <a class="nav-link {{ request()->is('konsultasi*') ? 'active text-primary fw-bold' : '' }}" href="{{ route('konsultasi') }}">Konsultasi</a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link {{ request()->is('booking*') ? 'active text-primary fw-bold' : '' }}" href="#">Booking</a>
@@ -26,7 +26,7 @@
                     <a class="nav-link {{ request()->is('layanan*') ? 'active text-primary fw-bold' : '' }}" href="#">Layanan Kesehatan</a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->is('artikel*') ? 'active text-primary fw-bold' : '' }}" href="#">Artikel Kesehatan</a>
+                    <a class="nav-link {{ request()->is('artikel*') ? 'active text-primary fw-bold' : '' }}" href="{{ route('artikel') }}">Artikel Kesehatan</a>
                 </li>
             </ul>
 
