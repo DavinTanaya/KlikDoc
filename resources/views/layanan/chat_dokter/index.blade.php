@@ -316,30 +316,32 @@
 
       console.log("[CHAT] Subscribing chats." + chatId);
 
-      window.Echo.private("chats." + chatId)
-        .subscribed(() => console.log("[CHAT] ✔ Subscribed chats." + chatId))
-        .listen("NewMessage", e => {
-          console.log("[CHAT] Received:", e);
+      window.Echo.private('chats.' + chatId)
+        .listen('.new-message', e => {
+          const msg = e.message;
+          console.log('[CHAT] NewMessage(dokter):', msg);
 
-          if (e.message.type === 'system' &&
-            e.message.body === 'KONSULTASI_SELESAI') {
+          // ✅ pesan system: konsultasi selesai
+          if (msg.type === 'system' && msg.body === 'KONSULTASI_SELESAI') {
+            const statusTextEl = document.getElementById('statusText');
+            const statusIconEl = document.getElementById('statusIcon');
+            const inputWrapperEl = document.getElementById('inputWrapperActive');
+            const inputClosedEl = document.getElementById('inputClosedMessage');
+            const doctorCtrlEl = document.getElementById('doctorControls');
 
-            document.getElementById("statusText").innerText =
-              "Sesi konsultasi telah selesai";
+            if (statusTextEl) statusTextEl.innerText = 'Sesi konsultasi telah selesai';
+            if (statusIconEl) statusIconEl.innerHTML = '<i class="fas fa-lock"></i>';
+            if (inputWrapperEl) inputWrapperEl.style.display = 'none';
+            if (inputClosedEl) inputClosedEl.style.display = 'block';
+            if (doctorCtrlEl) doctorCtrlEl.style.display = 'none';
 
-            document.getElementById("statusIcon").innerHTML =
-              '<i class="fas fa-lock"></i>';
-
-            document.getElementById("inputWrapperActive").style.display = "none";
-            document.getElementById("inputClosedMessage").style.display = "flex";
-
-            return;
+            return; // ⛔ jangan render bubble
           }
 
-          if (e.message.sender_id === authUserId) return;
-          appendMessage(e.message, "received");
+          // normal message
+          if (msg.sender_id === authUserId) return;
+          appendMessage(msg, 'received');
         });
-
     }
 
     function appendMessage(msg, type) {
@@ -589,6 +591,12 @@
       callContainer.style.display = "block";
 
       makeOffer(payload.from);
+    }
+    async function onRemoteReject(payload) {
+      if (!isCaller) return;
+      console.log("[CALL] Remote rejected:", payload.from);
+
+      endCallLocal();
     }
 
     async function makeOffer(remoteId) {

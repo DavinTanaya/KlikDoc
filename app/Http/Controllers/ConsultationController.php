@@ -392,7 +392,7 @@ class ConsultationController extends Controller
             ->where('status', 'AKTIF')
             ->firstOrFail();
 
-        if($consultation->prescription()->count() == 0) {
+        if($consultation->prescriptions()->count() == 0) {
             return response()->json([
                 'success' => false,
                 'message' => 'Tolong tambahkan resep/diagnosa sebelum menyelesaikan konsultasi.'
@@ -409,6 +409,7 @@ class ConsultationController extends Controller
             $chat->update(['status' => 'closed']);
 
             $message = Message::create([
+                'sender_id' => $doctor->id,
                 'chat_id' => $chat->id,
                 'type' => 'system',
                 'body' => 'KONSULTASI_SELESAI'
@@ -417,7 +418,7 @@ class ConsultationController extends Controller
             broadcast(new NewMessage($message))->toOthers();
         }
 
-        return response()->json([
+        return response()->json(data: [
             'success' => true,
             'message' => 'Konsultasi telah diselesaikan.'
         ]);

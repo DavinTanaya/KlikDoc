@@ -6,6 +6,7 @@ use App\Events\NewMessage;
 use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ChatDokterController extends Controller
 {
@@ -79,7 +80,7 @@ class ChatDokterController extends Controller
             'chat_id' => 'required|exists:chats,id',
             'body'    => 'required|string',
         ]);
-
+        Log::info('[CHAT] sendMessage called', $request->all());
         $chat = Chat::with('consultation')->findOrFail($request->chat_id);
 
         // ❌ BLOCK kalau konsultasi tidak aktif
@@ -95,8 +96,13 @@ class ChatDokterController extends Controller
             'body'      => $request->body,
         ]);
 
-        broadcast(new NewMessage($message))->toOthers();
+        Log::info('[CHAT] Message created', [
+            'message_id' => $message->id,
+            'chat_id' => $message->chat_id,
+        ]);
 
+        broadcast(new NewMessage($message))->toOthers();
+        Log::info('[CHAT] Broadcast dispatched');
         return response()->json([
             'ok' => true,
             'message' => [

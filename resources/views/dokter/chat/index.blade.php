@@ -236,7 +236,8 @@
     let activeChatId = {{ $activechat?->id ?? 'null' }};
     const chatUserId = {{ $activechat?->user_id ?? 'null' }};
     const chatDoctorId = {{ $activechat?->doctor_id ?? 'null' }};
-
+    let chatChannel = null;
+    let subscribedChatId = null;
     console.table({
       authUserId,
       authRole,
@@ -349,35 +350,53 @@
     function subscribeChat(chatId) {
       if (!chatId) return console.warn('[CHAT] no chatId');
 
+      // 🔍 kalau sudah subscribe ke chat yang sama → jangan double listener
+      if (chatChannel && subscribedChatId === chatId) {
+        console.log('[CHAT] already subscribed chats.' + chatId);
+        return;
+      }
+
       console.log('[CHAT] subscribe chats.' + chatId);
 
-      window.Echo.private('chats.' + chatId)
-        .stopListening('NewMessage')
-        .listen('NewMessage', e => {
-          const msg = e.message;
-          console.log('[CHAT] NewMessage(dokter):', msg);
+      // ❌ kalau sebelumnya sudah subscribe ke chat lain → lepas dulu
+      if (chatChannel && subscribedChatId !== chatId) {
+        console.log('[CHAT] leave previous chats.' + subscribedChatId);
+        chatChannel.stopListening('.new-message');
+        window.Echo.leave('chats.' + subscribedChatId); // nama channel sama seperti di private(...)
+        chatChannel = null;
+      }
 
-          // ✅ pesan system: konsultasi selesai
-          if (msg.type === 'system' && msg.body === 'KONSULTASI_SELESAI') {
-            const statusTextEl = document.getElementById('statusText');
-            const statusIconEl = document.getElementById('statusIcon');
-            const inputWrapperEl = document.getElementById('inputWrapperActive');
-            const inputClosedEl = document.getElementById('inputClosedMessage');
-            const doctorCtrlEl = document.getElementById('doctorControls');
+      // ✅ subscribe baru
+      subscribedChatId = chatId;
+      chatChannel = window.Echo.private('chats.' + chatId);
 
-            if (statusTextEl) statusTextEl.innerText = 'Sesi konsultasi telah selesai';
-            if (statusIconEl) statusIconEl.innerHTML = '<i class="fas fa-lock"></i>';
-            if (inputWrapperEl) inputWrapperEl.style.display = 'none';
-            if (inputClosedEl) inputClosedEl.style.display = 'block';
-            if (doctorCtrlEl) doctorCtrlEl.style.display = 'none';
+      chatChannel.listen('.new-message', e => {
+        const msg = e.message;
+        console.log('[CHAT] NewMessage(dokter):', msg);
 
-            return; // ⛔ jangan render bubble
-          }
+        // ✅ pesan system: konsultasi selesai
+        if (msg.type === 'system' && msg.body === 'KONSULTASI_SELESAI') {
+          const statusTextEl = document.getElementById('statusText');
+          const statusIconEl = document.getElementById('statusIcon');
+          const inputWrapperEl = document.getElementById('inputWrapperActive');
+          const inputClosedEl = document.getElementById('inputClosedMessage');
+          const doctorCtrlEl = document.getElementById('doctorControls');
 
-          // normal message
-          if (msg.sender_id === authUserId) return;
-          appendMessage(msg, 'received');
-        });
+          if (statusTextEl) statusTextEl.innerText = 'Sesi konsultasi telah selesai';
+          if (statusIconEl) statusIconEl.innerHTML = '<i class="fas fa-lock"></i>';
+          if (inputWrapperEl) inputWrapperEl.style.display = 'none';
+          if (inputClosedEl) inputClosedEl.style.display = 'block';
+          if (doctorCtrlEl) doctorCtrlEl.style.display = 'none';
+
+          return; // ⛔ jangan render bubble
+        }
+
+        // ❌ jangan render ulang pesan kita sendiri (yang sudah di-append lokal)
+        if (msg.sender_id === authUserId) return;
+
+        // ✅ normal message
+        appendMessage(msg, 'received');
+      });
     }
 
     /* =========================================================
@@ -863,30 +882,48 @@
     function finishConsultation(consultationId) {
       if (!confirm('Selesaikan sesi konsultasi ini?')) return;
 
-      const url = "{{ route('dokter.consultation.finish', ':id') }}".replace(':id', consultationId);
+      const url = "{{ route('dokter.consultation.finish', ':id') }}"
+        .replace(':id', consultationId);
 
       fetch(url, {
           method: 'POST',
           headers: {
-            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+            'Accept': 'application/json'
           }
         })
+        .then(async res => {
+          const data = await res.json();
+
+          // ❌ gagal (belum ada resep / error lain)
+          if (!res.ok) {
+            throw new Error(data.message || 'Gagal menyelesaikan konsultasi');
+          }
+
+          return data;
+        })
         .then(() => {
-          // local update (system message juga akan broadcast)
+          // ✅ sukses → update UI lokal
           const statusTextEl = document.getElementById('statusText');
           const statusIconEl = document.getElementById('statusIcon');
           const inputWrapperEl = document.getElementById('inputWrapperActive');
           const inputClosedEl = document.getElementById('inputClosedMessage');
           const doctorCtrlEl = document.getElementById('doctorControls');
 
-          if (statusTextEl) statusTextEl.innerText = 'Sesi konsultasi selesai';
+          if (statusTextEl) statusTextEl.innerText = 'Sesi konsultasi telah selesai';
           if (statusIconEl) statusIconEl.innerHTML = '<i class="fas fa-lock"></i>';
           if (inputWrapperEl) inputWrapperEl.style.display = 'none';
           if (inputClosedEl) inputClosedEl.style.display = 'block';
           if (doctorCtrlEl) doctorCtrlEl.style.display = 'none';
         })
-        .catch(err => console.error('[CONSULT] finish error:', err));
+        .catch(err => {
+          console.error('[CONSULT] finish error:', err);
+
+          // ✅ tampilkan alasan gagal ke dokter
+          alert(err.message);
+        });
     }
+
 
     /* =========================================================
        MISC
@@ -897,10 +934,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       if (msgContainer) msgContainer.scrollTop = msgContainer.scrollHeight;
-      if (activeChatId) {
-        subscribeChat(activeChatId);
-        subscribeCall(activeChatId);
-      }
     });
   </script>
 @endpush
