@@ -595,63 +595,162 @@
 }
 
 .chat-status-bar {
-  padding: 10px 16px;
-  background: #fffbe6;
-  border-bottom: 1px solid #f0e6a0;
-  font-size: 13px;
-  color: #8a6d3b;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    padding: 10px 16px;
+    background: #fffbe6;
+    border-bottom: 1px solid #f0e6a0;
+    font-size: 13px;
+    color: #8a6d3b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .chat-status-bar i {
-  color: #d4a017;
+    color: #d4a017;
 }
 
 .status-active {
-  background: #e6f7ff;
-  border-bottom: 1px solid #b5e2ff;
-  color: #0369a1;
-  justify-content: center;
+    background: #e6f7ff;
+    border-bottom: 1px solid #b5e2ff;
+    color: #0369a1;
+    justify-content: center;
 }
 
 .status-active i {
-  color: #0284c7;
+    color: #0284c7;
 }
 
 .status-ended {
-  background: #ffecec;
-  border-bottom: 1px solid #ffb8b8;
-  color: #b91c1c;
+    background: #ffecec;
+    border-bottom: 1px solid #ffb8b8;
+    color: #b91c1c;
 }
 
 .status-ended i {
-  color: #dc2626;
+    color: #dc2626;
 }
 
 .input-wrapper-active {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
 }
 
 .input-closed-message {
-  display: none;
-  width: 100%;
-  padding: 12px 16px;
-  background: #f8d7da;
-  color: #842029;
-  border: 1px solid #f5c2c7;
-  border-radius: 8px;
-  font-size: 14px;
+    display: none;
+    width: 100%;
+    padding: 12px 16px;
+    background: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
 .input-area.closed #inputWrapperActive {
-  display: none;
+    display: none;
 }
 
 .input-area.closed #inputClosedMessage {
-  display: block;
+    display: block;
+}
+
+/* ===============================
+   CHAT CARD – PRESCRIPTION
+================================= */
+
+.chat-card.prescription {
+    max-width: 75%;
+    margin: 10px 0;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f0fdfa, #e6fffb);
+    border: 1px solid #99f6e4;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    animation: fadeSlideIn 0.18s ease;
+}
+
+/* Title */
+.chat-card.prescription h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Description */
+.chat-card.prescription p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: #134e4a;
+    line-height: 1.4;
+}
+
+/* Actions container */
+.chat-card.prescription a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-right: 6px;
+    white-space: nowrap;
+}
+
+/* Lihat Resep */
+.chat-card.prescription a:first-of-type {
+    background: #ffffff;
+    color: #0f766e;
+    border: 1px solid #5eead4;
+}
+
+.chat-card.prescription a:first-of-type:hover {
+    background: #ccfbf1;
+}
+
+/* Tebus Obat */
+.chat-card.prescription a:last-of-type {
+    background: #0d9488;
+    color: #ffffff;
+}
+
+.chat-card.prescription a:last-of-type:hover {
+    background: #0f766e;
+}
+
+/* Animation */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .chat-card.prescription {
+        max-width: 90%;
+    }
+
+    .chat-card.prescription a {
+        display: block;
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .chat-card.prescription a:last-of-type {
+        margin-bottom: 0;
+    }
 }

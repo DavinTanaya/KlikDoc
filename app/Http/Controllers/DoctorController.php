@@ -19,6 +19,7 @@ class DoctorController extends Controller
             'sip' => 'required|string|max:255',
             'spesialisasi' => 'required|string|max:255',
             'document' => 'required|file|mimes:pdf,jpg,png|max:5120',
+            'experience_years' => 'required|integer|min:0',
         ]);
 
         $document = $request->file('document');
@@ -34,8 +35,11 @@ class DoctorController extends Controller
             'sip' => $request->input('sip'),
             'spesialisasi' => $request->input('spesialisasi'),
             'document' => $document_name,
+            'experience_years' => $request->input('experience_years'),
         ]);
 
         return redirect()->route('home')->with('success', 'Application submitted successfully!');
     }
+
+    
 }

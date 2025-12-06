@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DokterChatController;
 use App\Http\Controllers\DokterDashboardController;
@@ -23,14 +24,9 @@ use App\Http\Controllers\KalkulatorBmiContoller;
 use App\Http\Controllers\KlikHomeController;
 use App\Http\Controllers\KlikHomeHistoryController;
 use App\Http\Controllers\KlikHomePaymentController;
-use App\Http\Controllers\KonsultasiDokterController;
-use App\Http\Controllers\KonsultasiDokterDetailController;
-use App\Http\Controllers\KonsultasiDokterSuccessController;
 use App\Http\Controllers\KonsultasiHistoryController;
-use App\Http\Controllers\KonsultasiHistoryDetailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PengingatObatController;
-use App\Http\Controllers\SuccessController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,18 +54,21 @@ Route::post('/apotek/keranjang/{id}', [CartController::class, 'addCart'])->name(
 Route::patch('/apotek/keranjang/{id}', [CartController::class, 'updateCart'])->name('apotek_keranjang.update');
 Route::delete('/apotek/keranjang/{id}', [CartController::class, 'removeCart'])->name('apotek_keranjang.delete');
 Route::get('/apotek/checkout', [CheckoutController::class, 'index'])->name('apotek.checkout');
+Route::get('/apotek/checkout/from-prescription/{prescriptionId}', [CheckoutController::class, 'fromPrescription'])->name('apotek.fromPrescription');
 Route::post('/apotek/checkout/pay', [CheckoutController::class, 'pay'])->name('apotek.checkout.pay');
 Route::get('/apotek/checkout/retry/{code}', [CheckoutController::class, 'retry'])->name('apotek.checkout.retry');
 Route::get('/apotek/checkout/success/{code}', [CheckoutController::class, 'success'])->name('apotek.checkout.success');
 Route::post('/apotek/checkout/use-voucher', [CheckoutController::class, 'useVoucher'])->name('apotek.checkout.use_voucher');
-
 Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
 
-Route::get('/konsultasi', [KonsultasiDokterController::class, 'index'])->name('konsultasi');
-Route::get('/konsultasi/detail', [KonsultasiDokterController::class, 'detail'])->name('konsultasi.detail');
-Route::get('/konsultasi/success', [KonsultasiDokterController::class, 'success'])->name('konsultasi.success');
-Route::get('/konsultasi/riwayat', [KonsultasiHistoryController::class, 'index'])->name('konsultasi.riwayat');
-Route::get('/konsultasi/riwayat/detail', [KonsultasiHistoryController::class, 'detail'])->name('konsultasi.riwayat.detail');
+Route::get('/konsultasi', [ConsultationController::class, 'getConsultation'])->name('konsultasi');
+Route::get('/konsultasi/detail/{id}', [ConsultationController::class, 'getConsultationDetail'])->name('konsultasi.detail');
+Route::post('/konsultasi/bayar/{id}', [ConsultationController::class, 'payConsultation'])->name('konsultasi.bayar');
+Route::get('/konsultasi/retry/{code}', [ConsultationController::class, 'retryPayment'])->name('konsultasi.retry');
+Route::get('/konsultasi/success/{code}', [ConsultationController::class, 'paymentSuccess'])->name('konsultasi.success');
+Route::get('/konsultasi/riwayat', [ConsultationController::class, 'getHistory'])->name('konsultasi.riwayat');
+Route::get('/konsultasi/riwayat/{id}', [ConsultationController::class, 'getDetail'])->name('konsultasi.riwayat.detail');
+Route::post('/konsultasi/riwayat/{id}/beri-rating', [ConsultationController::class, 'giveRating'])->name('konsultasi.rating.store');
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 Route::get('/artikel/detail', [ArtikelController::class, 'detail'])->name('artikel.detail');
@@ -88,7 +87,12 @@ Route::post('/dokter/pendaftaran', [DoctorController::class, 'register'])->name(
 Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
 Route::get('/dokter/rujukan', [DokterRujukanController::class, 'index'])->name('dokter.rujukan');
 Route::get('/dokter/riwayat', [DokterHistoryController::class, 'index'])->name('dokter.riwayat');
-Route::get('/dokter/chat', [DokterChatController::class, 'index'])->name('dokter.chat');
+Route::get('/dokter/chat', [DokterChatController::class, 'index'])->name('dokter.chat.index');
+Route::post('/dokter/prescription-chat/{consultationId}',[ConsultationController::class, 'createPrescriptionChat'])->name('dokter.prescription.chat');
+Route::post('/dokter/finish/{consultationId}',[ConsultationController::class, 'finishConsultation'])->name('dokter.consultation.finish');
+
+
+
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin', function () {

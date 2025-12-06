@@ -12,8 +12,17 @@ class PrescriptionItem extends Model
     
     protected $fillable = [
         'prescription_id',
-        'medicine_id',
+        'drug_id',
         'qty',
-        'usage_instructions',
     ];
+
+    public function drug()
+    {
+        return $this->belongsTo(Drug::class, 'drug_id');
+    }
+
+    public function prescription()
+    {
+        return $this->belongsTo(Prescription::class, 'prescription_id');
+    }
 }

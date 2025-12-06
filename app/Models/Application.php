@@ -20,5 +20,26 @@ class Application extends Model
         'document',
         'status',
         'is_active',
+        'experience_years',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'doctor_id', 'id');
+    }
+
+    public function averageRating()
+    {
+        return round($this->ratings()->avg('rating') ?? 0, 1);
+    }
+
+    public function ratingCount()
+    {
+        return $this->ratings()->count();
+    }
 }

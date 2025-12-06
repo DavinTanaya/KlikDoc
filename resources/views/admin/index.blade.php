@@ -94,4 +94,65 @@
   <script src="{{ asset('js/admin/button-handlers.js') }}"></script>
   <script src="{{ asset('js/admin/modal-handlers.js') }}"></script>
   <script src="{{ asset('js/admin/modals.js') }}"></script>
+
+  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
+  <script>
+    window.Echo = new Echo({
+      broadcaster: 'pusher',
+      key: "{{ config('broadcasting.connections.pusher.key') }}",
+      wsHost: "5.175.183.160",
+      wsPort: 6001,
+      forceTLS: false,
+      encrypted: false,
+      disableStats: true,
+      authEndpoint: "/broadcasting/auth",
+      auth: {
+        headers: {
+          "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        }
+      },
+    });
+
+    let onlineUsers = {};
+    let onlineDoctors = {};
+
+    window.Echo.join('presence.online')
+      .here((users) => {
+        console.log("[ONLINE] Current:", users);
+        onlineUsers = {};
+        onlineDoctors = {};
+        users.forEach(u => {
+          if (u.role === 'doctor') {
+            onlineDoctors[u.id] = u;
+          } else {
+            onlineUsers[u.id] = u;
+          }
+        });
+        updateOnlineDoctorCount();
+      })
+      .joining((user) => {
+        console.log("[ONLINE] User joined:", user);
+        if (user.role === 'doctor') {
+          onlineDoctors[user.id] = user;
+        } else {
+          onlineUsers[user.id] = user;
+        }
+        updateOnlineDoctorCount();
+      })
+      .leaving((user) => {
+        console.log("[ONLINE] User left:", user);
+        delete onlineUsers[user.id];
+        delete onlineDoctors[user.id];
+        updateOnlineDoctorCount();
+      });
+
+
+    function updateOnlineDoctorCount() {
+      const el = document.getElementById("doctorOnlineCount");
+      if (!el) return console.log("No element with id doctorOnlineCount found.");
+      const count = Object.keys(onlineDoctors).length;
+      el.innerText = count;
+    }
+  </script>
 @endpush

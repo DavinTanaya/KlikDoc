@@ -40,16 +40,16 @@
             @endphp
 
             <li class="chat-item {{ $isActive ? 'active' : '' }}"
-              onclick="selectChat(this, {{ $chat->id }}, '{{ $partner->name }}')">
+              onclick="selectChat(this, {{ $chat->id }}, '{{ $partner->application->full_name ?? $partner->name }}')">
 
               <div class="avatar-container">
                 <img class="avatar"
-                  src="https://ui-avatars.com/api/?name={{ urlencode($partner->name) }}&background=random">
+                  src="https://ui-avatars.com/api/?name={{ urlencode($partner->application->full_name ?? $partner->name) }}&background=random">
               </div>
 
               <div class="chat-info">
                 <div class="chat-header-info">
-                  <span class="chat-name">{{ $partner->name }}</span>
+                  <span class="chat-name">{{ $partner->application->full_name ?? $partner->name }}</span>
                   <span class="chat-time">{{ optional($lastMessage)->created_at?->format('H:i') }}</span>
                 </div>
                 <div class="chat-preview">
@@ -75,7 +75,7 @@
               <div>
                 <h6 id="headerName">
                   {{ $authUser->id === ($activechat->user_id ?? null)
-                      ? $activechat->doctor->name ?? 'Chat'
+                      ? $activechat->doctor->application->full_name ?? 'Chat'
                       : $activechat->user->name ?? 'Chat' }}
                 </h6>
                 <small id="headerStatus">Online</small>
@@ -90,19 +90,43 @@
           </div>
         </header>
 
-        <div id="chatStatusBar" class="chat-status-bar status-active">
-          <span id="statusIcon"><i class="fas fa-clock"></i></span>
-          <span id="statusText">Sesi chat sedang berlangsung</span>
+        @php
+          $isActiveConsultation = $activechat?->consultation?->status === 'AKTIF';
+        @endphp
+
+        <div id="chatStatusBar" class="chat-status-bar {{ $isActiveConsultation ? 'status-active' : 'status-closed' }}">
+          <span id="statusIcon">
+            <i class="fas {{ $isActiveConsultation ? 'fa-clock' : 'fa-lock' }}"></i>
+          </span>
+
+          <span id="statusText">
+            {{ $isActiveConsultation ? 'Sesi chat sedang berlangsung' : 'Sesi konsultasi telah selesai' }}
+          </span>
         </div>
 
+
         <div class="messages-container" id="messageContainer">
+
           @foreach ($messages as $message)
-            <div class="message-row {{ $message->sender_id === $authUser->id ? 'sent' : 'received' }}">
-              <div class="bubble">
-                {{ $message->body }}
-                <span class="bubble-time">{{ $message->created_at->format('H:i') }}</span>
+            @if ($message->type === 'prescription')
+              <div class="message-row received">
+                <div class="chat-card prescription">
+                  <h4>🩺 Resep Dokter</h4>
+                  <p>Dokter telah mengirimkan resep.</p>
+
+                  <a href="{{ route('apotek.fromPrescription', $message->prescription_id) }}">
+                    Tebus Obat
+                  </a>
+                </div>
               </div>
-            </div>
+            @else
+              <div class="message-row {{ $message->sender_id === $authUser->id ? 'sent' : 'received' }}">
+                <div class="bubble">
+                  {{ $message->body }}
+                  <span class="bubble-time">{{ $message->created_at->format('H:i') }}</span>
+                </div>
+              </div>
+            @endif
           @endforeach
         </div>
 
@@ -120,7 +144,11 @@
         </div>
 
         <footer class="input-area">
-          <div id="inputWrapperActive" class="input-wrapper-active">
+
+          {{-- SEND INPUT --}}
+          <div id="inputWrapperActive" class="input-wrapper-active"
+            style="{{ $isActiveConsultation ? '' : 'display:none' }}">
+
             <div class="input-actions">
               <i class="far fa-smile"></i>
               <i class="fas fa-paperclip"></i>
@@ -128,15 +156,22 @@
 
             <input type="text" id="msgInput" class="chat-input" placeholder="Ketik pesan..."
               onkeypress="handleEnter(event)">
+
             <button class="btn-send">
               <i class="fas fa-paper-plane"></i>
             </button>
           </div>
 
-          <div id="inputClosedMessage" class="input-closed-message">
-            <i class="fas fa-lock me-2"></i> Anda tidak dapat membalas percakapan ini.
+          {{-- CLOSED MESSAGE --}}
+          <div id="inputClosedMessage" class="input-closed-message"
+            style="{{ $isActiveConsultation ? 'display:none' : 'display:block' }}">
+
+            <i class="fas fa-lock me-2"></i>
+            Sesi konsultasi telah selesai. Anda tidak dapat mengirim pesan.
           </div>
+
         </footer>
+
       </main>
     </div>
   </div>
@@ -198,8 +233,8 @@
     window.Echo = new Echo({
       broadcaster: "pusher",
       key: "{{ config('broadcasting.connections.pusher.key') }}",
-      wsHost: "ws.cheapdl.online",
-      wsPort: 443,
+      wsHost: "5.175.183.160",
+      wsPort: 6001,
       forceTLS: false,
       encrypted: false,
       disableStats: true,
@@ -266,9 +301,25 @@
         .listen("NewMessage", e => {
           console.log("[CHAT] Received:", e);
 
+          if (e.message.type === 'system' &&
+            e.message.body === 'KONSULTASI_SELESAI') {
+
+            document.getElementById("statusText").innerText =
+              "Sesi konsultasi telah selesai";
+
+            document.getElementById("statusIcon").innerHTML =
+              '<i class="fas fa-lock"></i>';
+
+            document.getElementById("inputWrapperActive").style.display = "none";
+            document.getElementById("inputClosedMessage").style.display = "flex";
+
+            return;
+          }
+
           if (e.message.sender_id === authUserId) return;
           appendMessage(e.message, "received");
         });
+
     }
 
     function appendMessage(msg, type) {

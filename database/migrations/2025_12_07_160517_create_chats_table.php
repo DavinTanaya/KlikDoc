@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('doctor_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('consultation_id')->constrained('consultations')->cascadeOnDelete();
             $table->enum('status', ['active', 'closed'])->default('active');
             $table->enum('call_status', ['idle', 'ringing', 'in_call', 'ended'])->default('idle');
             $table->enum('call_type', ['none', 'audio', 'video'])->default('none');

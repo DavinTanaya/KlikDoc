@@ -90,6 +90,58 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   @stack('scripts')
+  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
+
+  <script>
+    window.Echo = new Echo({
+      broadcaster: 'pusher',
+      key: "{{ config('broadcasting.connections.pusher.key') }}",
+      wsHost: "5.175.183.160",
+      wsPort: 6001,
+      forceTLS: false,
+      encrypted: false,
+      disableStats: true,
+      authEndpoint: "/broadcasting/auth",
+      auth: {
+        headers: {
+          "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        }
+      },
+    });
+
+    let onlineUsers = {};
+
+    window.Echo.join('presence.online')
+      .here((users) => {
+        console.log("[ONLINE] Current:", users);
+        onlineUsers = {};
+        users.forEach(u => onlineUsers[u.id] = u);
+        updateOnlineUI();
+      })
+      .joining((user) => {
+        console.log("[ONLINE] User joined:", user);
+        onlineUsers[user.id] = user;
+        updateOnlineUI();
+      })
+      .leaving((user) => {
+        console.log("[ONLINE] User left:", user);
+        delete onlineUsers[user.id];
+        updateOnlineUI();
+      });
+
+    function updateOnlineUI() {
+      document.querySelectorAll("[data-user-id]").forEach(el => {
+        let uid = el.dataset.userId;
+        if (onlineUsers[uid]) {
+          el.innerHTML = '<span class="text-success">● Online</span>';
+        } else {
+          el.innerHTML = '<span class="text-muted">● Offline</span>';
+        }
+      });
+    }
+  </script>
+
 </body>
 
 </html>

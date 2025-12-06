@@ -204,7 +204,7 @@
   .doctor-search-box button:hover {
     color: #0d6efd;
   }
-  
+
   .disabled-card {
     opacity: 0.6;
   }
@@ -228,16 +228,7 @@
     <div class="card stat-card">
       <div class="card-body">
         <p class="text-muted mb-2">Dokter Online</p>
-        <h2 class="stat-value text-success">89</h2>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xl-3 col-md-6">
-    <div class="card stat-card">
-      <div class="card-body">
-        <p class="text-muted mb-2">Dokter Sibuk</p>
-        <h2 class="stat-value text-warning">23</h2>
+        <h2 class="stat-value text-success" id="doctorOnlineCount">0</h2>
       </div>
     </div>
   </div>
@@ -247,6 +238,15 @@
       <div class="card-body">
         <p class="text-muted mb-2">Dokter Dinonaktifkan</p>
         <h2 class="stat-value text-danger">{{ $disabledApplicants }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-md-6">
+    <div class="card stat-card">
+      <div class="card-body">
+        <p class="text-muted mb-2">Average Rating</p>
+        <h2 class="stat-value text-warning">4.8</h2>
       </div>
     </div>
   </div>
@@ -314,7 +314,7 @@
           </div>
 
           <div class="card-body">
-            <div class="col-12 d-flex flex-wrap gap-4 justify-content-start">
+            <div class="col-12 d-flex justify-content-start flex-wrap gap-4">
 
               @forelse ($doctors as $doctor)
                 @php
@@ -333,11 +333,12 @@
                       'submission_date' => $doctor->created_at->format('d M Y'),
                       'status' => $doctor->status,
                       'document' => $doctor->document,
+                      'experience_years' => $doctor->experience_years,
                   ];
                 @endphp
 
                 <div class="col-md-6 col-lg-4">
-                  <div class="doctor-card card border-0 @if($doctor->status === 'disabled') disabled-card @endif">
+                  <div class="doctor-card card @if ($doctor->status === 'disabled') disabled-card @endif border-0">
                     <div class="card-body">
 
                       <!-- HEADER -->
@@ -411,6 +412,7 @@
                     'submission_date' => $item->created_at->format('d M Y'),
                     'status' => ucfirst($item->status ?? 'Pending'),
                     'document' => $item->document,
+                    'experience_years' => $item->experience_years,
                 ];
 
                 $pillClass = match ($item->status) {
@@ -451,3 +453,5 @@
     </div>
   </div>
 </div>
+
+<script></script>

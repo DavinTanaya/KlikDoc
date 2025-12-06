@@ -2321,7 +2321,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const pageName = link.dataset.page;
 
             localStorage.setItem("lastPage", pageName);
-
+            if(pageName === "dokter"){
+                setTimeout(updateOnlineDoctorCount, 1000) 
+            }
             loadPage(pageName);
         });
     });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Order;
+use App\Models\Prescription;
 use App\Models\Province;
 use App\Models\UserCart;
 use App\Models\Voucher;
@@ -337,5 +338,34 @@ class CheckoutController extends Controller
 
         return redirect($snap->redirect_url);
     }
+     public function fromPrescription($prescriptionId)
+    {
+        $user = auth()->user();
 
+        $prescription = Prescription::with('items.drug')
+            ->whereHas('consultation', fn ($q) =>
+                $q->where('user_id', $user->id)
+            )
+            ->findOrFail($prescriptionId);
+
+        $cartIds = [];
+
+        foreach ($prescription->items as $item) {
+            $cart = UserCart::updateOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'drug_id' => $item->drug_id,
+                ],
+                [
+                    'quantity' => $item->qty,
+                ]
+            );
+
+            $cartIds[] = $cart->id;
+        }
+
+        return redirect()->route('apotek.checkout', [
+            'ids' => json_encode($cartIds)
+        ]);
+    }
 }

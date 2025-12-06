@@ -32,4 +32,9 @@ class Drug extends Model
     {
         return $this->hasMany(OrderItem::class, 'drug_id');
     }
+
+    public function prescriptionItems()
+    {
+        return $this->hasMany(PrescriptionItem::class, 'drug_id');
+    }
 }

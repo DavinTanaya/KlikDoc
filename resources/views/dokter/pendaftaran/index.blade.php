@@ -113,12 +113,16 @@
                 <div class="select-wrapper">
                   <select id="specialization" name="spesialisasi" required>
                     <option value="" disabled selected>Pilih Spesialisasi...</option>
-                    <option value="umum">Dokter Umum</option>
-                    <option value="gigi">Dokter Gigi</option>
-                    <option value="anak">Spesialis Anak</option>
-                    <option value="penyakit_dalam">Spesialis Penyakit Dalam</option>
+                    <option value="Dokter Umum">Dokter Umum</option>
+                    <option value="Dokter Gigi">Dokter Gigi</option>
+                    <option value="Spesialis Anak">Spesialis Anak</option>
+                    <option value="Spesialis Penyakit Dalam">Spesialis Penyakit Dalam</option>
                   </select>
                 </div>
+              </div>
+              <div class="input-group">
+                <label for="experience_years">Total Pengalaman (Tahun)</label>
+                <input type="number" id="experience_years" name="experience_years" placeholder="Tahun Pengalaman Kerja" required>
               </div>
 
               <div class="input-group">

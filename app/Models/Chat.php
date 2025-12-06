@@ -8,7 +8,8 @@ class Chat extends Model
 {
     protected $fillable = [
         'user_id', 
-        'doctor_id', 
+        'doctor_id',
+        'consultation_id',
         'status',
         'call_status',
         'call_type',
@@ -34,5 +35,10 @@ class Chat extends Model
     }
     public function messages(){ 
         return $this->hasMany(Message::class); 
+    }
+
+    public function consultation()
+    {
+        return $this->belongsTo(Consultation::class, 'consultation_id');
     }
 }

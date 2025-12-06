@@ -134,6 +134,7 @@
                       'document' => $app->document,
                       'status' => $app->status,
                       'submission_date' => $app->created_at->format('d M Y'),
+                      'experience_years' => $app->experience_years,
                   ];
                 @endphp
                 <div>

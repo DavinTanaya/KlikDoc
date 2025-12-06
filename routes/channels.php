@@ -18,3 +18,11 @@ Broadcast::channel('calls.{chat}', function ($user, Chat $chat) {
         $user->id === $chat->doctor_id ||
         $user->role === 'admin';
 });
+
+Broadcast::channel('presence.online', function ($user) {
+    return [
+        'id' => $user->id,
+        'name' => $user->name,
+        'role' => $user->role,
+    ];
+});

@@ -11,8 +11,18 @@ class Prescription extends Model
     use HasFactory, Notifiable;
     
     protected $fillable = [
-        'chat_id',
-        'doctor_id',
+        'consultation_id',
+        'diagnosis',
         'notes',
     ];
+    public function consultation()
+    {
+        return $this->belongsTo(Consultation::class, 'consultation_id');
+    }
+
+    public function items()
+    {
+        return $this->hasMany(PrescriptionItem::class);
+    }
+
 }

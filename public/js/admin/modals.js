@@ -35,6 +35,12 @@ const ModalTemplates = {
                     <tr><td class="text-muted">Spesialisasi:</td><td>${
                         data.spesialisasi
                     }</td></tr>
+                    <tr><td class="text-muted">Spesialisasi:</td><td>${
+                        data.spesialisasi
+                    }</td></tr>
+                    <tr><td class="text-muted">Pengalaman (Tahun):</td><td>${
+                        data.experience_years
+                    }</td></tr>
 
                     <tr>
                         <td class="text-muted">Dokumen:</td>

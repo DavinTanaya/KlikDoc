@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('document');
             $table->enum('status', ['pending', 'approved', 'rejected', 'disabled'])->default('pending');
             $table->boolean('is_active')->default(true);
+            $table->integer('experience_years')->default(0);
             $table->timestamps();
         });
     }

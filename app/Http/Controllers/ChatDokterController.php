@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewMessage;
+use App\Models\Application;
 use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -13,35 +14,53 @@ class ChatDokterController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role === 'user') {
-            $chats = Chat::where('user_id', $user->id)
-                ->with(['doctor', 'messages' => fn($q) => $q->latest()->limit(1)])
-                ->get();
-        }
-
-        elseif ($user->role === 'doctor') {
+        if ($user->role === 'doctor') {
             $chats = Chat::where('doctor_id', $user->id)
-                ->with(['user', 'messages' => fn($q) => $q->latest()->limit(1)])
+                ->with([
+                    'user', 
+                    'doctor.application',
+                    'messages' => fn($q) => $q->latest()->limit(1),
+                ])
+                ->get();
+        } 
+        else {
+            $chats = Chat::where('user_id', $user->id)
+                ->with([
+                    'doctor.application',
+                    'user',
+                    'messages' => fn($q) => $q->latest()->limit(1),
+                ])
                 ->get();
         }
 
-        else {
-            $chats = Chat::with(['user', 'doctor', 'messages' => fn($q) => $q->latest()->limit(1)])
-                ->get();
-        }
+        $chats = $chats->sortByDesc(fn ($chat) =>
+            $chat->messages->first()?->created_at ?? now()->subYears(10)
+        );
 
         $activechat = $chats->first();
         $messages = $activechat
             ? $activechat->messages()->orderBy('created_at')->get()
             : collect();
 
+        // -------- RETURN PAGE BERBEDA --------
+        if ($user->role === 'doctor') {
+            return view('dokter.chat.index', [
+                'chats' => $chats,
+                'activechat' => $activechat,
+                'messages' => $messages,
+                'authUser' => $user,
+            ]);
+        }
+
+        // user
         return view('layanan.chat_dokter.index', [
             'chats' => $chats,
             'activechat' => $activechat,
             'messages' => $messages,
             'authUser' => $user,
         ]);
-    }
+    }   
+
 
     public function sendMessage(Request $request)
     {
@@ -115,4 +134,6 @@ class ChatDokterController extends Controller
 
         return response()->json(['ok' => true]);
     }
+
+
 }

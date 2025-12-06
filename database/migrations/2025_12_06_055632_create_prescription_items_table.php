@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('prescription_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('prescription_id');
+            $table->foreignId('drug_id');
+            $table->integer('qty');
             $table->timestamps();
         });
     }
