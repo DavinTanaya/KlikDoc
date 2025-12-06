@@ -91,7 +91,7 @@
         </header>
 
         @php
-          $isActiveConsultation = $activechat?->consultation?->status === 'AKTIF';
+          $isActiveConsultation = $activeConsultation !== null;
         @endphp
 
         <div id="chatStatusBar" class="chat-status-bar {{ $isActiveConsultation ? 'status-active' : 'status-closed' }}">
@@ -287,8 +287,28 @@
             appendMessage(msg, msg.sender_id === authUserId ? "sent" : "received");
           });
 
+          const isActive = data.consultation_status === "AKTIF";
+
+          document.getElementById("chatStatusBar").className =
+            `chat-status-bar ${isActive ? 'status-active' : 'status-closed'}`;
+
+          document.getElementById("statusIcon").innerHTML =
+            isActive ? '<i class="fas fa-clock"></i>' : '<i class="fas fa-lock"></i>';
+
+          document.getElementById("statusText").innerText =
+            isActive ?
+            'Sesi chat sedang berlangsung' :
+            'Sesi konsultasi telah selesai';
+
+          document.getElementById("inputWrapperActive").style.display =
+            isActive ? "flex" : "none";
+
+          document.getElementById("inputClosedMessage").style.display =
+            isActive ? "none" : "flex";
+
           msgContainer.scrollTop = msgContainer.scrollHeight;
         });
+
     };
 
     function subscribeChat(chatId) {
@@ -323,15 +343,39 @@
     }
 
     function appendMessage(msg, type) {
-      msgContainer.insertAdjacentHTML("beforeend", `
-        <div class="message-row ${type}">
-          <div class="bubble">
-            ${msg.body}
-            <span class="bubble-time">${new Date(msg.created_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>
-          </div>
+
+      if (msg.type === 'prescription') {
+        msgContainer.insertAdjacentHTML("beforeend", `
+      <div class="message-row received">
+        <div class="chat-card prescription">
+          <h4>🩺 Resep Dokter</h4>
+          <p>Dokter telah mengirimkan resep.</p>
+
+          <a href="/apotek/checkout/from-prescription/${msg.prescription_id}">
+            Tebus Obat
+          </a>
         </div>
-      `);
+      </div>
+    `);
+        return;
+      }
+
+      // ✅ CASE: PESAN BIASA
+      msgContainer.insertAdjacentHTML("beforeend", `
+    <div class="message-row ${type}">
+      <div class="bubble">
+        ${msg.body}
+        <span class="bubble-time">
+          ${new Date(msg.created_at).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
+        </span>
+      </div>
+    </div>
+  `);
     }
+
 
 
     function handleEnter(e) {

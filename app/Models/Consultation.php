@@ -29,7 +29,7 @@ class Consultation extends Model
         return $this->belongsTo(Application::class, 'doctor_id');
     }
 
-    public function prescription()
+    public function prescriptions()
     {
         return $this->hasOne(Prescription::class, 'consultation_id');
     }

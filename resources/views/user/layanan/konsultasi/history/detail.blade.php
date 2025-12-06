@@ -12,7 +12,7 @@
     {{-- HEADER --}}
     <header class="detail-header">
       <div class="header-container">
-        <a href="{{ route('konsultasi.history') }}" class="btn-back">
+        <a href="{{ route('konsultasi.riwayat') }}" class="btn-back">
           <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
@@ -77,7 +77,7 @@
               <div class="content-card">
                 <div class="card-title-row">
                   <div class="card-title">Resep Dokter</div>
-                  <a href="{{ route('konsultasi.resep.pdf', $consultation->id) }}" class="btn-text">Unduh PDF</a>
+                  <a href="" class="btn-text">Unduh PDF</a>
                 </div>
 
                 <div class="prescription-list">
@@ -188,7 +188,7 @@
                 </button>
               @endif
 
-              <a href="{{ route('support') }}" class="btn-outline-action">
+              <a href="" class="btn-outline-action">
                 Bantuan
               </a>
             </div>

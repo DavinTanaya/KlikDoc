@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use App\Models\Application;
 use App\Models\Chat;
 use App\Models\Consultation;
@@ -293,7 +294,7 @@ class ConsultationController extends Controller
         ->where('id', $id)
         ->where('user_id', auth()->id())
         ->firstOrFail();
-
+            
         return view(
             'user.layanan.konsultasi.history.detail',
             compact('consultation')
@@ -401,6 +402,20 @@ class ConsultationController extends Controller
         $consultation->update([
             'status' => 'SELESAI',
         ]);
+
+        $chat = $consultation->chat;
+
+        if ($chat) {
+            $chat->update(['status' => 'closed']);
+
+            $message = Message::create([
+                'chat_id' => $chat->id,
+                'type' => 'system',
+                'body' => 'KONSULTASI_SELESAI'
+            ]);
+
+            broadcast(new NewMessage($message))->toOthers();
+        }
 
         return response()->json([
             'success' => true,

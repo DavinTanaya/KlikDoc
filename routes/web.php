@@ -21,6 +21,10 @@ use App\Http\Controllers\KlikHomeController;
 use App\Http\Controllers\KlikHomeHistoryController;
 use App\Http\Controllers\KlikHomePaymentController;
 use App\Http\Controllers\KonsultasiHistoryController;
+use App\Http\Controllers\MandiriBmiController;
+use App\Http\Controllers\MandiriKehamilanController;
+use App\Http\Controllers\MandiriMenstruasiController;
+use App\Http\Controllers\MandiriObatController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PengingatObatController;
 use App\Http\Controllers\UserController;
@@ -84,7 +88,7 @@ Route::post('/dokter/pendaftaran', [DoctorController::class, 'register'])->name(
 Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
 Route::get('/dokter/rujukan', [DokterRujukanController::class, 'index'])->name('dokter.rujukan');
 Route::get('/dokter/riwayat', [DokterHistoryController::class, 'index'])->name('dokter.riwayat');
-Route::get('/dokter/chat', [DokterChatController::class, 'index'])->name('dokter.chat.index');
+Route::get('/dokter/chat', [ChatDokterController::class, 'index'])->name('dokter.chat.index');
 Route::post('/dokter/prescription-chat/{consultationId}',[ConsultationController::class, 'createPrescriptionChat'])->name('dokter.prescription.chat');
 Route::post('/dokter/finish/{consultationId}',[ConsultationController::class, 'finishConsultation'])->name('dokter.consultation.finish');
 

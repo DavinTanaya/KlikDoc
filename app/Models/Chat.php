@@ -41,4 +41,9 @@ class Chat extends Model
     {
         return $this->belongsTo(Consultation::class, 'consultation_id');
     }
+
+    public function isConsultationActive(): bool
+    {
+        return $this->consultation && $this->consultation->status === 'AKTIF';
+    }
 }

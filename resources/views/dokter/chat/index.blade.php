@@ -304,8 +304,39 @@
           data.messages.forEach(m => {
             appendMessage(m, m.sender_id === authUserId ? 'sent' : 'received');
           });
+
+          const isActive = data.consultation_status === 'AKTIF';
+
+          // STATUS BAR
+          document.getElementById('statusText').innerText =
+            isActive ?
+            'Sesi konsultasi sedang berlangsung' :
+            'Sesi konsultasi telah selesai';
+
+          document.getElementById('statusIcon').innerHTML =
+            isActive ?
+            '<i class="fas fa-clock"></i>' :
+            '<i class="fas fa-lock"></i>';
+
+          document.getElementById('chatStatusBar').className =
+            `chat-status-bar ${isActive ? 'status-active' : 'status-closed'}`;
+
+          // INPUT
+          document.getElementById('inputWrapperActive').style.display =
+            isActive ? 'flex' : 'none';
+
+          document.getElementById('inputClosedMessage').style.display =
+            isActive ? 'none' : 'block';
+
+          // DOCTOR CONTROLS
+          const doctorCtrl = document.getElementById('doctorControls');
+          if (doctorCtrl) {
+            doctorCtrl.style.display = isActive ? 'flex' : 'none';
+          }
+
           msgContainer.scrollTop = msgContainer.scrollHeight;
         });
+
 
       if (window.innerWidth <= 900 && appContainer) {
         appContainer.classList.add('chat-active');
@@ -382,6 +413,25 @@
        CHAT: APPEND BUBBLE
     ========================================================= */
     function appendMessage(msg, type) {
+
+      // ✅ SYSTEM MESSAGE (JANGAN RENDER)
+      if (msg.type === 'system') return;
+
+      // ✅ RESEP DOKTER (CARD)
+      if (msg.type === 'prescription') {
+        msgContainer.insertAdjacentHTML('beforeend', `
+      <div class="message-row received">
+        <div class="chat-card prescription">
+          <h4>🩺 Resep Dokter</h4>
+          <p>Y
+          ou telah mengirimkan resep ke pasien.</p>
+        </div>
+      </div>
+    `);
+        return;
+      }
+
+      // ✅ NORMAL CHAT
       const time = new Date(msg.created_at);
       const timeStr = time.toLocaleTimeString([], {
         hour: '2-digit',
@@ -389,13 +439,14 @@
       });
 
       msgContainer.insertAdjacentHTML('beforeend', `
-        <div class="message-row ${type}">
-          <div class="bubble">
-            ${msg.body}
-            <span class="bubble-time">${timeStr}</span>
-          </div>
-        </div>
-      `);
+    <div class="message-row ${type}">
+      <div class="bubble">
+        ${msg.body}
+        <span class="bubble-time">${timeStr}</span>
+      </div>
+    </div>
+  `);
+
       msgContainer.scrollTop = msgContainer.scrollHeight;
     }
 
