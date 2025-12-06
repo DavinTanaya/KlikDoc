@@ -1,18 +1,14 @@
 :root {
     --green: 76, 175, 80;
-
     --blue1: 28, 39, 76;
     --blue2: 119, 139, 164;
     --blue3: 211, 240, 253;
     --blue4: 79, 195, 247;
-
     --red1: 255, 194, 205;
     --red2: 255, 72, 103;
     --red3: 220, 38, 38;
     --red4: 111, 0, 19;
-
     --white: 255, 255, 255;
-
     --grey1: 224, 224, 224;
     --grey2: 102, 102, 102;
     --grey3: 51, 51, 51;
@@ -20,18 +16,30 @@
 
 * {
     font-family: "Lato", sans-serif;
+    box-sizing: border-box; /* Penting untuk responsif */
 }
 
-html,
+/* --- LOGIKA LAYOUT STICKY FOOTER --- */
+html {
+    height: 100%;
+}
+
 body {
-    height: auto;
+    min-height: 100vh; /* Pastikan body minimal setinggi layar perangkat */
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column; /* Susun vertikal: Navbar -> Main -> Footer */
+    background-color: #f9f9f9; /* Opsional: warna background body */
 }
 
-body {
-    display: flex;
-    flex-direction: column;
+/* Wrapper Konten Utama */
+.main-content {
+    flex: 1; /* Komponen ini akan mengambil sisa ruang yang tersedia */
+    width: 100%;
+    margin: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .no-link {
@@ -39,6 +47,7 @@ body {
     color: inherit;
 }
 
+/* --- FORM STYLES --- */
 .klik_form-title h1 {
     font-size: 36px;
     color: rgb(var(--grey3));
@@ -48,29 +57,28 @@ body {
 .klik_form-title h2 {
     font-size: 20px;
     color: rgb(var(--grey2));
+    margin-bottom: 20px;
 }
 
 .klik_form-label {
     font-size: 18px;
     color: rgb(var(--grey3));
     font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
 }
 
-.klik_form-input {
-    border-right: 0;
-    padding: 12px 20px;
-}
-
-.klik_form-input:focus {
-    border-color: rgb(var(--blue4)) !important;
-    box-shadow: 0 0 0 0.25rem rgba(var(--blue4), 0.35) !important; 
-    outline: none !important;
-}
-
+.klik_form-input, 
 .klik_form-select {
+    width: 100%; /* Full width agar responsif */
+    border: 1px solid rgb(var(--grey1)); /* Tambahkan border default */
     padding: 12px 20px;
+    border-radius: 8px;
+    background-color: rgb(var(--white));
+    margin-bottom: 15px; /* Jarak antar input */
 }
 
+.klik_form-input:focus,
 .klik_form-select:focus {
     border-color: rgb(var(--blue4)) !important;
     box-shadow: 0 0 0 0.25rem rgba(var(--blue4), 0.35) !important; 
@@ -87,9 +95,28 @@ body {
     background-color: rgb(var(--blue4));
     color: rgb(var(--white));
     border: none;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .klik_form-button:hover {
     background-color: rgb(var(--blue1));
     color: rgb(var(--white));
+}
+
+/* --- RESPONSIVE MEDIA QUERY --- */
+/* Ketika layar di bawah 768px (Tablet/HP) */
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 2rem;    /* Jarak diperkecil sedikit di HP */
+        padding-bottom: 2rem;
+    }
+
+    .klik_form-title h1 {
+        font-size: 28px; /* Judul mengecil di HP */
+    }
+    
+    .klik_form-title h2 {
+        font-size: 16px;
+    }
 }
