@@ -84,6 +84,9 @@
                                 <small class="text-muted">{{ Auth::user()->email }}</small>
                             </li>
 
+                            @if(auth()->user()->role === 'admin')
+                                <li><a class="dropdown-item py-2" href="{{ route('admin.index') }}"><i class="bi bi-speedometer2 me-2 text-secondary"></i>Dashboard Admin</a></li>
+                            @endif
                             <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2 text-secondary"></i>Profil Saya</a></li>
                             <li><a class="dropdown-item py-2" href="#"><i class="bi bi-clock-history me-2 text-secondary"></i>Riwayat Medis</a></li>
                             <li><a class="dropdown-item py-2" href="#"><i class="bi bi-receipt me-2 text-secondary"></i>Transaksi</a></li>

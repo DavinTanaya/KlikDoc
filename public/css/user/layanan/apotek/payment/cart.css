@@ -414,3 +414,18 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 72, 103, 0.4);
 }
+
+.cart-image {
+    width: 100%;
+    height: 180px; /* kamu bisa sesuaikan 120–200px */
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.cart-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ini yang membuat gambar rapi */
+    object-position: center; /* fokus di tengah */
+    display: block;
+}

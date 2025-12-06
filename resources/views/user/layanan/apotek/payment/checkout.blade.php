@@ -443,7 +443,6 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-      // DATA KOTA
       let allCities = @json($cities);
 
       function populateCities(provinceId, citySelect, selectedCity = null) {

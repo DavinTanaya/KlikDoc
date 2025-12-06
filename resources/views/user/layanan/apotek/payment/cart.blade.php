@@ -4,6 +4,7 @@
 
 @push('styles')
   <link rel="stylesheet" href="{{ asset('css/user/layanan/apotek/payment/cart.css') }}">
+  
 @endpush
 
 @section('body')
@@ -61,7 +62,7 @@
                   </label>
                 </div>
 
-                <div class="item-image">
+                <div class="item-image cart-image">
                   @if ($drug->image)
                     <img src="{{ asset('images/drugs/' . $drug->image) }}" alt="{{ $drug->name }}">
                   @else

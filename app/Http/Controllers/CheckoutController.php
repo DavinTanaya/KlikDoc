@@ -140,6 +140,7 @@ class CheckoutController extends Controller
 
         $subtotal = $cartItems->sum(fn ($item) => $item->drug->price * $item->quantity);
         $shipping_fee = 15000;
+        $shipping_discount = 5000;
         $service_fee = 1000;
 
         $voucher = session('voucher');
@@ -190,6 +191,12 @@ class CheckoutController extends Controller
             'price' => $shipping_fee,
             'quantity' => 1,
             'name' => 'Biaya Pengiriman',
+        ];
+        $itemDetails[] = [
+            'id' => 'shipping_discount',
+            'price' => -$shipping_discount,
+            'quantity' => 1,
+            'name' => 'Diskon Pengiriman',
         ];
 
         $itemDetails[] = [
@@ -270,6 +277,7 @@ class CheckoutController extends Controller
         $voucher = session('voucher');
         $voucher_discount = $voucher['discount'] ?? 0;
         $shipping_fee = 15000;
+        $shipping_discount = 5000;
         $service_fee = 1000;
         $itemDetails = $order->items->map(function ($item) {
             return [
@@ -286,7 +294,12 @@ class CheckoutController extends Controller
             'quantity' => 1,
             'name' => 'Biaya Pengiriman',
         ];
-
+        $itemDetails[] = [
+            'id' => 'shipping_discount',
+            'price' => -$shipping_discount,
+            'quantity' => 1,
+            'name' => 'Diskon Pengiriman',
+        ];
         $itemDetails[] = [
             'id' => 'service_fee',
             'price' => $service_fee,

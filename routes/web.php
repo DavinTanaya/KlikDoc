@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DokterChatController;
 use App\Http\Controllers\DokterDashboardController;
 use App\Http\Controllers\DokterHistoryController;
@@ -82,7 +83,8 @@ Route::get('klik-home/riwayat/detail', [KlikHomeHistoryController::class, 'detai
 
 
 Route::get('/dokter', [DokterDashboardController::class, 'index'])->name('dokter.dashboard');
-Route::get('/dokter/pendaftaran', [DokterPendaftaranController::class, 'index'])->name('dokter.pendaftaran');
+Route::get('/dokter/pendaftaran', [DoctorController::class, 'registerIndex'])->name('dokter.pendaftaran');
+Route::post('/dokter/pendaftaran', [DoctorController::class, 'register'])->name('dokter.register');
 Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
 Route::get('/dokter/rujukan', [DokterRujukanController::class, 'index'])->name('dokter.rujukan');
 Route::get('/dokter/riwayat', [DokterHistoryController::class, 'index'])->name('dokter.riwayat');
@@ -95,6 +97,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/admin/drugs/create', [DrugController::class, 'createDrug'])->name('admin.drugs.create');
     Route::put('/admin/drugs/{id}', [DrugController::class, 'editDrug'])->name('admin.drugs.update');
     Route::delete('/admin/drugs/{id}', [DrugController::class, 'deleteDrug'])->name('admin.drugs.delete');
+    Route::get('/admin/orders/history', [AdminController::class, 'drugOrderHistory'])
+    ->name('admin.orders.history');
+    Route::get('/admin/orders/{code}', [AdminController::class, 'drugOrderDetail'])
+    ->name('admin.orders.detail');
+    Route::patch('/admin/orders/{code}', [AdminController::class, 'updateOrder'])
+    ->name('admin.orders.update');
+
 });
 
 
@@ -108,7 +117,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/admin/apotek/html',[AdminController::class, 'getApotekHtml']);
+Route::get('/admin/dokter/html',[AdminController::class, 'getDokterHtml']);
 
+Route::get('/admin/applications/update-status/{id}', [AdminController::class, 'updateApplicationStatus'])->name('admin.applications.update_status');
+Route::get('/admin/applicants/history', [AdminController::class, 'applicantHistory'])->name('admin.applicants.history');
 
 Route::post('/address', [UserController::class, 'storeAddress'])->name('address.store');
 Route::post('/address/set-default', [UserController::class, 'setDefaultAddress'])->name('address.set_default');

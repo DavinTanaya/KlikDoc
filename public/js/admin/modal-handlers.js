@@ -518,4 +518,15 @@ window.showMedicalRecordDetail = function (recordId) {
     modal.show();
 };
 
+window.showApplicationDetail = function (app) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+
+    document.getElementById("detailModalTitle").textContent =
+        "Detail Pengajuan Dokter";
+    document.getElementById("detailModalBody").innerHTML =
+        ModalTemplates.applicationDetail(app);
+
+    modal.show();
+};
+
 console.log("Modal handlers loaded successfully!");

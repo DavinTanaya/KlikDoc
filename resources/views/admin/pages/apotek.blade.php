@@ -1,3 +1,118 @@
+<style>
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 4px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: 0.2s ease;
+    color: inherit;
+  }
+
+  .order-item:hover {
+    background: #f3f6fb;
+  }
+
+  .order-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .order-id {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1e1e2d;
+  }
+
+  .order-user {
+    font-size: 12px;
+    color: #6c757d;
+  }
+
+  .pill {
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    width: fit-content;
+    margin-top: 4px;
+  }
+
+  .pill.primary {
+    background: #e3f1ff;
+    color: #007bff;
+  }
+
+  .pill.success {
+    background: #e5f8e8;
+    color: #2e7d32;
+  }
+
+  .pill.warning {
+    background: #fff4d6;
+    color: #b77400;
+  }
+
+  .pill.danger {
+    background: #ffe3e3;
+    color: #d32f2f;
+  }
+
+  .order-right {
+    text-align: right;
+  }
+
+  .order-right .price {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1b4ad1;
+  }
+
+  .order-right .lihat {
+    font-size: 12px;
+    color: #9aa0ac;
+  }
+
+  .divider {
+    height: 1px;
+    background: #eee;
+    margin: 8px 0;
+  }
+
+  .product-search-form {
+    margin-right: 10px;
+  }
+
+  .product-search-box {
+    display: flex;
+    align-items: center;
+    background: #f1f3f5;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .product-search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    width: 150px;
+  }
+
+  .product-search-box button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    color: #6c757d;
+  }
+
+  .product-search-box button:hover {
+    color: #0d6efd;
+  }
+</style>
 <div class="row g-4 fade-in mb-4">
   @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -30,6 +145,29 @@
       </div>
     </div>
   </div>
+
+  <div class="col-xl-3 col-md-6">
+    <div class="card stat-card">
+      <div class="card-body">
+        <p class="text-muted mb-2">Total Pesanan</p>
+        <h2 class="stat-value text-primary">
+          {{ number_format($totalOrders) }}
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-md-6">
+    <div class="card stat-card">
+      <div class="card-body">
+        <p class="text-muted mb-2">Pesanan Hari Ini</p>
+        <h2 class="stat-value text-success">
+          {{ number_format($todayOrders) }}
+        </h2>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
@@ -42,7 +180,15 @@
           Daftar Produk
 
         </h5>
-
+        <form method="GET" class="product-search-form d-flex align-items-center">
+          <div class="product-search-box">
+            <input type="text" name="search" id="productSearch" placeholder="Cari produk..."
+              value="{{ request('search') }}">
+            <button type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </form>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddDrug" onclick="showAddForm()">
           <i class="bi bi-plus-lg"></i> Tambah Produk
         </button>
@@ -138,17 +284,58 @@
   </div>
 
 
-  <!-- PESANAN TERBARU (Biarkan dummy dulu) -->
   <div class="col-lg-4">
     <div class="card fade-in">
       <div class="card-header">
         <h5 class="mb-0">Pesanan Terbaru</h5>
       </div>
-      <div class="card-body">
-        <p class="text-muted">Integrasi pesanan belum dibuat.</p>
+
+      <div class="card-body p-3">
+
+        @forelse ($latestOrders as $order)
+          <a href="{{ route('admin.orders.detail', $order->order_code) }}" class="order-item">
+
+            <div class="order-left">
+              <div class="order-id">#{{ $order->order_code }}</div>
+              <div class="order-user">
+                {{ $order->user->name }} • {{ $order->created_at->format('d M Y') }}
+              </div>
+
+              @php
+                $badgeClass = match ($order->status) {
+                    'BELUM_BAYAR' => 'pill danger',
+                    'DIPROSES' => 'pill primary',
+                    'DIKIRIM' => 'pill warning',
+                    'SELESAI' => 'pill success',
+                    default => 'pill secondary',
+                };
+              @endphp
+
+              <span class="{{ $badgeClass }}">
+                {{ ucfirst(strtolower(str_replace('_', ' ', $order->status))) }}
+              </span>
+            </div>
+
+            <div class="order-right">
+              <div class="price">Rp {{ number_format($order->total, 0, ',', '.') }}</div>
+              <span class="lihat">Lihat →</span>
+            </div>
+
+          </a>
+
+          @if (!$loop->last)
+            <div class="divider"></div>
+          @endif
+
+        @empty
+          <p class="text-muted mb-0 text-center">Belum ada pesanan.</p>
+        @endforelse
+        <hr>
+          <a href="{{ route('admin.orders.history') }}" class="text-center d-block" style="text-decoration: none; color: inherit;">Lihat Semua →</a>
       </div>
     </div>
   </div>
+
 
   <div id="hiddenFormAdd" class="d-none">
     @include('admin.components.forms.addProductForm')
@@ -163,3 +350,10 @@
   </div>
 
 </div>
+<script>
+  document.getElementById("productSearch").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      this.form.submit();
+    }
+  });
+</script>

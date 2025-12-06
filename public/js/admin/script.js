@@ -352,177 +352,12 @@ const pages = {
     dokter: {
         title: "Dokter",
         subtitle: "Kelola dan pantau dokter",
-        content: `
-            <div class="row g-4 mb-4 fade-in">
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Total Dokter</p>
-                            <h2 class="stat-value">156</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Dokter Online</p>
-                            <h2 class="stat-value text-success">89</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Dokter Sibuk</p>
-                            <h2 class="stat-value text-warning">23</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card stat-card">
-                        <div class="card-body">
-                            <p class="text-muted mb-2">Rating Rata-rata</p>
-                            <h2 class="stat-value text-warning">4.8</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Daftar Dokter</h5>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i> Tambah Dokter
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card shadow-hover">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="d-flex gap-3">
-                                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=64&h=64&fit=crop" 
-                                                 class="rounded-circle" width="64" height="64" alt="">
-                                            <div>
-                                                <h6 class="mb-1">Dr. Sarah Johnson</h6>
-                                                <p class="text-muted mb-1 small">Kardiologi</p>
-                                                <small class="text-warning">★ 4.9</small>
-                                            </div>
-                                        </div>
-                                        <span class="badge badge-success-custom">Online</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between mb-2 small">
-                                            <span class="text-muted">Pengalaman:</span>
-                                            <span>15 tahun</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-2 small">
-                                            <span class="text-muted">Konsultasi:</span>
-                                            <span>245x</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between small">
-                                            <span class="text-muted">Tarif:</span>
-                                            <span class="text-primary fw-semibold">Rp 150.000</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-primary btn-sm flex-grow-1">
-                                            <i class="bi bi-eye"></i> Detail
-                                        </button>
-                                        <button class="btn btn-outline-secondary btn-sm">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card shadow-hover">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="d-flex gap-3">
-                                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=64&h=64&fit=crop" 
-                                                 class="rounded-circle" width="64" height="64" alt="">
-                                            <div>
-                                                <h6 class="mb-1">Dr. Michael Chen</h6>
-                                                <p class="text-muted mb-1 small">Dermatologi</p>
-                                                <small class="text-warning">★ 4.8</small>
-                                            </div>
-                                        </div>
-                                        <span class="badge badge-success-custom">Online</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between mb-2 small">
-                                            <span class="text-muted">Pengalaman:</span>
-                                            <span>12 tahun</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-2 small">
-                                            <span class="text-muted">Konsultasi:</span>
-                                            <span>198x</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between small">
-                                            <span class="text-muted">Tarif:</span>
-                                            <span class="text-primary fw-semibold">Rp 125.000</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-primary btn-sm flex-grow-1">
-                                            <i class="bi bi-eye"></i> Detail
-                                        </button>
-                                        <button class="btn btn-outline-secondary btn-sm">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card shadow-hover">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="d-flex gap-3">
-                                            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=64&h=64&fit=crop" 
-                                                 class="rounded-circle" width="64" height="64" alt="">
-                                            <div>
-                                                <h6 class="mb-1">Dr. Lisa Anderson</h6>
-                                                <p class="text-muted mb-1 small">Pediatri</p>
-                                                <small class="text-warning">★ 4.9</small>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-secondary">Offline</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between mb-2 small">
-                                            <span class="text-muted">Pengalaman:</span>
-                                            <span>10 tahun</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-2 small">
-                                            <span class="text-muted">Konsultasi:</span>
-                                            <span>187x</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between small">
-                                            <span class="text-muted">Tarif:</span>
-                                            <span class="text-primary fw-semibold">Rp 120.000</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-primary btn-sm flex-grow-1">
-                                            <i class="bi bi-eye"></i> Detail
-                                        </button>
-                                        <button class="btn btn-outline-secondary btn-sm">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `,
+        content: "",
+        load: async function () {
+            const query = window.location.search;
+            const res = await fetch("/admin/dokter/html" + query);
+            return await res.text();
+        },
     },
 
     konsultasi: {
@@ -825,9 +660,10 @@ const pages = {
     apotek: {
         title: "Apotek Online",
         subtitle: "Kelola dan pantau apotek online",
-        content: "", // kosong dulu
+        content: "",
         load: async function () {
-            const res = await fetch("/admin/apotek/html");
+            const query = window.location.search;
+            const res = await fetch("/admin/apotek/html" + query);
             return await res.text();
         },
     },
@@ -1924,6 +1760,254 @@ const pages = {
                 </div>
             </div>
         `,
+    },
+    aplikasi: {
+        title: "Aplikasi Mitra Dokter",
+        subtitle: "Pendaftaran mitra dokter (dummy)",
+        content: `
+        <div class="row g-4 mb-4 fade-in">
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <p class="text-muted mb-2">Total Pengajuan</p>
+                        <h2 class="stat-value">12</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <p class="text-muted mb-2">Belum Diverifikasi</p>
+                        <h2 class="stat-value text-warning">5</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card fade-in">
+            <div class="card-header">
+                <h5 class="mb-0">Daftar Pengajuan Mitra (Dummy)</h5>
+            </div>
+
+            <div class="card-body">
+
+                <!-- ======================= DUMMY 1 ======================= -->
+                <div class="list-item d-flex align-items-center justify-content-between py-3 px-2">
+
+                    <!-- LEFT -->
+                    <div class="d-flex align-items-center gap-3 flex-grow-1">
+                        <div class="avatar">AW</div>
+                        <div>
+                            <h6 class="mb-1">dr. Andi Wijaya, Sp.JP</h6>
+                            <small class="text-muted">Spesialis Jantung • STR-001234</small>
+                        </div>
+                    </div>
+
+                    <!-- STATUS BADGE -->
+                    <span id="status-1" class="badge badge-warning-custom me-3">pending</span>
+
+                    <!-- DROPDOWN -->
+                    <div class="dropdown me-3">
+                        <button class="btn btn-sm btn-light border dropdown-toggle" data-bs-toggle="dropdown">
+                            Ubah Status
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="setStatus(1,'pending')">Pending</a></li>
+                            <li><a class="dropdown-item" onclick="setStatus(1,'approved')">Approved</a></li>
+                            <li><a class="dropdown-item" onclick="setStatus(1,'rejected')">Rejected</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- BUTTON DETAIL -->
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailApp1">
+                        <i class="bi bi-eye"></i> Detail
+                    </button>
+                </div>
+
+
+                <!-- ======================= DUMMY 2 ======================= -->
+                <div class="list-item d-flex align-items-center justify-content-between py-3 px-2">
+
+                    <div class="d-flex align-items-center gap-3 flex-grow-1">
+                        <div class="avatar">SM</div>
+                        <div>
+                            <h6 class="mb-1">dr. Sarah Mulyani</h6>
+                            <small class="text-muted">Dokter Umum • STR-009988</small>
+                        </div>
+                    </div>
+
+                    <span id="status-2" class="badge badge-success-custom me-3">approved</span>
+
+                    <div class="dropdown me-3">
+                        <button class="btn btn-sm btn-light border dropdown-toggle" data-bs-toggle="dropdown">
+                            Ubah Status
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="setStatus(2,'pending')">Pending</a></li>
+                            <li><a class="dropdown-item" onclick="setStatus(2,'approved')">Approved</a></li>
+                            <li><a class="dropdown-item" onclick="setStatus(2,'rejected')">Rejected</a></li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailApp2">
+                        <i class="bi bi-eye"></i> Detail
+                    </button>
+                </div>
+
+
+                <!-- ======================= DUMMY 3 ======================= -->
+                <div class="list-item d-flex align-items-center justify-content-between py-3 px-2">
+
+                    <div class="d-flex align-items-center gap-3 flex-grow-1">
+                        <div class="avatar">BS</div>
+                        <div>
+                            <h6 class="mb-1">dr. Budi Santoso</h6>
+                            <small class="text-muted">Penyakit Dalam • STR-004422</small>
+                        </div>
+                    </div>
+
+                    <span id="status-3" class="badge badge-danger-custom me-3">rejected</span>
+
+                    <div class="dropdown me-3">
+                        <button class="btn btn-sm btn-light border dropdown-toggle" data-bs-toggle="dropdown">
+                            Ubah Status
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="setStatus(3,'pending')">Pending</a></li>
+                            <li><a class="dropdown-item" onclick="setStatus(3,'approved')">Approved</a></li>
+                            <li><a class="dropdown-item" onclick="setStatus(3,'rejected')">Rejected</a></li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailApp3">
+                        <i class="bi bi-eye"></i> Detail
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ======================= MODAL DETAIL 1 ======================= -->
+        <div class="modal fade" id="detailApp1" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detail Pengajuan — dr. Andi Wijaya, Sp.JP</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h6>Identitas</h6>
+                        <p><strong>NIK:</strong> 3178123456789012</p>
+                        <p><strong>Jenis Kelamin:</strong> Laki-laki</p>
+
+                        <h6 class="mt-3">Kredensial Medis</h6>
+                        <p><strong>STR:</strong> STR-001234</p>
+                        <p><strong>SIP:</strong> SIP-56789</p>
+                        <p><strong>Spesialisasi:</strong> Spesialis Jantung</p>
+
+                        <h6 class="mt-3">Dokumen</h6>
+                        <a href="#" class="btn btn-primary">
+                            <i class="bi bi-download"></i> Download Dokumen STR/SIP
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ======================= MODAL DETAIL 2 ======================= -->
+        <div class="modal fade" id="detailApp2" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detail Pengajuan — dr. Sarah Mulyani</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <h6>Identitas</h6>
+                        <p><strong>NIK:</strong> 3178987654321001</p>
+                        <p><strong>Jenis Kelamin:</strong> Perempuan</p>
+
+                        <h6 class="mt-3">Kredensial</h6>
+                        <p><strong>STR:</strong> STR-009988</p>
+                        <p><strong>SIP:</strong> SIP-22334</p>
+                        <p><strong>Spesialisasi:</strong> Dokter Umum</p>
+
+                        <h6 class="mt-3">Dokumen</h6>
+                        <a href="#" class="btn btn-primary">
+                            <i class="bi bi-download"></i> Download Dokumen STR/SIP
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ======================= MODAL DETAIL 3 ======================= -->
+        <div class="modal fade" id="detailApp3" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detail Pengajuan — dr. Budi Santoso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <h6>Identitas</h6>
+                        <p><strong>NIK:</strong> 3178001122334455</p>
+                        <p><strong>Jenis Kelamin:</strong> Laki-laki</p>
+
+                        <h6 class="mt-3">Kredensial</h6>
+                        <p><strong>STR:</strong> STR-004422</p>
+                        <p><strong>SIP:</strong> SIP-99887</p>
+                        <p><strong>Spesialisasi:</strong> Spesialis Penyakit Dalam</p>
+
+                        <h6 class="mt-3">Dokumen</h6>
+                        <a href="#" class="btn btn-primary">
+                            <i class="bi bi-download"></i> Download Dokumen STR/SIP
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ======================= STATUS SCRIPT ======================= -->
+        <script>
+            function setStatus(id, status) {
+                const el = document.getElementById("status-" + id);
+                el.className = "badge me-3";
+
+                if (status === "pending") {
+                    el.classList.add("badge-warning-custom");
+                    el.textContent = "pending";
+                }
+                if (status === "approved") {
+                    el.classList.add("badge-success-custom");
+                    el.textContent = "approved";
+                }
+                if (status === "rejected") {
+                    el.classList.add("badge-danger-custom");
+                    el.textContent = "rejected";
+                }
+            }
+        </script>
+    `,
     },
 
     notifikasi: {

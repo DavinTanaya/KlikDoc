@@ -22,14 +22,15 @@ class DrugController extends Controller
             'type' => 'required|string|max:255',
         ]);
 
-        $image = $request->file('image');
-        $image_name = now()->format('YmdHis') . '_' . $image->getClientOriginalName();
-        $image->move(public_path('images/drugs'), $image_name);
-
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = now()->format('YmdHis') . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/drugs'), $image_name);
+        }
         $drug = Drug::create([
             'name' => $request->input('name'),
             'category' => $request->input('category'),
-            'image' => $image_name,
+            'image' => isset($image_name) ? $image_name : null,
             'description' => $request->input('description'),
             'short_description' => $request->input('short_description'),
             'dosis' => $request->input('dosis'),
