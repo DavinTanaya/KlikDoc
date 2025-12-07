@@ -222,7 +222,6 @@
     <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
 
     <script>
-        console.log(@json($activechat->doctor));
         console.log("[INIT] ChatDokter script loaded");
 
         const authUserId = {{ $authUser->id }};

@@ -5,15 +5,7 @@
         </a>
 
         <div class="d-flex align-items-center gap-3 ms-auto order-xl-last">
-            <form class="d-none d-lg-block" role="search">
-                <div class="input-group">
-                    <span class="input-group-text bg-light border-end-0 rounded-start-pill text-muted py-1">
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input type="text" class="form-control bg-light border-start-0 rounded-end-pill py-1"
-                        placeholder="Cari obat, dokter..." style="width: 200px; font-size: 0.9rem;">
-                </div>
-            </form>
+
 
             <div class="dropdown">
                 @if (auth()->check() && auth()->user()->role === 'user')
@@ -28,14 +20,6 @@
                         style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
                         <i class="bi bi-envelope-fill"></i>
                     </a>
-                @else
-                    <button class="btn btn-light position-relative rounded-circle text-secondary" type="button"
-                        data-bs-toggle="dropdown"
-                        style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
-                        <i class="bi bi-bell-fill"></i>
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light">12</span>
-                    </button>
                 @endif
 
                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
