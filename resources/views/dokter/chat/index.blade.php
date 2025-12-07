@@ -5,6 +5,47 @@
 @push('styles')
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/dokter/chat/styles.css') }}">
+  <style>
+    .chat-card.referral {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 12px 14px;
+      max-width: 340px;
+      font-size: 13px;
+    }
+
+    .referral-header {
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 6px;
+    }
+
+    .referral-body p {
+      margin: 2px 0;
+      color: #064e3b;
+    }
+
+    .referral-actions {
+      margin-top: 8px;
+      text-align: right;
+    }
+
+    .btn-rujukan {
+      background: #10b981;
+      border: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn-rujukan:hover {
+      background: #059669;
+    }
+  </style>
 @endpush
 
 @section('body')
@@ -17,7 +58,7 @@
         <aside class="sidebar">
           <div class="sidebar-header">
             <div class="sidebar-header-left">
-              <a href="{{ url('/dokter/dashboard') }}" class="btn-home-back">
+              <a href="{{ route('dokter.dashboard') }}" class="btn-home-back">
                 <i class="fas fa-arrow-left"></i>
               </a>
               <h2 class="sidebar-title">Chats</h2>
@@ -103,6 +144,11 @@
                 <button class="btn-doc-action btn-resep" onclick="openPrescriptionModal()">
                   <i class="fas fa-prescription-bottle-alt"></i> Resep
                 </button>
+
+                <button class="btn-doc-action btn-rujukan" onclick="openReferralModal()">
+                  <i class="fas fa-hospital"></i> Rujukan
+                </button>
+
                 <button class="btn-doc-action btn-selesai"
                   onclick="finishConsultation({{ $activechat->consultation_id }})">
                   <i class="fas fa-check-circle"></i> Selesai
@@ -213,6 +259,44 @@
         </div>
       </div>
     </div>
+
+    <div id="referralModal" class="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <span class="modal-title">Buat Surat Rujukan</span>
+          <span class="close-modal" onclick="closeReferralModal()">&times;</span>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" id="refConsultationId" value="{{ $activechat?->consultation_id }}">
+
+          <div class="form-group">
+            <label>Rumah Sakit Tujuan</label>
+            <input type="text" id="refDestination">
+          </div>
+
+          <div class="form-group">
+            <label>Poli Spesialis</label>
+            <input type="text" id="refDepartment">
+          </div>
+
+          <div class="form-group">
+            <label>Alasan Rujukan</label>
+            <textarea id="refReason" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Catatan Tambahan</label>
+            <textarea id="refNotes" rows="3"></textarea>
+          </div>
+
+          <button class="btn-submit-resep" onclick="submitReferral()">
+            Kirim Rujukan
+          </button>
+        </div>
+      </div>
+    </div>
+
 
   </div>
 @endsection
@@ -433,26 +517,46 @@
     ========================================================= */
     function appendMessage(msg, type) {
 
-      // ✅ SYSTEM MESSAGE (JANGAN RENDER)
+      /* ======================
+         SYSTEM MESSAGE
+      ====================== */
       if (msg.type === 'system') return;
 
-      // ✅ RESEP DOKTER (CARD)
+      /* ======================
+         REFERRAL CARD
+      ====================== */
+    if (msg.type === 'referral') {
+      msgContainer.insertAdjacentHTML('beforeend', `
+    <div class="message-row ${type}">
+      <div class="bubble">
+        Dokter telah mengirimkan rujukan
+        <span class="bubble-time">${new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      </div>
+    </div>
+    `);
+      msgContainer.scrollTop = msgContainer.scrollHeight;
+      return;
+    }
+
+      /* ======================
+         PRESCRIPTION CARD
+      ====================== */
       if (msg.type === 'prescription') {
         msgContainer.insertAdjacentHTML('beforeend', `
       <div class="message-row received">
         <div class="chat-card prescription">
           <h4>🩺 Resep Dokter</h4>
-          <p>Y
-          ou telah mengirimkan resep ke pasien.</p>
+          <p>Resep telah dikirim ke pasien.</p>
         </div>
       </div>
     `);
         return;
       }
 
-      // ✅ NORMAL CHAT
-      const time = new Date(msg.created_at);
-      const timeStr = time.toLocaleTimeString([], {
+      /* ======================
+         NORMAL CHAT
+      ====================== */
+      const time = new Date(msg.created_at).toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit'
       });
@@ -461,7 +565,7 @@
     <div class="message-row ${type}">
       <div class="bubble">
         ${msg.body}
-        <span class="bubble-time">${timeStr}</span>
+        <span class="bubble-time">${time}</span>
       </div>
     </div>
   `);
@@ -865,7 +969,7 @@
         .then(res => res.json())
         .then(() => {
           appendMessage({
-            body: '📝 Dokter telah mengirimkan resep',
+            body: 'Dokter telah mengirimkan resep',
             created_at: new Date()
           }, 'sent');
 
@@ -919,7 +1023,6 @@
         .catch(err => {
           console.error('[CONSULT] finish error:', err);
 
-          // ✅ tampilkan alasan gagal ke dokter
           alert(err.message);
         });
     }
@@ -930,6 +1033,49 @@
     ========================================================= */
     function closeChat() {
       if (appContainer) appContainer.classList.remove('chat-active');
+    }
+
+    function openReferralModal() {
+      document.getElementById('referralModal').style.display = 'flex';
+    }
+
+    function closeReferralModal() {
+      document.getElementById('referralModal').style.display = 'none';
+    }
+
+    function submitReferral() {
+      const payload = {
+        consultation_id: document.getElementById('refConsultationId').value,
+        destination: document.getElementById('refDestination').value,
+        department: document.getElementById('refDepartment').value,
+        reason: document.getElementById('refReason').value,
+        notes: document.getElementById('refNotes').value
+      };
+
+      fetch("{{ route('dokter.rujukan.store') }}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+          // ✅ APPEND CARD SECARA LOKAL
+          appendMessage({
+            type: 'referral',
+            created_at: new Date(),
+            metadata: {
+              referral_id: data.referral_id,
+              destination: payload.destination,
+              department: payload.department
+            }
+          }, 'sent');
+
+          closeReferralModal();
+        })
+        .catch(err => console.error('[REFERRAL] error:', err));
     }
 
     document.addEventListener('DOMContentLoaded', () => {

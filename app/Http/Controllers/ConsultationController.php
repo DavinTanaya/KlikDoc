@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewMessage;
+use App\Helpers\PrescriptionPdfHelper;
 use App\Models\Application;
 use App\Models\Chat;
 use App\Models\Consultation;
@@ -289,15 +290,16 @@ class ConsultationController extends Controller
         $consultation = Consultation::with([
             'doctor',
             'prescriptions',
-            'rating'
+            'rating',
+            'prescriptions.items.drug'
         ])
         ->where('id', $id)
         ->where('user_id', auth()->id())
         ->firstOrFail();
-            
+
         return view(
             'user.layanan.konsultasi.history.detail',
-            compact('consultation')
+            ['consultation' => $consultation]
         );
     }
 
@@ -318,6 +320,8 @@ class ConsultationController extends Controller
         }
 
         Rating::create([
+            'user_id' => auth()->id(),
+            'doctor_id' => $consultation->doctor_id,
             'consultation_id' => $consultation->id,
             'rating' => $request->input('rating'),
             'review' => $request->input('review'),
@@ -344,6 +348,7 @@ class ConsultationController extends Controller
         ]);
         $doctor = auth()->user();
         $doctorApplication = Application::where('user_id', $doctor->id)->firstOrFail();
+        
         $consultation = Consultation::with('chat')
             ->where('id', $consultationId)
             ->where('doctor_id', $doctorApplication->id)
@@ -366,13 +371,14 @@ class ConsultationController extends Controller
                 ]);
             }
 
-            Message::create([
+            $message = Message::create([
                 'chat_id'        => $consultation->chat->id,
                 'sender_id'      => $doctor->id,
                 'type'           => 'prescription',
                 'prescription_id'=> $prescription->id,
                 'body'           => 'Dokter telah mengirimkan resep.',
             ]);
+            broadcast(new NewMessage($message))->toOthers();
         });
 
         return response()->json([
@@ -423,6 +429,19 @@ class ConsultationController extends Controller
             'message' => 'Konsultasi telah diselesaikan.'
         ]);
     }
-   
+   public function download($id)
+    {
+        $prescription = Prescription::with(['consultation', 'items.drug', 'consultation.doctor', 'consultation.user', 'consultation.doctor'])
+            ->findOrFail($id);
+        // security (opsional tapi WAJIB dalam prod)
+        // if (
+        //     auth()->id() !== $prescription->user_id &&
+        //     auth()->id() !== $prescription->doctor_id
+        // ) {
+        //     abort(403);
+        // }
+
+        return PrescriptionPdfHelper::download($prescription);
+    }
 
 }

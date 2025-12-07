@@ -246,7 +246,7 @@
     <div class="card stat-card">
       <div class="card-body">
         <p class="text-muted mb-2">Average Rating</p>
-        <h2 class="stat-value text-warning">4.8</h2>
+        <h2 class="stat-value text-warning">{{ $averageRating }}</h2>
       </div>
     </div>
   </div>

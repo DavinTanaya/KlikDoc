@@ -3,428 +3,265 @@
 @section('title', 'Kelola Rujukan')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/dokter/layanan/rujukan.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/dokter/layanan/rujukan.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 @endpush
 
 @section('body')
-    <div class="rujukan-dashboard">
+  <div class="rujukan-dashboard">
+    <div class="main-wrapper">
 
-        <div class="main-wrapper">
+      {{-- ================= HEADER ================= --}}
+      <div class="top-header">
+        <div class="header-left">
+          <a href="{{ route('dokter.dashboard') }}" class="btn-back-pill">← Kembali</a>
+          <div class="title-block">
+            <h1>Kelola Rujukan</h1>
+            <div class="date-capsule">{{ date('d F Y') }}</div>
+          </div>
+        </div>
+      </div>
 
-            {{-- Header Area (Sama persis dengan Jadwal) --}}
-            <div class="top-header">
-                <div class="header-left">
-                    <a href="{{ url()->previous() }}" class="btn-back-pill">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                        </svg>
-                        <span>Kembali</span>
+      {{-- ================= TABS ================= --}}
+      <div class="tabs-wrapper">
+        <button class="tab-pill active" onclick="switchTab('active', this)">Rujukan Aktif</button>
+        <button class="tab-pill" onclick="switchTab('history', this)">Riwayat Rujukan</button>
+      </div>
+
+      {{-- =======================================================
+        TAB 1 : RUJUKAN AKTIF
+    ======================================================= --}}
+      <div id="tab-active">
+
+        <div class="table-head-info">
+          <h3>Konsultasi Online Aktif</h3>
+          <span class="count-bubble">{{ $consultationsOnline->count() }} Sesi</span>
+        </div>
+
+        <div class="table-container fade-in">
+          <table class="floating-table">
+            <thead>
+              <tr>
+                <th width="10%">Jam</th>
+                <th width="30%">Pasien</th>
+                <th width="20%">Media</th>
+                <th width="25%">Keluhan / Diagnosa</th>
+                <th width="15%" class="text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @forelse ($consultationsOnline as $c)
+                <tr>
+                  <td>{{ $c->created_at->format('H:i') }}</td>
+
+                  <td>
+                    <div class="profile-group">
+                      <div class="avatar-box gradient-blue">
+                        {{ strtoupper(substr($c->user->name, 0, 2)) }}
+                      </div>
+                      <div>
+                        <div class="p-name">{{ $c->user->name }}</div>
+                        <div class="p-id">
+                          {{ $c->user->gender }} / {{ $c->user->age }} Thn
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span class="media-tag {{ $c->media }}">{{ ucfirst($c->media) }}</span>
+                  </td>
+
+                  <td>{{ $c->diagnosis ?? '-' }}</td>
+
+                  <td class="text-right">
+                    <button class="btn-primary-pill"
+                      onclick="openModal(
+                      '{{ $c->id }}',
+                      '{{ $c->user->name }}',
+                      '{{ $c->user->gender }} / {{ $c->user->age }} Thn',
+                      '{{ $c->diagnosis ?? '-' }}'
+                    )">
+                      Buat Rujukan
+                    </button>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="text-muted text-center">
+                    Tidak ada konsultasi online
+                  </td>
+                </tr>
+              @endforelse
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {{-- =======================================================
+        TAB 2 : RIWAYAT RUJUKAN
+    ======================================================= --}}
+      <div id="tab-history" style="display:none">
+
+        <div class="table-head-info">
+          <h3>Riwayat Rujukan</h3>
+          <span class="count-bubble">{{ $referrals->count() }} Rujukan</span>
+        </div>
+
+        <div class="table-container fade-in">
+          <table class="floating-table">
+            <thead>
+              <tr>
+                <th width="15%">Tanggal</th>
+                <th width="30%">Pasien</th>
+                <th width="25%">Tujuan</th>
+                <th width="20%">Poli</th>
+                <th width="10%" class="text-right">Dokumen</th>
+              </tr>
+            </thead>
+            <tbody>
+              @forelse ($referrals as $r)
+                <tr>
+                  <td>
+                    <div>{{ $r->created_at->format('d M Y') }}</div>
+                    <small class="text-muted">{{ $r->created_at->format('H:i') }}</small>
+                  </td>
+
+                  <td>
+                    <div class="profile-group">
+                      <div class="avatar-box gradient-blue">
+                        {{ strtoupper(substr($r->consultation->user->name, 0, 2)) }}
+                      </div>
+                      <div>
+                        <div class="p-name">{{ $r->consultation->user->name }}</div>
+                        <div class="p-id">
+                          {{ $r->consultation->user->gender }} /
+                          {{ $r->consultation->user->age }} Thn
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>{{ $r->destination }}</td>
+                  <td>{{ $r->department }}</td>
+
+                  <td class="text-right">
+                    <a href="{{ route('referral.download', $r->id) }}" class="btn-primary-pill">
+                      Download
                     </a>
-                    <div class="title-block">
-                        <h1>Kelola Rujukan</h1>
-                        <div class="date-capsule">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            {{ date('d F Y') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Tabs Navigation (Style menyatu dengan table) --}}
-            <div class="tabs-wrapper">
-                <button class="tab-pill active" onclick="switchTab('tatap-muka')">
-                    Pasien Tatap Muka
-                </button>
-                <button class="tab-pill" onclick="switchTab('online')">
-                    Konsultasi Online
-                    <span class="badge-count">2</span>
-                </button>
-            </div>
-
-            {{-- CONTENT: TATAP MUKA --}}
-            <div id="list-tatap-muka" class="table-container fade-in">
-                <div class="table-head-info">
-                    <h3>Antrian Pasien</h3>
-                    <span class="count-bubble">2 Pasien</span>
-                </div>
-
-                <table class="floating-table">
-                    <thead>
-                        <tr>
-                            <th width="10%">Jam</th>
-                            <th width="35%">Identitas Pasien</th>
-                            <th width="15%">Info</th>
-                            <th width="20%">Diagnosa Sementara</th>
-                            <th width="10%">Status</th>
-                            <th width="10%" class="text-right">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Pasien 1 -->
-                        <tr class="patient-row" id="row-tm-1">
-                            <td>
-                                <div class="time-stamp">09:00</div>
-                            </td>
-                            <td>
-                                <div class="profile-group">
-                                    <div class="avatar-box gradient-blue">BS</div>
-                                    <div>
-                                        <div class="p-name">Budi Santoso</div>
-                                        <div class="p-id">ID: P-001</div>
-                                        <div class="referral-badge" id="badge-tm-1" style="display: none;">⚠ Butuh Rujukan
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="gender-pill male"><span>Laki-laki</span> • 32 Thn</div>
-                            </td>
-                            <td><span class="complaint">Demam Tifoid (A01.0)</span></td>
-                            <td><span class="status-pill waiting">Menunggu</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-primary-pill"
-                                        onclick="openModal('tm-1', 'Budi Santoso', 'Laki-laki / 32 Thn', 'Demam Tifoid')">
-                                        Proses
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Pasien 2 -->
-                        <tr class="patient-row" id="row-tm-2">
-                            <td>
-                                <div class="time-stamp">10:30</div>
-                            </td>
-                            <td>
-                                <div class="profile-group">
-                                    <div class="avatar-box gradient-purple">SA</div>
-                                    <div>
-                                        <div class="p-name">Siti Aminah</div>
-                                        <div class="p-id">ID: P-002</div>
-                                        <div class="referral-badge" id="badge-tm-2" style="display: none;">⚠ Butuh Rujukan
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="gender-pill female"><span>Perempuan</span> • 45 Thn</div>
-                            </td>
-                            <td><span class="complaint">Hipertensi (I10)</span></td>
-                            <td><span class="status-pill waiting">Menunggu</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-primary-pill"
-                                        onclick="openModal('tm-2', 'Siti Aminah', 'Perempuan / 45 Thn', 'Hipertensi')">
-                                        Proses
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            {{-- CONTENT: ONLINE --}}
-            <div id="list-online" class="table-container fade-in" style="display: none;">
-                <div class="table-head-info">
-                    <h3>Antrian Online</h3>
-                    <span class="count-bubble">2 Sesi</span>
-                </div>
-
-                <table class="floating-table">
-                    <thead>
-                        <tr>
-                            <th width="10%">Sesi</th>
-                            <th width="35%">Identitas Pasien</th>
-                            <th width="15%">Info</th>
-                            <th width="20%">Media Konsultasi</th>
-                            <th width="10%">Status</th>
-                            <th width="10%" class="text-right">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Online 1 -->
-                        <tr class="patient-row" id="row-ol-1">
-                            <td>
-                                <div class="time-stamp">11:00</div>
-                            </td>
-                            <td>
-                                <div class="profile-group">
-                                    <div class="avatar-box gradient-teal">RH</div>
-                                    <div>
-                                        <div class="p-name">Rahmat Hidayat</div>
-                                        <div class="p-id">ID: OL-003</div>
-                                        <div class="referral-badge" id="badge-ol-1" style="display: none;">⚠ Butuh Rujukan
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="gender-pill male"><span>Laki-laki</span> • 28 Thn</div>
-                            </td>
-                            <td>
-                                <span class="media-tag video">
-                                    <svg width="12" height="12" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    Video Call
-                                </span>
-                            </td>
-                            <td><span class="status-pill waiting">Menunggu</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-primary-pill"
-                                        onclick="openModal('ol-1', 'Rahmat Hidayat', 'Laki-laki / 28 Thn', 'Keluhan Kulit')">
-                                        Proses
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Online 2 -->
-                        <tr class="patient-row" id="row-ol-2">
-                            <td>
-                                <div class="time-stamp">11:15</div>
-                            </td>
-                            <td>
-                                <div class="profile-group">
-                                    <div class="avatar-box gradient-orange">DN</div>
-                                    <div>
-                                        <div class="p-name">Dina Nuralisa</div>
-                                        <div class="p-id">ID: OL-004</div>
-                                        <div class="referral-badge" id="badge-ol-2" style="display: none;">⚠ Butuh
-                                            Rujukan</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="gender-pill female"><span>Perempuan</span> • 22 Thn</div>
-                            </td>
-                            <td>
-                                <span class="media-tag chat">
-                                    <svg width="12" height="12" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
-                                        </path>
-                                    </svg>
-                                    Chat
-                                </span>
-                            </td>
-                            <td><span class="status-pill waiting">Menunggu</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-primary-pill"
-                                        onclick="openModal('ol-2', 'Dina Nuralisa', 'Perempuan / 22 Thn', 'Maag Akut')">
-                                        Proses
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="text-muted text-center">
+                    Belum ada riwayat rujukan
+                  </td>
+                </tr>
+              @endforelse
+            </tbody>
+          </table>
         </div>
-
-        {{-- MODAL POPUP FORM RUJUKAN --}}
-        <div class="modal-overlay" id="referralModal">
-            <div class="modal-card">
-                <button class="btn-close-absolute" onclick="closeModal()">&times;</button>
-
-                <div class="modal-flex">
-                    {{-- SISI KIRI (INFO) --}}
-                    <div class="modal-sidebar theme-dark">
-                        <div class="sidebar-header">
-                            <div class="avatar-xl" id="mAvatar">BS</div>
-                            <div>
-                                <h2 id="mName">Nama Pasien</h2>
-                                <span class="patient-tag">Status Pemeriksaan</span>
-                            </div>
-                        </div>
-
-                        <div class="divider-line"></div>
-
-                        <div class="info-block">
-                            <label>Info Personal</label>
-                            <p id="mInfo">Laki-laki / 32 Thn</p>
-                        </div>
-
-                        <div class="info-block">
-                            <label>Diagnosa / Keluhan</label>
-                            <p id="mComplaint" class="text-highlight">Demam Tifoid</p>
-                        </div>
-
-                        <div class="illustration-area">
-                            <svg width="60" height="60" fill="none" stroke="rgba(255,255,255,0.2)"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
-                            </svg>
-                            <span>Sistem Rujukan Terintegrasi</span>
-                        </div>
-                    </div>
-
-                    {{-- SISI KANAN (INPUT) --}}
-                    <div class="modal-main theme-light">
-                        <div class="main-header">
-                            <div class="icon-wrap">
-                                <svg width="24" height="24" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3>Buat Surat Rujukan</h3>
-                                <p>Lengkapi data faskes tujuan di bawah ini.</p>
-                            </div>
-                        </div>
-
-                        <form onsubmit="event.preventDefault(); saveReferral();">
-                            <input type="hidden" id="currentRowId">
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Rumah Sakit Tujuan</label>
-                                    <select class="input-field">
-                                        <option>RSUD Dr. Soetomo</option>
-                                        <option>RS Mitra Keluarga</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Poli Spesialis</label>
-                                    <select class="input-field">
-                                        <option>Penyakit Dalam</option>
-                                        <option>Jantung</option>
-                                        <option>Bedah</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Alasan Rujukan</label>
-                                <textarea class="input-field" rows="4" placeholder="Jelaskan kondisi klinis dan alasan merujuk..."></textarea>
-                            </div>
-
-                            {{-- CHECKBOX UTAMA UNTUK MENANDAI RUJUKAN --}}
-                            <div class="referral-activation-box">
-                                <label class="checkbox-container">
-                                    <input type="checkbox" id="markAsReferral">
-                                    <span class="checkmark"></span>
-                                    <div class="text-content">
-                                        <span class="title">Konfirmasi Rujukan</span>
-                                        <span class="desc">Pasien ini membutuhkan penanganan lebih lanjut (Rujuk).</span>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="form-footer">
-                                <div class="toggle-option">
-                                    <label class="switch">
-                                        <input type="checkbox" checked>
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <span class="toggle-text">Cetak Otomatis</span>
-                                </div>
-                                <div class="btn-wrap">
-                                    <button type="button" class="btn-ghost" onclick="closeModal()">Batal</button>
-                                    <button type="submit" class="btn-solid">Simpan & Proses</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
 
     </div>
 
-    <script>
-        const modal = document.getElementById('referralModal');
+    {{-- ================= MODAL RUJUKAN ================= --}}
+    <div class="modal-overlay" id="referralModal">
+      <div class="modal-card">
+        <button class="btn-close-absolute" onclick="closeModal()">×</button>
 
-        // Tab Switcher
-        function switchTab(type) {
-            const listTatap = document.getElementById('list-tatap-muka');
-            const listOnline = document.getElementById('list-online');
-            const btns = document.querySelectorAll('.tab-pill');
+        <div class="modal-flex">
 
-            listTatap.style.display = 'none';
-            listOnline.style.display = 'none';
+          <div class="modal-sidebar theme-dark">
+            <h2 id="mName"></h2>
+            <p id="mInfo"></p>
+            <p id="mComplaint" class="text-highlight"></p>
+          </div>
 
-            btns.forEach(b => b.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+          <div class="modal-main theme-light">
+            <h3>Buat Surat Rujukan</h3>
 
-            if (type === 'tatap-muka') listTatap.style.display = 'block';
-            else listOnline.style.display = 'block';
-        }
+            <form id="referralForm">
+              @csrf
+              <input type="hidden" id="consultationId">
 
-        // Open Modal
-        function openModal(rowId, name, info, diagnosis) {
-            document.getElementById('currentRowId').value = rowId;
-            document.getElementById('mName').innerText = name;
-            document.getElementById('mInfo').innerText = info;
-            document.getElementById('mComplaint').innerText = diagnosis;
+              <div class="form-group">
+                <label>Rumah Sakit Tujuan</label>
+                <input class="input-field" id="destination" required>
+              </div>
 
-            let initials = name.match(/\b(\w)/g);
-            document.getElementById('mAvatar').innerText = initials ? initials.join('').substring(0, 2) : 'XX';
+              <div class="form-group">
+                <label>Poli Spesialis</label>
+                <input class="input-field" id="department" required>
+              </div>
 
-            // Reset Form
-            const row = document.getElementById('row-' + rowId);
-            const isReferral = row.classList.contains('is-referral');
-            document.getElementById('markAsReferral').checked = isReferral;
+              <div class="form-group">
+                <label>Alasan Rujukan</label>
+                <textarea class="input-field" id="reason" required></textarea>
+              </div>
 
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+              <div class="form-group">
+                <label>Catatan Tambahan</label>
+                <textarea class="input-field" id="notes"></textarea>
+              </div>
 
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+              <div class="form-footer">
+                <button type="button" class="btn-ghost" onclick="closeModal()">Batal</button>
+                <button type="submit" class="btn-solid">Simpan Rujukan</button>
+              </div>
+            </form>
+          </div>
 
-        // Save Logic (Update UI Background)
-        function saveReferral() {
-            const rowId = document.getElementById('currentRowId').value;
-            const needsReferral = document.getElementById('markAsReferral').checked;
-            const row = document.getElementById('row-' + rowId);
-            const badge = document.getElementById('badge-' + rowId);
-            const btn = document.querySelector('.btn-solid');
-            const originalText = btn.innerText;
+        </div>
+      </div>
+    </div>
 
-            btn.innerText = 'Memproses...';
+  </div>
 
-            setTimeout(() => {
-                if (needsReferral) {
-                    row.classList.add('is-referral');
-                    badge.style.display = 'block';
-                    alert('Surat Rujukan Berhasil Dibuat!');
-                } else {
-                    row.classList.remove('is-referral');
-                    badge.style.display = 'none';
-                    alert('Data disimpan tanpa status rujukan.');
-                }
+  {{-- ================= SCRIPT ================= --}}
+  <script>
+    const modal = document.getElementById('referralModal');
 
-                btn.innerText = originalText;
-                closeModal();
-            }, 800);
-        }
+    function switchTab(type, el) {
+      document.getElementById('tab-active').style.display = type === 'active' ? 'block' : 'none';
+      document.getElementById('tab-history').style.display = type === 'history' ? 'block' : 'none';
 
-        modal.addEventListener('click', e => {
-            if (e.target === modal) closeModal();
-        });
-    </script>
+      document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function openModal(id, name, info, diagnosis) {
+      consultationId.value = id;
+      mName.innerText = name;
+      mInfo.innerText = info;
+      mComplaint.innerText = diagnosis;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('referralForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      fetch("{{ route('dokter.rujukan.store') }}", {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          consultation_id: consultationId.value,
+          destination: destination.value,
+          department: department.value,
+          reason: reason.value,
+          notes: notes.value
+        })
+      }).then(() => location.reload());
+    });
+  </script>
 @endsection

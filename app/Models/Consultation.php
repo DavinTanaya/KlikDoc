@@ -43,4 +43,9 @@ class Consultation extends Model
     {
         return $this->hasOne(Chat::class, 'consultation_id');
     }
+
+    public function referral()
+    {
+        return $this->hasOne(Referral::class, 'consultation_id');
+    }
 }

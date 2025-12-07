@@ -8,15 +8,15 @@
    ========================================= */
 
 .artikel-page {
-    --bg-sidebar: #1C274C;
-    --text-sidebar: #FFFFFF;
-    --accent: #FF4867;
-    --bg-content: #F4F7FE;
-    --card-bg: #FFFFFF;
-    
+    --bg-sidebar: #1c274c;
+    --text-sidebar: #ffffff;
+    --accent: #ff4867;
+    --bg-content: #f4f7fe;
+    --card-bg: #ffffff;
+
     width: 100%;
     min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: var(--bg-content);
 }
 
@@ -58,7 +58,7 @@
         height: 100vh;
         overflow-y: auto;
         flex-shrink: 0;
-        border-right: 1px solid rgba(255,255,255,0.05);
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .artikel-page .split-content {
@@ -66,7 +66,6 @@
         overflow-y: auto;
     }
 }
-
 
 /* 2. SIDEBAR COMPONENTS
    ========================================= */
@@ -85,7 +84,7 @@
     font-size: 0.85rem;
     opacity: 0.7;
     margin-top: 0.25rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Search Widget */
@@ -137,7 +136,7 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* Topic Cloud (Tags) */
@@ -158,7 +157,7 @@
     border: 1px solid transparent;
 }
 
-.artikel-page .topic-tag:hover, 
+.artikel-page .topic-tag:hover,
 .artikel-page .topic-tag.active {
     background: var(--accent);
     color: white;
@@ -183,7 +182,7 @@
     padding: 12px;
     border-radius: 10px;
     transition: background 0.2s;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .artikel-page .trending-item:hover {
@@ -230,16 +229,16 @@
     box-shadow: 0 10px 20px rgba(255, 72, 103, 0.2);
 }
 
-.artikel-page .sidebar-banner h3 { 
-    margin: 0 0 5px 0; 
-    font-size: 1.1rem; 
+.artikel-page .sidebar-banner h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
     font-weight: 700;
 }
 
-.artikel-page .sidebar-banner p { 
-    font-size: 0.85rem; 
-    margin-bottom: 1.2rem; 
-    opacity: 0.9; 
+.artikel-page .sidebar-banner p {
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
 }
 
 .artikel-page .btn-subscribe {
@@ -256,15 +255,14 @@
 
 .artikel-page .btn-subscribe:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .artikel-page .sidebar-divider {
     border: 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin: 0;
 }
-
 
 /* 3. MAIN CONTENT AREA
    ========================================= */
@@ -279,7 +277,7 @@
 
 .artikel-page .content-header h1 {
     font-size: 1.8rem;
-    color: #1C274C;
+    color: #1c274c;
     margin: 0;
     font-weight: 700;
 }
@@ -305,7 +303,7 @@
 /* Article Grid */
 .artikel-page .article-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
 }
 
@@ -317,7 +315,7 @@
     border: 1px solid transparent;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .artikel-page .article-card:hover {
@@ -351,10 +349,18 @@
 }
 
 /* Card Placeholder Colors */
-.artikel-page .bg-blue-light { background: #e3f2fd; }
-.artikel-page .bg-pink-light { background: #fce4ec; }
-.artikel-page .bg-green-light { background: #e8f5e9; }
-.artikel-page .bg-orange-light { background: #fff3e0; }
+.artikel-page .bg-blue-light {
+    background: #e3f2fd;
+}
+.artikel-page .bg-pink-light {
+    background: #fce4ec;
+}
+.artikel-page .bg-green-light {
+    background: #e8f5e9;
+}
+.artikel-page .bg-orange-light {
+    background: #fff3e0;
+}
 
 /* Category Badge */
 .artikel-page .category-badge {
@@ -368,15 +374,23 @@
     z-index: 2;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(4px);
 }
 
-.artikel-page .cat-blue { color: #1565c0; }
-.artikel-page .cat-pink { color: #c2185b; }
-.artikel-page .cat-green { color: #2e7d32; }
-.artikel-page .cat-orange { color: #ef6c00; }
+.artikel-page .cat-blue {
+    color: #1565c0;
+}
+.artikel-page .cat-pink {
+    color: #c2185b;
+}
+.artikel-page .cat-green {
+    color: #2e7d32;
+}
+.artikel-page .cat-orange {
+    color: #ef6c00;
+}
 
 /* Card Body */
 .artikel-page .article-body {
@@ -407,7 +421,7 @@
 .artikel-page .article-title {
     font-size: 1.1rem;
     font-weight: 800;
-    color: #1C274C;
+    color: #1c274c;
     margin: 0 0 10px 0;
     line-height: 1.5;
     /* Limit 2 lines */
@@ -448,7 +462,7 @@
 .artikel-page .author-avatar {
     width: 32px;
     height: 32px;
-    background: #1C274C;
+    background: #1c274c;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -484,22 +498,22 @@
 }
 
 /* Pagination */
-.artikel-page .pagination-wrapper { 
-    margin-top: 3rem; 
-    display: flex; 
-    justify-content: center; 
-    gap: 8px; 
+.artikel-page .pagination-wrapper {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
-.artikel-page .page-btn { 
-    width: 40px; 
-    height: 40px; 
-    border-radius: 8px; 
-    border: 1px solid #E0E0E0; 
-    background: white; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+.artikel-page .page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #666;
     transition: all 0.2s;
 }
@@ -507,8 +521,34 @@
     border-color: var(--accent);
     color: var(--accent);
 }
-.artikel-page .page-btn.active { 
-    background: var(--accent); 
-    color: white; 
-    border-color: var(--accent); 
+.artikel-page .page-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.apotek-online .pagination-wrapper {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.pagination-wrapper nav {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .page-link {
+    border-radius: 8px;
+    margin: 0 4px;
+    padding: 8px 14px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff5a79;
+    border-color: #ff5a79;
+    color: #fff;
 }

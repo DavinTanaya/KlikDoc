@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('body');
             $table->string('type')->default('text');
             $table->unsignedBigInteger('prescription_id')->nullable();
+            $table->unsignedBigInteger('referral_id')->nullable();
             $table->timestamps();
         });
     }
