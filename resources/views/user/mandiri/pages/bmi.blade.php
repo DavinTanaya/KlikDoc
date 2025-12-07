@@ -54,7 +54,7 @@
             <h1>Kalkulator BMI</h1>
             <h2>Isi data diri Anda untuk mendapatkan hasil analisis.</h2>
         </div>
-        <form action="{{ route('kalkulator_bmi.hitung') }}" method="POST" class="bmi-form">
+        <form action="{{ route('mandiri.kalkulator_bmi.hitung') }}" method="POST" class="bmi-form">
             @csrf
             <div class="form-section">
                 <label class="section-label klik_form-label">Jenis Kelamin</label>

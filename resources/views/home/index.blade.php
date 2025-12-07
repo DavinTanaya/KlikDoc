@@ -120,6 +120,14 @@
                 <h2>Diawasi oleh Board of Medical Excellence</h2>
                 <p>Seluruh prosedur medis dan tenaga kesehatan di KlikDoc dipastikan memenuhi standar regulasi dan etika
                     layanan kesehatan tertinggi.</p>
+                <a href="{{ route('dokter.pendaftaran') }}" class="home_lebih-lengkap">
+                    Daftar sebagai Dokter KlikDoc
+                    <svg viewBox="0 0 15 8" fill="none">
+                        <path
+                            d="M0.330173 7.69408C0.541647 7.88996 0.828428 8 1.12745 8C1.42648 8 1.71326 7.88996 1.92473 7.69408L7.50681 2.52205L13.0889 7.69408C13.3016 7.88441 13.5864 7.98972 13.8821 7.98734C14.1778 7.98496 14.4606 7.87508 14.6697 7.68135C14.8788 7.48763 14.9974 7.22557 15 6.95161C15.0025 6.67765 14.8889 6.41372 14.6834 6.21666L8.30409 0.305919C8.09261 0.110039 7.80583 0 7.50681 0C7.20778 0 6.921 0.110039 6.70953 0.305919L0.330173 6.21666C0.118763 6.4126 0 6.67831 0 6.95537C0 7.23243 0.118763 7.49814 0.330173 7.69408Z"
+                            fill="#FF4867" />
+                    </svg>
+                </a>
             </div>
         </section>
 
@@ -129,7 +137,7 @@
                 <p>Dapatkan gambaran ringkas tentang kesehatanmu dan ketahui penanganan selanjutnya, tanpa biaya.</p>
             </div>
             <div class="home_mandiri-grid">
-                <a href="{{ route('kalkulator_bmi') }}" class="no-link">
+                <a href="{{ route('mandiri.kalkulator_bmi') }}" class="no-link">
                     <div class="home_mandiri-item">
                         <div class="home_mandiri-logo">
                             <img src="{{ asset('icons/home/mandiri/mandiri-bmi.svg') }}" alt="mandiri-bmi">
@@ -139,7 +147,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('pengingat_obat') }}" class="no-link">
+                <a href="{{ route('mandiri.pengingat_obat') }}" class="no-link">
                     <div class="home_mandiri-item">
                         <div class="home_mandiri-logo">
                             <img src="{{ asset('icons/home/mandiri/mandiri-alarm.svg') }}" alt="mandiri-alarm">
@@ -149,7 +157,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('kalender_menstruasi') }}" class="no-link">
+                <a href="{{ route('mandiri.kalender_menstruasi') }}" class="no-link">
                     <div class="home_mandiri-item">
                         <div class="home_mandiri-logo">
                             <img src="{{ asset('icons/home/mandiri/mandiri-menstruasi.svg') }}" alt="mandiri-menstruasi">
@@ -159,7 +167,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('kalender_kehamilan') }}" class="no-link">
+                <a href="{{ route('mandiri.kalender_kehamilan') }}" class="no-link">
                     <div class="home_mandiri-item">
                         <div class="home_mandiri-logo">
                             <img src="{{ asset('icons/home/mandiri/mandiri-kehamilan.svg') }}" alt="mandiri-kehamilan">

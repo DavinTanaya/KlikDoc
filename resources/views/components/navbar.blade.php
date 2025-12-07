@@ -120,16 +120,51 @@
                         href="{{ route('konsultasi') }}">Konsultasi</a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->is('booking*') ? 'active text-primary fw-bold' : '' }}"
-                        href="#">Booking</a>
+                    <a class="nav-link {{ request()->is('klik-home*') ? 'active text-primary fw-bold' : '' }}"
+                        href="{{ route('klik-home') }}">KlikHome</a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link {{ request()->is('apotek*') ? 'active text-primary fw-bold' : '' }}"
-                        href="{{ route('apotek') }}">Apotek</a>
+                        href="{{ route('apotek') }}">Apotek Online</a>
                 </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->is('layanan*') ? 'active text-primary fw-bold' : '' }}"
-                        href="#">Layanan Kesehatan</a>
+                <li class="nav-item dropdown px-2">
+                    <a class="nav-link dropdown-toggle {{ request()->is('mandiri*') ? 'active text-primary fw-bold' : '' }}"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Cek Mandiri</a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 mt-2 shadow-sm rounded-3 overflow-hidden">
+                        <li>
+                            <a class="dropdown-item py-2 fw-medium text-center text-xl-start"
+                                href="{{ route('mandiri.kalkulator_bmi') }}">
+                                Kalkulator BMI
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider my-0">
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 fw-medium text-center text-xl-start"
+                                href="{{ route('mandiri.pengingat_obat') }}">
+                                Pengingat Obat
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider my-0">
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 fw-medium text-center text-xl-start"
+                                href="{{ route('mandiri.kalender_menstruasi') }}">
+                                Kalender Menstruasi
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider my-0">
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 fw-medium text-center text-xl-start"
+                                href="{{ route('mandiri.kalender_kehamilan') }}">
+                                Kalender Kehamilan
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link {{ request()->is('artikel*') ? 'active text-primary fw-bold' : '' }}"
