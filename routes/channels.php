@@ -19,6 +19,11 @@ Broadcast::channel('calls.{chat}', function ($user, Chat $chat) {
         $user->role === 'admin';
 });
 
+Broadcast::channel('admin-chat-monitor.{chatId}', function ($user) {
+    return $user->role === 'admin';
+});
+
+
 Broadcast::channel('presence.online', function ($user) {
     return [
         'id' => $user->id,

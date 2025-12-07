@@ -82,7 +82,9 @@ class ArticleController extends Controller
     public function detail(Article $article)
     {
         // 🔒 hanya artikel published
-        abort_if($article->status !== 'published', 404);
+        if(auth()->user()?->role !== 'admin'){
+            abort_if($article->status !== 'published', 404);
+        }
 
         // 🕒 estimasi waktu baca (±200 kata / menit)
         $wordCount = str_word_count(strip_tags($article->content));
@@ -158,6 +160,14 @@ class ArticleController extends Controller
             'category' => 'required|string|max:100',
             'content'  => 'required|string',
         ]);
+
+        if($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $thumbnail_name = now()->format('YmdHis') . '_' . $thumbnail->getClientOriginalName();
+            $thumbnail->move(public_path('images/articles'), $thumbnail_name);
+            $article->thumbnail = 'images/articles/' . $thumbnail_name;
+            $article->save();
+        }
 
         $article->update([
             'title'    => $request->input('title'),

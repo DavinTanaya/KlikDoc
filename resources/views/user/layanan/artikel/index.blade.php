@@ -116,10 +116,13 @@
                 <div class="category-badge cat-blue">
                   {{ $article->category }}
                 </div>
-
-                <div class="img-placeholder bg-blue-light">
-                  📰
-                </div>
+                @if ($article->thumbnail && file_exists(public_path($article->thumbnail)))
+                  <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}" style="object-fit: cover;" class="img-placeholder">
+                @else
+                  <div class="img-placeholder bg-blue-light">
+                    📰
+                  </div>
+                @endif
               </div>
 
               <div class="article-body">

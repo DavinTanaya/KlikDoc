@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Article;
+use App\Models\Consultation;
 use App\Models\Drug;
 use App\Models\Order;
 use App\Models\Rating;
@@ -35,7 +37,7 @@ class AdminController extends Controller
         $order = Order::with(['items.drug', 'user', 'address'])
         ->where('order_code', $code)
         ->firstOrFail();
-        return view('admin.pages.order.order_detail', ['order' => $order]);
+        return view('admin.pages.apotek.order_detail', ['order' => $order]);
     }
 
     public function updateOrder($code){
@@ -60,7 +62,7 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.pages.order.order_history', compact('orders'));
+        return view('admin.pages.apotek.order_history', compact('orders'));
     }
 
     public function getDokterHtml() {
@@ -118,5 +120,69 @@ class AdminController extends Controller
         $applicants = Application::orderBy('created_at', 'desc')->get();
 
         return view('admin.pages.applicant.applicant_history', compact('applicants'));
+    }
+
+    public function getArticleHtml() {
+        $totalArticles = Article::count();
+        $published = Article::where('status', 'published')->count();
+        $draft = Article::where('status', 'draft')->count();
+
+        $articles = Article::with('author')
+            ->latest()
+            ->limit(5)
+            ->get();
+        return view('admin.pages.article', ['articles' => $articles, 'totalArticles' => $totalArticles, 'published' => $published, 'draft' => $draft])->render();
+    }
+
+    public function getConsultationHtml() {
+        $today = now()->startOfDay();
+
+        $totalToday = Consultation::whereDate('created_at', today())->count();
+
+        $active = Consultation::where('status', 'AKTIF')->count();
+        $waiting = Consultation::where('status', 'MENUNGGU')->count();
+        $finished = Consultation::where('status', 'SELESAI')->count();
+
+        $consultations = Consultation::with(['user', 'doctor'])
+            ->latest()
+            ->limit(6)
+            ->get();
+
+        return view('admin.pages.konsultasi', ['today' => $today, 'totalToday' => $totalToday, 'active' => $active, 'waiting' => $waiting, 'finished' => $finished, 'consultations' => $consultations])->render();
+    }
+
+    public function consultationIndex()
+    {
+        $consultations = Consultation::with([
+                'user:id,name',
+                'doctor:id,full_name',
+                'chat'
+            ])
+            ->latest()
+            ->paginate(15);
+
+        return view('admin.pages.consultation.index', compact('consultations'));
+    }
+
+    public function consultationDetail($consultations)
+    {
+        $consultation = Consultation::with('chat.messages.sender', 'chat')
+            ->where('id', $consultations)
+            ->firstOrFail();
+        $chat = $consultation->chat;
+
+        abort_if(!$chat, 404);
+
+        $messages = $chat->messages()
+            ->with('sender')
+            ->latest()
+            ->take(50)
+            ->get()
+            ->reverse();
+
+        return view('admin.pages.consultation._monitor_modal', compact(
+            'chat',
+            'messages'
+        ));
     }
 }

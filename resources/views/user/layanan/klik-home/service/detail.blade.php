@@ -1,318 +1,564 @@
 @extends('layout')
 
-@section('title', 'Immune Booster Infusion - KlikHome')
+@section('title', $service->name . ' - KlikHome')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/user/layanan/klik-home/service/detail.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/user/layanan/klik-home/service/detail.css') }}">
 @endpush
 
 @section('body')
-    <div class="klikhome-detail-page">
-        <div class="detail-container">
-            
-            {{-- Navigation Back --}}
-            <div class="top-nav">
-                <a href="{{ url('/klikhome') }}" class="btn-back">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                    Kembali ke Daftar Layanan
-                </a>
+  <div class="klikhome-detail-page">
+    <div class="detail-container">
+
+      {{-- BACK --}}
+      <div class="top-nav">
+        <a href="{{ route('klik-home') }}" class="btn-back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Kembali ke Daftar Layanan
+        </a>
+      </div>
+
+      <div class="content-grid">
+
+        {{-- ================= LEFT ================= --}}
+        <div class="main-content">
+          {{-- HERO --}}
+          <div class="service-hero-image bg-orange-light">
+            <div class="hero-icon">
+              {!! $service->icon_svg ?? '' !!}
             </div>
+            <span class="category-badge">{{ $service->category }}</span>
+          </div>
 
-            <div class="content-grid">
-                
-                {{-- KOLOM KIRI: Informasi Detail Layanan --}}
-                <div class="main-content">
-                    
-                    {{-- Hero Image --}}
-                    <div class="service-hero-image bg-orange-light">
-                        <div class="hero-icon">
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#f57c00" stroke-width="1.5">
-                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                            </svg>
-                        </div>
-                        <span class="category-badge">Vitamin Booster</span>
-                    </div>
+          {{-- TITLE --}}
+          <header class="service-header">
+            <h1>{{ $service->name }}</h1>
 
-                    {{-- Judul & Ringkasan --}}
-                    <header class="service-header">
-                        <h1>Immune Booster Infusion</h1>
-                        <div class="service-meta-row">
-                            <div class="meta-item">
-                                <div class="icon-box">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                </div>
-                                <span>45 Menit</span>
-                            </div>
-                            <div class="meta-item">
-                                <div class="icon-box">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                </div>
-                                <span>Perawat Terverifikasi</span>
-                            </div>
-                            <div class="meta-item">
-                                <div class="icon-box">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                                </div>
-                                <span>Alat Steril</span>
-                            </div>
-                        </div>
-                    </header>
-
-                    <hr class="divider">
-
-                    {{-- Deskripsi --}}
-                    <div class="info-section">
-                        <h3>Tentang Layanan</h3>
-                        <p>
-                            Layanan infus vitamin C dan B Complex dosis optimal yang dirancang untuk meningkatkan sistem kekebalan tubuh secara instan. Sangat cocok bagi Anda yang memiliki aktivitas padat, sering merasa lelah, atau dalam masa pemulihan setelah sakit.
-                        </p>
-                        <p>
-                            Cairan infus akan langsung masuk ke pembuluh darah (intravena), sehingga penyerapan vitamin mencapai 99% dibandingkan vitamin oral (tablet/kapsul).
-                        </p>
-                    </div>
-
-                    <div class="info-section">
-                        <h3>Manfaat Utama</h3>
-                        <ul class="check-list">
-                            <li>Meningkatkan daya tahan tubuh terhadap virus dan bakteri.</li>
-                            <li>Mempercepat pemulihan dari flu atau kelelahan kronis.</li>
-                            <li>Mencerahkan kulit dan sebagai antioksidan.</li>
-                            <li>Mengembalikan hidrasi tubuh.</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-section">
-                        <h3>Yang Termasuk Dalam Paket</h3>
-                        <div class="inclusion-card">
-                            <div class="inc-item">
-                                <span class="dot"></span> 1x Cairan Infus Vitamin C 1000mg + B Complex
-                            </div>
-                            <div class="inc-item">
-                                <span class="dot"></span> Jasa Perawat Home Care ke Lokasi
-                            </div>
-                            <div class="inc-item">
-                                <span class="dot"></span> Alat Kesehatan (Jarum, Infus Set, Alcohol Swab)
-                            </div>
-                            <div class="inc-item">
-                                <span class="dot"></span> Konsultasi Singkat Tanda Vital (Tensi, Suhu)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="info-section">
-                        <h3>Prosedur Keamanan</h3>
-                        <div class="safety-box">
-                            <div class="safety-item">
-                                <strong>APD Lengkap</strong>
-                                <p>Perawat kami menggunakan masker, sarung tangan, dan gown sesuai standar medis.</p>
-                            </div>
-                            <div class="safety-item">
-                                <strong>Alat Sekali Pakai</strong>
-                                <p>Jarum dan selang infus baru dibuka di depan pasien untuk menjamin sterilitas.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                {{-- KOLOM KANAN: Widget Pemesanan --}}
-                <div class="booking-sidebar">
-                    <div class="booking-card">
-                        <div class="price-header">
-                            <span class="label">Total Biaya</span>
-                            <span class="price">Rp 350.000</span>
-                        </div>
-                        
-                        <div class="booking-form">
-                            {{-- Form Lokasi --}}
-                            <div class="form-group">
-                                <div class="label-row">
-                                    <label>Lokasi Kunjungan</label>
-                                    {{-- Tombol Tambah Alamat (Membuka Modal Edit Kosong/Baru) --}}
-                                    <button type="button" class="btn-add-address" onclick="openEditModal()">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                        Tambah Alamat
-                                    </button>
-                                </div>
-
-                                {{-- Preview Alamat Terpilih --}}
-                                <div class="location-preview">
-                                    <div class="loc-icon">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    </div>
-                                    <div class="loc-text">
-                                        <span class="loc-name">Rumah (Utama)</span>
-                                        <span class="loc-detail">Jl. Mawar No. 12, Jakarta Selatan</span>
-                                    </div>
-                                    {{-- Tombol Ubah Alamat Terpilih (Membuka Modal Edit) --}}
-                                    <button type="button" class="btn-change" onclick="openEditModal()">Ubah</button>
-                                </div>
-
-                                {{-- Tombol Pilih Alamat Lain (Membuka Modal List) --}}
-                                <button type="button" class="btn-select-other" onclick="openAddressModal()">
-                                    Pilih Alamat Lain
-                                </button>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Jadwal Kunjungan</label>
-                                <input type="date" class="form-control" value="{{ date('Y-m-d') }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Waktu</label>
-                                <select class="form-control">
-                                    <option>09:00 - 10:00</option>
-                                    <option>10:00 - 11:00</option>
-                                    <option selected>13:00 - 14:00</option>
-                                    <option>15:00 - 16:00</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <hr class="card-divider">
-
-                        <div class="summary-row">
-                            <span>Subtotal</span>
-                            <span>Rp 350.000</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Biaya Layanan</span>
-                            <span>Rp 5.000</span>
-                        </div>
-                         <div class="summary-row total">
-                            <span>Total Bayar</span>
-                            <span>Rp 355.000</span>
-                        </div>
-
-                        <button class="btn-payment">Lanjut Pembayaran</button>
-                        <p class="secure-text">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            Pembayaran Aman & Terenkripsi
-                        </p>
-                    </div>
-                </div>
-
+            <div class="service-meta-row">
+              <div class="meta-item">
+                <div class="icon-box">⏱</div>
+                <span>{{ $service->duration_minutes }} Menit</span>
+              </div>
+              <div class="meta-item">
+                <div class="icon-box">👩‍⚕️</div>
+                <span>{{ $service->handled_by }}</span>
+              </div>
+              <div class="meta-item">
+                <div class="icon-box">🛡</div>
+                <span>Alat Steril</span>
+              </div>
             </div>
+          </header>
+
+          <hr class="divider">
+
+          {{-- ABOUT --}}
+          <div class="info-section">
+            <h3>Tentang Layanan</h3>
+            <p>{{ $service->description }}</p>
+          </div>
+
+          {{-- BENEFITS --}}
+          @if ($service->benefits)
+            <div class="info-section">
+              <h3>Manfaat Utama</h3>
+              <ul class="check-list">
+                @foreach ($service->benefits as $b)
+                  <li>{{ $b }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+          {{-- INCLUSIONS --}}
+          @if ($service->inclusions)
+            <div class="info-section">
+              <h3>Yang Termasuk Dalam Paket</h3>
+              <div class="inclusion-card">
+                @foreach ($service->inclusions as $inc)
+                  <div class="inc-item">
+                    <span class="dot"></span> {{ $inc }}
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          @endif
+
+          {{-- SAFETY --}}
+          @if ($service->safety_notes)
+            <div class="info-section">
+              <h3>Prosedur Keamanan</h3>
+              <div class="safety-box">
+                @foreach ($service->safety_notes as $safe)
+                  <div class="safety-item">
+                    <strong>{{ $safe['title'] }}</strong>
+                    <p>{{ $safe['desc'] }}</p>
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          @endif
+
         </div>
 
-        {{-- MODAL 1: PILIH ALAMAT (LIST) --}}
-        <div id="addressModal" class="modal-overlay hidden">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Pilih Alamat</h3>
-                    <button class="btn-close" onclick="closeAddressModal()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                    {{-- Alamat 1 --}}
-                    <div class="address-item selected">
-                        <div class="addr-info">
-                            <span class="addr-tag">Rumah</span>
-                            <p class="addr-text">Jl. Mawar No. 12, RT 05/RW 02, Kec. Tebet, Jakarta Selatan, 12810</p>
-                            <span class="addr-phone">0812-3456-7890 (Penerima: Budi)</span>
-                        </div>
-                        <div class="addr-check">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                    </div>
+        {{-- ================= RIGHT ================= --}}
+        <div class="booking-sidebar">
+          <div class="booking-card">
 
-                    {{-- Alamat 2 --}}
-                    <div class="address-item">
-                        <div class="addr-info">
-                            <span class="addr-tag secondary">Kantor</span>
-                            <p class="addr-text">Gedung Menara Karya Lt. 5, Jl. Rasuna Said, Kuningan, Jakarta Selatan</p>
-                            <span class="addr-phone">0812-3456-7890</span>
-                        </div>
-                        <button class="btn-use-addr">Pilih</button>
-                    </div>
-
-                    {{-- Alamat 3 --}}
-                    <div class="address-item">
-                        <div class="addr-info">
-                            <span class="addr-tag secondary">Orang Tua</span>
-                            <p class="addr-text">Jl. Kenanga No. 88, Bekasi Barat</p>
-                            <span class="addr-phone">0818-9999-0000</span>
-                        </div>
-                        <button class="btn-use-addr">Pilih</button>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn-new-addr-modal" onclick="closeAddressModal(); openEditModal();">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                        Tambah Alamat Baru
-                    </button>
-                </div>
+            <div class="price-header">
+              <span class="label">Total Biaya</span>
+              <span class="price">
+                Rp {{ number_format($service->price + $service->service_fee, 0, ',', '.') }}
+              </span>
             </div>
+
+            {{-- ADDRESS SECTION (APOTEK-STYLE) --}}
+            <div class="booking-form">
+
+              {{-- Normalisasi variabel kalau controller belum kirim --}}
+              @php
+                $addresses =
+                    $addresses ??
+                    auth()
+                        ->user()
+                        ->addresses()
+                        ->with(['provinceRelation', 'cityRelation'])
+                        ->get();
+                $noAddress = $noAddress ?? $addresses->isEmpty();
+                $defaultAddress = $defaultAddress ?? ($addresses->firstWhere('is_active', true) ?? $addresses->first());
+              @endphp
+
+              <div class="form-group">
+                <label>Alamat Kunjungan</label>
+
+                @if ($noAddress)
+                  {{-- Tidak ada alamat sama sekali --}}
+                  <div class="address-card empty-address">
+                    <p>Anda belum memiliki alamat kunjungan.</p>
+                    <button class="btn-add-address" data-bs-toggle="modal" data-bs-target="#addAddressModal"
+                      data-return-url="{{ url()->current() }}">
+                      Tambah Alamat Baru
+                    </button>
+                  </div>
+                @else
+                  {{-- Ada alamat default --}}
+                  <div class="address-card">
+                    <div class="address-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    </div>
+
+                    <div class="address-details">
+                      <span class="label-home">{{ $defaultAddress->label }}</span>
+                      <h3>{{ $defaultAddress->recipient_name }} ({{ $defaultAddress->phone_number }})</h3>
+                      <p>
+                        {{ $defaultAddress->address_line }},
+                        {{ $defaultAddress->cityRelation->name ?? '' }},
+                        {{ $defaultAddress->provinceRelation->name ?? '' }}
+                        {{ $defaultAddress->zip_code }}
+                      </p>
+                    </div>
+
+                    <button class="btn-change" data-bs-toggle="modal" data-bs-target="#editAddressModal">
+                      Ubah
+                    </button>
+                  </div>
+
+                  {{-- Tombol tambahan: pilih lain / tambah baru --}}
+                  <div class="address-actions mt-2">
+                    <button class="btn-address-action" data-bs-toggle="modal" data-bs-target="#savedAddressModal">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      </svg>
+                      Pilih Alamat Lain
+                    </button>
+
+                    <button class="btn-address-action" data-bs-toggle="modal" data-bs-target="#addAddressModal"
+                      data-return-url="{{ url()->current() }}">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      Tambah Alamat Baru
+                    </button>
+                  </div>
+                @endif
+              </div>
+
+              {{-- DATE --}}
+              <div class="form-group">
+                <label>Jadwal Kunjungan</label>
+                <input type="date" name="scheduled_date" id="visitDate" class="form-control" min="{{ date('Y-m-d') }}"
+                  required>
+
+              </div>
+
+              {{-- TIME --}}
+              @php
+                $timeSlots = $service->time_slots ?: [
+                    '09:00 - 10:00',
+                    '10:00 - 11:00',
+                    '11:00 - 12:00',
+                    '13:00 - 14:00',
+                    '14:00 - 15:00',
+                    '15:00 - 16:00',
+                ];
+              @endphp
+              <div class="form-group">
+                <label>Waktu</label>
+                <select name="scheduled_time" id="visitTime" class="form-control" required>
+
+                  @foreach ($timeSlots as $t)
+                    <option>{{ $t }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+            <hr class="card-divider">
+
+            <div class="summary-row">
+              <span>Harga Layanan</span>
+              <span>Rp {{ number_format($service->price, 0, ',', '.') }}</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Biaya Layanan</span>
+              <span>Rp {{ number_format($service->service_fee, 0, ',', '.') }}</span>
+            </div>
+
+            <div class="summary-row total">
+              <span>Total Bayar</span>
+              <span>Rp {{ number_format($service->price + $service->service_fee, 0, ',', '.') }}</span>
+            </div>
+
+            @if ($noAddress)
+              <button class="btn-payment btn-payment-disabled" disabled>
+                Lanjut Pembayaran
+              </button>
+            @else
+              <form id="klikhomePayForm" action="{{ route('klikhome.pay', $service->slug) }}" method="POST">
+                @csrf
+
+                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                <input type="hidden" name="address_id" value="{{ $defaultAddress?->id }}">
+                <input type="hidden" name="scheduled_date" id="visitDateInput">
+                <input type="hidden" name="scheduled_time" id="visitTimeInput">
+
+                <button type="submit" class="btn-payment">
+                  Lanjut Pembayaran
+                </button>
+              </form>
+            @endif
+          </div>
         </div>
 
-        {{-- MODAL 2: UBAH / TAMBAH DETAIL ALAMAT (FORM) --}}
-        <div id="editAddressModal" class="modal-overlay hidden">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Detail Alamat</h3>
-                    <button class="btn-close" onclick="closeEditModal()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                    <form class="address-form">
-                        <div class="form-group">
-                            <label>Label Alamat (Contoh: Rumah, Kantor)</label>
-                            <input type="text" class="form-control" placeholder="Rumah" value="Rumah">
-                        </div>
-                        
-                        <div class="form-row two-col">
-                            <div class="form-group">
-                                <label>Nama Penerima</label>
-                                <input type="text" class="form-control" value="Budi Santoso">
-                            </div>
-                            <div class="form-group">
-                                <label>Nomor Telepon</label>
-                                <input type="tel" class="form-control" value="081234567890">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Alamat Lengkap</label>
-                            <textarea class="form-control" rows="3" placeholder="Nama Jalan, No Rumah, RT/RW, Kelurahan, Kecamatan">Jl. Mawar No. 12, RT 05/RW 02, Kec. Tebet, Jakarta Selatan, 12810</textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Catatan untuk Nakes (Opsional)</label>
-                            <input type="text" class="form-control" placeholder="Contoh: Pagar hitam, bel rusak">
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn-save-addr" onclick="closeEditModal()">Simpan Perubahan</button>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
+  </div>
 
-    {{-- Script Toggle Modal --}}
-    <script>
-        function openAddressModal() {
-            document.getElementById('addressModal').classList.remove('hidden');
-        }
-        function closeAddressModal() {
-            document.getElementById('addressModal').classList.add('hidden');
-        }
+  {{-- ================= MODALS SECTION (PERSIS APOTEK) ================= --}}
 
-        function openEditModal() {
-            document.getElementById('editAddressModal').classList.remove('hidden');
-        }
-        function closeEditModal() {
-            document.getElementById('editAddressModal').classList.add('hidden');
-        }
-    </script>
+  {{-- 1. Modal Edit Alamat --}}
+  @if (!$noAddress)
+    <div class="modal fade" id="editAddressModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">Ubah Alamat Kunjungan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <form action="{{ route('address.update', $defaultAddress->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="modal-body">
+
+              <div class="mb-3">
+                <label class="form-label">Label Alamat</label>
+                <input type="text" name="label" class="form-control" value="{{ $defaultAddress->label }}"
+                  required>
+              </div>
+
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label class="form-label">Nama Penerima</label>
+                  <input type="text" name="recipient_name" class="form-control"
+                    value="{{ $defaultAddress->recipient_name }}" required>
+                </div>
+                <div class="col-6 mb-3">
+                  <label class="form-label">No. Telepon</label>
+                  <input type="text" name="phone_number" class="form-control"
+                    value="{{ $defaultAddress->phone_number }}" required>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Alamat Lengkap</label>
+                <textarea name="address_line" class="form-control" rows="3" required>{{ $defaultAddress->address_line }}</textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Provinsi</label>
+                <select name="province" class="form-control" id="editProvinceSelect" required>
+                  @foreach ($provinces as $prov)
+                    <option value="{{ $prov->province_id }}"
+                      {{ $defaultAddress->provinceRelation && $defaultAddress->provinceRelation->province_id == $prov->province_id ? 'selected' : '' }}>
+                      {{ $prov->name }}
+                    </option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Kota</label>
+                <select name="city" class="form-control" id="editCitySelect" required>
+                  @foreach ($cities as $c)
+                    @if ($defaultAddress->provinceRelation && $c->province_id == $defaultAddress->provinceRelation->province_id)
+                      <option value="{{ $c->city_id }}"
+                        {{ $defaultAddress->cityRelation && $defaultAddress->cityRelation->city_id == $c->city_id ? 'selected' : '' }}>
+                        {{ $c->name }}
+                      </option>
+                    @endif
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Kode Pos</label>
+                <input type="text" class="form-control" name="zip_code" value="{{ $defaultAddress->zip_code }}">
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary" style="background-color:#1C274C;border:none;">
+                Simpan Perubahan
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  @endif
+
+  {{-- 2. Modal Pilih Alamat Tersimpan --}}
+  @if (!$noAddress)
+    <div class="modal fade" id="savedAddressModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">Pilih Alamat Kunjungan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="list-group">
+              @foreach ($addresses as $address)
+                <form action="{{ route('address.set_default') }}" method="POST" class="w-100">
+                  @csrf
+                  <input type="hidden" name="address_id" value="{{ $address->id }}">
+
+                  <button type="submit" class="list-group-item list-group-item-action text-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h6 class="fw-bold mb-1">
+                        {{ $address->label }} ({{ $address->recipient_name }})
+
+                        @if ($defaultAddress && $defaultAddress->id === $address->id)
+                          <span class="badge bg-primary ms-2">Utama</span>
+                        @endif
+                      </h6>
+                      <small>{{ $address->phone_number }}</small>
+                    </div>
+
+                    <p class="small mb-1">
+                      {{ $address->address_line }},
+                      {{ $address->cityRelation->name ?? '' }},
+                      {{ $address->provinceRelation->name ?? '' }}
+                    </p>
+                  </button>
+                </form>
+              @endforeach
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  @endif
+
+  {{-- 3. Modal Tambah Alamat Baru --}}
+  <div class="modal fade" id="addAddressModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Alamat Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form action="{{ route('address.store') }}" method="POST">
+          @csrf
+          <input type="hidden" name="return_url" id="returnUrlInput">
+
+          <div class="modal-body">
+
+            <div class="mb-3">
+              <label class="form-label">Label Alamat</label>
+              <input type="text" class="form-control" name="label" placeholder="Rumah / Kantor" required>
+            </div>
+
+            <div class="row">
+              <div class="col-6 mb-3">
+                <label class="form-label">Nama Penerima</label>
+                <input type="text" class="form-control" name="recipient_name" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label">No. Telepon</label>
+                <input type="text" class="form-control" name="phone_number" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Alamat Lengkap</label>
+              <textarea name="address_line" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Provinsi</label>
+              <select name="province" class="form-control" id="addProvinceSelect" required>
+                <option value="">Pilih Provinsi</option>
+                @foreach ($provinces as $prov)
+                  <option value="{{ $prov->province_id }}">{{ $prov->name }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Kota</label>
+              <select name="city" class="form-control" id="addCitySelect" required>
+                <option value="">Pilih Kota</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Kode Pos</label>
+              <input type="text" class="form-control" name="zip_code">
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary" style="background-color:#1C274C;border:none;">
+              Simpan Alamat
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
 @endsection
+
+@push('scripts')
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      let allCities = @json($cities ?? []);
+
+      function populateCities(provinceId, citySelect, selectedCity = null) {
+        citySelect.innerHTML = "";
+
+        if (!provinceId) {
+          citySelect.innerHTML = `<option value="">Pilih Kota</option>`;
+          return;
+        }
+
+        const filtered = allCities.filter(c => String(c.province_id) === String(provinceId));
+
+        if (filtered.length === 0) {
+          citySelect.innerHTML = `<option value="">Tidak ada kota</option>`;
+          return;
+        }
+
+        filtered.forEach(c => {
+          const option = document.createElement("option");
+          option.value = c.city_id; // penting: city_id
+          option.textContent = c.name;
+
+          if (selectedCity && Number(selectedCity) === Number(c.city_id)) {
+            option.selected = true;
+          }
+
+          citySelect.appendChild(option);
+        });
+      }
+
+      // EDIT MODAL
+      const editProv = document.getElementById("editProvinceSelect");
+      const editCity = document.getElementById("editCitySelect");
+      const defaultProvince = "{{ $defaultAddress->provinceRelation->province_id ?? '' }}";
+      const defaultCity = "{{ $defaultAddress->cityRelation->city_id ?? '' }}";
+
+      if (editProv && editCity && defaultProvince !== "") {
+        populateCities(defaultProvince, editCity, defaultCity);
+
+        editProv.addEventListener("change", function() {
+          populateCities(this.value, editCity);
+        });
+      }
+
+      // ADD MODAL
+      const addProv = document.getElementById("addProvinceSelect");
+      const addCity = document.getElementById("addCitySelect");
+
+      if (addProv && addCity) {
+        addProv.addEventListener("change", function() {
+          populateCities(this.value, addCity);
+        });
+      }
+
+      // set return_url dari tombol yang punya data-return-url
+      const returnUrlInput = document.getElementById("returnUrlInput");
+      document.querySelectorAll("[data-return-url]").forEach(btn => {
+        btn.addEventListener("click", function() {
+          if (returnUrlInput) {
+            returnUrlInput.value = this.dataset.returnUrl;
+          }
+        });
+      });
+      document.getElementById("klikhomePayForm")
+        .addEventListener("submit", function() {
+
+          document.getElementById("visitDateInput").value =
+            document.getElementById("visitDate").value;
+
+          document.getElementById("visitTimeInput").value =
+            document.getElementById("visitTime").value;
+        });
+
+    });
+  </script>
+@endpush

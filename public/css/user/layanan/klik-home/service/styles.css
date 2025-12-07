@@ -5,15 +5,15 @@
    ========================================= */
 
 .klikhome-page {
-    --bg-sidebar: #1C274C;
-    --text-sidebar: #FFFFFF;
-    --accent: #FF4867;
-    --bg-content: #F4F7FE;
-    --card-bg: #FFFFFF;
-    
+    --bg-sidebar: #1c274c;
+    --text-sidebar: #ffffff;
+    --accent: #ff4867;
+    --bg-content: #f4f7fe;
+    --card-bg: #ffffff;
+
     width: 100%;
     min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: var(--bg-content);
 }
 
@@ -66,9 +66,21 @@
    ========================================= */
 
 /* Header */
-.klikhome-page .sidebar-header h2 { font-size: 1.8rem; margin: 0; font-weight: 700; color: white; }
-.klikhome-page .sidebar-header .dot { color: var(--accent); }
-.klikhome-page .sidebar-header p { font-size: 0.85rem; opacity: 0.7; margin-top: 0.25rem; color: rgba(255,255,255,0.8); }
+.klikhome-page .sidebar-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+    color: white;
+}
+.klikhome-page .sidebar-header .dot {
+    color: var(--accent);
+}
+.klikhome-page .sidebar-header p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 0.25rem;
+    color: rgba(255, 255, 255, 0.8);
+}
 
 /* Search Widget */
 .klikhome-page .input-icon-wrapper {
@@ -85,45 +97,104 @@
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
 }
-.klikhome-page .input-icon-wrapper svg { color: rgba(255, 255, 255, 0.6); }
-.klikhome-page .search-input {
-    background: transparent; border: none; color: white; padding: 12px 10px; width: 100%; outline: none;
+.klikhome-page .input-icon-wrapper svg {
+    color: rgba(255, 255, 255, 0.6);
 }
-.klikhome-page .search-input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.klikhome-page .search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 12px 10px;
+    width: 100%;
+    outline: none;
+}
+.klikhome-page .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 
 /* Category List (Custom Radio Button Style) */
 .klikhome-page .category-widget .widget-header {
-    font-weight: 600; margin-bottom: 1rem; color: rgba(255,255,255,0.7); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
 }
-.klikhome-page .category-list { display: flex; flex-direction: column; gap: 8px; }
+.klikhome-page .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 .klikhome-page .cat-item {
-    display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 10px; border-radius: 8px; transition: background 0.2s; position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    position: relative;
 }
-.klikhome-page .cat-item:hover { background: rgba(255,255,255,0.05); }
-.klikhome-page .cat-item input { position: absolute; opacity: 0; cursor: pointer; }
+.klikhome-page .cat-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+.klikhome-page .cat-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
 
 /* Active State for Category */
 .klikhome-page .cat-item:has(input:checked) {
     background: rgba(255, 255, 255, 0.1);
 }
 .klikhome-page .cat-item:has(input:checked) .cat-name {
-    color: var(--accent); font-weight: 700;
+    color: var(--accent);
+    font-weight: 700;
 }
 
 .klikhome-page .cat-icon {
-    width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #1C274C;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1c274c;
 }
-.klikhome-page .cat-name { font-size: 0.9rem; color: white; transition: color 0.2s; }
+.klikhome-page .cat-name {
+    font-size: 0.9rem;
+    color: white;
+    transition: color 0.2s;
+}
 
 /* Icon Background Colors */
-.klikhome-page .bg-blue-soft { background: #e3f2fd; color: #1565c0; }
-.klikhome-page .bg-purple-soft { background: #f3e5f5; color: #7b1fa2; }
-.klikhome-page .bg-green-soft { background: #e8f5e9; color: #2e7d32; }
-.klikhome-page .bg-orange-soft { background: #fff3e0; color: #ef6c00; }
-.klikhome-page .bg-pink-soft { background: #fce4ec; color: #c2185b; }
-.klikhome-page .bg-cyan-soft { background: #e0f7fa; color: #00838f; }
-
+.klikhome-page .bg-blue-soft {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+.klikhome-page .bg-purple-soft {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+.klikhome-page .bg-green-soft {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+.klikhome-page .bg-orange-soft {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+.klikhome-page .bg-pink-soft {
+    background: #fce4ec;
+    color: #c2185b;
+}
+.klikhome-page .bg-cyan-soft {
+    background: #e0f7fa;
+    color: #00838f;
+}
 
 /* Trust Banner */
 .klikhome-page .trust-banner {
@@ -136,22 +207,48 @@
     gap: 12px;
     margin-top: 1rem;
 }
-.klikhome-page .trust-icon { color: #81c784; margin-top: 2px; }
-.klikhome-page .trust-banner h3 { margin: 0 0 4px 0; font-size: 0.95rem; color: #a5d6a7; }
-.klikhome-page .trust-banner p { margin: 0; font-size: 0.8rem; color: rgba(255,255,255,0.7); line-height: 1.4; }
-.klikhome-page .sidebar-divider { border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 0; }
-
+.klikhome-page .trust-icon {
+    color: #81c784;
+    margin-top: 2px;
+}
+.klikhome-page .trust-banner h3 {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    color: #a5d6a7;
+}
+.klikhome-page .trust-banner p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+}
+.klikhome-page .sidebar-divider {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
+}
 
 /* =========================================
    MAIN CONTENT
    ========================================= */
 
 .klikhome-page .content-header {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
-.klikhome-page .content-header h1 { font-size: 1.8rem; color: #1C274C; margin: 0; font-weight: 700; }
+.klikhome-page .content-header h1 {
+    font-size: 1.8rem;
+    color: #1c274c;
+    margin: 0;
+    font-weight: 700;
+}
 .klikhome-page .sort-wrapper select {
-    padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; outline: none;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
 }
 
 /* Service Grid */
@@ -183,14 +280,30 @@
 }
 
 .klikhome-page .thumb-placeholder {
-    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.klikhome-page .bg-orange-light { background: #fff3e0; }
-.klikhome-page .bg-purple-light { background: #f3e5f5; }
-.klikhome-page .bg-green-light { background: #e8f5e9; }
-.klikhome-page .bg-cyan-light { background: #e0f7fa; }
-.klikhome-page .bg-pink-light { background: #fce4ec; }
-.klikhome-page .bg-blue-light { background: #e3f2fd; }
+.klikhome-page .bg-orange-light {
+    background: #fff3e0;
+}
+.klikhome-page .bg-purple-light {
+    background: #f3e5f5;
+}
+.klikhome-page .bg-green-light {
+    background: #e8f5e9;
+}
+.klikhome-page .bg-cyan-light {
+    background: #e0f7fa;
+}
+.klikhome-page .bg-pink-light {
+    background: #fce4ec;
+}
+.klikhome-page .bg-blue-light {
+    background: #e3f2fd;
+}
 
 /* Floating Tags */
 .klikhome-page .service-tag {
@@ -203,43 +316,283 @@
     border-radius: 20px;
     text-transform: uppercase;
     z-index: 2;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
 }
 
 /* Specific Tag Colors */
-.klikhome-page .tag-vitamin { background: #ffe0b2; color: #ef6c00; }
-.klikhome-page .tag-lab { background: #e1bee7; color: #7b1fa2; }
-.klikhome-page .tag-vaksin { background: #c8e6c9; color: #2e7d32; }
-.klikhome-page .tag-dokter { background: #b2ebf2; color: #00838f; }
-.klikhome-page .tag-grooming { background: #f8bbd0; color: #ad1457; }
-.klikhome-page .tag-bidan { background: #bbdefb; color: #1565c0; }
-
+.klikhome-page .tag-vitamin {
+    background: #ffe0b2;
+    color: #ef6c00;
+}
+.klikhome-page .tag-lab {
+    background: #e1bee7;
+    color: #7b1fa2;
+}
+.klikhome-page .tag-vaksin {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+.klikhome-page .tag-dokter {
+    background: #b2ebf2;
+    color: #00838f;
+}
+.klikhome-page .tag-grooming {
+    background: #f8bbd0;
+    color: #ad1457;
+}
+.klikhome-page .tag-bidan {
+    background: #bbdefb;
+    color: #1565c0;
+}
 
 /* Card Body */
-.klikhome-page .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+.klikhome-page .card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
 .klikhome-page .card-body h3 {
-    margin: 0 0 8px 0; font-size: 1.1rem; color: #1C274C; line-height: 1.3;
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #1c274c;
+    line-height: 1.3;
 }
 .klikhome-page .desc {
-    font-size: 0.85rem; color: #666; margin-bottom: 1rem; line-height: 1.5; flex: 1;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    flex: 1;
 }
 
 .klikhome-page .meta-info {
-    display: flex; gap: 15px; font-size: 0.75rem; color: #888; margin-bottom: 12px;
+    display: flex;
+    gap: 15px;
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 12px;
 }
-.klikhome-page .meta-info span { display: flex; align-items: center; gap: 4px; }
+.klikhome-page .meta-info span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 
-.klikhome-page .divider { border: 0; border-top: 1px solid #f0f0f0; margin: 0 0 12px 0; }
+.klikhome-page .divider {
+    border: 0;
+    border-top: 1px solid #f0f0f0;
+    margin: 0 0 12px 0;
+}
 
 .klikhome-page .price-action {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .klikhome-page .price {
-    font-weight: 700; font-size: 1rem; color: #1C274C;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1c274c;
 }
 .klikhome-page .btn-book {
-    background: #1C274C; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+    background: #1c274c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
 }
-.klikhome-page .btn-book:hover { background: var(--accent); }
+.klikhome-page .btn-book:hover {
+    background: var(--accent);
+}
+
+/* ===== CUSTOM CHECKBOX ===== */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.checkbox-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.checkbox-item input {
+    display: none;
+}
+
+.checkbox-item .checkmark {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-item input:checked + .checkmark {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.checkbox-item input:checked + .checkmark::after {
+    content: "✓";
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ===============================
+   KlikHome - Sidebar History
+   =============================== */
+
+.klikhome .history-widget {
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+/* ---------- Header ---------- */
+.klikhome .history-widget .widget-header {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 10px;
+}
+
+.klikhome .history-widget .widget-header span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.klikhome .history-widget .widget-header svg {
+    opacity: 0.7;
+}
+
+/* ---------- List ---------- */
+.klikhome .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ---------- Item ---------- */
+.klikhome .history-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.klikhome .history-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* ---------- Info ---------- */
+.klikhome .history-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 160px;
+}
+
+.klikhome .history-date {
+    font-size: 0.7rem;
+    opacity: 0.6;
+}
+
+.klikhome .history-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------- Status Pill ---------- */
+.klikhome .status-pill {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* Belum Bayar */
+.klikhome .status-pill.warning {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffd54f;
+    border: 1px solid rgba(255, 193, 7, 0.35);
+}
+
+/* Terjadwal */
+.klikhome .status-pill.info {
+    background: rgba(33, 150, 243, 0.2);
+    color: #64b5f6;
+    border: 1px solid rgba(33, 150, 243, 0.35);
+}
+
+/* Berjalan */
+.klikhome .status-pill.primary {
+    background: rgba(255, 152, 0, 0.2);
+    color: #ffb74d;
+    border: 1px solid rgba(255, 152, 0, 0.35);
+}
+
+/* Selesai */
+.klikhome .status-pill.success {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81c784;
+    border: 1px solid rgba(76, 175, 80, 0.35);
+}
+
+/* Dibatalkan */
+.klikhome .status-pill.danger {
+    background: rgba(244, 67, 54, 0.2);
+    color: #e57373;
+    border: 1px solid rgba(244, 67, 54, 0.35);
+}
+
+/* ---------- Footer Button ---------- */
+.klikhome .btn-history-more {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 1rem;
+    padding: 6px 0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.klikhome .btn-history-more:hover {
+    color: var(--accent);
+}
+
+.klikhome .history-item { overflow: hidden; }
+.klikhome .history-info { flex:1; min-width:0; }
+.klikhome .history-name {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.klikhome .status-pill { flex-shrink:0; }

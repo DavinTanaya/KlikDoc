@@ -190,7 +190,7 @@
     background: transparent;
     outline: none;
     font-size: 13px;
-    width: 650px;
+    width: 550px;
   }
 
   .doctor-search-box button {

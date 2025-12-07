@@ -98,6 +98,34 @@
   <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
   <script>
+    window.initAdminMonitor = function(chatId) {
+
+      console.log('[ADMIN MONITOR] INIT', chatId);
+
+      const container = document.getElementById('messageContainer');
+      if (!container) return console.warn('messageContainer not found');
+
+      window.Echo.private('chats.' + chatId)
+        .listen('.new-message', e => {
+          console.log('[ADMIN MONITOR] new message', e.message);
+
+          if (e.message.type === 'system') return;
+
+          container.insertAdjacentHTML('beforeend', `
+        <div class="mb-3">
+          <div class="small text-muted">
+            ${e.message.sender?.name ?? 'System'}
+          </div>
+          <div class="bg-light rounded p-2">
+            ${e.message.body}
+          </div>
+        </div>
+      `);
+
+          container.scrollTop = container.scrollHeight;
+        });
+    }
+
     window.Echo = new Echo({
       broadcaster: 'pusher',
       key: "{{ config('broadcasting.connections.pusher.key') }}",
@@ -153,6 +181,31 @@
       if (!el) return console.log("No element with id doctorOnlineCount found.");
       const count = Object.keys(onlineDoctors).length;
       el.innerText = count;
+    }
+
+    function openMonitor(consultationId) {
+
+      document.getElementById('monitorContent').innerHTML = `
+    <div class="text-muted py-5 text-center">
+      Loading chat...
+    </div>
+  `;
+
+      fetch(`/admin/consultation/${consultationId}/monitor`)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('monitorContent').innerHTML = html;
+          window.initAdminMonitor(consultationId);
+        })
+        .catch(() => {
+          document.getElementById('monitorContent').innerHTML = `
+        <div class="text-danger py-5 text-center">
+          Gagal memuat chat
+        </div>
+      `;
+        });
+
+      monitorModal.show();
     }
   </script>
 @endpush

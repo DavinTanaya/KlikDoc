@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
         UserSeeder::class,
+        ApplicationSeeder::class,
         // ChatSeeder::class,
         // MessageSeeder::class,
         DrugSeeder::class,
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         CitySeeder::class,
         VoucherSeeder::class,
         ArticleSeeder::class,
+        KlikHomeServiceSeeder::class,
     ]);
     }
 }

@@ -56,7 +56,6 @@ Route::post('/apotek/checkout/pay', [CheckoutController::class, 'pay'])->name('a
 Route::get('/apotek/checkout/retry/{code}', [CheckoutController::class, 'retry'])->name('apotek.checkout.retry');
 Route::get('/apotek/checkout/success/{code}', [CheckoutController::class, 'success'])->name('apotek.checkout.success');
 Route::post('/apotek/checkout/use-voucher', [CheckoutController::class, 'useVoucher'])->name('apotek.checkout.use_voucher');
-Route::get('/apotek/riwayat/detail', [HistoryDetailController::class, 'index'])->name('detail_pesanan');
 
 Route::get('/konsultasi', [ConsultationController::class, 'getConsultation'])->name('konsultasi');
 Route::get('/konsultasi/detail/{id}', [ConsultationController::class, 'getConsultationDetail'])->name('konsultasi.detail');
@@ -85,18 +84,19 @@ Route::post('/artikel/{article}/unpublish', [ArticleController::class, 'unpublis
 
 
 Route::get('/klik-home', [KlikHomeController::class, 'index'])->name('klik-home');
-Route::get('/klik-home/detail', [KlikHomeController::class, 'detail'])->name('klik-home.detail');
-Route::get('/klik-home/pembayaran', [KlikHomePaymentController::class, 'payment'])->name('klik-home.payment');
-Route::get('/klik-home/sukses', [KlikHomePaymentController::class, 'success'])->name('klik-home.payment.success');
-Route::get('klik-home/riwayat', [KlikHomeHistoryController::class, 'index'])->name('klik-home.riwayat');
-Route::get('klik-home/riwayat/detail', [KlikHomeHistoryController::class, 'detail'])->name('klik-home.riwayat.detail');
+Route::get('/klik-home/detail/{service}', [KlikHomeController::class, 'detail'])->name('klik-home.detail');
+Route::get('klik-home/riwayat', [KlikHomeController::class, 'history'])->name('klik-home.riwayat');
+Route::get('klik-home/riwayat/detail', [KlikHomeController::class, 'detailHistory'])->name('klik-home.riwayat.detail');
+Route::post('/klik-home/{service}/pay', [KlikHomeController::class, 'pay'])->name('klikhome.pay');
+Route::get('/klikhome/payment/success/{orderCode}', [KlikHomeController::class, 'success'])->name('klikhome.success');
+Route::get('/klikhome/payment/retry/{orderCode}', [KlikHomeController::class, 'retry'])->name('klikhome.retry');
 
 
 Route::get('/dokter', [DoctorController::class, 'index'])->name('dokter.dashboard');
 Route::get('/dokter/pendaftaran', [DoctorController::class, 'registerIndex'])->name('dokter.pendaftaran');
 Route::post('/dokter/pendaftaran', [DoctorController::class, 'register'])->name('dokter.register');
 Route::get('/dokter/riwayat', [DoctorController::class, 'getHistory'])->name('dokter.riwayat');
-Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
+// Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
 Route::get('/dokter/rujukan', [DoctorController::class, 'getRefferal'])->name('dokter.rujukan');
 // routes/web.php
 Route::post('/dokter/rujukan/store', [DoctorController::class, 'storeRefferal'])->name('dokter.rujukan.store');
@@ -123,7 +123,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     ->name('admin.orders.detail');
     Route::patch('/admin/orders/{code}', [AdminController::class, 'updateOrder'])
     ->name('admin.orders.update');
-
+    Route::get('/admin/consultations', [AdminController::class, 'consultationIndex'])->name('admin.consultations.index');
+    Route::get('/admin/consultation/{consultations}/monitor', [AdminController::class, 'consultationDetail'])->name('admin.consultations.detail');
 });
 
 
@@ -138,6 +139,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/admin/apotek/html',[AdminController::class, 'getApotekHtml']);
 Route::get('/admin/dokter/html',[AdminController::class, 'getDokterHtml']);
+Route::get('/admin/artikel/html',[AdminController::class, 'getArticleHtml']);
+Route::get('/admin/konsultasi/html',[AdminController::class, 'getConsultationHtml']);
 
 Route::get('/admin/applications/update-status/{id}', [AdminController::class, 'updateApplicationStatus'])->name('admin.applications.update_status');
 Route::get('/admin/applicants/history', [AdminController::class, 'applicantHistory'])->name('admin.applicants.history');

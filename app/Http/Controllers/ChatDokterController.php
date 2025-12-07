@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewMessage;
 use App\Models\Chat;
 use App\Models\Message;
+use App\Models\Referral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -147,7 +148,7 @@ class ChatDokterController extends Controller
 
                 // ✅ JIKA RUJUKAN (INI YANG KAMU BUTUH)
                 if ($msg->type === 'referral' && $msg->referral_id) {
-                    $referral = \App\Models\Referral::find($msg->referral_id);
+                    $referral = Referral::find($msg->referral_id);
 
                     if ($referral) {
                         $payload['referral_id'] = $referral->id;
