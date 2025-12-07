@@ -45,6 +45,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::get('/kalkulator-bmi', [MandiriController::class, 'bmi'])->name('kalkulator_bmi');
+Route::post('/kalkulator-bmi', [MandiriController::class, 'calculateBmi'])->name('kalkulator_bmi.hitung');
 Route::get('/pengingat-obat', [MandiriController::class, 'pengingatObat'])->name('pengingat_obat');
 Route::get('/kalender-menstruasi', [MandiriController::class, 'kalenderMenstruasi'])->name('kalender_menstruasi');
 Route::get('/kalender-kehamilan', [MandiriController::class, 'kalenderKehamilan'])->name('kalender_kehamilan');

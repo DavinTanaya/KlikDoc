@@ -1,0 +1,115 @@
+.med-list-container {
+    margin-top: 2rem;
+    border-top: 1px dashed rgb(var(--grey1));
+    padding-top: 1.5rem;
+}
+
+.med-list-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgb(var(--blue1));
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    background: rgb(var(--grey4));
+    border-radius: 16px;
+    color: rgb(var(--grey2));
+    font-size: 0.9rem;
+}
+
+.med-card {
+    background: rgb(var(--white));
+    border: 1px solid rgba(var(--blue2), 0.2);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: transform 0.2s;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@media(min-width: 768px) {
+    .med-card {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+.med-card:hover {
+    transform: translateY(-2px);
+    border-color: rgb(var(--blue3));
+    box-shadow: 0 6px 15px rgba(var(--blue1), 0.08);
+}
+
+.med-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: rgb(var(--blue1));
+    font-weight: 700;
+}
+
+.med-info p {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: rgb(var(--grey2));
+}
+
+.med-badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.med-time-badge {
+    background: rgba(var(--blue3), 0.5);
+    color: rgb(var(--blue1));
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.med-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.btn-delete {
+    background: rgba(var(--red2), 0.1);
+    color: rgb(var(--red2));
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-delete:hover {
+    background: rgb(var(--red2));
+    color: rgb(var(--white));
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

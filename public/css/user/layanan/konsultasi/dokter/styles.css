@@ -2,17 +2,17 @@
    GLOBAL & LAYOUT
    ========================================= */
 .konsultasi-page {
-    --bg-sidebar: #1C274C;
-    --text-sidebar: #FFFFFF;
-    --accent: #FF4867;
-    --accent-hover: #DC2626;
-    --bg-content: #F4F7FE;
-    --card-bg: #FFFFFF;
+    --bg-sidebar: #1c274c;
+    --text-sidebar: #ffffff;
+    --accent: #ff4867;
+    --accent-hover: #dc2626;
+    --bg-content: #f4f7fe;
+    --card-bg: #ffffff;
     --text-primary: #333;
     --text-secondary: #888;
-    --border-color: #E0E0E0;
+    --border-color: #e0e0e0;
 
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     width: 100%;
     min-height: 100vh;
 }
@@ -55,13 +55,23 @@
 }
 
 /* Header & Search */
-.konsultasi-page .sidebar-header h2 { font-size: 1.8rem; margin: 0; font-weight: 700; }
-.konsultasi-page .sidebar-header .dot { color: var(--accent); }
-.konsultasi-page .sidebar-header p { font-size: 0.85rem; opacity: 0.7; margin-top: 0.25rem; }
+.konsultasi-page .sidebar-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+.konsultasi-page .sidebar-header .dot {
+    color: var(--accent);
+}
+.konsultasi-page .sidebar-header p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 0.25rem;
+}
 
 .konsultasi-page .input-icon-wrapper {
     position: relative;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 0 12px;
     display: flex;
@@ -69,138 +79,390 @@
     border: 1px solid transparent;
 }
 .konsultasi-page .search-input {
-    background: transparent; border: none; color: white; padding: 12px 10px; width: 100%; outline: none;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 12px 10px;
+    width: 100%;
+    outline: none;
 }
-.konsultasi-page .search-input::placeholder { color: rgba(255,255,255,0.5); }
+.konsultasi-page .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 
 /* Appointment Widget */
 .konsultasi-page .appointment-widget {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.05)
+    );
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 1rem;
 }
 .konsultasi-page .widget-header {
-    display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 .konsultasi-page .appointment-card {
-    background: white; border-radius: 8px; padding: 10px; color: var(--text-primary);
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--text-primary);
 }
-.konsultasi-page .app-info { display: flex; flex-direction: column; margin-bottom: 8px; }
-.konsultasi-page .app-doctor { font-weight: 700; font-size: 0.9rem; color: #1C274C; }
-.konsultasi-page .app-spec { font-size: 0.75rem; color: #666; margin-bottom: 4px; }
+.konsultasi-page .app-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+.konsultasi-page .app-doctor {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #1c274c;
+}
+.konsultasi-page .app-spec {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 4px;
+}
 .konsultasi-page .app-time {
-    display: flex; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--accent); font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
 }
 .konsultasi-page .btn-join {
-    width: 100%; background: #1C274C; color: white; border: none; padding: 6px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;
+    width: 100%;
+    background: #1c274c;
+    color: white;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
 }
 
 /* History List */
-.konsultasi-page .history-list { display: flex; flex-direction: column; gap: 12px; }
-.konsultasi-page .history-item {
-    background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; align-items: center;
+.konsultasi-page .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
-.konsultasi-page .history-date { font-size: 0.7rem; opacity: 0.6; display: block; }
-.konsultasi-page .history-name { font-size: 0.85rem; font-weight: 500; }
-.konsultasi-page .status-pill { font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
-.konsultasi-page .status-pill.success { background: rgba(76, 175, 80, 0.2); color: #81c784; }
-.konsultasi-page .btn-history-more { display: block; text-align: center; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-decoration: none; }
+.konsultasi-page .history-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.konsultasi-page .history-date {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    display: block;
+}
+.konsultasi-page .history-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.konsultasi-page .status-pill {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.konsultasi-page .status-pill.success {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81c784;
+}
+.konsultasi-page .btn-history-more {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 1rem;
+    text-decoration: none;
+}
 
 /* Filter Items */
-.konsultasi-page .filter-group h3 { font-size: 0.9rem; text-transform: uppercase; opacity: 0.6; margin-bottom: 1rem; margin-top: 1.5rem; }
-.konsultasi-page .checkbox-item { display: flex; align-items: center; gap: 10px; margin-bottom: 0.8rem; cursor: pointer; font-size: 0.95rem; opacity: 0.9; }
-.konsultasi-page .checkbox-item input { display: none; }
-.konsultasi-page .checkmark { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 4px; position: relative; }
-.konsultasi-page .checkbox-item input:checked + .checkmark { background: var(--accent); border-color: var(--accent); }
+.konsultasi-page .filter-group h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+}
+.konsultasi-page .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+.konsultasi-page .checkbox-item input {
+    display: none;
+}
+.konsultasi-page .checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    position: relative;
+}
+.konsultasi-page .checkbox-item input:checked + .checkmark {
+    background: var(--accent);
+    border-color: var(--accent);
+}
 
 /* =========================================
    MAIN CONTENT (KANAN)
    ========================================= */
 .konsultasi-page .split-content {
-    background-color: var(--bg-content); flex: 1; padding: 2rem;
+    background-color: var(--bg-content);
+    flex: 1;
+    padding: 2rem;
 }
 @media (min-width: 1024px) {
-    .konsultasi-page .split-content { padding: 3rem 4rem; overflow-y: auto; }
+    .konsultasi-page .split-content {
+        padding: 3rem 4rem;
+        overflow-y: auto;
+    }
 }
 
 .konsultasi-page .content-header {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
-.konsultasi-page .content-header h1 { font-size: 1.8rem; color: #1C274C; margin: 0; }
-.konsultasi-page .sort-wrapper select { padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; }
+.konsultasi-page .content-header h1 {
+    font-size: 1.8rem;
+    color: #1c274c;
+    margin: 0;
+}
+.konsultasi-page .sort-wrapper select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
 
 /* Doctor Grid & Cards */
 .konsultasi-page .doctor-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
 }
 .konsultasi-page .doctor-card {
-    background: white; border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid transparent; cursor: pointer; display: flex; flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 .konsultasi-page .doctor-card:hover {
-    transform: translateY(-5px); box-shadow: 0 10px 20px rgba(28, 39, 76, 0.08); border-color: rgba(28, 39, 76, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(28, 39, 76, 0.08);
+    border-color: rgba(28, 39, 76, 0.1);
 }
 
 .konsultasi-page .doctor-image-wrapper {
-    height: 180px; background: #f8f9fa; position: relative; display: flex; align-items: flex-end; justify-content: center;
+    height: 180px;
+    background: #f8f9fa;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 .konsultasi-page .doctor-img-placeholder {
-    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.konsultasi-page .bg-blue-soft { background: #e3f2fd; }
-.konsultasi-page .bg-pink-soft { background: #ffebee; }
+.konsultasi-page .bg-blue-soft {
+    background: #e3f2fd;
+}
+.konsultasi-page .bg-pink-soft {
+    background: #ffebee;
+}
 
 /* Badges on Image */
 .konsultasi-page .status-badge {
-    position: absolute; top: 12px; left: 12px; font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; z-index: 2;
-    backdrop-filter: blur(4px); box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.konsultasi-page .status-badge.online { background: rgba(232, 245, 233, 0.9); color: #2e7d32; border: 1px solid #c8e6c9; }
-.konsultasi-page .status-badge.offline { background: rgba(245, 245, 245, 0.9); color: #757575; border: 1px solid #e0e0e0; }
+.konsultasi-page .status-badge.online {
+    background: rgba(232, 245, 233, 0.9);
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+.konsultasi-page .status-badge.offline {
+    background: rgba(245, 245, 245, 0.9);
+    color: #757575;
+    border: 1px solid #e0e0e0;
+}
 
 .konsultasi-page .experience-badge {
-    position: absolute; bottom: 12px; right: 12px; background: rgba(28, 39, 76, 0.85); color: white; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; font-weight: 500;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(28, 39, 76, 0.85);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
 }
 
 /* Card Body */
-.konsultasi-page .doctor-info { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
-
-.konsultasi-page .doc-header {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+.konsultasi-page .doctor-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
-.konsultasi-page .spec-label { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-.konsultasi-page .rating-badge { font-size: 0.8rem; font-weight: 600; color: #f39c12; }
+.konsultasi-page .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
 
-.konsultasi-page .doctor-info h3 { font-size: 1.15rem; margin: 0 0 0.8rem 0; color: #333; font-weight: 700; line-height: 1.4; }
+.konsultasi-page .spec-label {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.konsultasi-page .rating-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #f39c12;
+}
+
+.konsultasi-page .doctor-info h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.8rem 0;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.4;
+}
 
 /* Service Tags (NEW) */
 .konsultasi-page .service-tags {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
 }
 .konsultasi-page .tag-service {
-    display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
 }
-.konsultasi-page .tag-service.chat { background: #e0f2f1; color: #00897b; }
-.konsultasi-page .tag-service.visit { background: #f3e5f5; color: #8e24aa; }
-
-.konsultasi-page .hospital-info { 
-    font-size: 0.85rem; color: #666; margin-bottom: 10px; display: flex; align-items: center; 
+.konsultasi-page .tag-service.chat {
+    background: #e0f2f1;
+    color: #00897b;
+}
+.konsultasi-page .tag-service.visit {
+    background: #f3e5f5;
+    color: #8e24aa;
 }
 
-.konsultasi-page .card-divider { border: 0; border-top: 1px solid #f0f0f0; margin: 10px 0; }
+.konsultasi-page .hospital-info {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
 
-.konsultasi-page .price-action { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-.konsultasi-page .price-box { display: flex; flex-direction: column; }
-.konsultasi-page .price-box small { font-size: 0.7rem; color: #888; }
-.konsultasi-page .price-box .price { font-weight: 700; color: #333; font-size: 1rem; }
+.konsultasi-page .card-divider {
+    border: 0;
+    border-top: 1px solid #f0f0f0;
+    margin: 10px 0;
+}
+
+.konsultasi-page .price-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+.konsultasi-page .price-box {
+    display: flex;
+    flex-direction: column;
+}
+.konsultasi-page .price-box small {
+    font-size: 0.7rem;
+    color: #888;
+}
+.konsultasi-page .price-box .price {
+    font-weight: 700;
+    color: #333;
+    font-size: 1rem;
+}
 
 .konsultasi-page .btn-book-direct {
-    background: #1C274C; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: background 0.2s;
+    background: #1c274c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
 }
-.konsultasi-page .btn-book-direct:hover { background: var(--accent); }
+.konsultasi-page .btn-book-direct:hover {
+    background: var(--accent);
+}
 
 /* Pagination */
-.konsultasi-page .pagination-wrapper { margin-top: 3rem; display: flex; justify-content: center; gap: 8px; }
-.konsultasi-page .page-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border-color); background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.konsultasi-page .page-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+.konsultasi-page .pagination-wrapper {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.konsultasi-page .page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.konsultasi-page .page-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}

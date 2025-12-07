@@ -1,0 +1,111 @@
+ .calendar-container {
+    margin-top: 2rem;
+    background: rgb(var(--white));
+    border-radius: 24px;
+    box-shadow: 0 10px 30px -5px rgba(var(--blue1), 0.1);
+    padding: 1rem;
+    border: 1px solid rgba(var(--blue2), 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+@media (min-width: 768px) {
+     .calendar-container {
+        padding: 2rem;
+        margin-top: 3rem;
+    }
+}
+
+ .calendar-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fc {
+    font-family: inherit;
+    --fc-border-color: rgba(var(--blue2), 0.15);
+    --fc-today-bg-color: rgba(var(--blue3), 0.2);
+    --fc-neutral-bg-color: rgba(var(--grey4), 0.5);
+}
+
+.fc-header-toolbar {
+    margin-bottom: 1rem !important;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 576px) {
+    .fc-header-toolbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .fc-toolbar-title {
+        font-size: 1.2rem !important;
+    }
+
+    .fc-button {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+.fc-toolbar-title {
+    font-size: 1.25rem !important;
+    font-weight: 800;
+    color: rgb(var(--blue1));
+}
+
+.fc-button-primary {
+    background-color: transparent !important;
+    color: rgb(var(--blue2)) !important;
+    border: 1px solid rgb(var(--grey1)) !important;
+    border-radius: 10px !important;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: none !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s;
+}
+
+.fc-button-primary:hover,
+.fc-button-primary.fc-button-active {
+    background-color: rgb(var(--blue1)) !important;
+    color: rgb(var(--white)) !important;
+    border-color: rgb(var(--blue1)) !important;
+}
+
+.fc-daygrid-day-number {
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+}
+
+.legend-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgb(var(--grey1));
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: rgb(var(--blue1));
+    font-weight: 600;
+    background: rgb(var(--grey4));
+    padding: 6px 12px;
+    border-radius: 15px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
