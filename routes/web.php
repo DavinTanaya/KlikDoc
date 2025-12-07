@@ -2,32 +2,26 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApotekController;
-use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatDokterController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\DokterChatController;
-use App\Http\Controllers\DokterDashboardController;
-use App\Http\Controllers\DokterHistoryController;
 use App\Http\Controllers\DokterJadwalPraktikController;
-use App\Http\Controllers\DokterRujukanController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\HistoryDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KlikHomeController;
 use App\Http\Controllers\KlikHomeHistoryController;
 use App\Http\Controllers\KlikHomePaymentController;
-use App\Http\Controllers\KonsultasiHistoryController;
 use App\Http\Controllers\MandiriBmiController;
 use App\Http\Controllers\MandiriController;
 use App\Http\Controllers\MandiriKehamilanController;
 use App\Http\Controllers\MandiriMenstruasiController;
 use App\Http\Controllers\MandiriObatController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PengingatObatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,8 +67,22 @@ Route::get('/konsultasi/riwayat', [ConsultationController::class, 'getHistory'])
 Route::get('/konsultasi/riwayat/{id}', [ConsultationController::class, 'getDetail'])->name('konsultasi.riwayat.detail');
 Route::post('/konsultasi/riwayat/{id}/beri-rating', [ConsultationController::class, 'giveRating'])->name('konsultasi.rating.store');
 
-Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
-Route::get('/artikel/detail', [ArtikelController::class, 'detail'])->name('artikel.detail');
+Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel');
+Route::get('/artikel/detail/{article}', [ArticleController::class, 'detail'])->name('artikel.detail');
+
+Route::get('/artikel/create', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/artikel', [ArticleController::class, 'store'])->name('article.store');
+Route::get('/artikel/list', [ArticleController::class, 'articleList'])->name('article.index');
+Route::get('/artikel/{article}/edit', [ArticleController::class, 'edit'])
+  ->name('article.edit');
+
+Route::put('/artikel/{article}', [ArticleController::class, 'update'])
+  ->name('article.update');
+
+Route::post('/artikel/{article}/approve', [ArticleController::class, 'approve'])->name('article.approve');
+
+Route::post('/artikel/{article}/unpublish', [ArticleController::class, 'unpublish'])->name('article.unpublish');
+
 
 Route::get('/klik-home', [KlikHomeController::class, 'index'])->name('klik-home');
 Route::get('/klik-home/detail', [KlikHomeController::class, 'detail'])->name('klik-home.detail');
@@ -84,12 +92,17 @@ Route::get('klik-home/riwayat', [KlikHomeHistoryController::class, 'index'])->na
 Route::get('klik-home/riwayat/detail', [KlikHomeHistoryController::class, 'detail'])->name('klik-home.riwayat.detail');
 
 
-Route::get('/dokter', [DokterDashboardController::class, 'index'])->name('dokter.dashboard');
+Route::get('/dokter', [DoctorController::class, 'index'])->name('dokter.dashboard');
 Route::get('/dokter/pendaftaran', [DoctorController::class, 'registerIndex'])->name('dokter.pendaftaran');
 Route::post('/dokter/pendaftaran', [DoctorController::class, 'register'])->name('dokter.register');
+Route::get('/dokter/riwayat', [DoctorController::class, 'getHistory'])->name('dokter.riwayat');
 Route::get('/dokter/jadwal-praktik', [DokterJadwalPraktikController::class, 'index'])->name('dokter.jadwal-praktik');
-Route::get('/dokter/rujukan', [DokterRujukanController::class, 'index'])->name('dokter.rujukan');
-Route::get('/dokter/riwayat', [DokterHistoryController::class, 'index'])->name('dokter.riwayat');
+Route::get('/dokter/rujukan', [DoctorController::class, 'getRefferal'])->name('dokter.rujukan');
+// routes/web.php
+Route::post('/dokter/rujukan/store', [DoctorController::class, 'storeRefferal'])->name('dokter.rujukan.store');
+Route::get('/rujukan/{referral}/download', [DoctorController::class, 'downloadRefferal'])->name('referral.download');
+
+
 Route::get('/dokter/chat', [ChatDokterController::class, 'index'])->name('dokter.chat.index');
 Route::post('/dokter/prescription-chat/{consultationId}',[ConsultationController::class, 'createPrescriptionChat'])->name('dokter.prescription.chat');
 Route::post('/dokter/finish/{consultationId}',[ConsultationController::class, 'finishConsultation'])->name('dokter.consultation.finish');
@@ -136,3 +149,5 @@ Route::put('/address/{id}', [UserController::class, 'editAddress'])->name('addre
 
 Route::get('/orders/history', [OrderController::class, 'history'])->name('orders.history');
 Route::get('/orders/{code}', [OrderController::class, 'detail'])->name('orders.detail');
+
+Route::get( '/prescription/{id}/download',[ConsultationController::class, 'download'])->name('resep.download');

@@ -1,0 +1,100 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Application;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use App\Models\Article;
+use App\Models\User;
+
+class ArticleSeeder extends Seeder
+{
+    public function run(): void
+    {
+        // Ambil admin & dokter
+        $admin   = User::where('role', 'admin')->first();
+        $dokter  = Application::first();
+
+        if (!$admin || !$dokter) {
+            $this->command->warn('Admin / Dokter user belum ada.');
+            return;
+        }
+
+        $articles = [
+            [
+                'title'    => 'Mengapa Sering Merasa Lelah Padahal Cukup Tidur?',
+                'category' => 'Penyakit Dalam',
+                'content'  => $this->dummyContent(),
+                'status'   => 'published',
+                'author'   => $dokter,
+                'author_role'=> 'dokter',
+            ],
+            [
+                'title'    => 'Urutan Skincare Malam untuk Kulit Berjerawat',
+                'category' => 'Kesehatan Kulit',
+                'content'  => $this->dummyContent(),
+                'status'   => 'published',
+                'author'   => $dokter,
+                'author_role'=> 'dokter',
+            ],
+            [
+                'title'    => 'Vaksin Anak: Jadwal Terbaru IDAI 2024',
+                'category' => 'Kesehatan Anak',
+                'content'  => $this->dummyContent(),
+                'status'   => 'draft', // 👈 dokter publish → tetap draft
+                'author'   => $dokter,
+                'author_role'=> 'dokter',
+            ],
+            [
+                'title'    => 'Pola Hidup Sehat untuk Cegah Diabetes',
+                'category' => 'Gaya Hidup',
+                'content'  => $this->dummyContent(),
+                'status'   => 'published',
+                'author'   => $admin,
+                'author_role'=> 'admin',
+            ],
+        ];
+
+        foreach ($articles as $item) {
+            Article::create([
+                'title'       => $item['title'],
+                'slug'        => Str::slug($item['title']),
+                'category'    => $item['category'],
+                'content'     => $item['content'],
+                'status'      => $item['status'],
+                'author_id'   => $item['author']->id,
+                'author_role' => $item['author_role'],
+                'thumbnail'   => 'images/article/default.jpg', // opsional
+                'created_at'=> $item['status'] === 'published' ? now() : null,
+            ]);
+        }
+    }
+
+    private function dummyContent(): string
+    {
+        return <<<HTML
+<p class="lead">
+  Artikel ini ditulis untuk memberikan edukasi kesehatan yang mudah dipahami oleh masyarakat umum.
+</p>
+
+<h2>Penyebab Umum</h2>
+<ul>
+  <li>Pola tidur tidak teratur</li>
+  <li>Kurang aktivitas fisik</li>
+  <li>Stres berkepanjangan</li>
+</ul>
+
+<h2>Kapan Harus ke Dokter?</h2>
+<p>
+  Jika keluhan berlangsung lebih dari dua minggu disertai gejala lain seperti pusing,
+  penurunan berat badan, atau nyeri dada, segera konsultasikan ke dokter.
+</p>
+
+<div class="highlight-box">
+  <strong>Catatan Dokter:</strong>
+  <p>Deteksi dini dapat mencegah komplikasi lebih lanjut.</p>
+</div>
+HTML;
+    }
+}

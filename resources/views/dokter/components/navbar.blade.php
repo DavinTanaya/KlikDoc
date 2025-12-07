@@ -2,7 +2,7 @@
     <div class="container">
         
         {{-- 1. Brand / Logo --}}
-        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('dokter.dashboard') }}">
             <img src="{{ asset('image/KlikDoc.png') }}" alt="KlikDoc" height="35">
             {{-- Opsional: Tambahan label Partner/Dokter --}}
             <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill d-none d-sm-block" 

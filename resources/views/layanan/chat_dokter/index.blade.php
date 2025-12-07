@@ -119,6 +119,23 @@
                   </a>
                 </div>
               </div>
+            @elseif ($message->type === 'referral')
+              <div class="message-row received">
+                <div class="chat-card referral">
+                  <h4>🏥 Surat Rujukan</h4>
+
+                  <p>Dokter merujuk Anda ke:</p>
+
+                  <ul>
+                    <li><strong>RS:</strong> {{ $message->referral->destination }}</li>
+                    <li><strong>Poli:</strong> {{ $message->referral->department }}</li>
+                  </ul>
+
+                  <a href="{{ route('referral.download', $message->referral_id) }}">
+                    Download Surat Rujukan
+                  </a>
+                </div>
+              </div>
             @else
               <div class="message-row {{ $message->sender_id === $authUser->id ? 'sent' : 'received' }}">
                 <div class="bubble">
@@ -359,6 +376,29 @@
         </div>
       </div>
     `);
+        return;
+      }
+      if (msg.type === 'referral') {
+        msgContainer.insertAdjacentHTML("beforeend", `
+    <div class="message-row received">
+      <div class="chat-card referral">
+        <h4>🏥 Surat Rujukan</h4>
+        <p>Dokter merujuk Anda ke fasilitas lanjutan.</p>
+
+        <div class="referral-info">
+          <strong>Tujuan:</strong> ${msg.referral?.destination ?? '-'}<br>
+          <strong>Poli:</strong> ${msg.referral?.department ?? '-'}
+        </div>
+
+        <div class="referral-actions">
+          <a class="btn-secondary"
+             href="/rujukan/${msg.referral_id}/download">
+            Download Surat Rujukan
+          </a>
+        </div>
+      </div>
+    </div>
+  `);
         return;
       }
 

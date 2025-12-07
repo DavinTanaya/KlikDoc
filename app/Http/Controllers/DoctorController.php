@@ -2,11 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use App\Models\Application;
+use App\Models\Chat;
+use App\Models\Consultation;
+use App\Models\Message;
+use App\Models\Referral;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+    public function index()
+    {
+        $doctor = auth()->user();
+        $doctorId = Application::where('user_id', $doctor->id)->firstOrFail()->id;
+        // ✅ Total pasien unik
+        $totalPasien = Consultation::where('doctor_id', $doctorId)
+            ->distinct('user_id')
+            ->count('user_id');
+
+        // ✅ Chat konsultasi AKTIF
+        $aktifConsultation = Consultation::where('doctor_id', $doctorId)
+            ->where('status', 'AKTIF')
+            ->count();
+
+        // ✅ Konsultasi selesai
+        $selesaiConsultation = Consultation::where('doctor_id', $doctorId)
+            ->where('status', 'SELESAI')
+            ->count();
+
+        // ✅ Chat aktif terbaru (sidebar / highlight)
+        $activeChats = Chat::where('doctor_id', $doctor->id)
+            ->whereHas('consultation', fn ($q) =>
+                $q->where('status', 'AKTIF')
+            )
+            ->with(['user'])
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('dokter.dashboard.index', compact(
+            'totalPasien',
+            'aktifConsultation',
+            'selesaiConsultation',
+            'activeChats'
+        ));
+    }
     public function registerIndex() {
         return view('dokter.pendaftaran.index');
     }
@@ -41,5 +83,126 @@ class DoctorController extends Controller
         return redirect()->route('home')->with('success', 'Application submitted successfully!');
     }
 
-    
+    public function getHistory(){
+        $doctor = auth()->user();
+        $doctorId = Application::where('user_id', $doctor->id)->firstOrFail()->id;
+        $consultations = Consultation::with([
+                'user',
+                'prescriptions',
+                'referral'
+            ])
+            ->where('doctor_id', $doctorId)
+            ->where('status', 'SELESAI')
+            ->latest()
+            ->get();
+            
+        return view('dokter.layanan.history', compact('consultations'));
+    }
+
+    public function getRefferal(){
+        $doctor = auth()->user();
+        $doctorId = Application::where('user_id', $doctor->id)->firstOrFail()->id;
+        $consultationsOnline = Consultation::with(['user'])
+            ->where('doctor_id', $doctorId)
+            ->where('status', 'AKTIF')
+            ->whereDoesntHave('referral')
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $referrals = Referral::whereHas('consultation', function ($q) use ($doctorId) {
+            $q->where('doctor_id', $doctorId);
+        })
+        ->with(['consultation.user'])
+        ->latest()
+        ->get();
+
+        return view('dokter.layanan.rujukan', compact('consultationsOnline', 'referrals'));
+    }
+
+    public function storeRefferal(Request $request)
+    {
+        $request->validate([
+            'consultation_id' => 'required|exists:consultations,id',
+            'destination'     => 'required|string',
+            'department'      => 'required|string',
+            'reason'          => 'required|string',
+            'notes'           => 'nullable|string',
+        ]);
+
+        $consultation = Consultation::with('chat')->findOrFail($request->consultation_id);
+
+        $referral = Referral::updateOrCreate(
+            ['consultation_id' => $consultation->id],
+            [
+                'destination' => $request->destination,
+                'department'  => $request->department,
+                'reason'      => $request->reason,
+                'notes'       => $request->notes,
+            ]
+        );
+
+        $message = Message::create([
+            'chat_id'    => $consultation->chat->id,
+            'sender_id'  => auth()->id(),
+            'type'       => 'referral',
+            'body'       => 'Dokter telah membuat surat rujukan.',
+            'referral_id'=> $referral->id,
+        ]);
+
+        broadcast(new NewMessage($message))->toOthers();
+
+        return response()->json([
+            'ok' => true,
+            'message' => 'Rujukan berhasil dikirim ke pasien'
+        ]);
+    }
+
+    public function downloadRefferal(Referral $referral)
+    {
+        // ✅ AMBIL RELASI YANG DIPERLUKAN
+        $referral->load([
+            'consultation.user',
+            'consultation.doctor'
+        ]);
+
+        $consultation = $referral->consultation;
+
+        // $user = auth()->user();
+
+        // if (
+        //     $user->role === 'user' &&
+        //     $consultation->user_id !== $user->id
+        // ) {
+        //     abort(403, 'Tidak memiliki akses');
+        // }
+
+        // if (
+        //     $user->role === 'doctor' &&
+        //     $consultation->doctor_id !== $user->id
+        // ) {
+        //     abort(403, 'Tidak memiliki akses');
+        // }
+
+        // ✅ DATA UNTUK VIEW PDF
+        $data = [
+            'referral'      => $referral,
+            'consultation'  => $consultation,
+            'patient'       => $consultation->user,
+            'doctor'        => $consultation->doctor,
+            'doctorProfile' => $consultation->doctor,
+            'date'          => now()->format('d F Y'),
+        ];
+
+        // ✅ GENERATE PDF
+        $pdf = Pdf::loadView(
+            'pdf.referral',
+            $data
+        )->setPaper('A4', 'portrait');
+
+        // ✅ DOWNLOAD
+        return $pdf->download(
+            'Surat_Rujukan_' . $data['patient']->name . '.pdf'
+        );
+    }
+
 }

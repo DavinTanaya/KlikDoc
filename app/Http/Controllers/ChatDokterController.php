@@ -121,13 +121,54 @@ class ChatDokterController extends Controller
     {
         $chat->load('consultation');
 
-        $isActive = $chat->consultation && $chat->consultation->status === 'AKTIF';
+        $isActive = $chat->consultation
+            && $chat->consultation->status === 'AKTIF';
+
+        // ✅ AMBIL MESSAGE + CONDITIONAL RELATION
+        $messages = $chat->messages()
+            ->orderBy('created_at')
+            ->get()
+            ->map(function ($msg) {
+
+                // ✅ DEFAULT PAYLOAD
+                $payload = [
+                    'id'         => $msg->id,
+                    'chat_id'    => $msg->chat_id,
+                    'sender_id'  => $msg->sender_id,
+                    'type'       => $msg->type,
+                    'body'       => $msg->body,
+                    'created_at' => $msg->created_at,
+                ];
+
+                // ✅ JIKA RESEP
+                if ($msg->type === 'prescription' && $msg->prescription_id) {
+                    $payload['prescription_id'] = $msg->prescription_id;
+                }
+
+                // ✅ JIKA RUJUKAN (INI YANG KAMU BUTUH)
+                if ($msg->type === 'referral' && $msg->referral_id) {
+                    $referral = \App\Models\Referral::find($msg->referral_id);
+
+                    if ($referral) {
+                        $payload['referral_id'] = $referral->id;
+                        $payload['referral'] = [
+                            'destination' => $referral->destination,
+                            'department'  => $referral->department,
+                            'reason'      => $referral->reason,
+                            'notes'       => $referral->notes,
+                        ];
+                    }
+                }
+
+                return $payload;
+            });
 
         return response()->json([
-            'messages' => $chat->messages()->orderBy('created_at')->get(),
+            'messages' => $messages,
             'consultation_status' => $isActive ? 'AKTIF' : 'SELESAI',
         ]);
     }
+
 
     // =====================================================
     // CALL START

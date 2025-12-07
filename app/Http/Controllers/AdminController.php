@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Drug;
 use App\Models\Order;
+use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -76,8 +77,9 @@ class AdminController extends Controller
         $acceptedApplicants = Application::where('status', 'approved')->count();
         $pendingApplicants = Application::where('status', 'pending')->count();
         $disabledApplicants = Application::where('status', 'disabled')->count();
-        
-        return view('admin.pages.doctor', ['doctors' => $doctors, 'latestApplicants' => $latestApplicants, 'totalDoctors' => $totalDoctors, 'totalApplicants' => $totalApplicants, 'rejectedApplicants' => $rejectedApplicants, 'acceptedApplicants' => $acceptedApplicants, 'pendingApplicants' => $pendingApplicants, 'disabledApplicants' => $disabledApplicants ])->render();
+        $averageRating = round(Rating::avg('rating'), 1);
+
+        return view('admin.pages.doctor', ['doctors' => $doctors, 'latestApplicants' => $latestApplicants, 'totalDoctors' => $totalDoctors, 'totalApplicants' => $totalApplicants, 'rejectedApplicants' => $rejectedApplicants, 'acceptedApplicants' => $acceptedApplicants, 'pendingApplicants' => $pendingApplicants, 'disabledApplicants' => $disabledApplicants, 'averageRating' => $averageRating ])->render();
     }
 
     public function updateApplicationStatus($id) {

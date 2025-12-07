@@ -12,6 +12,7 @@ class Message extends Model
         'body',
         'type',
         'prescription_id',
+        'referral_id',
     ];
 
     public function conversation() { 
@@ -19,5 +20,13 @@ class Message extends Model
     }
     public function sender()       { 
         return $this->belongsTo(User::class, 'sender_id'); 
+    }
+
+    public function prescription() { 
+        return $this->belongsTo(Prescription::class, 'prescription_id'); 
+    }
+
+    public function referral()     { 
+        return $this->belongsTo(Referral::class, 'referral_id'); 
     }
 }

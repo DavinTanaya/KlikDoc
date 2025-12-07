@@ -34,6 +34,7 @@ class NewMessage implements ShouldBroadcast
             'created_at' => $message->created_at->toISOString(),
             'type'       => $message->type,
             'prescription_id' => $message->prescription_id,
+            'referral_id' => $message->referral_id,
         ];
     }
 

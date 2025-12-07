@@ -64,8 +64,8 @@
               <div class="card-title">Catatan Dokter</div>
 
               <div class="note-box">
-                @if ($consultation->notes)
-                  {!! nl2br(e($consultation->notes)) !!}
+                @if ($consultation->prescriptions->notes)
+                  {!! nl2br(e($consultation->prescriptions->notes)) !!}
                 @else
                   <p class="text-muted">Belum ada catatan dari dokter.</p>
                 @endif
@@ -73,20 +73,24 @@
             </div>
 
             {{-- ===== RESEP (OPTIONAL) ===== --}}
-            @if ($consultation->prescriptions?->count())
+            @if ($consultation->prescriptions && $consultation->prescriptions->items->isNotEmpty())
               <div class="content-card">
                 <div class="card-title-row">
                   <div class="card-title">Resep Dokter</div>
-                  <a href="" class="btn-text">Unduh PDF</a>
+                  <a href="{{ route('resep.download', $consultation->prescriptions->id) }}" class="btn btn-primary">
+                    Unduh PDF
+                  </a>
+
                 </div>
 
                 <div class="prescription-list">
-                  @foreach ($consultation->prescriptions as $rx)
+                  @foreach ($consultation->prescriptions->items as $item)
+                    {{-- {{ dd($item->drug) }} --}}
                     <div class="prescription-item">
                       <div class="drug-info">
-                        <h4>{{ $rx->drug_name }}</h4>
-                        <p>{{ $rx->dosage }}</p>
-                        <span class="note">{{ $rx->notes }}</span>
+                        <h4>{{ $item->drug->name }}</h4>
+                        <p>{{ $item->drug->dosis }}</p>
+                        <span class="note">{{ $item->drug->short_description }}</span>
                       </div>
                     </div>
                   @endforeach
@@ -139,7 +143,8 @@
 
               <div class="bill-row">
                 <span>Biaya Konsultasi</span>
-                <span>Rp {{ number_format($consultation->subtotal) }}</span>
+                <span>Rp
+                  {{ number_format($consultation->total - $consultation->service_fee - $consultation->platform_fee) }}</span>
               </div>
               <div class="bill-row">
                 <span>Biaya Layanan</span>
