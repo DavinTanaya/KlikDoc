@@ -53,6 +53,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Application::class, 'user_id');
     }
+
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class, 'user_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

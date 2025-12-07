@@ -382,7 +382,7 @@
       subscribeChat(chatId);
       subscribeCall(chatId);
 
-      fetch(`/chat/messages/${chatId}`)
+      fetch(`/chat-dokter/messages/${chatId}`)
         .then(res => res.json())
         .then(data => {
           msgContainer.innerHTML = '';

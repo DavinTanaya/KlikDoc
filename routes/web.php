@@ -13,6 +13,7 @@ use App\Http\Controllers\DrugController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KlikHomeController;
 use App\Http\Controllers\MandiriController;
+use App\Http\Controllers\MedicineReminderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('mandiri')->group(function () {
         Route::get('/kalkulator-bmi', [MandiriController::class, 'bmi'])->name('mandiri.kalkulator_bmi');
         Route::post('/kalkulator-bmi', [MandiriController::class, 'calculateBmi'])->name('mandiri.kalkulator_bmi.hitung');
-        Route::get('/pengingat-obat', [MandiriController::class, 'pengingatObat'])->name('mandiri.pengingat_obat');
+        Route::get('/pengingat-obat', [MedicineReminderController::class, 'index'])->name('mandiri.pengingat_obat');
+
+        Route::post('/medicine-reminder', [MedicineReminderController::class, 'store'])->name('medicine-reminder.store');
+
+        Route::delete('/medicine-reminder/{id}', [MedicineReminderController::class, 'destroy'])->name('medicine-reminder.destroy');
         Route::get('/kalender-menstruasi', [MandiriController::class, 'kalenderMenstruasi'])->name('mandiri.kalender_menstruasi');
         Route::get('/kalender-kehamilan', [MandiriController::class, 'kalenderKehamilan'])->name('mandiri.kalender_kehamilan');
     });
@@ -130,8 +135,19 @@ Route::middleware('auth')->group(function () {
             Route::get('/dokter/html', [AdminController::class, 'getDokterHtml']);
             Route::get('/artikel/html', [AdminController::class, 'getArticleHtml']);
             Route::get('/konsultasi/html', [AdminController::class, 'getConsultationHtml']);
+            Route::get('/klikhome/html', [AdminController::class, 'getKlikHomeHtml']);
+            Route::get('/dashboard/html', [AdminController::class, 'dashboard']);
+            Route::get('/dashboard/export/pdf', [AdminController::class, 'exportDashboardPdf'])->name('admin.dashboard.export.pdf');
             Route::get('/applications/update-status/{id}', [AdminController::class, 'updateApplicationStatus'])->name('admin.applications.update_status');
             Route::get('/applicants/history', [AdminController::class, 'applicantHistory'])->name('admin.applicants.history');
+            Route::post('/klikhome/services',[AdminController::class, 'storeKlikHomeService'])->name('admin.klikhome.services.store');
+
+            Route::post('/klikhome/services/{serviceId}/status', [AdminController::class, 'updateKlikHomeServiceStatus'])->name('admin.klikhome.services.update_status');
+            Route::put('/klikhome/services/{id}', [AdminController::class, 'updateKlikHomeService'])->name('admin.klikhome.services.update');
+            Route::get('/klikhome/history', [AdminController::class, 'klikHomeOrderHistory'])->name('admin.klikhome.history');
+            Route::get('/klikhome/history/{orderCode}', [AdminController::class, 'detailKlikHomeHistory'])->name('admin.klikhome.history.detail');
+            Route::patch('/klikhome/orders/{orderCode}', [AdminController::class, 'updateKlikHomeOrder'])->name('admin.klikhome.orders.update');
+            
         });
     });
 

@@ -18,4 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })->withSchedule(function ($schedule) {
+        $schedule->command('medicine:send-reminder')->everyMinute()->withoutOverlapping();
+    })
+    ->create();

@@ -16,11 +16,6 @@
       <i class="bi bi-grid-fill me-2"></i>
       <span>Dashboard</span>
     </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="pasien">
-      <i class="bi bi-people-fill me-2"></i>
-      <span>Pasien</span>
-      <span class="badge bg-secondary ms-auto">1234</span>
-    </a>
     <a href="#" class="list-group-item list-group-item-action" data-page="dokter">
       <i class="bi bi-person-badge-fill me-2"></i>
       <span>Dokter</span>
@@ -45,32 +40,6 @@
       <i class="bi bi-file-text-fill me-2"></i>
       <span>Artikel Kesehatan</span>
       <span class="badge bg-secondary ms-auto">89</span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="cek-kesehatan">
-      <i class="bi bi-activity me-2"></i>
-      <span>Cek Kesehatan</span>
-      <span class="badge bg-secondary ms-auto">345</span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="program">
-      <i class="bi bi-heart-fill me-2"></i>
-      <span>Program Kesehatan</span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="obat">
-      <i class="bi bi-capsule-pill me-2"></i>
-      <span>Manajemen Obat</span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="rekam-medis">
-      <i class="bi bi-clipboard2-pulse-fill me-2"></i>
-      <span>Rekam Medis</span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="laporan">
-      <i class="bi bi-bar-chart-fill me-2"></i>
-      <span>Laporan & Analitik</span>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" data-page="notifikasi">
-      <i class="bi bi-bell-fill me-2"></i>
-      <span>Notifikasi</span>
-      <span class="badge bg-secondary ms-auto">12</span>
     </a>
     <a href="#" class="list-group-item list-group-item-action" data-page="pengaturan">
       <i class="bi bi-gear-fill me-2"></i>
