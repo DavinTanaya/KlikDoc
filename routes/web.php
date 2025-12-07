@@ -17,6 +17,7 @@ use App\Http\Controllers\KlikHomeController;
 use App\Http\Controllers\KlikHomeHistoryController;
 use App\Http\Controllers\KlikHomePaymentController;
 use App\Http\Controllers\MandiriBmiController;
+use App\Http\Controllers\MandiriController;
 use App\Http\Controllers\MandiriKehamilanController;
 use App\Http\Controllers\MandiriMenstruasiController;
 use App\Http\Controllers\MandiriObatController;
@@ -37,10 +38,11 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/kalkulator-bmi', [MandiriBmiController::class, 'index'])->name('kalkulator_bmi');
-Route::get('/pengingat-obat', [MandiriObatController::class, 'index'])->name('pengingat_obat');
-Route::get('/kalender-menstruasi', [MandiriMenstruasiController::class, 'index'])->name('kalender_menstruasi');
-Route::get('/kalender-kehamilan', [MandiriKehamilanController::class, 'index'])->name('kalender_kehamilan');
+Route::get('/kalkulator-bmi', [MandiriController::class, 'bmi'])->name('kalkulator_bmi');
+Route::post('/kalkulator-bmi', [MandiriController::class, 'calculateBmi'])->name('kalkulator_bmi.hitung');
+Route::get('/pengingat-obat', [MandiriController::class, 'pengingatObat'])->name('pengingat_obat');
+Route::get('/kalender-menstruasi', [MandiriController::class, 'kalenderMenstruasi'])->name('kalender_menstruasi');
+Route::get('/kalender-kehamilan', [MandiriController::class, 'kalenderKehamilan'])->name('kalender_kehamilan');
 
 Route::get('/apotek', [ApotekController::class, 'index'])->name('apotek');
 Route::get('/apotek/keranjang', [CartController::class, 'index'])->name('apotek_keranjang');
