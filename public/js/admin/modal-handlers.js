@@ -529,4 +529,151 @@ window.showApplicationDetail = function (app) {
     modal.show();
 };
 
+window.showKlikHomeServiceDetail = function (app) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+
+    document.getElementById("detailModalTitle").textContent =
+        "Detail Layanan KlikHome";
+    document.getElementById("detailModalBody").innerHTML =
+        ModalTemplates.klikhomeServiceDetail(app);
+
+    modal.show();
+};
+
+function getCsrfToken() {
+    const tokenMeta = document.querySelector('meta[name="csrf-token"]');
+    return tokenMeta ? tokenMeta.getAttribute("content") : "";
+}
+
+window.saveKlikHomeStatus = function (serviceId) {
+    const select = document.getElementById(`klikhome-status-${serviceId}`);
+    const isActive = select.value;
+
+    fetch(`/admin/klikhome/services/${serviceId}/status`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": getCsrfToken(),
+        },
+        body: JSON.stringify({
+            is_active: isActive,
+        }),
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                setTimeout(() => location.reload(), 1500);
+            }
+        })
+        .catch((err) => {
+            alert("Terjadi kesalahan saat memperbarui status layanan.");
+        });
+};
+
+window.openEditKlikHomeService = function (data) {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+
+    document.getElementById("detailModalTitle").textContent =
+        "Edit Layanan KlikHome";
+
+    document.getElementById("detailModalBody").innerHTML =
+        ModalTemplates.klikhomeServiceEdit(data);
+
+    modal.show();
+};
+window.submitEditKlikHomeService = function () {
+    const id = document.getElementById("edit-service-id").value;
+
+    const payload = {
+        name: document.getElementById("edit-name").value,
+        category: document.getElementById("edit-category").value,
+        price: document.getElementById("edit-price").value,
+        service_fee: document.getElementById("edit-service-fee").value,
+        duration_minutes: document.getElementById("edit-duration").value,
+        handled_by: document.getElementById("edit-handled-by").value,
+        description: document.getElementById("edit-description").value,
+        is_active: document.getElementById("edit-is-active").value,
+    };
+
+    fetch(`/admin/klikhome/services/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": getCsrfToken(),
+            Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((res) => {
+            if (!res.ok) throw new Error("Gagal update layanan");
+            return res.json();
+        })
+        .then(() => {
+            alert("Layanan berhasil diperbarui");
+            location.reload(); // atau update DOM manual
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("Terjadi kesalahan");
+        });
+};
+window.openCreateKlikHomeService = function () {
+    const modal = new bootstrap.Modal(document.getElementById("detailModal"));
+
+    document.getElementById("detailModalTitle").textContent =
+        "Tambah Layanan KlikHome";
+
+    document.getElementById("detailModalBody").innerHTML =
+        ModalTemplates.klikhomeServiceCreate();
+
+    modal.show();
+};
+
+function v($id) {
+    return document.getElementById($id).value;
+}
+
+window.submitCreateKlikHomeService = function () {
+    const payload = {
+        name: v("create-name"),
+        category: v("create-category"),
+        price: +v("create-price"),
+        service_fee: +v("create-service-fee"),
+        duration_minutes: +v("create-duration"),
+        handled_by: v("create-handled-by"),
+        description: v("create-description"),
+        icon_svg: v("create-icon"),
+
+        benefits: v("create-benefits").split("\n").filter(Boolean),
+        inclusions: v("create-inclusions").split("\n").filter(Boolean),
+        time_slots: v("create-slots").split("\n").filter(Boolean),
+
+        safety_notes: v("create-safety") ? JSON.parse(v("create-safety")) : [],
+
+        is_active: v("create-is-active") == "1",
+    };
+
+    fetch("/admin/klikhome/services", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": getCsrfToken(),
+            Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((res) => {
+            if (!res.ok) throw new Error("Gagal membuat layanan");
+            return res.json();
+        })
+        .then(() => {
+            alert("Layanan KlikHome berhasil ditambahkan");
+            location.reload();
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("Terjadi kesalahan saat menambahkan layanan");
+        });
+};
+
 console.log("Modal handlers loaded successfully!");

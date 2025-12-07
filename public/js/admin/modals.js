@@ -81,7 +81,286 @@ const ModalTemplates = {
 
         </div>
     `,
-    // Patient Detail Modal
+    klikhomeServiceDetail: (data) => `
+    <div class="row g-4">
+    <div class="col-md-4 text-center">
+        <div class="avatar mx-auto mb-3"
+        style="width:90px;height:90px;font-size:32px;">
+        ${data.name
+            .split(" ")
+            .map((w) => w[0])
+            .join("")}
+        </div>
+
+        <h5>${data.name}</h5>
+        <span class="badge bg-primary">${data.category}</span>
+    </div>
+
+    <div class="col-md-8">
+        <h6 class="mb-3">Informasi Layanan</h6>
+
+        <table class="table table-borderless table-sm">
+        <tr>
+            <td class="text-muted" width="160">Harga</td>
+            <td>Rp ${data.price.toLocaleString()}</td>
+        </tr>
+        <tr>
+            <td class="text-muted">Biaya Layanan</td>
+            <td>Rp ${data.service_fee.toLocaleString()}</td>
+        </tr>
+        <tr>
+            <td class="text-muted">Durasi</td>
+            <td>${data.duration_minutes} menit</td>
+        </tr>
+        <tr>
+            <td class="text-muted">Ditangani oleh</td>
+            <td>${data.handled_by}</td>
+        </tr>
+
+        <tr>
+            <td class="text-muted">Status</td>
+            <td>
+            <select class="form-select form-select-sm"
+                    id="klikhome-status-${data.id}">
+                <option value="1" ${
+                    data.is_active ? "selected" : ""
+                }>Aktif</option>
+                <option value="0" ${
+                    !data.is_active ? "selected" : ""
+                }>Nonaktif</option>
+            </select>
+            </td>
+        </tr>
+        </table>
+
+        <div class="mt-3">
+        <strong>Deskripsi</strong>
+        <p class="text-muted small mt-1">${data.description ?? "-"}</p>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-success btn-sm"
+            onclick="saveKlikHomeStatus(${data.id})">
+            <i class="bi bi-save"></i> Simpan Status
+        </button>
+
+        <button class="btn btn-primary btn-sm"
+            onclick='openEditKlikHomeService(${JSON.stringify(data)})'>
+            <i class="bi bi-pencil"></i> Edit
+        </button>
+        </div>
+    </div>
+    </div>
+    `,
+    klikhomeServiceEdit: (data) => `
+        <form id="editKlikHomeForm" class="row g-3">
+
+            <input type="hidden" id="edit-service-id" value="${data.id}">
+
+            <div class="col-md-6">
+                <label class="form-label">Nama Layanan</label>
+                <input type="text" class="form-control form-control-sm"
+                    id="edit-name"
+                    value="${data.name}">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Kategori</label>
+                <input type="text" class="form-control form-control-sm"
+                    id="edit-category"
+                    value="${data.category}">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Harga</label>
+                <input type="number" class="form-control form-control-sm"
+                    id="edit-price"
+                    value="${data.price}">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Biaya Layanan</label>
+                <input type="number" class="form-control form-control-sm"
+                    id="edit-service-fee"
+                    value="${data.service_fee}">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Durasi (menit)</label>
+                <input type="number" class="form-control form-control-sm"
+                    id="edit-duration"
+                    value="${data.duration_minutes}">
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Ditangani Oleh</label>
+                <input type="text" class="form-control form-control-sm"
+                    id="edit-handled-by"
+                    value="${data.handled_by}">
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Deskripsi</label>
+                <textarea rows="3"
+                    id="edit-description"
+                    class="form-control form-control-sm">${
+                        data.description ?? ""
+                    }</textarea>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Status</label>
+                <select class="form-select form-select-sm" id="edit-is-active">
+                    <option value="1" ${
+                        data.is_active ? "selected" : ""
+                    }>Aktif</option>
+                    <option value="0" ${
+                        !data.is_active ? "selected" : ""
+                    }>Nonaktif</option>
+                </select>
+            </div>
+
+            <div class="col-12 d-flex justify-content-end gap-2 mt-3">
+                <button type="button" class="btn btn-success btn-sm"
+                    onclick="submitEditKlikHomeService()">
+                    <i class="bi bi-save"></i> Simpan
+                </button>
+
+                <button type="button" class="btn btn-outline-secondary btn-sm"
+                    data-bs-dismiss="modal">
+                    Batal
+                </button>
+            </div>
+        </form>
+        `,
+    klikhomeServiceCreate: () => `
+<form id="createKlikHomeForm" class="row g-3 klikhome-create-form">
+
+    <!-- BASIC INFO -->
+    <div class="col-12">
+        <h6 class="section-title">
+            <i class="bi bi-info-circle"></i> Informasi Dasar
+        </h6>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Nama Layanan</label>
+        <input type="text" class="form-control form-control-sm"
+            id="create-name" placeholder="Contoh: Immune Booster Infusion" required>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Kategori</label>
+        <input type="text" class="form-control form-control-sm"
+            id="create-category" placeholder="Vitamin Booster / Vaksinasi" required>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Harga (Rp)</label>
+        <input type="number" class="form-control form-control-sm"
+            id="create-price" required>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Biaya Layanan (Rp)</label>
+        <input type="number" class="form-control form-control-sm"
+            id="create-service-fee" value="5000" required>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Durasi (menit)</label>
+        <input type="number" class="form-control form-control-sm"
+            id="create-duration" required>
+    </div>
+
+    <div class="col-md-12">
+        <label class="form-label">Ditangani Oleh</label>
+        <input type="text" class="form-control form-control-sm"
+            id="create-handled-by" placeholder="Perawat / Dokter Umum" required>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="col-12">
+        <label class="form-label">Deskripsi</label>
+        <textarea rows="3"
+            id="create-description"
+            class="form-control form-control-sm"
+            placeholder="Deskripsi singkat layanan..."></textarea>
+    </div>
+
+    <!-- ICON -->
+    <div class="col-12">
+        <label class="form-label">Icon SVG (Optional)</label>
+        <textarea rows="2"
+            id="create-icon"
+            class="form-control form-control-sm"
+            placeholder="<svg>...</svg>"></textarea>
+    </div>
+
+    <!-- ARRAYS -->
+    <div class="col-12">
+        <h6 class="section-title mt-3">
+            <i class="bi bi-list-check"></i> Detail Tambahan
+        </h6>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Manfaat (1 per baris)</label>
+        <textarea rows="3"
+            id="create-benefits"
+            class="form-control form-control-sm"
+            placeholder="✅ Meningkatkan imun&#10;✅ Menambah stamina"></textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Yang Termasuk (1 per baris)</label>
+        <textarea rows="3"
+            id="create-inclusions"
+            class="form-control form-control-sm"
+            placeholder="💉 Infus set&#10;🧤 Alat steril"></textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Prosedur Keamanan (JSON)</label>
+        <textarea rows="3"
+            id="create-safety"
+            class="form-control form-control-sm"
+            placeholder='[{"title":"Steril","desc":"Alat steril"}]'></textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Time Slots (1 per baris)</label>
+        <textarea rows="3"
+            id="create-slots"
+            class="form-control form-control-sm"
+            placeholder="09:00 - 10:00&#10;10:00 - 11:00"></textarea>
+    </div>
+
+    <!-- STATUS -->
+    <div class="col-md-4">
+        <label class="form-label">Status</label>
+        <select class="form-select form-select-sm" id="create-is-active">
+            <option value="1" selected>Aktif</option>
+            <option value="0">Nonaktif</option>
+        </select>
+    </div>
+
+    <!-- ACTION -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-4">
+        <button type="button" class="btn btn-success btn-sm px-4"
+            onclick="submitCreateKlikHomeService()">
+            <i class="bi bi-plus-circle"></i> Tambah Layanan
+        </button>
+
+        <button type="button"
+            class="btn btn-outline-secondary btn-sm px-4"
+            data-bs-dismiss="modal">
+            Batal
+        </button>
+    </div>
+</form>
+`,
+
     patientDetail: (data) => `
         <div class="row g-4">
             <div class="col-md-4 text-center">

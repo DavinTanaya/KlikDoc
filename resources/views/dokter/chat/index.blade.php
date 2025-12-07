@@ -359,13 +359,13 @@
             subscribeChat(chatId);
             subscribeCall(chatId);
 
-            fetch(`/chat-dokter/messages/${chatId}`)
-                .then(res => res.json())
-                .then(data => {
-                    msgContainer.innerHTML = '';
-                    data.messages.forEach(m => {
-                        appendMessage(m, m.sender_id === authUserId ? 'sent' : 'received');
-                    });
+      fetch(`/chat-dokter/messages/${chatId}`)
+        .then(res => res.json())
+        .then(data => {
+          msgContainer.innerHTML = '';
+          data.messages.forEach(m => {
+            appendMessage(m, m.sender_id === authUserId ? 'sent' : 'received');
+          });
 
                     const isActive = data.consultation_status === 'AKTIF';
 

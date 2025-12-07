@@ -14,15 +14,11 @@ class ChatDokterController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        // =========================
-        // LOAD CHAT + RELATION
-        // =========================
         $query = Chat::with([
             'user',
             'doctor.application',
             'messages' => fn ($q) => $q->latest()->limit(1),
-            'consultation', // 🔥 pakai consultation_id di chats
+            'consultation',
         ]);
 
         if ($user->role === 'doctor') {
@@ -115,9 +111,6 @@ class ChatDokterController extends Controller
         ]);
     }
 
-    // =====================================================
-    // LOAD MESSAGES PER CHAT
-    // =====================================================
     public function messages(Chat $chat)
     {
         $chat->load('consultation');
@@ -125,13 +118,10 @@ class ChatDokterController extends Controller
         $isActive = $chat->consultation
             && $chat->consultation->status === 'AKTIF';
 
-        // ✅ AMBIL MESSAGE + CONDITIONAL RELATION
         $messages = $chat->messages()
             ->orderBy('created_at')
             ->get()
             ->map(function ($msg) {
-
-                // ✅ DEFAULT PAYLOAD
                 $payload = [
                     'id'         => $msg->id,
                     'chat_id'    => $msg->chat_id,
@@ -141,12 +131,10 @@ class ChatDokterController extends Controller
                     'created_at' => $msg->created_at,
                 ];
 
-                // ✅ JIKA RESEP
                 if ($msg->type === 'prescription' && $msg->prescription_id) {
                     $payload['prescription_id'] = $msg->prescription_id;
                 }
 
-                // ✅ JIKA RUJUKAN (INI YANG KAMU BUTUH)
                 if ($msg->type === 'referral' && $msg->referral_id) {
                     $referral = Referral::find($msg->referral_id);
 

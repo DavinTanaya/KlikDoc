@@ -2,44 +2,27 @@ document.addEventListener('DOMContentLoaded', function() {
     loadReminders();
 });
 
-function addReminder() {
-    const nameInput = document.getElementById('med_name');
-    const freqInput = document.getElementById('med_freq');
-    const timeInput = document.getElementById('med_time');
-    const noteInput = document.getElementById('med_note');
-
-    const name = nameInput.value.trim();
-    const frequency = parseInt(freqInput.value);
-    const startTime = timeInput.value;
-    const note = noteInput.value.trim();
-
-    if (!name || !startTime) {
-        alert('Mohon isi nama obat dan waktu konsumsi.');
-        return;
-    }
-
-    const calculatedTimes = calculateSchedule(startTime, frequency);
-
-    const reminder = {
-        id: Date.now(),
-        name: name,
-        frequency: frequency,
-        times: calculatedTimes,
-        note: note || 'Tidak ada catatan'
+async function addReminder() {
+    const payload = {
+        medicine_name: document.getElementById("med_name").value,
+        frequency: document.getElementById("med_freq").value,
+        start_time: document.getElementById("med_time").value,
+        note: document.getElementById("med_note").value,
     };
 
-    let reminders = getRemindersFromStorage();
-    reminders.push(reminder);
-    
-    saveReminders(reminders);
+    await fetch("/mandiri/obat", {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]').content,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
 
-    nameInput.value = '';
-    timeInput.value = '';
-    noteInput.value = '';
-    freqInput.value = '1';
-
-    renderList(reminders);
+    alert("Pengingat obat berhasil ditambahkan ✅");
 }
+
 
 function calculateSchedule(start, freq) {
     const times = [];
