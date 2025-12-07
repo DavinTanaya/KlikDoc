@@ -27,7 +27,7 @@ class ArticleSeeder extends Seeder
                 'category' => 'Penyakit Dalam',
                 'content'  => $this->dummyContent(),
                 'status'   => 'published',
-                'author'   => $dokter,
+                'author'   => $dokter->user_id,
                 'author_role'=> 'dokter',
             ],
             [
@@ -35,23 +35,23 @@ class ArticleSeeder extends Seeder
                 'category' => 'Kesehatan Kulit',
                 'content'  => $this->dummyContent(),
                 'status'   => 'published',
-                'author'   => $dokter,
-                'author_role'=> 'dokter',
+                'author'   => $dokter->user_id,
+                'author_role'=> 'doctor',
             ],
             [
                 'title'    => 'Vaksin Anak: Jadwal Terbaru IDAI 2024',
                 'category' => 'Kesehatan Anak',
                 'content'  => $this->dummyContent(),
                 'status'   => 'draft', // 👈 dokter publish → tetap draft
-                'author'   => $dokter,
-                'author_role'=> 'dokter',
+                'author'   => $dokter->user_id,
+                'author_role'=> 'doctor',
             ],
             [
                 'title'    => 'Pola Hidup Sehat untuk Cegah Diabetes',
                 'category' => 'Gaya Hidup',
                 'content'  => $this->dummyContent(),
                 'status'   => 'published',
-                'author'   => $admin,
+                'author'   => $admin->id,
                 'author_role'=> 'admin',
             ],
         ];
@@ -63,7 +63,7 @@ class ArticleSeeder extends Seeder
                 'category'    => $item['category'],
                 'content'     => $item['content'],
                 'status'      => $item['status'],
-                'author_id'   => $item['author']->id,
+                'author_id'   => $item['author'],
                 'author_role' => $item['author_role'],
                 'thumbnail'   => 'images/article/default.jpg', // opsional
                 'created_at'=> $item['status'] === 'published' ? now() : null,

@@ -146,9 +146,9 @@
                 <div class="article-footer">
                   <div class="author">
                     <div class="author-avatar">
-                      {{ strtoupper(substr($article->author->name, 0, 2)) }}
+                      {{ strtoupper(substr($article->author->application?->full_name, 0, 2)) }}
                     </div>
-                    <span>{{ $article->author->name }}</span>
+                    <span>{{ $article->author->application?->full_name ?: $article->author->name }}</span>
                   </div>
 
                   <a href="{{ route('artikel.detail', $article) }}" class="btn-read-more">

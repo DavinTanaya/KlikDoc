@@ -13,7 +13,7 @@ class ArticleController extends Controller
         $search   = $request->q;
         $category = $request->category;
 
-        $articles = Article::with('author')
+        $articles = Article::with('author', 'author.application')
             ->where('status', 'published')
 
             // SEARCH

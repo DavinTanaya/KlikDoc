@@ -39,7 +39,7 @@
             </div>
             <div class="text">
               <span class="name">
-                Ditulis oleh <strong>{{ $article->author->name }}</strong>
+                Ditulis oleh <strong>{{ $article->author->application?->full_name ?: $article->author->name }}</strong>
               </span>
               <span class="date">
                 {{ $article->created_at->format('d F Y') }}
@@ -114,7 +114,7 @@
             src="https://ui-avatars.com/api/?name={{ urlencode($article->author->name) }}&background=1C274C&color=fff">
         </div>
         <div class="bio-text">
-          <h4>{{ $article->author->name }}</h4>
+          <h4>{{ $article->author->application?->full_name ?: $article->author->name }}</h4>
           <p>
             {{ $article->author->bio ?? 'Dokter terpercaya di KlikDoc yang aktif memberikan edukasi kesehatan.' }}
           </p>
