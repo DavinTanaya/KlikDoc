@@ -155,4 +155,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/prescription/{id}/download', [ConsultationController::class, 'download'])->name('resep.download');
+
+    Route::get('/profil', [UserController::class, 'profile'])->name('user.profilie');
+    Route::put('/profil', [UserController::class, 'update'])->name('user.profile.update');
+
+    Route::get('/dokter/profile', [DoctorController::class, 'profile'])->name('dokter.profile');
 });
