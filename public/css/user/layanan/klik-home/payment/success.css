@@ -1,4 +1,12 @@
 .klikhome-success-page {
+    --bg-page: #f4f7fe;
+    --bg-white: #ffffff;
+    --primary: #1c274c;
+    --accent: #ff4867;
+    --green-success: #4caf50;
+    --text-main: #333;
+    --text-grey: #888;
+    --border: #e0e0e0;
     background-color: var(--bg-content);
     min-height: 100vh;
     display: flex;
@@ -15,7 +23,7 @@
     padding: 3rem 2rem;
     text-align: center;
     box-shadow: 0 20px 60px rgba(var(--blue1), 0.08);
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +65,9 @@
 }
 
 @keyframes popIn {
-    to { transform: scale(1); }
+    to {
+        transform: scale(1);
+    }
 }
 
 .klikhome-success-page .ripple {
@@ -71,8 +81,14 @@
 }
 
 @keyframes rippleEffect {
-    0% { transform: scale(0.8); opacity: 1; }
-    100% { transform: scale(1.6); opacity: 0; }
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
 }
 
 .klikhome-success-page .text-content h1 {
