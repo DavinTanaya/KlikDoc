@@ -166,9 +166,10 @@
           <div id="callContainer" class="call-container" style="display:none">
             <div class="video-wrapper" id="videoWrapper">
               <video class="video-local" id="localVideo" autoplay muted playsinline></video>
-              <video class="video-remote" id="remoteVideoUser" autoplay playsinline></video>
-              <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline style="display: none;"></video>
+              <video class="video-remote" id="remoteVideoUser" autoplay playsinline style="display: none;"></video>
+              <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline></video>
             </div>
+            <audio id="remoteAudio" autoplay controls style="display:none;"></audio>
             <div class="audio-wrapper" id="audioWrapper">
               <img id="incomingCallAvatar"
                 src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->user->name ?? ($activechat?->user->name ?? 'Chat')) }}"
@@ -625,22 +626,33 @@
       };
 
       pc.ontrack = e => {
-        console.log('[RTC] ✅ ontrack fired from', remoteId);
+        console.log('[RTC] ✅ ontrack fired:', e.track.kind);
 
         if (!remoteStreams[remoteId]) {
           remoteStreams[remoteId] = new MediaStream();
         }
 
-        e.streams[0].getTracks().forEach(track => {
-          remoteStreams[remoteId].addTrack(track);
-          console.log('[RTC] remote track:', track.kind);
-        });
+        remoteStreams[remoteId].addTrack(e.track);
 
-        const video = videoElementFor(remoteId);
-        video.srcObject = remoteStreams[remoteId];
-        video.muted = false;
-        video.play().catch(() => {});
+        if (e.track.kind === 'audio') {
+          const audio = document.getElementById('remoteAudio');
+          audio.srcObject = remoteStreams[remoteId];
+          audio.muted = false;
+          audio.volume = 1.0;
+
+          audio.play().catch(err => {
+            console.warn('[RTC] audio autoplay blocked', err);
+          });
+        }
+
+        if (e.track.kind === 'video') {
+          const video = videoElementFor(remoteId);
+          video.srcObject = remoteStreams[remoteId];
+          video.muted = false;
+          video.play().catch(() => {});
+        }
       };
+
 
       return pc;
     }
@@ -740,6 +752,10 @@
 
       await getLocalStream(currentCallType);
       if (callContainer) callContainer.style.display = 'block';
+
+      const audio = document.getElementById('remoteAudio');
+      audio.muted = false;
+      audio.play().catch(() => {});
 
       if (!callChannel) return;
       callChannel.whisper('rtc-signal', {
