@@ -543,14 +543,6 @@
         video: true
       };
 
-      if (type === 'audio') {
-        document.getElementById("videoWrapper").style.display = "none";
-        document.getElementById("audioWrapper").style.display = "flex";
-      } else {
-        document.getElementById("videoWrapper").style.display = "flex";
-        document.getElementById("audioWrapper").style.display = "none";
-      }
-
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
       localVideo.srcObject = localStream;
 
