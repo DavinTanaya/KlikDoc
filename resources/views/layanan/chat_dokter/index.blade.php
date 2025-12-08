@@ -552,15 +552,23 @@
     function createPC(remoteId) {
       if (pcs[remoteId]) return pcs[remoteId];
 
-      console.log("[RTC] Creating PC for", remoteId);
-
+      console.log('[RTC] Creating PC for', remoteId);
       const pc = new RTCPeerConnection(rtcConfig);
       pcs[remoteId] = pc;
 
-      pc.onicecandidate = (e) => {
-        if (e.candidate) {
-          callChannel.whisper("rtc-signal", {
-            type: "ice",
+      if (localStream) {
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+          console.log('[RTC] track added:', track.kind);
+        });
+      } else {
+        console.warn('[RTC] localStream NOT READY when createPC');
+      }
+
+      pc.onicecandidate = e => {
+        if (e.candidate && callChannel) {
+          callChannel.whisper('rtc-signal', {
+            type: 'ice',
             from: authUserId,
             to: remoteId,
             candidate: e.candidate
@@ -568,21 +576,22 @@
         }
       };
 
-      pc.ontrack = (e) => {
+      pc.ontrack = e => {
+        console.log('[RTC] ✅ ontrack fired from', remoteId);
+
         if (!remoteStreams[remoteId]) {
           remoteStreams[remoteId] = new MediaStream();
         }
 
         e.streams[0].getTracks().forEach(track => {
           remoteStreams[remoteId].addTrack(track);
+          console.log('[RTC] remote track:', track.kind);
         });
 
         const video = videoElementFor(remoteId);
         video.srcObject = remoteStreams[remoteId];
-
-        video.play().catch(err => {
-          console.warn('[RTC] autoplay blocked, retrying...', err);
-        });
+        video.muted = false;
+        video.play().catch(() => {});
       };
 
       return pc;
@@ -677,38 +686,43 @@
     }
 
     async function makeOffer(remoteId) {
-      const pc = createPC(remoteId);
+      console.log('[CALL] makeOffer to', remoteId);
 
+      await getLocalStream(currentCallType);
+
+      const pc = createPC(remoteId);
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
 
-      callChannel.whisper("rtc-signal", {
-        type: "offer",
+      callChannel.whisper('rtc-signal', {
+        type: 'offer',
         from: authUserId,
         to: remoteId,
         sdp: offer
       });
     }
 
+
     async function onOffer(payload) {
-      console.log("[CALL] OFFER from", payload.from);
+      console.log('[CALL] receive OFFER from', payload.from);
 
       await getLocalStream(currentCallType);
-      callContainer.style.display = "block";
 
       const pc = createPC(payload.from);
 
       await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
+
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
 
-      callChannel.whisper("rtc-signal", {
-        type: "answer",
+      callChannel.whisper('rtc-signal', {
+        type: 'answer',
         from: authUserId,
         to: payload.from,
         sdp: answer
       });
     }
+
 
     async function onAnswer(payload) {
       console.log("[CALL] ANSWER from", payload.from);
