@@ -44,6 +44,12 @@
     .btn-rujukan:hover {
       background: #059669;
     }
+
+    #remoteAudio {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
   </style>
 @endpush
 
@@ -169,7 +175,7 @@
               <video class="video-remote" id="remoteVideoUser" autoplay playsinline style="display: none;"></video>
               <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline></video>
             </div>
-            <audio id="remoteAudio" autoplay controls style="display:none;"></audio>
+            <audio id="remoteAudio" autoplay></audio>
             <div class="audio-wrapper" id="audioWrapper">
               <img id="incomingCallAvatar"
                 src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->user->name ?? ($activechat?->user->name ?? 'Chat')) }}"
@@ -539,16 +545,19 @@
     }
 
     const rtcConfig = {
-      iceTransportPolicy: "relay",
       iceServers: [{
-        urls: [
-          "turn:5.175.183.160:3478?transport=udp",
-          "turn:5.175.183.160:3478?transport=tcp",
-          "turns:5.175.183.160:5349"
-        ],
-        username: "klikdoc",
-        credential: "passwordkuat"
-      }]
+          urls: "stun:stun.l.google.com:19302"
+        },
+        {
+          urls: [
+            "turn:5.175.183.160:3478?transport=udp",
+            "turn:5.175.183.160:3478?transport=tcp",
+            "turns:5.175.183.160:5349"
+          ],
+          username: "klikdoc",
+          credential: "passwordkuat"
+        }
+      ]
     };
 
 
@@ -570,10 +579,9 @@
     const incomingSubtitle = document.getElementById('incomingCallSubtitle');
 
     function videoElementFor(id) {
-      if (id == chatUserId && remoteVideoUser) return remoteVideoUser;
-      if (id == chatDoctorId && remoteVideoDoc) return remoteVideoDoc;
-      return remoteVideoUser || remoteVideoDoc;
+      return remoteVideoUser;
     }
+
 
     async function getLocalStream(type) {
       if (localStream) return localStream;

@@ -149,7 +149,7 @@
             <video id="remoteVideoUser" class="video-remote" autoplay playsinline style="display: none;"></video>
             <video id="remoteVideoDoctor" class="video-remote" autoplay playsinline></video>
           </div>
-          <audio id="remoteAudio" autoplay controls style="display:none;"></audio>
+          <audio id="remoteAudio" autoplay></audio>
           <div class="audio-wrapper" id="audioWrapper">
             <img id="incomingCallAvatar"
               src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->doctor->name ?? ($activechat?->user->name ?? 'Chat')) }}"
@@ -499,17 +499,21 @@
     }
 
     const rtcConfig = {
-      iceTransportPolicy: "relay",
       iceServers: [{
-        urls: [
-          "turn:5.175.183.160:3478?transport=udp",
-          "turn:5.175.183.160:3478?transport=tcp",
-          "turns:5.175.183.160:5349"
-        ],
-        username: "klikdoc",
-        credential: "passwordkuat"
-      }]
+          urls: "stun:stun.l.google.com:19302"
+        },
+        {
+          urls: [
+            "turn:5.175.183.160:3478?transport=udp",
+            "turn:5.175.183.160:3478?transport=tcp",
+            "turns:5.175.183.160:5349"
+          ],
+          username: "klikdoc",
+          credential: "passwordkuat"
+        }
+      ]
     };
+
 
     let localStream = null;
     let pcs = {};
@@ -521,7 +525,15 @@
     const remoteVideoDoc = document.getElementById("remoteVideoDoctor");
 
     async function getLocalStream(type) {
-      if (localStream) return localStream;
+      if (localStream) {
+        const hasVideo = localStream.getVideoTracks().length > 0;
+        if (type === 'video' && !hasVideo) {
+          localStream.getTracks().forEach(t => t.stop());
+          localStream = null;
+        } else {
+          return localStream;
+        }
+      }
 
       const constraints = type === 'audio' ? {
         audio: true,
@@ -535,9 +547,7 @@
       localVideo.srcObject = localStream;
 
       Object.values(pcs).forEach(pc => {
-        localStream.getTracks().forEach(track => {
-          pc.addTrack(track, localStream);
-        });
+        localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
       });
 
       return localStream;
@@ -545,10 +555,9 @@
 
 
     function videoElementFor(id) {
-      if (id == chatUserId) return remoteVideoUser;
-      if (id == chatDoctorId) return remoteVideoDoc;
       return remoteVideoUser;
     }
+
 
     function createPC(remoteId) {
       if (pcs[remoteId]) return pcs[remoteId];
