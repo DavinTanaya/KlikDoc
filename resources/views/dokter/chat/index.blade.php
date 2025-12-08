@@ -125,12 +125,14 @@
 
           <div id="chatStatusBar"
             class="chat-status-bar {{ $activechat?->consultation->status === 'AKTIF' ? 'status-active' : 'status-closed' }}">
-            <span id="statusIcon"><i class="fas fa-clock"></i></span>
-            <span id="statusText">
-              {{ $activechat?->consultation->status === 'AKTIF'
-                  ? 'Sesi konsultasi sedang berlangsung'
-                  : 'Sesi konsultasi telah selesai' }}
-            </span>
+            <div class="staus-content">
+              <span id="statusIcon"><i class="fas fa-clock"></i></span>
+              <span id="statusText">
+                {{ $activechat?->consultation->status === 'AKTIF'
+                    ? 'Sesi konsultasi sedang berlangsung'
+                    : 'Sesi konsultasi telah selesai' }}
+              </span>
+            </div>
 
             @if ($activechat?->consultation->status === 'AKTIF')
               <div class="doctor-controls" id="doctorControls">
@@ -161,6 +163,24 @@
             @endforeach
           </div>
 
+          <div id="callContainer" class="call-container" style="display:none">
+            <div class="video-wrapper" id="videoWrapper">
+              <video class="video-local" id="localVideo" autoplay muted playsinline></video>
+              <video class="video-remote" id="remoteVideoUser" autoplay playsinline></video>
+              <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline style="display: none;"></video>
+            </div>
+            <div class="audio-wrapper" id="audioWrapper">
+              <img id="incomingCallAvatar"
+                src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->user->name ?? ($activechat?->user->name ?? 'Chat')) }}"
+                alt="Caller avatar">
+            </div>
+            <div class="call-controls">
+              <button class="btn btn-danger btn-sm" onclick="hangupCall()">
+                End Call
+              </button>
+            </div>
+          </div>
+
           <footer class="input-area {{ $activechat?->consultation->status !== 'AKTIF' ? 'closed' : '' }}">
             <div id="inputWrapperActive" class="input-wrapper-active"
               style="{{ $activechat?->consultation->status !== 'AKTIF' ? 'display:none' : '' }}">
@@ -179,19 +199,6 @@
           </footer>
         </main>
 
-      </div>
-    </div>
-
-    <div id="callContainer" class="call-container" style="display:none">
-      <div class="video-wrapper">
-        <video id="localVideo" autoplay muted playsinline></video>
-        <video id="remoteVideoUser" autoplay playsinline></video>
-        <video id="remoteVideoDoctor" autoplay playsinline></video>
-      </div>
-      <div class="call-controls">
-        <button class="btn btn-danger btn-sm" onclick="hangupCall()">
-          End Call
-        </button>
       </div>
     </div>
 
@@ -364,6 +371,13 @@
         .then(data => {
           chatUserId = data.user_id;
           chatDoctorId = data.doctor_id;
+
+          console.table({
+            '[CHAT CONTEXT UPDATED]': activeChatId,
+            chatUserId,
+            chatDoctorId
+          });
+
           msgContainer.innerHTML = '';
           data.messages.forEach(m => {
             appendMessage(m, m.sender_id === authUserId ? 'sent' : 'received');
@@ -563,6 +577,14 @@
         video: true
       };
 
+      if (type === "audio") {
+        document.getElementById("audioWrapper").style.display = "flex";
+        document.getElementById("videoWrapper").style.display = "none";
+      } else {
+        document.getElementById("audioWrapper").style.display = "none";
+        document.getElementById("videoWrapper").style.display = "flex";
+      }
+
       console.log('[RTC] getUserMedia(dokter):', constraints);
 
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -608,7 +630,11 @@
 
     function subscribeCall(chatId) {
       if (!chatId) return console.warn('[CALL] no chatId');
-
+      if (callChannel) {
+        callChannel.stopListeningForWhisper('rtc-signal');
+        window.Echo.leave('calls.' + activeChatId);
+      }
+      endCallLocal();
       console.log('[CALL] subscribe calls.' + chatId);
 
       callChannel = window.Echo.private('calls.' + chatId);
@@ -619,8 +645,8 @@
       callChannel.listenForWhisper('rtc-signal', async payload => {
         console.log('[CALL] rtc-signal (dokter):', payload);
         if (String(payload.from) === String(authUserId)) {
-            console.warn('[CALL] ignore self rtc-signal');
-            return;
+          console.warn('[CALL] ignore self rtc-signal');
+          return;
         }
         if (payload.to && String(payload.to) !== String(authUserId)) {
           return; // not for this doctor

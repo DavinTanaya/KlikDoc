@@ -11,20 +11,19 @@
         <div class="home_information">
             <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators carousel-bullet">
-                    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    @foreach ($informationFile as $key => $file)
+                        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="{{ $key }}"
+                            class="{{ $loop->first ? 'active' : '' }}" aria-current="true"
+                            aria-label="Slide {{ $key + 1 }}"></button>
+                    @endforeach
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('image/home/information/information-1.png') }}" class="d-block w-100" alt="Banner 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('image/home/artikel/artikel-1.png') }}" class="d-block w-100" alt="Banner 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('image/home/artikel/artikel-2.png') }}" class="d-block w-100" alt="Banner 3">
-                    </div>
+                    @foreach ($informationFile as $file)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <img src="{{ asset('image/home/information/' . $file->getFileName()) }}" class="d-block w-100"
+                                alt="Banner {{ $loop->index + 1 }}">
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -95,18 +94,12 @@
             <h2>Promo & Penawaran Hari Ini</h2>
             <div class="home_promo-wrapper">
                 <div class="promo-scroll-container">
-                    <div class="promo-card-item">
-                        <img src="{{ asset('image/home/promo/promo-1.png') }}" alt="Promo 1">
-                    </div>
-                    <div class="promo-card-item">
-                        <div class="promo-placeholder red-promo"></div>
-                    </div>
-                    <div class="promo-card-item">
-                        <img src="{{ asset('image/home/promo/promo-1.png') }}" alt="Promo 3">
-                    </div>
-                    <div class="promo-card-item">
-                        <img src="{{ asset('image/home/promo/promo-1.png') }}" alt="Promo 4">
-                    </div>
+                    @foreach ($promoFile as $key => $file)
+                        <div class="promo-card-item">
+                            <img src="{{ asset('image/home/promo/' . $file->getFileName()) }}"
+                                alt="Promo {{ $key + 1 }}">
+                        </div>
+                    @endforeach
                 </div>
                 <div class="promo-indicators carousel-bullet"></div>
             </div>

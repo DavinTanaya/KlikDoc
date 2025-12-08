@@ -469,7 +469,6 @@
     background: rgb(var(--white));
     padding: 10px;
     border-radius: 10px;
-    margin-top: 10px;
     border: 1px solid rgb(var(--grey1));
 }
 
@@ -492,17 +491,19 @@
 
 .video-wrapper {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
     justify-content: center;
+    align-items: center;
 }
 
 .video-local,
 .video-remote {
     background: #000;
     border-radius: 8px;
-    width: 100%;
-    max-width: 320px;
+    width: auto;
+    height: 20vh;
     aspect-ratio: 16/9;
     object-fit: cover;
 }
@@ -514,12 +515,18 @@
 
     .video-remote,
     .video-local {
-        max-width: 260px;
+        max-width: 320px;
+        height: auto;
     }
 
     .call-container {
         padding: 6px;
         margin-top: 6px;
+    }
+
+    .video-wrapper {
+        flex-direction: row;
+        gap: 20px;
     }
 }
 

@@ -50,41 +50,46 @@
 
 @section('split-right')
     <div class="form-wrapper">
-                    <div class="form-header klik_form-header">
-                        <h1>Kalkulator Kehamilan</h1>
-                        <h2>Masukkan Hari Pertama Haid Terakhir (HPHT) untuk melihat perkiraan.</h2>
-                    </div>
+        <div class="form-header klik_form-header">
+            <h1>Kalkulator Kehamilan</h1>
+            <h2>Masukkan Hari Pertama Haid Terakhir (HPHT) untuk melihat perkiraan.</h2>
+        </div>
 
-                    <form onsubmit="event.preventDefault(); calculatePregnancy();" class="tracker-form">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="input-group-custom">
-                                    <label for="hpht_date" class="klik_form-label">Hari Pertama Haid Terakhir (HPHT)</label>
-                                    <div class="input-with-icon">
-                                        <input type="date" id="hpht_date" class="klik_form-input" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-submit mt-3 klik_form-button">
-                            <i class="fas fa-calculator"></i>
-                            <span>Hitung Sekarang</span>
-                        </button>
-                    </form>
-                    
-                    <div id="result-wrapper" class="calendar-container">
-                        <div class="result-content">
-                            <div class="result-title">Hari Perkiraan Lahir (HPL)</div>
-                            <div class="result-value" id="hpl-display">-</div>
-
-                            <div class="result-title">Usia Kehamilan Saat Ini</div>
-                            <div class="gestational-age" id="age-display">-</div>
+        <form onsubmit="event.preventDefault(); calculatePregnancy();" class="tracker-form">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="input-group-custom">
+                        <label for="hpht_date" class="klik_form-label">Hari Pertama Haid Terakhir (HPHT)</label>
+                        <div class="input-with-icon">
+                            <input type="date" id="hpht_date" class="klik_form-input" required>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <button type="submit" class="btn-submit mt-3 klik_form-button">
+                <i class="fas fa-calculator"></i>
+                <span>Hitung Sekarang</span>
+            </button>
+        </form>
+
+        <div id="result-wrapper" class="calendar-container">
+            <div class="result-content">
+                <div class="result-title">Hari Perkiraan Lahir (HPL)</div>
+                <div class="result-value" id="hpl-display">-</div>
+
+                <div class="result-title">Usia Kehamilan Saat Ini</div>
+                <div class="gestational-age" id="age-display">-</div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
+    <script>
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        document.getElementById('hpht_date').setAttribute('max', formattedDate);
+    </script>
     <script src="{{ asset('js/user/mandiri/kehamilan.js') }}"></script>
 @endpush

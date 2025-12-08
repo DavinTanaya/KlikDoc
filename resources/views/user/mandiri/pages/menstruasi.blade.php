@@ -69,8 +69,8 @@
                     <div class="input-group-custom">
                         <label for="cycle_length" class="klik_form-label">Panjang Siklus (Hari)</label>
                         <div class="input-with-icon">
-                            <input class="klik_form-input" type="number" id="cycle_length" value="28" min="21" max="40" required
-                                placeholder="28">
+                            <input class="klik_form-input" type="number" id="cycle_length" value="28" min="21"
+                                max="40" required placeholder="28">
                         </div>
                     </div>
                 </div>
@@ -104,6 +104,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        document.getElementById('start_date').setAttribute('max', formattedDate);
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
     <script src="{{ asset('js/user/mandiri/menstruasi.js') }}"></script>
 @endpush
