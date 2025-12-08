@@ -481,12 +481,12 @@
 }
 
 #incomingCallAvatar {
-    width: 50px; 
+    width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgb(var(--blue1));
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .video-wrapper {
@@ -812,4 +812,10 @@
 
 .btn-secondary:active {
     transform: translateY(1px);
+}
+
+#remoteAudio {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
 }

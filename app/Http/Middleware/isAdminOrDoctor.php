@@ -15,7 +15,7 @@ class isAdminOrDoctor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && (auth()->user()->role === 'admin' || auth()->user()->role === 'dokter')) {
+        if (auth()->check() && (auth()->user()->role === 'admin' || auth()->user()->role === 'doctor')) {
             return $next($request);
         }
 

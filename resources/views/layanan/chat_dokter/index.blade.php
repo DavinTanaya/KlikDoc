@@ -143,23 +143,24 @@
           @endforeach
         </div>
 
-                <div id="callContainer" class="call-container">
-                    <div class="video-wrapper" id="videoWrapper">
-                        <video id="localVideo" class="video-local" autoplay playsinline muted></video>
-                        <video id="remoteVideoUser" class="video-remote" autoplay playsinline></video>
-                        <video id="remoteVideoDoctor" class="video-remote" autoplay playsinline style="display: none;"></video>
-                    </div>
-                    <div class="audio-wrapper" id="audioWrapper">
-                        <img id="incomingCallAvatar"
-                            src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->doctor->name ?? ($activechat?->user->name ?? 'Chat')) }}"
-                            alt="Caller avatar">
-                    </div>
-                    <div class="call-controls">
-                        <button class="btn btn-danger btn-sm" onclick="hangupCall()">
-                            End Call
-                        </button>
-                    </div>
-                </div>
+        <div id="callContainer" class="call-container">
+          <div class="video-wrapper" id="videoWrapper">
+            <video id="localVideo" class="video-local" autoplay playsinline muted></video>
+            <video id="remoteVideoUser" class="video-remote" autoplay playsinline></video>
+            <video id="remoteVideoDoctor" class="video-remote" autoplay playsinline style="display: none;"></video>
+          </div>
+          <audio id="remoteAudio" autoplay></audio>
+          <div class="audio-wrapper" id="audioWrapper">
+            <img id="incomingCallAvatar"
+              src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->doctor->name ?? ($activechat?->user->name ?? 'Chat')) }}"
+              alt="Caller avatar">
+          </div>
+          <div class="call-controls">
+            <button class="btn btn-danger btn-sm" onclick="hangupCall()">
+              End Call
+            </button>
+          </div>
+        </div>
 
         <footer class="input-area">
           <div id="inputWrapperActive" class="input-wrapper-active"
@@ -453,23 +454,30 @@
     }
 
     function subscribeCall(chatId) {
-      if (!chatId) return console.warn("[CALL] No chatId");
+      if (!chatId) return;
+
+      if (callChannel) {
+        callChannel.stopListeningForWhisper("rtc-signal");
+        window.Echo.leave("calls." + activeChatId);
+      }
+
+      endCallLocal();
 
       console.log("[CALL] Subscribing calls." + chatId);
 
       callChannel = window.Echo.private("calls." + chatId);
 
-      callChannel.subscribed(() => console.log("[CALL] ✔ Subscribed calls." + chatId));
+      callChannel.subscribed(() =>
+        console.log("[CALL] ✔ Subscribed calls." + chatId)
+      );
 
-      callChannel.error(e => console.error("[CALL] Channel error:", e));
+      callChannel.error(e =>
+        console.error("[CALL] Channel error:", e)
+      );
 
       callChannel.listenForWhisper("rtc-signal", async payload => {
-        console.log("[CALL] Signal:", payload);
-
-        if (payload.to && String(payload.to) !== String(authUserId)) {
-          console.log("[CALL] Signal ignored (not for me)");
-          return;
-        }
+        if (String(payload.from) === String(authUserId)) return;
+        if (payload.to && String(payload.to) !== String(authUserId)) return;
 
         switch (payload.type) {
           case "incoming-call":
@@ -492,12 +500,16 @@
 
     const rtcConfig = {
       iceServers: [{
-          urls: 'stun:stun.l.google.com:19302'
+          urls: "stun:stun.l.google.com:19302"
         },
         {
-          urls: 'turn:openrelay.metered.ca:443',
-          username: 'openrelayproject',
-          credential: 'openrelayproject'
+          urls: [
+            "turn:5.175.183.160:3478?transport=udp",
+            "turn:5.175.183.160:3478?transport=tcp",
+            "turns:5.175.183.160:5349"
+          ],
+          username: "klikdoc",
+          credential: "passwordkuat"
         }
       ]
     };
@@ -513,9 +525,17 @@
     const remoteVideoDoc = document.getElementById("remoteVideoDoctor");
 
     async function getLocalStream(type) {
-      if (localStream) return localStream;
+      if (localStream) {
+        const hasVideo = localStream.getVideoTracks().length > 0;
+        if (type === 'video' && !hasVideo) {
+          localStream.getTracks().forEach(t => t.stop());
+          localStream = null;
+        } else {
+          return localStream;
+        }
+      }
 
-      const constraints = type === "audio" ? {
+      const constraints = type === 'audio' ? {
         audio: true,
         video: false
       } : {
@@ -523,39 +543,42 @@
         video: true
       };
 
-      if (type === "audio") {
-        document.getElementById("audioWrapper").style.display = "flex";
-        document.getElementById("videoWrapper").style.display = "none";
-      } else {
-        document.getElementById("audioWrapper").style.display = "none";
-        document.getElementById("videoWrapper").style.display = "flex";
-      }
-
-      console.log("[RTC] getUserMedia:", constraints);
-
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
       localVideo.srcObject = localStream;
+
+      Object.values(pcs).forEach(pc => {
+        localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+      });
+
       return localStream;
     }
 
+
     function videoElementFor(id) {
-      if (id == chatUserId) return remoteVideoUser;
-      if (id == chatDoctorId) return remoteVideoDoc;
       return remoteVideoUser;
     }
+
 
     function createPC(remoteId) {
       if (pcs[remoteId]) return pcs[remoteId];
 
-      console.log("[RTC] Creating PC for", remoteId);
-
+      console.log('[RTC] Creating PC for', remoteId);
       const pc = new RTCPeerConnection(rtcConfig);
       pcs[remoteId] = pc;
 
-      pc.onicecandidate = (e) => {
-        if (e.candidate) {
-          callChannel.whisper("rtc-signal", {
-            type: "ice",
+      if (localStream) {
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+          console.log('[RTC] track added:', track.kind);
+        });
+      } else {
+        console.warn('[RTC] localStream NOT READY when createPC');
+      }
+
+      pc.onicecandidate = e => {
+        if (e.candidate && callChannel) {
+          callChannel.whisper('rtc-signal', {
+            type: 'ice',
             from: authUserId,
             to: remoteId,
             candidate: e.candidate
@@ -563,19 +586,33 @@
         }
       };
 
-      pc.ontrack = (e) => {
-        if (!remoteStreams[remoteId]) remoteStreams[remoteId] = new MediaStream();
+      pc.ontrack = e => {
+        console.log('[RTC] ✅ ontrack:', e.track.kind);
 
-        e.streams[0].getTracks().forEach(t => {
-          remoteStreams[remoteId].addTrack(t);
-        });
+        if (!remoteStreams[remoteId]) {
+          remoteStreams[remoteId] = new MediaStream();
+        }
 
-        videoElementFor(remoteId).srcObject = remoteStreams[remoteId];
+        remoteStreams[remoteId].addTrack(e.track);
+
+        if (e.track.kind === 'audio') {
+          const audio = document.getElementById('remoteAudio');
+          audio.srcObject = remoteStreams[remoteId];
+          audio.muted = false;
+          audio.volume = 1.0;
+          audio.play().catch(err => {
+            console.warn('[RTC] audio autoplay blocked', err);
+          });
+        }
+
+        if (e.track.kind === 'video') {
+          const video = videoElementFor(remoteId);
+          video.srcObject = remoteStreams[remoteId];
+          video.muted = false;
+          video.play().catch(() => {});
+        }
       };
 
-      if (localStream) {
-        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-      }
 
       return pc;
     }
@@ -589,17 +626,25 @@
       await getLocalStream(type);
       callContainer.style.display = "block";
 
-      const targets = [chatUserId, chatDoctorId].filter(id => id && id != authUserId);
+      const targetId =
+        authRole === 'doctor' ?
+        chatUserId :
+        chatDoctorId;
 
-      targets.forEach(rid => {
-        console.log("[CALL] Whisper incoming-call →", rid);
-
-        callChannel.whisper("rtc-signal", {
-          type: "incoming-call",
-          from: authUserId,
-          to: rid,
-          call_type: type
+      if (!targetId || targetId === authUserId) {
+        console.error("[CALL] Invalid target", {
+          authUserId,
+          chatUserId,
+          chatDoctorId
         });
+        return;
+      }
+
+      callChannel.whisper("rtc-signal", {
+        type: "incoming-call",
+        from: authUserId,
+        to: targetId,
+        call_type: type
       });
     }
 
@@ -620,10 +665,14 @@
       console.log("[CALL] Accepting call");
       console.log(currentCallType);
 
-      incomingModal.style.display = "none";
+      if (incomingModal) incomingModal.style.display = 'none';
 
       await getLocalStream(currentCallType);
-      callContainer.style.display = "block";
+      if (callContainer) callContainer.style.display = 'block';
+
+      const audio = document.getElementById('remoteAudio');
+      audio.muted = false;
+      audio.play().catch(() => {});
 
       callChannel.whisper("rtc-signal", {
         type: "accept-call",
@@ -661,38 +710,43 @@
     }
 
     async function makeOffer(remoteId) {
-      const pc = createPC(remoteId);
+      console.log('[CALL] makeOffer to', remoteId);
 
+      await getLocalStream(currentCallType);
+
+      const pc = createPC(remoteId);
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
 
-      callChannel.whisper("rtc-signal", {
-        type: "offer",
+      callChannel.whisper('rtc-signal', {
+        type: 'offer',
         from: authUserId,
         to: remoteId,
         sdp: offer
       });
     }
 
+
     async function onOffer(payload) {
-      console.log("[CALL] OFFER from", payload.from);
+      console.log('[CALL] receive OFFER from', payload.from);
 
       await getLocalStream(currentCallType);
-      callContainer.style.display = "block";
 
       const pc = createPC(payload.from);
 
       await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
+
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
 
-      callChannel.whisper("rtc-signal", {
-        type: "answer",
+      callChannel.whisper('rtc-signal', {
+        type: 'answer',
         from: authUserId,
         to: payload.from,
         sdp: answer
       });
     }
+
 
     async function onAnswer(payload) {
       console.log("[CALL] ANSWER from", payload.from);

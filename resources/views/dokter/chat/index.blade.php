@@ -44,6 +44,12 @@
     .btn-rujukan:hover {
       background: #059669;
     }
+
+    #remoteAudio {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
   </style>
 @endpush
 
@@ -163,23 +169,24 @@
             @endforeach
           </div>
 
-                    <div id="callContainer" class="call-container" style="display:none">
-                        <div class="video-wrapper" id="videoWrapper">
-                            <video class="video-local" id="localVideo" autoplay muted playsinline></video>
-                            <video class="video-remote" id="remoteVideoUser" autoplay playsinline style="display: none;"></video>
-                            <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline></video>
-                        </div>
-                        <div class="audio-wrapper" id="audioWrapper">
-                            <img id="incomingCallAvatar"
-                                src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->user->name ?? ($activechat?->user->name ?? 'Chat')) }}"
-                                alt="Caller avatar">
-                        </div>
-                        <div class="call-controls">
-                            <button class="btn btn-danger btn-sm" onclick="hangupCall()">
-                                End Call
-                            </button>
-                        </div>
-                    </div>
+          <div id="callContainer" class="call-container" style="display:none">
+            <div class="video-wrapper" id="videoWrapper">
+              <video class="video-local" id="localVideo" autoplay muted playsinline></video>
+              <video class="video-remote" id="remoteVideoUser" autoplay playsinline></video>
+              <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline style="display: none;"></video>
+            </div>
+            <audio id="remoteAudio" autoplay></audio>
+            <div class="audio-wrapper" id="audioWrapper">
+              <img id="incomingCallAvatar"
+                src="https://ui-avatars.com/api/?name={{ urlencode($activechat?->user->name ?? ($activechat?->user->name ?? 'Chat')) }}"
+                alt="Caller avatar">
+            </div>
+            <div class="call-controls">
+              <button class="btn btn-danger btn-sm" onclick="hangupCall()">
+                End Call
+              </button>
+            </div>
+          </div>
 
           <footer class="input-area {{ $activechat?->consultation->status !== 'AKTIF' ? 'closed' : '' }}">
             <div id="inputWrapperActive" class="input-wrapper-active"
@@ -539,12 +546,16 @@
 
     const rtcConfig = {
       iceServers: [{
-          urls: 'stun:stun.l.google.com:19302'
+          urls: "stun:stun.l.google.com:19302"
         },
         {
-          urls: 'turn:openrelay.metered.ca:443',
-          username: 'openrelayproject',
-          credential: 'openrelayproject'
+          urls: [
+            "turn:5.175.183.160:3478?transport=udp",
+            "turn:5.175.183.160:3478?transport=tcp",
+            "turns:5.175.183.160:5349"
+          ],
+          username: "klikdoc",
+          credential: "passwordkuat"
         }
       ]
     };
@@ -568,10 +579,9 @@
     const incomingSubtitle = document.getElementById('incomingCallSubtitle');
 
     function videoElementFor(id) {
-      if (id == chatUserId && remoteVideoUser) return remoteVideoUser;
-      if (id == chatDoctorId && remoteVideoDoc) return remoteVideoDoc;
-      return remoteVideoUser || remoteVideoDoc;
+      return remoteVideoUser;
     }
+
 
     async function getLocalStream(type) {
       if (localStream) return localStream;
@@ -584,29 +594,35 @@
         video: true
       };
 
-      if (type === "audio") {
-        document.getElementById("audioWrapper").style.display = "flex";
-        document.getElementById("videoWrapper").style.display = "none";
-      } else {
-        document.getElementById("audioWrapper").style.display = "none";
-        document.getElementById("videoWrapper").style.display = "flex";
-      }
-
-      console.log('[RTC] getUserMedia(dokter):', constraints);
-
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
-      if (localVideo) localVideo.srcObject = localStream;
+      localVideo.srcObject = localStream;
+
+      Object.values(pcs).forEach(pc => {
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+        });
+      });
+
       return localStream;
     }
 
     function createPC(remoteId) {
       if (pcs[remoteId]) return pcs[remoteId];
 
-      console.log('[RTC] create PC for', remoteId);
+      console.log('[RTC] Creating PC for', remoteId);
       const pc = new RTCPeerConnection(rtcConfig);
       pcs[remoteId] = pc;
 
-      pc.onicecandidate = (e) => {
+      if (localStream) {
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+          console.log('[RTC] track added:', track.kind);
+        });
+      } else {
+        console.warn('[RTC] localStream NOT READY when createPC');
+      }
+
+      pc.onicecandidate = e => {
         if (e.candidate && callChannel) {
           callChannel.whisper('rtc-signal', {
             type: 'ice',
@@ -617,20 +633,34 @@
         }
       };
 
-      pc.ontrack = (e) => {
+      pc.ontrack = e => {
+        console.log('[RTC] ✅ ontrack fired:', e.track.kind);
+
         if (!remoteStreams[remoteId]) {
           remoteStreams[remoteId] = new MediaStream();
         }
 
-        e.streams[0].getTracks().forEach(t => remoteStreams[remoteId].addTrack(t));
+        remoteStreams[remoteId].addTrack(e.track);
 
-        const vid = videoElementFor(remoteId);
-        if (vid) vid.srcObject = remoteStreams[remoteId];
+        if (e.track.kind === 'audio') {
+          const audio = document.getElementById('remoteAudio');
+          audio.srcObject = remoteStreams[remoteId];
+          audio.muted = false;
+          audio.volume = 1.0;
+
+          audio.play().catch(err => {
+            console.warn('[RTC] audio autoplay blocked', err);
+          });
+        }
+
+        if (e.track.kind === 'video') {
+          const video = videoElementFor(remoteId);
+          video.srcObject = remoteStreams[remoteId];
+          video.muted = false;
+          video.play().catch(() => {});
+        }
       };
 
-      if (localStream) {
-        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-      }
 
       return pc;
     }
@@ -731,6 +761,10 @@
       await getLocalStream(currentCallType);
       if (callContainer) callContainer.style.display = 'block';
 
+      const audio = document.getElementById('remoteAudio');
+      audio.muted = false;
+      audio.play().catch(() => {});
+
       if (!callChannel) return;
       callChannel.whisper('rtc-signal', {
         type: 'accept-call',
@@ -762,11 +796,15 @@
     }
 
     async function makeOffer(remoteId) {
+      console.log('[CALL] makeOffer to', remoteId);
+
+      await getLocalStream(currentCallType);
+
       const pc = createPC(remoteId);
+
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
 
-      if (!callChannel) return;
       callChannel.whisper('rtc-signal', {
         type: 'offer',
         from: authUserId,
@@ -775,19 +813,19 @@
       });
     }
 
+
     async function onOffer(payload) {
       console.log('[CALL] receive OFFER from', payload.from);
 
       await getLocalStream(currentCallType);
-      if (callContainer) callContainer.style.display = 'block';
 
       const pc = createPC(payload.from);
+
       await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
 
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
 
-      if (!callChannel) return;
       callChannel.whisper('rtc-signal', {
         type: 'answer',
         from: authUserId,
@@ -806,13 +844,22 @@
     async function onIce(payload) {
       const pc = pcs[payload.from];
       if (!pc || !payload.candidate) return;
-      await pc.addIceCandidate(new RTCIceCandidate(payload.candidate));
+
+      try {
+        await pc.addIceCandidate(new RTCIceCandidate(payload.candidate));
+      } catch (e) {
+        console.warn('[RTC] addIceCandidate failed:', e);
+      }
     }
+
 
     function onRemoteReject(payload) {
       console.log('[CALL] remote reject', payload.from);
+      incomingCall = null;
+      isCaller = false;
       endCallLocal();
     }
+
 
     function hangupCall() {
       if (callChannel) {
