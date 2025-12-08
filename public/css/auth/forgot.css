@@ -1,0 +1,209 @@
+:root {
+    --bg-white: 255, 255, 255;
+    --bg-content: 244, 247, 254;
+
+    --green1: 16, 185, 129;
+    --green2: 15, 118, 110;
+    --green3: 153, 246, 228;
+    --green4: 204, 251, 241;
+
+    --blue1: 28, 39, 76;
+    --blue2: 119, 139, 164;
+    --blue3: 211, 240, 253;
+    --blue4: 79, 195, 247;
+    --blue5: 230, 247, 255;
+
+    --red1: 255, 194, 205;
+    --red2: 255, 72, 103;
+    --red3: 220, 38, 38;
+
+    --white: 255, 255, 255;
+
+    --grey1: 224, 224, 224;
+    --grey2: 102, 102, 102;
+    --grey3: 51, 51, 51;
+    --grey4: 249, 250, 251;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(var(--bg-content));
+}
+
+.auth-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.auth-card {
+    background-color: rgb(var(--bg-white));
+    width: 100%;
+    max-width: 480px;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px rgba(var(--blue1), 0.08);
+    border: 1px solid rgb(var(--grey1));
+    text-align: center;
+}
+
+/* Header & Icon */
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    background-color: rgb(var(--blue5));
+    color: rgb(var(--blue1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    border: 1px solid rgb(var(--blue3));
+}
+
+.auth-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: rgb(var(--blue1));
+    margin-bottom: 0.8rem;
+}
+
+.auth-subtitle {
+    color: rgb(var(--grey2));
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* Form Styles */
+.auth-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: rgb(var(--blue1));
+    font-size: 0.95rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: rgb(var(--grey2));
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.9rem 1rem 0.9rem 3rem; /* Extra padding kiri untuk icon */
+    border: 1px solid rgb(var(--grey1));
+    border-radius: 12px;
+    font-size: 1rem;
+    color: rgb(var(--grey3));
+    background-color: rgb(var(--bg-white));
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: rgb(var(--blue4));
+    box-shadow: 0 0 0 4px rgba(var(--blue4), 0.15);
+}
+
+.form-control::placeholder {
+    color: rgb(var(--grey1)); /* Warna placeholder lebih terang */
+}
+
+/* Button */
+.btn-primary-auth {
+    background-color: rgb(var(--blue1));
+    color: rgb(var(--white));
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(var(--blue1), 0.2);
+    margin-top: 0.5rem;
+    font-family: inherit;
+}
+
+.btn-primary-auth:hover {
+    background-color: rgb(var(--blue2)); /* Sedikit lebih terang saat hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--blue1), 0.3);
+}
+
+.auth-footer {
+    margin-top: 2rem;
+}
+
+.back-link {
+    text-decoration: none;
+    color: rgb(var(--grey2));
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: rgb(var(--blue1));
+}
+
+/* Error & Alert */
+.text-danger-custom {
+    color: rgb(var(--red2));
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    display: block;
+}
+
+.form-control.is-invalid {
+    border-color: rgb(var(--red2));
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.alert-success {
+    background-color: rgb(var(--green4));
+    color: rgb(var(--green2));
+    border: 1px solid rgb(var(--green3));
+}

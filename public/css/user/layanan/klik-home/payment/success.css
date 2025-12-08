@@ -1,16 +1,5 @@
-/* --- Scope Wrapper --- */
 .klikhome-success-page {
-    --bg-page: #F4F7FE;
-    --bg-white: #ffffff;
-    --primary: #1C274C;
-    --accent: #FF4867;
-    --green-success: #4caf50;
-    --text-main: #333;
-    --text-grey: #888;
-    --border: #e0e0e0;
-
-    font-family: "Inter", sans-serif;
-    background-color: var(--bg-page);
+    background-color: var(--bg-content);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -18,7 +7,6 @@
     padding: 1rem;
 }
 
-/* --- Main Card --- */
 .klikhome-success-page .success-card {
     background: var(--bg-white);
     width: 100%;
@@ -26,13 +14,11 @@
     border-radius: 20px;
     padding: 3rem 2rem;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(28, 39, 76, 0.08); /* Shadow sedikit diperhalus */
+    box-shadow: 0 20px 60px rgba(var(--blue1), 0.08);
     
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    /* Animasi Card Muncul */
     animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
     transform: translateY(20px);
@@ -45,7 +31,6 @@
     }
 }
 
-/* --- Animated Icon --- */
 .klikhome-success-page .success-icon-wrapper {
     position: relative;
     width: 100px;
@@ -66,22 +51,20 @@
     justify-content: center;
     color: white;
     z-index: 2;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-
+    box-shadow: 0 4px 15px rgba(var(--green1), 0.3);
     animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
-    transform: scale(0); /* Start hidden */
+    transform: scale(0);
 }
 
 @keyframes popIn {
     to { transform: scale(1); }
 }
 
-/* Ripple Effect Animation */
 .klikhome-success-page .ripple {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(76, 175, 80, 0.2);
+    background: rgba(var(--green1), 0.2);
     border-radius: 50%;
     z-index: 1;
     animation: rippleEffect 2s infinite;
@@ -92,7 +75,6 @@
     100% { transform: scale(1.6); opacity: 0; }
 }
 
-/* --- Text Content --- */
 .klikhome-success-page .text-content h1 {
     font-size: 1.8rem;
     color: var(--primary);
@@ -108,9 +90,8 @@
     padding: 0 1rem;
 }
 
-/* --- Receipt Box --- */
 .klikhome-success-page .receipt-box {
-    background: #fafafa;
+    background: rgb(var(--grey4));
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.5rem;
@@ -123,7 +104,7 @@
     justify-content: space-between;
     margin-bottom: 1rem;
     font-size: 0.9rem;
-    align-items: center; /* Align items center jika multiline */
+    align-items: center;
 }
 
 .klikhome-success-page .receipt-row:last-child {
@@ -138,10 +119,9 @@
     color: var(--text-main);
     font-weight: 600;
     text-align: right;
-    max-width: 60%; /* Mencegah teks terlalu panjang */
+    max-width: 60%;
 }
 
-/* Highlight jadwal agar user notice */
 .klikhome-success-page .receipt-row .value.highlight {
     color: var(--accent);
     font-weight: 700;
@@ -149,7 +129,7 @@
 
 .klikhome-success-page .divider {
     height: 1px;
-    border-bottom: 2px dashed #ddd; /* Dashed lebih tebal */
+    border-bottom: 2px dashed rgb(var(--grey1));
     margin: 1.2rem 0;
     opacity: 0.6;
 }
@@ -160,7 +140,6 @@
     font-weight: 800;
 }
 
-/* --- Buttons --- */
 .klikhome-success-page .action-buttons {
     display: flex;
     flex-direction: column;
@@ -170,7 +149,7 @@
 
 .klikhome-success-page .btn-primary {
     background-color: var(--primary);
-    color: white;
+    color: rgb(var(--white));
     text-decoration: none;
     padding: 14px;
     border-radius: 12px;
@@ -178,13 +157,13 @@
     transition: all 0.2s;
     display: block;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(28, 39, 76, 0.2);
+    box-shadow: 0 4px 15px rgba(var(--blue1), 0.2);
 }
 
 .klikhome-success-page .btn-primary:hover {
-    background-color: #2a3b6e;
+    opacity: 0.9;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(28, 39, 76, 0.3);
+    box-shadow: 0 6px 20px rgba(var(--blue1), 0.3);
 }
 
 .klikhome-success-page .btn-secondary {
@@ -201,7 +180,7 @@
 }
 
 .klikhome-success-page .btn-secondary:hover {
-    color: var(--primary);
-    background-color: #f0f4f8;
-    border-color: #dbe4ef;
+    color: rgb(var(--white));
+    background-color: rgb(var(--blue2));
+    border-color: rgb(var(--blue3));
 }

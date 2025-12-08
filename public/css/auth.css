@@ -1,24 +1,314 @@
+:root {
+    --bg-white: 255, 255, 255;
+    --bg-content: 244, 247, 254;
+
+    --green1: 16, 185, 129;
+    --green2: 15, 118, 110;
+    --green3: 153, 246, 228;
+    --green4: 204, 251, 241;
+
+    --blue1: 28, 39, 76;
+    --blue2: 119, 139, 164;
+    --blue3: 211, 240, 253;
+    --blue4: 79, 195, 247;
+    --blue5: 230, 247, 255;
+
+    --red1: 255, 194, 205;
+    --red2: 255, 72, 103;
+    --red3: 220, 38, 38;
+
+    --white: 255, 255, 255;
+
+    --grey1: 224, 224, 224;
+    --grey2: 102, 102, 102;
+    --grey3: 51, 51, 51;
+    --grey4: 249, 250, 251;
+}
+
+/* Override Body Background */
 body {
-    font-family: "Inter", sans-serif;
+    background-color: rgb(var(--bg-content)) !important;
+    background-image: none !important; /* Menghapus gradient Tailwind */
+    font-family: 'Inter', sans-serif !important;
+    color: rgb(var(--grey3));
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* Card Container Styling */
 .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    background-color: rgb(var(--bg-white)) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 40px rgba(var(--blue1), 0.08) !important;
+    border: 1px solid rgb(var(--grey1)) !important;
+    padding: 3rem 2.5rem !important;
+    max-width: 480px !important;
 }
 
-.tab-active {
-    background-color: #3b82f6;
-    color: white;
+/* Typography Overrides */
+h2 {
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    color: rgb(var(--blue1)) !important;
+    margin-bottom: 0.8rem !important;
+}
+
+p.text-sm {
+    color: rgb(var(--grey2)) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+}
+
+/* Tab Styling */
+.bg-gray-100 {
+    background-color: transparent !important;
+    border: 1px solid rgb(var(--grey1));
+    border-radius: 12px !important;
+    padding: 4px !important;
+    margin-bottom: 2rem !important;
+}
+
+button.tab-active, 
+button#login-tab.bg-white, /* Fallback jika class tab-active tidak ada di JS */
+button#login-tab.shadow {
+    background-color: rgb(var(--blue5)) !important;
+    color: rgb(var(--blue1)) !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    transition: all 0.2s !important;
+    border: 1px solid rgb(var(--blue3)) !important;
+}
+
+button:not(.tab-active):not([type="submit"]):not(.absolute) {
+    color: rgb(var(--grey2)) !important;
+    font-weight: 600 !important;
+    background: transparent !important;
+}
+
+button:not(.tab-active):not([type="submit"]):not(.absolute):hover {
+    color: rgb(var(--blue1)) !important;
+}
+
+/* Input Fields */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"] {
+    border-radius: 12px !important;
+    border: 1px solid rgb(var(--grey1)) !important;
+    padding-top: 0.9rem !important;
+    padding-bottom: 0.9rem !important;
+    /* Padding kiri sudah dihandle tailwind (pl-10), padding kanan perlu disesuaikan */
+    background-color: rgb(var(--bg-white)) !important;
+    color: rgb(var(--grey3)) !important;
+    font-size: 1rem !important;
+    transition: all 0.2s !important;
+    box-shadow: none !important;
+}
+
+input:focus {
+    border-color: rgb(var(--blue4)) !important;
+    box-shadow: 0 0 0 4px rgba(var(--blue4), 0.15) !important;
+    outline: none !important;
+    ring: 0 !important; /* Reset tailwind ring */
+}
+
+input::placeholder {
+    color: rgb(var(--grey1)) !important;
+}
+
+/* SVG Icons inside Input */
+.absolute svg {
+    color: rgb(var(--grey2)) !important;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: rgb(var(--blue1)) !important;
+    color: rgb(var(--white)) !important;
+    border-radius: 50px !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(var(--blue1), 0.2) !important;
+    transition: all 0.2s !important;
+    margin-top: 1rem !important;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(var(--blue2)) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(var(--blue1), 0.3) !important;
+}
+
+/* Checkbox & Links */
+input[type="checkbox"] {
+    border-radius: 4px !important;
+    border-color: rgb(var(--grey1)) !important;
+    color: rgb(var(--blue1)) !important;
+}
+
+a.text-blue-600 {
+    color: rgb(var(--blue1)) !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+}
+
+a.text-blue-600:hover {
+    color: rgb(var(--blue2)) !important;
+    text-decoration: underline !important;
+}
+
+/* Social Login Buttons */
+a[href*="google"], a[href="#"] {
+    border-radius: 12px !important;
+    border: 1px solid rgb(var(--grey1)) !important;
+    color: rgb(var(--grey2)) !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    background-color: rgb(var(--bg-white)) !important;
+    transition: all 0.2s !important;
+    padding: 0.8rem !important;
+}
+
+a[href*="google"]:hover, a[href="#"]:hover {
+    border-color: rgb(var(--blue4)) !important;
+    background-color: rgb(var(--bg-content)) !important;
+}
+
+/* Divider */
+.border-t {
+    border-color: rgb(var(--grey1)) !important;
+}
+
+.text-gray-500 {
+    color: rgb(var(--grey2)) !important;
+    background-color: rgb(var(--bg-white)) !important;
+}
+
+/* Logo Image Styling (Optional) */
+img[alt=""] {
+    height: 40px !important; /* Sesuaikan ukuran logo */
+    object-fit: contain;
+}
+
+/* Error Alert */
+.bg-red-100 {
+    background-color: rgb(var(--red1)) !important;
+    color: rgb(var(--red2)) !important;
+    border: 1px solid rgb(var(--red2)) !important;
+    border-radius: 12px !important;
+    font-weight: 500 !important;
+}
+
+/* --- Email Verification Popup --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+    backdrop-filter: blur(4px); /* Efek blur di belakang */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.verification-popup {
+    background-color: rgb(var(--bg-white));
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(var(--blue1), 0.15);
+    border: 1px solid rgb(var(--grey1));
+    transform: scale(0.9);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.show .verification-popup {
+    transform: scale(1);
+}
+
+.popup-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(var(--blue5));
+    color: rgb(var(--blue1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2.5rem;
+    border: 1px solid rgb(var(--blue3));
+    /* Animasi kecil untuk ikon */
+    animation: pulseIcon 2s infinite;
+}
+
+@keyframes pulseIcon {
+    0% { box-shadow: 0 0 0 0 rgba(var(--blue1), 0.2); }
+    70% { box-shadow: 0 0 0 10px rgba(var(--blue1), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--blue1), 0); }
+}
+
+.popup-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: rgb(var(--blue1));
+    margin-bottom: 0.8rem;
+}
+
+.popup-message {
+    color: rgb(var(--grey2));
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.btn-popup-action {
+    background-color: rgb(var(--blue1));
+    color: rgb(var(--white));
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(var(--blue1), 0.2);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-popup-action:hover {
+    background-color: rgb(var(--blue2));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--blue1), 0.3);
+}
+
+.btn-popup-close {
+    background: transparent;
+    border: none;
+    color: rgb(var(--grey2));
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.btn-popup-close:hover {
+    color: rgb(var(--blue1));
 }

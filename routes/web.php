@@ -171,4 +171,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/prescription/{id}/download', [ConsultationController::class, 'download'])->name('resep.download');
+
+    Route::get('/profil', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/profil', [UserController::class, 'update'])->name('user.profile.update');
+
+    Route::get('/dokter/profil', [DoctorController::class, 'profile'])->name('dokter.profile');
+    Route::put('/dokter/profil', [DoctorController::class, 'update'])->name('dokter.profile.update');
 });
+
+ Route::get('/lupa-password', [AuthController::class, 'forgot'])->name('auth.forgot');
+ Route::get('/lupa-password/otp', [AuthController::class, 'otp'])->name('auth.forgot.otp');
+ Route::get('/lupa-password/password-baru', [AuthController::class, 'newPassword'])->name('auth.new-password');

@@ -43,9 +43,17 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'doctor',
         ]);
-
-        // USER / PASIEN
+        
         for ($i = 1; $i <= 5; $i++) {
+            if ($i == 1){
+                User::create([
+                    'name' => "User {$i}",
+                    'email' => "user{$i}@klikdoc.test",
+                    'password' => Hash::make('password'),
+                    'role' => 'doctor',
+                ]);
+                continue;
+            }
             User::create([
                 'name' => "User {$i}",
                 'email' => "user{$i}@klikdoc.test",

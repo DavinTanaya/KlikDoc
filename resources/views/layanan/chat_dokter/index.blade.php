@@ -3,7 +3,6 @@
 @section('title', 'KlikDoc | Chat Modern')
 
 @push('styles')
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/user/layanan/chat_dokter/chat_dokter.css') }}">
 @endpush
 
@@ -177,7 +176,7 @@
                         <input type="text" id="msgInput" class="chat-input" placeholder="Ketik pesan..."
                             onkeypress="handleEnter(event)">
 
-                        <button class="btn-send">
+                        <button class="btn-send" onclick="sendChat()">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -238,6 +237,7 @@
             chatDoctorId
         });
 
+        const appContainer = document.getElementById("appContainer");
         const msgContainer = document.getElementById("messageContainer");
         const incomingModal = document.getElementById("incomingCallModal");
         const incomingAvatar = document.getElementById("incomingCallAvatar");
@@ -289,7 +289,6 @@
         window.selectChat = function(el, chatId, partnerName) {
             document.querySelectorAll(".chat-item").forEach(i => i.classList.remove("active"));
             el.classList.add("active");
-            console.log("coba liat :", chatId);
             document.getElementById('headerAvatar').src =
                 "https://ui-avatars.com/api/?name=" + encodeURIComponent(partnerName) + "&background=random";
 
@@ -329,7 +328,9 @@
 
                     msgContainer.scrollTop = msgContainer.scrollHeight;
                 });
-
+            if (window.innerWidth <= 900 && appContainer) {
+                appContainer.classList.add('chat-active');
+            }
         };
 
         function subscribeChat(chatId) {
@@ -342,7 +343,6 @@
                     const msg = e.message;
                     console.log('[CHAT] NewMessage(dokter):', msg);
 
-                    // ✅ pesan system: konsultasi selesai
                     if (msg.type === 'system' && msg.body === 'KONSULTASI_SELESAI') {
                         const statusTextEl = document.getElementById('statusText');
                         const statusIconEl = document.getElementById('statusIcon');
@@ -420,10 +420,10 @@
   `);
         }
 
-        function handleEnter(e) {
-            if (e.key !== "Enter") return;
+        function sendChat() {
+            const input = document.getElementById("msgInput");
+            const text = input.value.trim();
 
-            const text = e.target.value.trim();
             if (!text) return;
 
             appendMessage({
@@ -443,7 +443,16 @@
                 })
             });
 
-            e.target.value = "";
+            input.value = "";
+        }
+
+        function handleEnter(e) {
+            if (e.key !== "Enter") return;
+            sendChat();
+        }
+
+        function closeChat() {
+            appContainer.classList.remove("chat-active");
         }
 
         function subscribeCall(chatId) {
