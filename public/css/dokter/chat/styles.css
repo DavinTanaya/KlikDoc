@@ -683,16 +683,56 @@
     gap: 20px;
     width: 100%;
     justify-content: center;
+    align-items: center;
 }
 
 .dokter-chat .video-local,
 .dokter-chat .video-remote {
     background: #000;
     border-radius: 8px;
-    width: 100%;
-    max-width: 320px;
+    width: auto;
+    height: 20vh;
     aspect-ratio: 16/9;
     object-fit: cover;
+}
+
+.dokter-chat .audio-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+}
+
+#incomingCallAvatar {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgb(var(--blue1));
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 900px) {
+    .dokter-chat .chat-wrapper {
+        padding: 10px 20px 10px 20px;
+    }
+
+    .dokter-chat .video-remote,
+    .dokter-chat .video-local {
+        max-width: 320px;
+        height: auto;
+    }
+
+    .dokter-chat .call-container {
+        padding: 6px;
+        margin-top: 6px;
+    }
+
+    .dokter-chat .video-wrapper {
+        flex-direction: row;
+        gap: 20px;
+    }
 }
 
 .dokter-chat .call-controls {
