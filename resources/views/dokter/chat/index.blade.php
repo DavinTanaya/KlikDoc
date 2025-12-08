@@ -167,8 +167,8 @@
                     <div id="callContainer" class="call-container" style="display:none">
                         <div class="video-wrapper" id="videoWrapper">
                             <video class="video-local" id="localVideo" autoplay muted playsinline></video>
-                            <video class="video-remote" id="remoteVideoUser" autoplay playsinline></video>
-                            <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline style="display: none;"></video>
+                            <video class="video-remote" id="remoteVideoUser" autoplay playsinline style="display: none;"></video>
+                            <video class="video-remote" id="remoteVideoDoctor" autoplay playsinline></video>
                         </div>
                         <div class="audio-wrapper" id="audioWrapper">
                             <img id="incomingCallAvatar"
