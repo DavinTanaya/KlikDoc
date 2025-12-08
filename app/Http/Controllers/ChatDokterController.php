@@ -155,6 +155,8 @@ class ChatDokterController extends Controller
         return response()->json([
             'messages' => $messages,
             'consultation_status' => $isActive ? 'AKTIF' : 'SELESAI',
+            'user_id'   => $chat->user_id,
+            'doctor_id' => $chat->doctor_id,
         ]);
     }
 
