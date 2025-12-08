@@ -540,9 +540,13 @@
     const rtcConfig = {
       iceTransportPolicy: "relay",
       iceServers: [{
-        urls: "turn:openrelay.metered.ca:443?transport=tcp",
-        username: "openrelayproject",
-        credential: "openrelayproject"
+        urls: [
+          "turn:5.175.183.160:3478?transport=udp",
+          "turn:5.175.183.160:3478?transport=tcp",
+          "turns:5.175.183.160:5349"
+        ],
+        username: "klikdoc",
+        credential: "passwordkuat"
       }]
     };
 
