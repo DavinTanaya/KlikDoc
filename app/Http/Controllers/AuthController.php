@@ -33,7 +33,6 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Hapus token lama (jaga-jaga)
         UserToken::where('user_id', $user->id)
             ->where('type', 'verify')
             ->delete();
@@ -47,7 +46,6 @@ class AuthController extends Controller
             'expired_at' => Carbon::now()->addMinutes(30),
         ]);
 
-        // kirim email
         Mail::to($user->email)->send(
             new VerifyEmailMail($token)
         );
@@ -202,8 +200,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
-
-        // hapus token reset lama
+        
         UserToken::where('user_id', $user->id)
             ->where('type', 'reset')
             ->delete();

@@ -16,8 +16,6 @@
     --status-orange-text: #ef6c00;
     --status-green-bg: #e8f5e9;
     --status-green-text: #2e7d32;
-
-    font-family: "Inter", sans-serif;
     background-color: var(--bg-page);
     min-height: 100vh;
     display: flex;
@@ -27,7 +25,6 @@
     overflow: hidden;
 }
 
-/* --- Header --- */
 .klikhome-history-page .history-header {
     background: transparent;
     width: 100%;
@@ -76,7 +73,6 @@
     width: 100px;
 }
 
-/* --- Main Content --- */
 .klikhome-history-page .history-content {
     width: 100%;
     display: flex;
@@ -88,18 +84,15 @@
     width: 70vw;
     max-width: 1200px;
     min-width: 600px;
-
     background: var(--bg-white);
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden;
 }
 
-/* --- Tabs --- */
 .klikhome-history-page .status-tabs {
     background: var(--bg-white);
     padding: 1.2rem 2rem;
@@ -128,7 +121,6 @@
     color: var(--primary);
 }
 
-/* --- Order List --- */
 .klikhome-history-page .order-list {
     display: flex;
     flex-direction: column;
@@ -165,7 +157,6 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
-/* Card Header */
 .klikhome-history-page .card-header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid #f5f5f5;
@@ -190,7 +181,6 @@
     color: var(--text-grey);
 }
 
-/* Badges */
 .klikhome-history-page .badge {
     font-size: 0.8rem;
     padding: 6px 12px;
@@ -216,7 +206,6 @@
     color: var(--status-green-text);
 }
 
-/* Card Body */
 .klikhome-history-page .card-body {
     padding: 1.5rem;
     display: flex;
@@ -227,14 +216,13 @@
 .klikhome-history-page .product-thumb {
     width: 60px;
     height: 60px;
-    border-radius: 12px; /* Lebih rounded */
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
-/* Icon Background Colors Helpers */
 .klikhome-history-page .bg-orange-soft {
     background: #fff3e0;
 }
@@ -282,7 +270,6 @@
     color: var(--primary);
 }
 
-/* Card Footer */
 .klikhome-history-page .card-footer {
     padding: 1rem 1.5rem;
     border-top: 1px solid #f5f5f5;
@@ -314,7 +301,6 @@
     gap: 6px;
 }
 
-/* Buttons */
 .klikhome-history-page button {
     cursor: pointer;
     font-family: inherit;
@@ -346,7 +332,6 @@
     color: var(--primary);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
     .klikhome-history-page .header-container,
     .klikhome-history-page .history-container {

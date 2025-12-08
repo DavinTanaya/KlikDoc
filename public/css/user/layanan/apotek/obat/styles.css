@@ -1,16 +1,13 @@
-/* --- Wrapper Scope --- */
 .apotek-online {
-    --bg-sidebar: #1c274c; /* Blue1 */
+    --bg-sidebar: #1c274c;
     --text-sidebar: #ffffff;
-    --accent: #ff4867; /* Red2 */
-    --accent-hover: #dc2626; /* Red3 */
-    --bg-content: #f4f7fe; /* Very Light Blue/Grey */
+    --accent: #ff4867;
+    --accent-hover: #dc2626;
+    --bg-content: #f4f7fe;
     --card-bg: #ffffff;
     --text-primary: #333;
     --text-secondary: #888;
     --border-color: #e0e0e0;
-
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     width: 100%;
     min-height: 100vh;
 }
@@ -24,14 +21,11 @@
 @media (min-width: 1024px) {
     .apotek-online .split-container {
         flex-direction: row;
-        height: 100vh; /* Fix height agar jadi app-like */
-        overflow: hidden; /* Mencegah body scroll */
+        height: 100vh;
+        overflow: hidden;
     }
 }
 
-/* =========================================
-   SIDEBAR (Kiri)
-   ========================================= */
 .apotek-online .split-sidebar {
     background-color: var(--bg-sidebar);
     color: var(--text-sidebar);
@@ -43,7 +37,7 @@
 
 @media (min-width: 1024px) {
     .apotek-online .split-sidebar {
-        width: 280px; /* Fixed width sidebar */
+        width: 280px;
         position: sticky;
         top: 0;
         height: 100vh;
@@ -52,7 +46,6 @@
     }
 }
 
-/* Header Sidebar */
 .apotek-online .sidebar-header h2 {
     font-size: 1.8rem;
     margin: 0;
@@ -67,7 +60,6 @@
     margin-top: 0.25rem;
 }
 
-/* Search Widget */
 .apotek-online .input-icon-wrapper {
     position: relative;
     background: rgba(255, 255, 255, 0.1);
@@ -101,9 +93,8 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Cart Widget */
 .apotek-online .cart-widget {
-    background: rgba(255, 72, 103, 0.1); /* Red tint bg */
+    background: rgba(255, 72, 103, 0.1);
     border: 1px solid rgba(255, 72, 103, 0.3);
     border-radius: 12px;
     padding: 1rem;
@@ -166,7 +157,6 @@
     margin: 0;
 }
 
-/* History Widget */
 .apotek-online .history-widget {
     padding: 0;
     margin-top: 1.5rem;
@@ -313,9 +303,6 @@
     outline: none;
 }
 
-/* =========================================
-   CONTENT (Kanan)
-   ========================================= */
 .apotek-online .split-content {
     background-color: var(--bg-content);
     flex: 1;
@@ -325,8 +312,8 @@
 @media (min-width: 1024px) {
     .apotek-online .split-content {
         padding: 3rem 4rem;
-        height: 100%; /* Mengisi tinggi container */
-        overflow-y: auto; /* Scroll konten independen */
+        height: 100%;
+        overflow-y: auto;
     }
 }
 
@@ -362,7 +349,6 @@
     cursor: pointer;
 }
 
-/* Product Grid */
 .apotek-online .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -424,7 +410,7 @@
     margin: 0 0 0.3rem 0;
     color: #333;
     line-height: 1.4;
-    height: 2.8em; /* Limit 2 lines roughly */
+    height: 2.8em;
     overflow: hidden;
 }
 
@@ -464,7 +450,6 @@
     background-color: var(--accent);
 }
 
-/* --- Pagination --- */
 .apotek-online .pagination-wrapper {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -510,7 +495,7 @@
 .apotek-online .page-btn:hover:not(:disabled) {
     border-color: var(--accent);
     color: var(--accent);
-    background-color: #fff0f3; /* Light red tint matching accent */
+    background-color: #fff0f3;
 }
 
 .apotek-online .page-btn.active {
@@ -532,18 +517,11 @@
     letter-spacing: 2px;
 }
 
-/* =========================================
-   PRODUCT DETAIL MODAL (GLOBAL SCOPE)
-   ========================================= */
-/* Style ini dibuat global (tanpa .apotek-online prefix)
-   agar tetap berfungsi saat Bootstrap memindahkan modal ke <body> */
-
 .product-modal {
     border-radius: 16px;
     border: none;
     overflow: hidden;
     position: relative;
-    /* Pastikan warna teks mewarisi atau didefinisikan ulang jika keluar dari wrapper */
     font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -580,7 +558,6 @@
     }
 }
 
-/* Modal Left: Image */
 .modal-img-wrapper {
     background-color: #f0f4f8;
     display: flex;
@@ -596,7 +573,6 @@
     }
 }
 
-/* Reusing tag-badge style globally if needed, or ensuring vars are present */
 .tag-badge.big {
     font-size: 0.85rem;
     padding: 6px 12px;
@@ -606,13 +582,12 @@
     border-radius: 4px;
     font-weight: 600;
 }
-/* Re-define colors for global scope if vars are missing */
+
 .tag-badge.blue {
     background: #e3f2fd;
     color: #1976d2;
 }
 
-/* Modal Right: Info */
 .modal-info-wrapper {
     padding: 2rem;
     flex: 1;
@@ -623,7 +598,7 @@
 .modal-title {
     font-size: 1.5rem;
     margin: 0 0 0.5rem 0;
-    color: #333; /* Fallback color */
+    color: #333;
     font-weight: 700;
 }
 
@@ -636,7 +611,7 @@
 .modal-price {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #ff4867; /* Fallback Accent */
+    color: #ff4867;
 }
 
 .modal-divider {
@@ -669,7 +644,6 @@
     line-height: 1.5;
 }
 
-/* Modal Actions */
 .modal-actions {
     display: flex;
     gap: 1rem;
@@ -705,7 +679,7 @@
 
 .btn-add-cart-modal {
     flex: 1;
-    background: #ff4867; /* Fallback Accent */
+    background: #ff4867;
     color: white;
     border: none;
     border-radius: 8px;
@@ -721,11 +695,10 @@
 
 .product-image .img-placeholder {
     width: 100%;
-    height: 160px; /* atur sesuai desain */
+    height: 160px;
     overflow: hidden;
     border-radius: 10px;
     background: #f8f8f8;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -734,12 +707,12 @@
 .product-image .img-placeholder img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ✨ KUNCI UTAMA */
+    object-fit: cover;
     object-position: center;
 }
 
 .modal-img-wrapper {
-    position: relative; /* wajib untuk overlay badge */
+    position: relative;
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
@@ -751,14 +724,11 @@
     position: absolute;
     top: 12px;
     left: 12px;
-
     background: white;
-
     padding: 6px 12px;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
-
     backdrop-filter: blur(4px);
 }
 
@@ -770,7 +740,7 @@
 }
 
 .product-image {
-    position: relative; /* penting untuk overlay badge */
+    position: relative;
 }
 
 .product-image .tag-badge {
@@ -778,13 +748,10 @@
     top: 10px;
     left: 10px;
     z-index: 5;
-
     padding: 4px 10px;
     border-radius: 6px;
-
     font-size: 12px;
     font-weight: 600;
-
     background: white;
 }
 

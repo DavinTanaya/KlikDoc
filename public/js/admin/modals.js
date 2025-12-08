@@ -1,5 +1,3 @@
-// Modal Templates and Functions
-
 const ModalTemplates = {
     applicationDetail: (data) => `
         <div class="row g-4">
@@ -409,8 +407,6 @@ const ModalTemplates = {
             </div>
         </div>
     `,
-
-    // Patient Form Modal
     patientForm: (data = {}) => `
         <form id="patientForm">
             <div class="row g-3">
@@ -471,8 +467,6 @@ const ModalTemplates = {
             </div>
         </form>
     `,
-
-    // Doctor Detail Modal
     doctorDetail: (data) => `
         <div class="row g-4">
             <div class="col-md-4 text-center">
@@ -547,8 +541,6 @@ const ModalTemplates = {
             </div>
         </div>
     `,
-
-    // Doctor Form Modal
     doctorForm: (data = {}) => `
         <form id="doctorForm">
             <div class="row g-3">
@@ -623,8 +615,6 @@ const ModalTemplates = {
             </div>
         </form>
     `,
-
-    // Consultation Monitor Modal
     consultationMonitor: (data) => `
         <div class="row g-4">
             <div class="col-lg-8">
@@ -723,8 +713,6 @@ const ModalTemplates = {
             </div>
         </div>
     `,
-
-    // Product Detail Modal
     productDetail: (data) => `
         <div class="row g-4">
             <div class="col-md-4 text-center">
@@ -784,8 +772,6 @@ const ModalTemplates = {
             </div>
         </div>
     `,
-
-    // Article Form Modal
     articleForm: (data = {}) => `
         <form id="articleForm">
             <div class="row g-3">
@@ -842,7 +828,6 @@ const ModalTemplates = {
     `,
 };
 
-// Modal Functions
 const ModalFunctions = {
     showPatientDetail: (patientData) => {
         const modal = new bootstrap.Modal(
@@ -934,7 +919,6 @@ const ModalFunctions = {
     },
 
     showSuccess: (message) => {
-        // Create toast notification
         const toast = document.createElement("div");
         toast.className =
             "toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3";

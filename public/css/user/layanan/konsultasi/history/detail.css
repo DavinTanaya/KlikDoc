@@ -1,4 +1,3 @@
-/* --- Variables (Konsisten dengan History) --- */
 .detail-page {
     --bg-page: #f4f7fe;
     --bg-white: #ffffff;
@@ -14,27 +13,19 @@
     --status-blue-bg: #e3f2fd;
     --status-blue-text: #1976d2;
     --gold: #ffc107;
-
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: var(--bg-page);
     min-height: 100vh;
-    
-    /* UPDATE: Menggunakan Flexbox untuk centering dan layout yang rapi */
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    /* UPDATE: Padding dikembalikan ke ukuran normal agar footer tidak terlalu jauh */
-    padding-bottom: 3rem; 
+    padding-bottom: 3rem;
     color: var(--text-main);
 }
 
-/* --- Header --- */
 .detail-page .detail-header {
     background: transparent;
     padding: 2rem 0 1.5rem 0;
-    /* UPDATE: Pastikan header mengambil lebar penuh agar centering bekerja */
-    width: 100%; 
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -68,12 +59,14 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s;
 }
-.detail-page .btn-back:hover { transform: translateX(-3px); }
-.detail-page .spacer { width: 100px; }
+.detail-page .btn-back:hover {
+    transform: translateX(-3px);
+}
+.detail-page .spacer {
+    width: 100px;
+}
 
-/* --- Layout Grid --- */
 .detail-page .detail-content {
-    /* UPDATE: Pastikan content mengambil lebar penuh agar centering bekerja */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -86,18 +79,17 @@
 
 .detail-page .detail-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Kiri 2 bagian, Kanan 1 bagian */
+    grid-template-columns: 2fr 1fr;
     gap: 1.5rem;
     align-items: start;
 }
 
-/* --- Content Cards General --- */
 .detail-page .content-card {
     background: var(--bg-white);
     border-radius: 16px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     border: 1px solid #f0f0f0;
 }
 
@@ -116,8 +108,7 @@
 }
 
 .detail-page .btn-text {
-    /* Hide tombol aksi di header kartu */
-    display: none; 
+    display: none;
     background: none;
     border: none;
     color: var(--status-blue-text);
@@ -126,7 +117,6 @@
     font-size: 0.9rem;
 }
 
-/* --- Doctor Section --- */
 .detail-page .doctor-profile {
     display: flex;
     gap: 1rem;
@@ -180,7 +170,6 @@
     color: #db2777;
 }
 
-/* --- Prescription Section --- */
 .detail-page .note-box {
     background: #f9fafb;
     padding: 1rem;
@@ -189,10 +178,11 @@
     line-height: 1.5;
     border-left: 4px solid var(--primary);
 }
-.detail-page .note-box p { margin: 5px 0; }
+.detail-page .note-box p {
+    margin: 5px 0;
+}
 
 .detail-page .prescription-list {
-    /* Style disamakan dengan note-box (kotak abu-abu border biru) */
     background: #f9fafb;
     padding: 1rem;
     border-radius: 8px;
@@ -202,18 +192,19 @@
 
     display: flex;
     flex-direction: column;
-    gap: 0.8rem; 
+    gap: 0.8rem;
 }
 
 .detail-page .prescription-item {
-    /* Hapus border dan padding agar terlihat seperti teks biasa */
-    display: block; 
+    display: block;
     padding-bottom: 0;
     border-bottom: none;
 }
-.detail-page .prescription-item:last-child { border-bottom: none; padding-bottom: 0; }
+.detail-page .prescription-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
 
-/* Sembunyikan icon obat */
 .detail-page .drug-icon {
     display: none;
 }
@@ -235,23 +226,29 @@
 }
 
 .detail-page .prescription-action {
-    /* Hide tombol tebus obat */
-    display: none; 
+    display: none;
     margin-top: 1.5rem;
     padding-top: 1rem;
     border-top: 1px solid #f0f0f0;
 }
 
-/* --- Sidebar (Payment & Status) --- */
 .detail-page .meta-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
     font-size: 0.9rem;
 }
-.detail-page .meta-row.center { justify-content: center; margin-top: 1rem; }
-.detail-page .meta-row .label { color: var(--text-grey); }
-.detail-page .meta-row .value { font-weight: 600; text-align: right;}
+.detail-page .meta-row.center {
+    justify-content: center;
+    margin-top: 1rem;
+}
+.detail-page .meta-row .label {
+    color: var(--text-grey);
+}
+.detail-page .meta-row .value {
+    font-weight: 600;
+    text-align: right;
+}
 
 .detail-page .badge {
     padding: 6px 16px;
@@ -260,8 +257,14 @@
     font-size: 0.85rem;
     text-transform: uppercase;
 }
-.detail-page .badge.green { background: var(--status-green-bg); color: var(--status-green-text); }
-.detail-page .badge.blue { background: var(--status-blue-bg); color: var(--status-blue-text); }
+.detail-page .badge.green {
+    background: var(--status-green-bg);
+    color: var(--status-green-text);
+}
+.detail-page .badge.blue {
+    background: var(--status-blue-bg);
+    color: var(--status-blue-text);
+}
 
 .detail-page .divider {
     height: 1px;
@@ -276,7 +279,9 @@
     font-size: 0.95rem;
     color: var(--text-grey);
 }
-.detail-page .bill-row.discount { color: var(--status-green-text); }
+.detail-page .bill-row.discount {
+    color: var(--status-green-text);
+}
 .detail-page .bill-row.total {
     font-weight: 800;
     color: var(--primary);
@@ -303,7 +308,6 @@
     border-radius: 4px;
 }
 
-/* --- Buttons --- */
 .detail-page .action-section {
     display: flex;
     flex-direction: column;
@@ -327,7 +331,10 @@
     font-size: 1rem;
     box-shadow: 0 4px 12px rgba(255, 72, 103, 0.25);
 }
-.detail-page .btn-primary-action:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.detail-page .btn-primary-action:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
 
 .detail-page .btn-secondary-full {
     width: 100%;
@@ -336,7 +343,9 @@
     color: white;
     border: none;
 }
-.detail-page .btn-secondary-full:hover { background: #1565c0; }
+.detail-page .btn-secondary-full:hover {
+    background: #1565c0;
+}
 
 .detail-page .btn-outline-action {
     width: 100%;
@@ -345,19 +354,20 @@
     border: 1px solid var(--border);
     color: var(--text-main);
 }
-.detail-page .btn-outline-action:hover { border-color: var(--primary); color: var(--primary); }
+.detail-page .btn-outline-action:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
 
-
-/* --- MODAL POPUP --- */
 .detail-page .modal-overlay {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(2px);
@@ -372,7 +382,7 @@
     max-width: 450px;
     text-align: center;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     animation: scaleUp 0.3s;
 }
 
@@ -387,19 +397,26 @@
     color: #999;
 }
 
-.detail-page .modal-content h3 { color: var(--primary); margin-top: 0; }
-.detail-page .modal-content p { color: var(--text-grey); margin-bottom: 1.5rem; }
+.detail-page .modal-content h3 {
+    color: var(--primary);
+    margin-top: 0;
+}
+.detail-page .modal-content p {
+    color: var(--text-grey);
+    margin-bottom: 1.5rem;
+}
 
-/* Star Rating System */
 .detail-page .star-rating {
     display: flex;
-    flex-direction: row-reverse; /* Reverse logic for simpler CSS hover */
+    flex-direction: row-reverse;
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
 }
 
-.detail-page .star-rating input { display: none; }
+.detail-page .star-rating input {
+    display: none;
+}
 
 .detail-page .star-rating label {
     font-size: 2.5rem;
@@ -408,7 +425,6 @@
     transition: color 0.2s;
 }
 
-/* Logic: Hover over a star highlights it and all subsequent stars (due to row-reverse) */
 .detail-page .star-rating input:checked ~ label,
 .detail-page .star-rating label:hover,
 .detail-page .star-rating label:hover ~ label {
@@ -426,7 +442,9 @@
     margin-bottom: 1rem;
     box-sizing: border-box;
 }
-.detail-page .comment-box textarea:focus { outline: 1px solid var(--primary); }
+.detail-page .comment-box textarea:focus {
+    outline: 1px solid var(--primary);
+}
 
 .detail-page .btn-submit {
     width: 100%;
@@ -437,31 +455,51 @@
     font-weight: 600;
     border-radius: 8px;
 }
-.detail-page .btn-submit:hover { background: #151e3b; }
+.detail-page .btn-submit:hover {
+    background: #151e3b;
+}
 
-/* Animation Keyframes */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleUp { from { transform: scale(0.9); } to { transform: scale(1); } }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .detail-page .detail-grid {
-        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        grid-template-columns: 1fr;
     }
-    
+
     .detail-page .header-container {
         width: 90vw;
     }
-    
+
     .detail-page .sidebar-info {
-        order: -1; /* Move sidebar (status) to top on mobile if needed, or keep bottom */
+        order: -1;
     }
-    
-    /* Option: Keep Status on top, Payment at bottom */
+
     .detail-page .sidebar-info {
-        display: contents; /* Allow children to break out of sidebar container */
+        display: contents;
     }
-    .detail-page .status-section { order: -2; } /* Top most */
-    .detail-page .main-info { order: -1; } /* Middle */
-    .detail-page .payment-section, .detail-page .action-section { order: 1; } /* Bottom */
+    .detail-page .status-section {
+        order: -2;
+    }
+    .detail-page .main-info {
+        order: -1;
+    }
+    .detail-page .payment-section,
+    .detail-page .action-section {
+        order: 1;
+    }
 }

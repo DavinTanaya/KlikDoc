@@ -8,48 +8,38 @@
     --text-main: #333;
     --text-grey: #888;
     --border: #e0e0e0;
-
-    font-family: "Inter", sans-serif;
     background-color: var(--bg-page);
-
-    /* Layout: Center Content */
-    /* Mengurangi min-height agar lebih pas/mepet dengan navbar atas */
     min-height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Mengurangi padding agar lebih mepet */
     padding: 1rem 0;
 }
 
-/* --- Header (Ditampilkan Kembali) --- */
 .cart-page .cart-header {
-    /* Membuat background transparan agar menyatu dengan page, atau putih jika ingin bar */
     background: transparent;
     box-shadow: none;
     flex-shrink: 0;
     z-index: 10;
     width: 100%;
-    display: flex; /* Mengaktifkan kembali display */
+    display: flex;
     justify-content: center;
-    margin-bottom: 1rem; /* Jarak sedikit ke kartu */
+    margin-bottom: 1rem;
 }
 
 .cart-page .header-container {
-    /* FIX: Lebar disamakan dengan kartu (70vw) */
     width: 70vw;
     max-width: 1200px;
     min-width: 600px;
-
-    padding: 0; /* Reset padding internal */
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .cart-page .header-container h1 {
-    font-size: 1.5rem; /* Font Judul lebih besar */
+    font-size: 1.5rem;
     color: var(--primary);
     margin: 0;
     font-weight: 800;
@@ -78,7 +68,6 @@
     width: 100px;
 }
 
-/* --- Main Content Wrapper --- */
 .cart-page .cart-content {
     width: 100%;
     display: flex;
@@ -87,31 +76,24 @@
     justify-content: center;
 }
 
-/* --- Unified Card Component (Top Part: List) --- */
 .cart-page .cart-container {
-    /* FIX: Lebar 70vw sesuai permintaan agar lebih luas */
     width: 70vw;
     max-width: 1200px;
     min-width: 600px;
-
     background: var(--bg-white);
     border-radius: 20px 20px 0 0;
     border-bottom: none;
     box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.02);
-
-    /* FIX: Tinggi list disesuaikan (55vh) agar total dengan footer ~70vh */
     height: 55vh;
-
     display: flex;
     flex-direction: column;
     overflow: hidden;
     margin: 0;
 }
 
-/* Actions Bar (Header List) */
 .cart-page .cart-actions-bar {
     background: var(--bg-white);
-    padding: 1.2rem 2.5rem; /* Padding sedikit diperbesar */
+    padding: 1.2rem 2.5rem;
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
@@ -128,13 +110,11 @@
     cursor: pointer;
 }
 
-/* --- Cart Items List (Scrollable) --- */
 .cart-page .cart-items-list {
     display: flex;
     flex-direction: column;
     flex: 1;
     overflow-y: auto;
-
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
 }
@@ -147,10 +127,9 @@
     border-radius: 10px;
 }
 
-/* Item Row Style */
 .cart-page .cart-item {
     background: var(--bg-white);
-    padding: 1.8rem 2.5rem; /* Item lebih lega */
+    padding: 1.8rem 2.5rem;
     display: flex;
     gap: 2rem;
     align-items: center;
@@ -166,7 +145,6 @@
     background-color: #fafafa;
 }
 
-/* Checkbox Styling */
 .cart-page .custom-checkbox {
     display: flex;
     align-items: center;
@@ -208,9 +186,8 @@
     transform: rotate(45deg);
 }
 
-/* Item Details */
 .cart-page .item-image {
-    width: 100px; /* Gambar lebih besar */
+    width: 100px;
     height: 100px;
     background: #f9f9f9;
     border-radius: 12px;
@@ -231,7 +208,7 @@
     .cart-page .cart-container,
     .cart-page .cart-footer,
     .cart-page .header-container {
-        width: 95vw; /* Responsif mobile */
+        width: 95vw;
         min-width: 0;
     }
 
@@ -266,7 +243,6 @@
     font-size: 1.3rem;
 }
 
-/* Badges */
 .cart-page .badge {
     font-size: 0.8rem;
     padding: 4px 10px;
@@ -282,7 +258,6 @@
     color: #2e7d32;
 }
 
-/* Actions */
 .cart-page .item-actions {
     display: flex;
     align-items: center;
@@ -296,7 +271,7 @@
     cursor: pointer;
     padding: 5px;
     display: flex;
-    transform: scale(1.1); /* Ikon trash sedikit lebih besar */
+    transform: scale(1.1);
 }
 .cart-page .btn-trash:hover {
     color: var(--accent);
@@ -338,28 +313,20 @@
     outline: none;
 }
 
-/* State: Unchecked Item */
 .cart-page .unchecked-item {
     opacity: 0.6;
     background: #fdfdfd;
 }
 
-/* --- Unified Card Component (Bottom Part: Footer) --- */
 .cart-page .cart-footer {
-    /* FIX: Lebar disamakan dengan cart-container (70vw) */
     width: 70vw;
     max-width: 1200px;
     min-width: 600px;
-
     background: var(--bg-white);
-
-    /* Styling menyatu */
     border-radius: 0 0 20px 20px;
     border-top: 1px solid var(--border);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
-    /* Padding & Dimensi */
-    padding: 0 2.5rem; /* Padding horizontal disamakan dengan item */
+    padding: 0 2.5rem;
     height: 15vh;
 
     display: flex;
@@ -391,7 +358,7 @@
 }
 
 .cart-page .total-section .amount {
-    font-size: 1.8rem; /* Harga lebih besar agar jelas */
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--primary);
 }
@@ -400,7 +367,7 @@
     background-color: var(--accent);
     color: white;
     border: none;
-    padding: 1.1rem 4rem; /* Tombol lebih besar */
+    padding: 1.1rem 4rem;
     border-radius: 12px;
     font-size: 1.2rem;
     font-weight: 700;
@@ -417,7 +384,7 @@
 
 .cart-image {
     width: 100%;
-    height: 180px; /* kamu bisa sesuaikan 120–200px */
+    height: 180px;
     overflow: hidden;
     border-radius: 12px;
 }
@@ -425,7 +392,7 @@
 .cart-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ini yang membuat gambar rapi */
-    object-position: center; /* fokus di tengah */
+    object-fit: cover;
+    object-position: center;
     display: block;
 }

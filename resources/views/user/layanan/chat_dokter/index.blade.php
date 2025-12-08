@@ -11,8 +11,6 @@
 @section('body')
     <div class="chat-wrapper">
         <div class="app-container" id="appContainer">
-
-            <!-- SIDEBAR -->
             <aside class="sidebar">
                 <div class="sidebar-header">
                     <div class="sidebar-header-left">
@@ -36,7 +34,6 @@
                 </div>
 
                 <ul class="chat-list">
-                    <!-- Chat 1: Active -->
                     <li class="chat-item active" onclick="openChat('digibot_NEW', 'Online', true)">
                         <div class="avatar-container">
                             <img src="https://ui-avatars.com/api/?name=Digibot&background=0D8ABC&color=fff" class="avatar"
@@ -53,8 +50,6 @@
                             </div>
                         </div>
                     </li>
-
-                    <!-- Chat 2: Active -->
                     <li class="chat-item" onclick="openChat('PCB Express', 'Online', true)">
                         <div class="avatar-container">
                             <img src="https://ui-avatars.com/api/?name=PCB+Express&background=random" class="avatar"
@@ -71,8 +66,6 @@
                             </div>
                         </div>
                     </li>
-
-                    <!-- Chat 3: Closed (Status=Offline, IsActive=false) -->
                     <li class="chat-item" onclick="openChat('Solar Perfect', 'Offline', false)">
                         <div class="avatar-container">
                             <img src="https://ui-avatars.com/api/?name=Solar+Perfect&background=random" class="avatar"
@@ -91,9 +84,7 @@
                 </ul>
             </aside>
 
-            <!-- CHAT AREA -->
             <main class="chat-area">
-                <!-- Header -->
                 <header class="chat-room-header">
                     <div class="header-left">
                         <button class="btn-back" onclick="closeChat()">
@@ -116,13 +107,11 @@
                     </div>
                 </header>
 
-                <!-- Status Bar -->
                 <div id="chatStatusBar" class="chat-status-bar status-active">
                     <span id="statusIcon"><i class="fas fa-clock"></i></span>
                     <span id="statusText">Sesi chat sedang berlangsung</span>
                 </div>
 
-                <!-- Messages List (Dengan banyak dummy data agar scroll aktif) -->
                 <div class="messages-container" id="messageContainer">
                     <div class="date-divider"><span>HARI INI</span></div>
                     <div class="message-row sent">
@@ -146,7 +135,6 @@
                         </div>
                     </div>
 
-                    <!-- DUMMY DATA UNTUK MEMASTIKAN SCROLL BERFUNGSI -->
                     <div class="message-row sent">
                         <div class="bubble">
                             Oke siap kak, ditunggu kabar baiknya ya
@@ -188,12 +176,9 @@
                             <span class="bubble-time">14:45</span>
                         </div>
                     </div>
-                    <!-- END DUMMY DATA -->
                 </div>
 
-                <!-- Input Area -->
                 <footer class="input-area" id="inputArea">
-                    <!-- Wrapper Aktif -->
                     <div class="input-wrapper-active" id="inputWrapperActive">
                         <div class="input-actions">
                             <i class="far fa-smile"></i>
@@ -206,7 +191,6 @@
                         </button>
                     </div>
 
-                    <!-- Pesan Closed -->
                     <div class="input-closed-message" id="inputClosedMessage">
                         <i class="fas fa-lock me-2"></i> Anda tidak dapat membalas percakapan ini.
                     </div>
@@ -223,23 +207,18 @@
         const headerStatus = document.getElementById('headerStatus');
         const headerAvatar = document.getElementById('headerAvatar');
 
-        // Element Status & Input
         const chatStatusBar = document.getElementById('chatStatusBar');
         const statusText = document.getElementById('statusText');
         const statusIcon = document.getElementById('statusIcon');
         const inputWrapperActive = document.getElementById('inputWrapperActive');
         const inputClosedMessage = document.getElementById('inputClosedMessage');
 
-        // Fungsi Buka Chat dengan Parameter Status (isActive)
         function openChat(name, statusInfo, isActive) {
-            // 1. Update Header
             headerName.innerText = name;
             headerStatus.innerText = statusInfo;
             headerAvatar.src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=random`;
 
-            // 2. Logic Status Bar & Input
             if (isActive) {
-                // UI Chat Aktif
                 chatStatusBar.className = 'chat-status-bar status-active';
                 statusIcon.innerHTML = '<i class="fas fa-clock"></i>';
                 statusText.innerText = 'Sesi chat sedang berlangsung';
@@ -247,7 +226,6 @@
                 inputWrapperActive.style.display = 'flex';
                 inputClosedMessage.style.display = 'none';
             } else {
-                // UI Chat Berakhir/Closed
                 chatStatusBar.className = 'chat-status-bar status-closed';
                 statusIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
                 statusText.innerText = 'Sesi chat telah berakhir';
@@ -256,17 +234,14 @@
                 inputClosedMessage.style.display = 'block';
             }
 
-            // 3. Mobile Responsiveness
             if (window.innerWidth <= 900) {
                 appContainer.classList.add('chat-active');
             }
 
-            // 4. Update List Active State
             const items = document.querySelectorAll('.chat-item');
             items.forEach(item => item.classList.remove('active'));
             event.currentTarget.classList.add('active');
-
-            // Scroll to bottom simulation
+            
             const container = document.getElementById('messageContainer');
             container.scrollTop = container.scrollHeight;
         }

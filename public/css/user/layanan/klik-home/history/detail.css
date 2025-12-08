@@ -1,4 +1,3 @@
-/* --- Scope Wrapper --- */
 .klikhome-detail-page {
     --bg-page: #f4f7fe;
     --bg-white: #ffffff;
@@ -22,7 +21,6 @@
     overflow: hidden;
 }
 
-/* --- Header --- */
 .klikhome-detail-page .detail-header {
     background: transparent;
     width: 100%;
@@ -71,7 +69,6 @@
     width: 100px;
 }
 
-/* --- Main Layout --- */
 .klikhome-detail-page .detail-content {
     width: 100%;
     display: flex;
@@ -94,7 +91,6 @@
     overflow: hidden;
 }
 
-/* Scroll Area */
 .klikhome-detail-page .detail-scroll-area {
     flex: 1;
     overflow-y: auto;
@@ -114,7 +110,6 @@
     border-radius: 10px;
 }
 
-/* --- Section Blocks --- */
 .klikhome-detail-page .section-block {
     background: white;
     border-bottom: 1px solid #f0f0f0;
@@ -132,7 +127,6 @@
     font-weight: 700;
 }
 
-/* Status Banner */
 .klikhome-detail-page .status-banner {
     display: flex;
     justify-content: space-between;
@@ -151,9 +145,15 @@
     font-size: 1.4rem;
     font-weight: 800;
 }
-.klikhome-detail-page .text-red { color: var(--red); }
-.klikhome-detail-page .text-green { color: var(--green); }
-.klikhome-detail-page .text-blue { color: var(--blue); }
+.klikhome-detail-page .text-red {
+    color: var(--red);
+}
+.klikhome-detail-page .text-green {
+    color: var(--green);
+}
+.klikhome-detail-page .text-blue {
+    color: var(--blue);
+}
 
 .klikhome-detail-page .status-badge-pill {
     background: #e8f5e9;
@@ -167,7 +167,6 @@
     gap: 6px;
 }
 
-/* Visit Info Section (Grid) */
 .klikhome-detail-page .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -197,7 +196,6 @@
     line-height: 1.4;
 }
 
-/* Service List Section */
 .klikhome-detail-page .product-list {
     display: flex;
     flex-direction: column;
@@ -220,9 +218,12 @@
     justify-content: center;
 }
 
-/* Helper background colors for icons */
-.klikhome-detail-page .bg-orange-soft { background: #fff3e0; }
-.klikhome-detail-page .bg-blue-soft { background: #e3f2fd; }
+.klikhome-detail-page .bg-orange-soft {
+    background: #fff3e0;
+}
+.klikhome-detail-page .bg-blue-soft {
+    background: #e3f2fd;
+}
 
 .klikhome-detail-page .details {
     flex: 1;
@@ -244,7 +245,6 @@
     color: var(--text-main);
 }
 
-/* Cost Section */
 .klikhome-detail-page .cost-section {
     background: #fcfcfc;
     padding: 1.5rem;
@@ -304,7 +304,6 @@
     color: var(--primary);
 }
 
-/* --- Footer Actions --- */
 .klikhome-detail-page .detail-footer {
     background: white;
     border-top: 1px solid var(--border);
@@ -343,7 +342,6 @@
     transform: translateY(-2px);
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .klikhome-detail-page .header-container,
     .klikhome-detail-page .detail-container {

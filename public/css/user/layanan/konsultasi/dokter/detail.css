@@ -1,21 +1,16 @@
-/* =========================================
-   DOCTOR DETAIL PAGE
-   Namespace: .doctor-detail-page
-   ========================================= */
-
 .doctor-detail-page {
-    --bg-page: #F4F7FE;
-    --card-bg: #FFFFFF;
-    --text-primary: #1C274C;
+    --bg-page: #f4f7fe;
+    --card-bg: #ffffff;
+    --text-primary: #1c274c;
     --text-body: #555;
-    --accent: #FF4867;
+    --accent: #ff4867;
     --accent-hover: #e0405b;
-    --border-color: #E0E0E0;
+    --border-color: #e0e0e0;
     --blue-soft: #e3f2fd;
-    
+
     background-color: var(--bg-page);
     min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     color: var(--text-primary);
     padding-bottom: 4rem;
 }
@@ -26,8 +21,6 @@
     padding: 0 1.5rem;
 }
 
-/* 1. NAVIGATION
-   ========================================= */
 .doctor-detail-page .top-nav {
     padding: 2rem 0;
 }
@@ -47,8 +40,6 @@
     color: var(--text-primary);
 }
 
-/* 2. LAYOUT GRID
-   ========================================= */
 .doctor-detail-page .content-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -57,25 +48,20 @@
 
 @media (min-width: 1024px) {
     .doctor-detail-page .content-grid {
-        grid-template-columns: 1.8fr 1fr; /* Kiri lebih lebar */
+        grid-template-columns: 1.8fr 1fr;
         gap: 3rem;
         align-items: start;
     }
 }
 
-/* 3. MAIN CONTENT (LEFT COLUMN)
-   ========================================= */
-
-/* Content Wrapper Styling */
 .doctor-detail-page .main-content {
     background: white;
     padding: 2.5rem;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(28, 39, 76, 0.03);
-    border: 1px solid rgba(0,0,0,0.02);
+    border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
-/* Doctor Profile Section */
 .doctor-detail-page .profile-flex {
     display: flex;
     gap: 20px;
@@ -147,7 +133,6 @@
     margin: 0;
 }
 
-/* Stats Grid */
 .doctor-detail-page .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -164,7 +149,9 @@
     text-align: center;
     border-right: 1px solid #e0e0e0;
 }
-.doctor-detail-page .stat-item:last-child { border-right: none; }
+.doctor-detail-page .stat-item:last-child {
+    border-right: none;
+}
 
 .doctor-detail-page .stat-item .val {
     font-weight: 700;
@@ -184,13 +171,12 @@
     margin: 2rem 0;
 }
 
-/* Tabs */
 .doctor-detail-page .content-tabs {
     display: flex;
     gap: 10px;
     margin-bottom: 2rem;
     overflow-x: auto;
-    padding-bottom: 5px; /* For scrollbar */
+    padding-bottom: 5px;
 }
 
 .doctor-detail-page .tab-btn {
@@ -212,16 +198,16 @@
     border-color: var(--text-primary);
 }
 
-/* Schedule Section */
 .doctor-detail-page .section-label {
     font-size: 0.95rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: var(--text-primary);
 }
-.doctor-detail-page .mt-4 { margin-top: 2rem; }
+.doctor-detail-page .mt-4 {
+    margin-top: 2rem;
+}
 
-/* Date Strip */
 .doctor-detail-page .date-strip-wrapper {
     overflow-x: auto;
     padding-bottom: 10px;
@@ -244,15 +230,24 @@
     transition: all 0.2s;
 }
 
-.doctor-detail-page .date-item .day { font-size: 0.8rem; color: #888; }
-.doctor-detail-page .date-item .date { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+.doctor-detail-page .date-item .day {
+    font-size: 0.8rem;
+    color: #888;
+}
+.doctor-detail-page .date-item .date {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
 
 .doctor-detail-page .date-item.active {
     background: var(--blue-soft);
     border-color: #2196f3;
 }
 .doctor-detail-page .date-item.active .day,
-.doctor-detail-page .date-item.active .date { color: #1976d2; }
+.doctor-detail-page .date-item.active .date {
+    color: #1976d2;
+}
 
 .doctor-detail-page .date-item.disabled {
     opacity: 0.5;
@@ -260,7 +255,6 @@
     cursor: not-allowed;
 }
 
-/* Time Grid */
 .doctor-detail-page .time-period h4 {
     font-size: 0.9rem;
     color: #666;
@@ -299,19 +293,20 @@
     border-color: #eee;
 }
 
-/* Bio & Review (Simple Styles) */
 .doctor-detail-page .bio-text h3 {
     font-size: 1.1rem;
     font-weight: 700;
     margin: 1.5rem 0 0.5rem 0;
 }
-.doctor-detail-page .bio-text p, 
+.doctor-detail-page .bio-text p,
 .doctor-detail-page .bio-text li {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--text-body);
 }
-.doctor-detail-page .check-list { padding-left: 1.2rem; }
+.doctor-detail-page .check-list {
+    padding-left: 1.2rem;
+}
 
 .doctor-detail-page .review-item {
     border-bottom: 1px solid #eee;
@@ -322,13 +317,19 @@
     justify-content: space-between;
     margin-bottom: 5px;
 }
-.doctor-detail-page .reviewer { font-weight: 700; }
-.doctor-detail-page .rating { color: #fbc02d; font-weight: 700; }
-.doctor-detail-page .comment { font-size: 0.9rem; color: #666; margin: 0; }
+.doctor-detail-page .reviewer {
+    font-weight: 700;
+}
+.doctor-detail-page .rating {
+    color: #fbc02d;
+    font-weight: 700;
+}
+.doctor-detail-page .comment {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
 
-
-/* 4. BOOKING SIDEBAR (RIGHT COLUMN)
-   ========================================= */
 .doctor-detail-page .booking-sidebar {
     position: sticky;
     top: 2rem;
@@ -339,7 +340,7 @@
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 15px 50px rgba(28, 39, 76, 0.08);
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .doctor-detail-page .price-header {
@@ -361,7 +362,6 @@
     color: var(--text-primary);
 }
 
-/* Summary List */
 .doctor-detail-page .booking-summary-list {
     margin-bottom: 2rem;
 }
@@ -373,10 +373,18 @@
     font-size: 0.9rem;
 }
 
-.doctor-detail-page .summary-item .label { color: #888; }
-.doctor-detail-page .summary-item .value { font-weight: 600; color: var(--text-primary); text-align: right; }
+.doctor-detail-page .summary-item .label {
+    color: #888;
+}
+.doctor-detail-page .summary-item .value {
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: right;
+}
 
-.doctor-detail-page .summary-item.highlight .value { color: var(--accent); }
+.doctor-detail-page .summary-item.highlight .value {
+    color: var(--accent);
+}
 
 .doctor-detail-page .card-divider {
     border: 0;
@@ -384,7 +392,6 @@
     margin: 1.5rem 0;
 }
 
-/* Price Breakdown */
 .doctor-detail-page .summary-row {
     display: flex;
     justify-content: space-between;
@@ -402,7 +409,6 @@
     border-top: 1px solid #f0f0f0;
 }
 
-/* Button */
 .doctor-detail-page .btn-payment {
     width: 100%;
     background: var(--text-primary);

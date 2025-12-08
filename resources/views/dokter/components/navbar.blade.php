@@ -32,7 +32,7 @@
                                 {{ Auth::user()->name ?? 'dr. Andi Setiawan' }}
                             </span>
                             <span class="d-block text-muted" style="font-size: 0.8rem;">
-                                Spesialis Jantung
+                                {{ Auth()->user()->application?->spesialisasi ?? '' }}
                             </span>
                         </div>
                         <img src="{{ Auth::user()->application?->avatar ? asset(Auth::user()->application?->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->application?->full_name ?? 'Dokter') }}"

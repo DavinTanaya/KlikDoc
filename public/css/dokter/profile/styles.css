@@ -2,7 +2,6 @@
     background-color: rgb(var(--bg-content)); 
     min-height: 100vh;
     padding: 3rem 0;
-    font-family: 'Inter', sans-serif;
     color: rgb(var(--grey3));
 }
 

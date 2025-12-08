@@ -1,4 +1,3 @@
-/* ==================== VARIABLES ==================== */
 :root {
     --primary-color: #4fc3f7;
     --primary-hover: #3fb3e7;
@@ -13,9 +12,8 @@
     --sidebar-width: 280px;
 }
 
-/* ==================== GENERAL ==================== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--light-color);
     overflow-x: hidden;
 }
@@ -24,7 +22,6 @@ body {
     min-height: 100vh;
 }
 
-/* ==================== SIDEBAR ==================== */
 #sidebar-wrapper {
     width: var(--sidebar-width);
     min-height: 100vh;
@@ -38,7 +35,11 @@ body {
 .logo-icon {
     width: 45px;
     height: 45px;
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -63,7 +64,11 @@ body {
 }
 
 #sidebar-wrapper .list-group-item.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
     color: white;
     box-shadow: 0 4px 12px rgba(79, 195, 247, 0.3);
 }
@@ -78,13 +83,12 @@ body {
     width: 24px;
 }
 
-/* ==================== PAGE CONTENT ==================== */
 #page-content-wrapper {
     min-width: 0;
 }
 
 .navbar {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .search-box {
@@ -104,16 +108,15 @@ body {
     border-color: #ced4da;
 }
 
-/* ==================== STATS CARDS ==================== */
 .stat-card {
     transition: transform 0.3s, box-shadow 0.3s;
     border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .stat-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .stat-icon {
@@ -132,9 +135,12 @@ body {
     line-height: 1;
 }
 
-/* ==================== CUSTOM BADGES ==================== */
 .badge-primary-custom {
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
     color: white;
 }
 
@@ -158,9 +164,12 @@ body {
     color: var(--info-color);
 }
 
-/* ==================== CUSTOM BUTTONS ==================== */
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
     border: none;
 }
 
@@ -169,7 +178,6 @@ body {
     box-shadow: 0 4px 12px rgba(79, 195, 247, 0.4);
 }
 
-/* ==================== LIST ITEMS ==================== */
 .list-item {
     background-color: var(--light-color);
     border-radius: 8px;
@@ -185,7 +193,11 @@ body {
 .avatar {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
     color: white;
     border-radius: 50%;
     display: flex;
@@ -195,17 +207,19 @@ body {
     font-size: 16px;
 }
 
-/* ==================== PROGRESS BARS ==================== */
 .progress {
     height: 8px;
     border-radius: 4px;
 }
 
 .progress-bar {
-    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+    background: linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--success-color)
+    );
 }
 
-/* ==================== TABLES ==================== */
 .table {
     margin-bottom: 0;
 }
@@ -220,10 +234,9 @@ body {
     background-color: var(--light-color);
 }
 
-/* ==================== CARDS ==================== */
 .card {
     border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 24px;
 }
 
@@ -232,7 +245,6 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
-/* ==================== ANIMATIONS ==================== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -248,7 +260,6 @@ body {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* ==================== RESPONSIVE ==================== */
 @media (max-width: 991.98px) {
     #sidebar-wrapper {
         margin-left: calc(var(--sidebar-width) * -1);
@@ -273,7 +284,6 @@ body {
     }
 }
 
-/* ==================== SCROLLBAR ==================== */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -292,16 +302,23 @@ body {
     background: #999;
 }
 
-/* ==================== UTILITIES ==================== */
 .text-gradient {
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .bg-gradient-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--info-color)
+    );
 }
 
 .bg-gradient-success {
@@ -321,5 +338,5 @@ body {
 }
 
 .shadow-hover:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
 }

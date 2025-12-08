@@ -29,15 +29,11 @@ class ChatDokterController extends Controller
 
         $chats = $query->get();
 
-        // =========================
-        // SORT BY LAST MESSAGE
-        // =========================
         $chats = $chats->sortByDesc(function ($chat) {
             if ($chat->consultation && $chat->consultation->status === 'AKTIF') {
                 return PHP_INT_MAX;
             }
 
-            // ✅ PRIORITAS KEDUA: last message
             return optional($chat->messages->first())->created_at?->timestamp ?? 0;
         });
 
@@ -48,13 +44,8 @@ class ChatDokterController extends Controller
             ? $activechat->messages()->orderBy('created_at')->get()
             : collect();
 
-        // 🔥 SEKARANG AMBIL DARI RELASI consultation
         $activeConsultation = $activechat && $activechat->consultation && $activechat->consultation->status === 'AKTIF' ? $activechat->consultation : null;
 
-
-        // =========================
-        // RETURN VIEW
-        // =========================
         $view = $user->role === 'doctor'
             ? 'dokter.chat.index'
             : 'layanan.chat_dokter.index';
@@ -68,9 +59,6 @@ class ChatDokterController extends Controller
         ]);
     }
 
-    // =====================================================
-    // SEND MESSAGE (BLOCK JIKA KONSULTASI SELESAI)
-    // =====================================================
     public function sendMessage(Request $request)
     {
         $request->validate([
@@ -80,7 +68,6 @@ class ChatDokterController extends Controller
         Log::info('[CHAT] sendMessage called', $request->all());
         $chat = Chat::with('consultation')->findOrFail($request->chat_id);
 
-        // ❌ BLOCK kalau konsultasi tidak aktif
         if (! $chat->consultation || $chat->consultation->status !== 'AKTIF') {
             return response()->json([
                 'error' => 'Sesi konsultasi telah selesai'
@@ -160,10 +147,6 @@ class ChatDokterController extends Controller
         ]);
     }
 
-
-    // =====================================================
-    // CALL START
-    // =====================================================
     public function start(Chat $chat, Request $request)
     {
         $user = $request->user();
@@ -183,10 +166,7 @@ class ChatDokterController extends Controller
 
         return response()->json(['ok' => true]);
     }
-
-    // =====================================================
-    // CALL END
-    // =====================================================
+    
     public function end(Chat $chat, Request $request)
     {
         $user = $request->user();

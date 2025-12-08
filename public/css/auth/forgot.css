@@ -55,7 +55,6 @@ body {
     text-align: center;
 }
 
-/* Header & Icon */
 .icon-wrapper {
     width: 70px;
     height: 70px;
@@ -84,7 +83,6 @@ body {
     margin-bottom: 2.5rem;
 }
 
-/* Form Styles */
 .auth-form {
     text-align: left;
 }
@@ -117,7 +115,7 @@ body {
 
 .form-control {
     width: 100%;
-    padding: 0.9rem 1rem 0.9rem 3rem; /* Extra padding kiri untuk icon */
+    padding: 0.9rem 1rem 0.9rem 3rem;
     border: 1px solid rgb(var(--grey1));
     border-radius: 12px;
     font-size: 1rem;
@@ -134,10 +132,9 @@ body {
 }
 
 .form-control::placeholder {
-    color: rgb(var(--grey1)); /* Warna placeholder lebih terang */
+    color: rgb(var(--grey1));
 }
 
-/* Button */
 .btn-primary-auth {
     background-color: rgb(var(--blue1));
     color: rgb(var(--white));
@@ -155,7 +152,7 @@ body {
 }
 
 .btn-primary-auth:hover {
-    background-color: rgb(var(--blue2)); /* Sedikit lebih terang saat hover */
+    background-color: rgb(var(--blue2));
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(var(--blue1), 0.3);
 }
@@ -179,7 +176,6 @@ body {
     color: rgb(var(--blue1));
 }
 
-/* Error & Alert */
 .text-danger-custom {
     color: rgb(var(--red2));
     font-size: 0.85rem;

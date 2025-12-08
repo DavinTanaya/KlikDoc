@@ -1,7 +1,3 @@
-// Modal Handler Functions
-// Load this after modals.js and script.js
-
-// Sample Data
 const sampleData = {
     patients: {
         P001: {
@@ -111,7 +107,6 @@ const sampleData = {
     },
 };
 
-// Patient Functions
 window.showPatientDetail = function (patientId) {
     const patient =
         sampleData.patients[patientId] || sampleData.patients["P001"];
@@ -129,7 +124,6 @@ window.deletePatient = function (patientId) {
     });
 };
 
-// Doctor Functions
 window.showDoctorDetail = function (doctorId) {
     const doctor = sampleData.doctors[doctorId] || sampleData.doctors["D001"];
     ModalFunctions.showDoctorDetail(doctor);
@@ -146,7 +140,6 @@ window.deleteDoctor = function (doctorId) {
     });
 };
 
-// Consultation Functions
 window.showConsultationMonitor = function (consultationId) {
     const consultation =
         sampleData.consultations[consultationId] ||
@@ -154,7 +147,6 @@ window.showConsultationMonitor = function (consultationId) {
     ModalFunctions.showConsultationMonitor(consultation);
 };
 
-// Product Functions
 window.showProductDetail = function (productId) {
     const product =
         sampleData.products[productId] || sampleData.products["PR001"];
@@ -226,7 +218,6 @@ window.deleteProduct = function (productId) {
     });
 };
 
-// Article Functions
 window.showArticleForm = function (articleId = null) {
     ModalFunctions.showArticleForm(articleId ? {} : null);
 };
@@ -261,7 +252,6 @@ window.deleteArticle = function (articleId) {
     });
 };
 
-// Service Functions
 window.showServiceDetail = function (serviceId) {
     const modal = new bootstrap.Modal(document.getElementById("detailModal"));
     document.getElementById("detailModalTitle").textContent =
@@ -370,7 +360,6 @@ window.showServiceForm = function () {
     modal.show();
 };
 
-// Program Functions
 window.showProgramDetail = function (programId) {
     const modal = new bootstrap.Modal(document.getElementById("detailModal"));
     document.getElementById("detailModalTitle").textContent = "Detail Program";
@@ -461,7 +450,6 @@ window.showProgramForm = function () {
     modal.show();
 };
 
-// Medical Record Functions
 window.showMedicalRecordDetail = function (recordId) {
     const modal = new bootstrap.Modal(document.getElementById("detailModal"));
     document.getElementById("detailModalTitle").textContent =

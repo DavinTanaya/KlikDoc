@@ -28,7 +28,6 @@ class MedicineReminderController extends Controller
             'note'      => 'nullable|string',
         ]);
 
-        /** 1️⃣ Simpan reminder utama */
         $reminder = MedicineReminder::create([
             'user_id'        => auth()->id(),
             'medicine_name'  => $request->name,
@@ -38,10 +37,8 @@ class MedicineReminderController extends Controller
             'is_active'      => true,
         ]);
 
-        /** 2️⃣ Generate jadwal untuk HARI INI */
         $this->generateSchedules($reminder);
 
-        /** 3️⃣ Return HTML */
         $html = view('components.medicine-reminder-item', compact('reminder'))->render();
 
         return response()->json(['html' => $html]);
@@ -57,12 +54,7 @@ class MedicineReminderController extends Controller
 
         return response()->json(['success' => true]);
     }
-
-    /**
-     * ===============================
-     * Generate Schedule Logic
-     * ===============================
-     */
+    
     private function generateSchedules(MedicineReminder $reminder)
     {
         $startTime = Carbon::createFromFormat('H:i', $reminder->start_time);

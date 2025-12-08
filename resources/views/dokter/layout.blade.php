@@ -2,123 +2,124 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'KlikDoc')</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'KlikDoc')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <style>
-    .toast-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 20000;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 20000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .toast-msg {
-      padding: 12px 18px;
-      border-radius: 8px;
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      opacity: 0;
-      transform: translateX(20px);
-      animation: slideIn 0.3s forwards, fadeOut 0.4s 3s forwards;
-    }
+        .toast-msg {
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideIn 0.3s forwards, fadeOut 0.4s 3s forwards;
+        }
 
-    .toast-success {
-      background: #28a745;
-    }
+        .toast-success {
+            background: #28a745;
+        }
 
-    .toast-error {
-      background: #dc3545;
-    }
+        .toast-error {
+            background: #dc3545;
+        }
 
-    @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: translateX(20px);
-      }
-    }
-  </style>
-  @yield('head')
-  @stack('styles')
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+        }
+    </style>
+    @yield('head')
+    @stack('styles')
 </head>
 
 <body>
-  @include('dokter.components.navbar')
-  @yield('body')
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  @stack('scripts')
-  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
+    @include('dokter.components.navbar')
+    @yield('body')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
+    @stack('scripts')
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
 
-  <script>
-    window.Echo = new Echo({
-      broadcaster: 'pusher',
-      key: "{{ config('broadcasting.connections.pusher.key') }}",
-      wsHost: "ws.klikdoc.online",
-      wsPort: 443,
-      forceTLS: false,
-      encrypted: false,
-      disableStats: true,
-      authEndpoint: "/broadcasting/auth",
-      auth: {
-        headers: {
-          "X-CSRF-TOKEN": "{{ csrf_token() }}"
+    <script>
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: "{{ config('broadcasting.connections.pusher.key') }}",
+            wsHost: "ws.klikdoc.online",
+            wsPort: 443,
+            forceTLS: false,
+            encrypted: false,
+            disableStats: true,
+            authEndpoint: "/broadcasting/auth",
+            auth: {
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                }
+            },
+        });
+
+        let onlineUsers = {};
+
+        window.Echo.join('presence.online')
+            .here((users) => {
+                console.log("[ONLINE] Current:", users);
+                onlineUsers = {};
+                users.forEach(u => onlineUsers[u.id] = u);
+                updateOnlineUI();
+            })
+            .joining((user) => {
+                console.log("[ONLINE] User joined:", user);
+                onlineUsers[user.id] = user;
+                updateOnlineUI();
+            })
+            .leaving((user) => {
+                console.log("[ONLINE] User left:", user);
+                delete onlineUsers[user.id];
+                updateOnlineUI();
+            });
+
+        function updateOnlineUI() {
+            document.querySelectorAll("[data-user-id]").forEach(el => {
+                let uid = el.dataset.userId;
+                if (onlineUsers[uid]) {
+                    el.innerHTML = '<span class="text-success">● Online</span>';
+                } else {
+                    el.innerHTML = '<span class="text-muted">● Offline</span>';
+                }
+            });
         }
-      },
-    });
-
-    let onlineUsers = {};
-
-    window.Echo.join('presence.online')
-      .here((users) => {
-        console.log("[ONLINE] Current:", users);
-        onlineUsers = {};
-        users.forEach(u => onlineUsers[u.id] = u);
-        updateOnlineUI();
-      })
-      .joining((user) => {
-        console.log("[ONLINE] User joined:", user);
-        onlineUsers[user.id] = user;
-        updateOnlineUI();
-      })
-      .leaving((user) => {
-        console.log("[ONLINE] User left:", user);
-        delete onlineUsers[user.id];
-        updateOnlineUI();
-      });
-
-    function updateOnlineUI() {
-      document.querySelectorAll("[data-user-id]").forEach(el => {
-        let uid = el.dataset.userId;
-        if (onlineUsers[uid]) {
-          el.innerHTML = '<span class="text-success">● Online</span>';
-        } else {
-          el.innerHTML = '<span class="text-muted">● Offline</span>';
-        }
-      });
-    }
-  </script>
+    </script>
 </body>
 
 </html>

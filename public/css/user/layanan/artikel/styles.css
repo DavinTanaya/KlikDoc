@@ -1,12 +1,3 @@
-/* =========================================
-   ARTIKEL PAGE SPECIFIC STYLES
-   Namespace: .artikel-page
-   ========================================= */
-
-/* 1. MAIN LAYOUT STRUCTURE (Fixing the "Broken" Look)
-   Meniru struktur layout halaman Konsultasi
-   ========================================= */
-
 .artikel-page {
     --bg-sidebar: #1c274c;
     --text-sidebar: #ffffff;
@@ -26,7 +17,6 @@
     min-height: 100vh;
 }
 
-/* Sidebar Layout */
 .artikel-page .split-sidebar {
     background-color: var(--bg-sidebar);
     color: var(--text-sidebar);
@@ -36,14 +26,12 @@
     gap: 2rem;
 }
 
-/* Content Layout */
 .artikel-page .split-content {
     background-color: var(--bg-content);
     flex: 1;
     padding: 2rem;
 }
 
-/* RESPONSIVE DESKTOP (Split Screen) */
 @media (min-width: 1024px) {
     .artikel-page .split-container {
         flex-direction: row;
@@ -52,7 +40,7 @@
     }
 
     .artikel-page .split-sidebar {
-        width: 300px; /* Sedikit lebih lebar untuk artikel */
+        width: 300px;
         position: sticky;
         top: 0;
         height: 100vh;
@@ -67,10 +55,6 @@
     }
 }
 
-/* 2. SIDEBAR COMPONENTS
-   ========================================= */
-
-/* Header */
 .artikel-page .sidebar-header h2 {
     font-size: 1.8rem;
     margin: 0;
@@ -87,7 +71,6 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Search Widget */
 .artikel-page .search-widget {
     margin-bottom: 0.5rem;
 }
@@ -126,7 +109,6 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Sidebar Section Headers */
 .artikel-page .widget-header {
     display: flex;
     align-items: center;
@@ -139,7 +121,6 @@
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Topic Cloud (Tags) */
 .artikel-page .topic-cloud {
     display: flex;
     flex-wrap: wrap;
@@ -166,7 +147,6 @@
     box-shadow: 0 4px 12px rgba(255, 72, 103, 0.3);
 }
 
-/* Trending List */
 .artikel-page .trending-list {
     display: flex;
     flex-direction: column;
@@ -218,7 +198,6 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Sidebar CTA (Newsletter) */
 .artikel-page .sidebar-banner {
     background: linear-gradient(135deg, var(--accent), #ff8a80);
     padding: 1.5rem;
@@ -264,10 +243,6 @@
     margin: 0;
 }
 
-/* 3. MAIN CONTENT AREA
-   ========================================= */
-
-/* Header Content */
 .artikel-page .content-header {
     display: flex;
     justify-content: space-between;
@@ -300,7 +275,6 @@
     cursor: pointer;
 }
 
-/* Article Grid */
 .artikel-page .article-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -324,10 +298,6 @@
     border-color: rgba(28, 39, 76, 0.05);
 }
 
-/* 4. ARTICLE CARD COMPONENTS
-   ========================================= */
-
-/* Thumbnail */
 .artikel-page .article-thumb {
     height: 190px;
     position: relative;
@@ -348,7 +318,6 @@
     transform: scale(1.08);
 }
 
-/* Card Placeholder Colors */
 .artikel-page .bg-blue-light {
     background: #e3f2fd;
 }
@@ -362,11 +331,10 @@
     background: #fff3e0;
 }
 
-/* Category Badge */
 .artikel-page .category-badge {
     position: absolute;
     top: 15px;
-    left: 15px; /* Pindah ke kiri agar lebih rapi */
+    left: 15px;
     font-size: 0.65rem;
     font-weight: 700;
     padding: 6px 12px;
@@ -392,7 +360,6 @@
     color: #ef6c00;
 }
 
-/* Card Body */
 .artikel-page .article-body {
     padding: 1.5rem;
     display: flex;
@@ -400,7 +367,6 @@
     flex: 1;
 }
 
-/* Meta Info */
 .artikel-page .article-meta {
     display: flex;
     justify-content: space-between;
@@ -417,14 +383,12 @@
     gap: 6px;
 }
 
-/* Title & Excerpt */
 .artikel-page .article-title {
     font-size: 1.1rem;
     font-weight: 800;
     color: #1c274c;
     margin: 0 0 10px 0;
     line-height: 1.5;
-    /* Limit 2 lines */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -437,14 +401,12 @@
     line-height: 1.6;
     margin: 0 0 1.5rem 0;
     flex: 1;
-    /* Limit 3 lines */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* Footer: Author & Action */
 .artikel-page .article-footer {
     display: flex;
     align-items: center;
@@ -497,7 +459,6 @@
     box-shadow: 0 4px 10px rgba(255, 72, 103, 0.2);
 }
 
-/* Pagination */
 .artikel-page .pagination-wrapper {
     margin-top: 3rem;
     display: flex;

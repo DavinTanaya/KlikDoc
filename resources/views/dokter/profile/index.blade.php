@@ -36,7 +36,7 @@
                 <div class="profile-card user-summary-card">
                     <div class="card-body text-center">
                         <div class="avatar-wrapper">
-                            <img src="{{ Auth::user()->application?->avatar ? asset(Auth::user()->application?->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->application?->full_name ?? "Dokter") }}"
+                            <img src="{{ Auth::user()->application?->avatar ? asset(Auth::user()->application?->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->application?->full_name ?? 'Dokter') }}"
                                 class="profile-avatar" id="avatar-preview">
                             <input type="file" name="avatar" id="avatar-input" accept="image/*" style="display: none;"
                                 onchange="previewImage(event)">
@@ -84,9 +84,9 @@
                             <label for="gender">Jenis Kelamin</label>
                             <div class="input-wrapper disabled">
                                 <i class="bi bi-gender-ambiguous input-icon"></i>
-                                <input type="text" name="gender" id="gender"
-                                    class="form-control" readonly title="Gender tidak dapat diubah"
-                                    placeholder="{{ old('gender', Auth::user()->application?->gender ?? "-") }}">
+                                <input type="text" name="gender" id="gender" class="form-control" readonly
+                                    title="Gender tidak dapat diubah"
+                                    placeholder="{{ old('gender', Auth::user()->application?->gender ?? '-') }}">
                             </div>
                             @error('gender')
                                 <span class="text-danger-custom">{{ $message }}</span>
@@ -114,7 +114,7 @@
                             @error('phone')
                                 <span class="text-danger-custom">{{ $message }}</span>
                             @enderror
-                        </div> 
+                        </div>
 
                         <div class="card-header-simple mt-4 mb-3" style="padding-left: 0; padding-right: 0;">
                             <h2>Informasi Kredensial</h2>

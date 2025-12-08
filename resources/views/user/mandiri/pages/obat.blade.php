@@ -3,12 +3,11 @@
 @section('title', 'KlikDoc | Pengingat Obat')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/user/mandiri/obat.css') }}">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/user/mandiri/obat.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 
 @section('split-left')
-    {{-- (LEFT SIDE tetap seperti versi kamu — tidak diubah) --}}
     <div class="brand-content">
         <div class="hero-text">
             <h1>Jangan Lewatkan <br> Jadwal Obatmu<span class="dot">.</span></h1>
@@ -86,8 +85,6 @@
                 <i class="fas fa-plus-circle"></i> Tambah Pengingat
             </button>
         </form>
-
-        {{-- LIST REMINDER --}}
         <div class="med-list-container mt-4">
             <div class="med-list-title">
                 <i class="fas fa-list-ul"></i> Daftar Obat Anda
@@ -113,38 +110,41 @@
 @endsection
 
 @push('scripts')
-<script>
-const csrf = document.querySelector("meta[name='csrf-token']").content;
+    <script>
+        const csrf = document.querySelector("meta[name='csrf-token']").content;
 
-// CREATE
-document.getElementById('reminderForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+        document.getElementById('reminderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-    fetch("{{ route('medicine-reminder.store') }}", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": csrf },
-        body: JSON.stringify({
-            name: document.getElementById("med_name").value,
-            frequency: document.getElementById("med_freq").value,
-            time: document.getElementById("med_time").value,
-            note: document.getElementById("med_note").value,
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("med-list").insertAdjacentHTML('beforeend', data.html);
-    });
-});
+            fetch("{{ route('medicine-reminder.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": csrf
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById("med_name").value,
+                        frequency: document.getElementById("med_freq").value,
+                        time: document.getElementById("med_time").value,
+                        note: document.getElementById("med_note").value,
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("med-list").insertAdjacentHTML('beforeend', data.html);
+                });
+        });
 
-// DELETE
-function deleteReminder(id) {
-    fetch(`/mandiri/medicine-reminder/${id}`, {
-        method: "DELETE",
-        headers: { "X-CSRF-TOKEN": csrf }
-    })
-    .then(() => {
-        document.getElementById(`reminder-${id}`).remove();
-    });
-}
-</script>
+        function deleteReminder(id) {
+            fetch(`/mandiri/medicine-reminder/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": csrf
+                    }
+                })
+                .then(() => {
+                    document.getElementById(`reminder-${id}`).remove();
+                });
+        }
+    </script>
 @endpush

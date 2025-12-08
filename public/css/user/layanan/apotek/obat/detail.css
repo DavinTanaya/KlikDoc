@@ -1,4 +1,3 @@
-/* --- Scope Wrapper --- */
 .detail-page {
     --bg-page: #f4f7fe;
     --bg-white: #ffffff;
@@ -10,18 +9,15 @@
     --border: #e0e0e0;
     --green: #2e7d32;
     --red: #d32f2f;
-
-    font-family: "Inter", sans-serif;
     background-color: var(--bg-page);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem 0;
-    overflow: hidden; /* Mencegah scroll di body */
+    overflow: hidden;
 }
 
-/* --- Header --- */
 .detail-page .detail-header {
     background: transparent;
     width: 100%;
@@ -70,15 +66,13 @@
     width: 100px;
 }
 
-/* --- Main Layout --- */
 .detail-page .detail-content {
     width: 100%;
     display: flex;
     justify-content: center;
-    height: 80vh; /* Fixed height agar container scrollable */
+    height: 80vh;
 }
 
-/* Container Putih Utama */
 .detail-page .detail-container {
     width: 70vw;
     max-width: 1200px;
@@ -91,10 +85,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: hidden; /* Penting untuk rounded corner */
+    overflow: hidden;
 }
 
-/* Area Scrollable */
 .detail-page .detail-scroll-area {
     flex: 1;
     overflow-y: auto;
@@ -115,7 +108,6 @@
     border-radius: 10px;
 }
 
-/* --- Section Blocks --- */
 .detail-page .section-block {
     background: white;
     border-bottom: 1px solid #f0f0f0;
@@ -133,7 +125,6 @@
     font-weight: 700;
 }
 
-/* Status Banner */
 .detail-page .status-banner {
     display: flex;
     justify-content: space-between;
@@ -167,7 +158,6 @@
     font-size: 0.9rem;
 }
 
-/* Payment Code Section */
 .detail-page .payment-code-section {
     background: #fdfdfd;
     border: 1px solid #eee;
@@ -193,7 +183,7 @@
     font-weight: 700;
     font-size: 0.8rem;
     border-radius: 4px;
-    color: #005e9e; /* Warna BCA */
+    color: #005e9e;
 }
 
 .detail-page .info-text {
@@ -246,7 +236,6 @@
     background: #f0f0f0;
 }
 
-/* Shipping Section */
 .detail-page .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -276,7 +265,6 @@
     line-height: 1.4;
 }
 
-/* Products Section */
 .detail-page .product-list {
     display: flex;
     flex-direction: column;
@@ -319,12 +307,11 @@
     color: var(--text-main);
 }
 
-/* Cost Section */
 .detail-page .cost-section {
     background: #fcfcfc;
     padding: 1.5rem;
     border-radius: 12px;
-    border: none; /* Override default section border */
+    border: none;
 }
 
 .detail-page .cost-row {
@@ -369,7 +356,6 @@
     color: var(--accent);
 }
 
-/* --- Footer Actions --- */
 .detail-page .detail-footer {
     background: white;
     border-top: 1px solid var(--border);
@@ -408,7 +394,6 @@
     transform: translateY(-2px);
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .detail-page .header-container,
     .detail-page .detail-container {
@@ -432,7 +417,7 @@
     }
 
     .detail-page .info-grid {
-        grid-template-columns: 1fr; /* Stack shipping info */
+        grid-template-columns: 1fr;
     }
 
     .detail-page .info-item.full-width {

@@ -1,4 +1,3 @@
-/* --- SCOPED STYLES --- */
 .rujukan-dashboard {
     --primary-navy: #0f172a;
     --secondary-navy: #1e293b;
@@ -14,8 +13,6 @@
     --white: #ffffff;
     --shadow-float: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
         0 4px 6px -2px rgba(0, 0, 0, 0.025);
-
-    font-family: "Plus Jakarta Sans", sans-serif;
     background-color: var(--bg-page);
     color: var(--text-main);
     min-height: 100vh;
@@ -32,7 +29,6 @@
     padding: 2rem;
 }
 
-/* --- HEADER --- */
 .rujukan-dashboard .top-header {
     margin-bottom: 2.5rem;
 }
@@ -83,7 +79,6 @@
     gap: 6px;
 }
 
-/* --- TABS --- */
 .rujukan-dashboard .tabs-wrapper {
     display: flex;
     gap: 1rem;
@@ -118,7 +113,6 @@
     border-radius: 10px;
 }
 
-/* --- TABLE SECTION (FLOATING STYLE) --- */
 .rujukan-dashboard .table-head-info {
     display: flex;
     align-items: center;
@@ -157,7 +151,6 @@
     letter-spacing: 0.05em;
 }
 
-/* Patient Row Logic */
 .rujukan-dashboard .patient-row td {
     background: var(--white);
     padding: 1.25rem 1.5rem;
@@ -183,9 +176,8 @@
     border-color: #cbd5e1;
 }
 
-/* REFERRAL HIGHLIGHT LOGIC */
 .rujukan-dashboard .patient-row.is-referral td {
-    background: #fffbf0; /* Soft amber */
+    background: #fffbf0;
     border-top-color: #fcd34d;
     border-bottom-color: #fcd34d;
 }
@@ -196,7 +188,6 @@
     border-right-color: #fcd34d;
 }
 
-/* Cell Contents */
 .rujukan-dashboard .time-stamp {
     font-weight: 700;
     color: var(--primary-navy);
@@ -326,7 +317,6 @@
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* --- MODAL --- */
 .rujukan-dashboard .modal-overlay {
     position: fixed;
     top: 0;
@@ -365,7 +355,6 @@
     min-height: 550px;
 }
 
-/* Modal Left */
 .rujukan-dashboard .modal-sidebar {
     flex: 1;
     background: var(--primary-navy);
@@ -435,7 +424,6 @@
     gap: 10px;
 }
 
-/* Modal Right */
 .rujukan-dashboard .modal-main {
     flex: 1.5;
     padding: 2.5rem;
@@ -496,7 +484,6 @@
     background: white;
 }
 
-/* CHECKBOX RUJUKAN KHUSUS */
 .rujukan-dashboard .referral-activation-box {
     background: #fffbeb;
     border: 1px solid #fcd34d;

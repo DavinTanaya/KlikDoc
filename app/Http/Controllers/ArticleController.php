@@ -15,14 +15,11 @@ class ArticleController extends Controller
 
         $articles = Article::with('author', 'author.application')
             ->where('status', 'published')
-
-            // SEARCH
             ->when($search, fn ($q) =>
                 $q->where('title', 'like', "%{$search}%")
                   ->orWhere('content', 'like', "%{$search}%")
             )
 
-            // CATEGORY
             ->when($category, fn ($q) =>
                 $q->where('category', $category)
             )
@@ -31,7 +28,6 @@ class ArticleController extends Controller
             ->paginate(8)
             ->withQueryString();
 
-        // ✅ Sidebar data
         $categories = Article::select('category')
             ->whereNotNull('category')
             ->distinct()
@@ -58,12 +54,10 @@ class ArticleController extends Controller
 
         $query = Article::with('author')->latest();
 
-        // 🔐 Role filter
         if ($user->role !== 'admin') {
             $query->where('author_id', $user->id);
         }
 
-        // 🔍 SEARCH (judul, kategori, isi)
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
@@ -74,23 +68,20 @@ class ArticleController extends Controller
 
         $articles = $query
             ->paginate(10)
-            ->withQueryString(); // ✅ biar ?q= ikut pagination
+            ->withQueryString();
 
         return view('components.article', compact('articles', 'search'));
     }
 
     public function detail(Article $article)
     {
-        // 🔒 hanya artikel published
         if(auth()->user()?->role !== 'admin'){
             abort_if($article->status !== 'published', 404);
         }
 
-        // 🕒 estimasi waktu baca (±200 kata / menit)
         $wordCount = str_word_count(strip_tags($article->content));
         $readTime = max(1, ceil($wordCount / 200));
 
-        // 📚 artikel terkait (kategori sama, selain artikel ini)
         $related = Article::where('status', 'published')
             ->where('category', $article->category)
             ->where('id', '!=', $article->id)
@@ -130,9 +121,6 @@ class ArticleController extends Controller
             $data['thumbnail'] = 'images/articles/' . $thumbnail_name;
         }
 
-        /* ======================
-           AUTHOR INFO
-        ====================== */
         $data['author_id']   = auth()->id();
         $data['author_role'] = auth()->user()->role;
         $data['status']      = 'draft';
@@ -191,10 +179,6 @@ class ArticleController extends Controller
 
         return back()->with('success', 'Artikel berhasil dipublish');
     }
-
-    /* =====================================================
-     * UNPUBLISH ARTIKEL (ADMIN ONLY)
-     * ===================================================== */
     public function unpublish(Article $article)
     {
         $this->authorizeAdmin();
@@ -206,11 +190,7 @@ class ArticleController extends Controller
 
         return back()->with('success', 'Artikel berhasil di-unpublish');
     }
-
-    /* =====================================================
-     * HELPERS (PRIVATE)
-     * ===================================================== */
-
+    
     private function authorizeAdmin()
     {
         if (auth()->user()->role !== 'admin') {

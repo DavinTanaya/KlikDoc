@@ -1,6 +1,4 @@
-/* --- Scope Wrapper --- */
 .success-page {
-    /* Variables Scoped */
     --bg-page: #f4f7fe;
     --bg-white: #ffffff;
     --primary: #1c274c;
@@ -9,17 +7,10 @@
     --text-main: #333;
     --text-grey: #888;
     --border: #e0e0e0;
-
-    font-family: "Inter", sans-serif;
     background-color: var(--bg-page);
-    
-    /* UPDATE: Menggunakan 100vh agar memenuhi layar sepenuhnya */
-    min-height: 100vh; 
-    
-    /* UPDATE: Menambahkan padding bawah yang besar agar footer tidak menutupi kartu */
+    min-height: 100vh;
     padding-top: 8rem;
-    padding-bottom: 8rem; 
-    
+    padding-bottom: 8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,22 +19,18 @@
     z-index: 1;
 }
 
-/* --- Main Card --- */
 .success-page .success-card {
     background: var(--bg-white);
     width: 100%;
-    max-width: 480px; /* Lebar ideal untuk struk/notifikasi */
+    max-width: 480px;
     border-radius: 24px;
     padding: 3rem 2.5rem;
     text-align: center;
     box-shadow: 0 20px 60px rgba(28, 39, 76, 0.08);
-    border: 1px solid rgba(255,255,255,0.5);
-
+    border: 1px solid rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    /* Animasi Card Muncul */
     animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
     transform: translateY(20px);
@@ -56,7 +43,6 @@
     }
 }
 
-/* --- Animated Icon --- */
 .success-page .success-icon-wrapper {
     position: relative;
     width: 100px;
@@ -78,9 +64,8 @@
     color: white;
     z-index: 2;
     box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
-
     animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
-    transform: scale(0); /* Start hidden */
+    transform: scale(0);
 }
 
 @keyframes popIn {
@@ -89,7 +74,6 @@
     }
 }
 
-/* Ripple Effect Animation */
 .success-page .ripple {
     position: absolute;
     width: 100%;
@@ -111,7 +95,6 @@
     }
 }
 
-/* --- Text Content --- */
 .success-page .text-content h1 {
     font-size: 1.8rem;
     color: var(--primary);
@@ -127,7 +110,6 @@
     margin-bottom: 2.5rem;
 }
 
-/* --- Receipt Box --- */
 .success-page .receipt-box {
     background: #fafafa;
     border: 1px solid var(--border);
@@ -160,24 +142,27 @@
 
 .success-page .divider {
     height: 1px;
-    border-bottom: 2px dashed #e0e0e0; /* Dashed line lebih tebal sedikit */
+    border-bottom: 2px dashed #e0e0e0;
     margin: 1rem 0;
     position: relative;
 }
 
-/* Efek potongan kertas struk (opsional aesthetic) */
-.success-page .divider::before, 
+.success-page .divider::before,
 .success-page .divider::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -6px;
-    width: 12px; height: 12px;
+    width: 12px;
+    height: 12px;
     background: var(--bg-white);
     border-radius: 50%;
 }
-.success-page .divider::before { left: -1.8rem; }
-.success-page .divider::after { right: -1.8rem; }
-
+.success-page .divider::before {
+    left: -1.8rem;
+}
+.success-page .divider::after {
+    right: -1.8rem;
+}
 
 .success-page .receipt-row.total .value {
     color: var(--primary);
@@ -185,7 +170,6 @@
     font-weight: 800;
 }
 
-/* --- Buttons --- */
 .success-page .action-buttons {
     display: flex;
     flex-direction: column;

@@ -156,7 +156,6 @@ class DoctorController extends Controller
 
     public function downloadRefferal(Referral $referral)
     {
-        // ✅ AMBIL RELASI YANG DIPERLUKAN
         $referral->load([
             'consultation.user',
             'consultation.doctor'
@@ -180,7 +179,6 @@ class DoctorController extends Controller
         //     abort(403, 'Tidak memiliki akses');
         // }
 
-        // ✅ DATA UNTUK VIEW PDF
         $data = [
             'referral'      => $referral,
             'consultation'  => $consultation,
@@ -190,13 +188,11 @@ class DoctorController extends Controller
             'date'          => now()->format('d F Y'),
         ];
 
-        // ✅ GENERATE PDF
         $pdf = Pdf::loadView(
             'pdf.referral',
             $data
         )->setPaper('A4', 'portrait');
-
-        // ✅ DOWNLOAD
+        
         return $pdf->download(
             'Surat_Rujukan_' . $data['patient']->name . '.pdf'
         );

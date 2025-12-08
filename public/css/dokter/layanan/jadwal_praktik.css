@@ -1,4 +1,3 @@
-/* --- SCOPED STYLES (RENAMED) --- */
 .jadwal-praktik {
     --primary-navy: #0f172a;
     --secondary-navy: #1e293b;
@@ -14,8 +13,6 @@
     --white: #ffffff;
     --shadow-float: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
         0 4px 6px -2px rgba(0, 0, 0, 0.025);
-
-    font-family: "Plus Jakarta Sans", sans-serif;
     background-color: var(--bg-page);
     color: var(--text-main);
     min-height: 100vh;
@@ -32,7 +29,6 @@
     padding: 2rem;
 }
 
-/* --- HEADER --- */
 .jadwal-praktik .top-header {
     display: flex;
     justify-content: space-between;
@@ -86,7 +82,6 @@
     gap: 6px;
 }
 
-/* --- TABLE SECTION --- */
 .jadwal-praktik .table-head-info {
     display: flex;
     align-items: center;
@@ -108,11 +103,10 @@
     border-radius: 12px;
 }
 
-/* Floating Table Styling */
 .jadwal-praktik .floating-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 16px; /* Space between rows */
+    border-spacing: 0 16px;
 }
 
 .jadwal-praktik .floating-table thead th {
@@ -126,7 +120,6 @@
     letter-spacing: 0.05em;
 }
 
-/* Patient Row (Card Style) */
 .jadwal-praktik .patient-row td {
     background: var(--white);
     padding: 1.25rem 1.5rem;
@@ -154,20 +147,18 @@
     border-color: #cbd5e1;
 }
 
-/* --- Referral Highlight Logic --- */
 .jadwal-praktik .patient-row.is-referral td {
-    background: #fffbf0; /* Light amber bg */
+    background: #fffbf0;
     border-top-color: #fcd34d;
     border-bottom-color: #fcd34d;
 }
 .jadwal-praktik .patient-row.is-referral td:first-child {
-    border-left: 4px solid var(--warning-amber); /* Thick left border */
+    border-left: 4px solid var(--warning-amber);
 }
 .jadwal-praktik .patient-row.is-referral td:last-child {
     border-right-color: #fcd34d;
 }
 
-/* Cell Contents */
 .jadwal-praktik .time-stamp {
     font-weight: 700;
     color: var(--primary-navy);
@@ -219,7 +210,6 @@
     color: var(--text-muted);
 }
 
-/* Badge Rujukan Styling */
 .jadwal-praktik .referral-badge {
     display: inline-block;
     font-size: 0.7rem;
@@ -277,7 +267,6 @@
     opacity: 0.7;
 }
 
-/* Actions */
 .jadwal-praktik .action-buttons {
     display: flex;
     justify-content: flex-end;
@@ -311,7 +300,6 @@
     gap: 6px;
 }
 
-/* --- MODAL --- */
 .jadwal-praktik .modal-overlay {
     position: fixed;
     top: 0;
@@ -469,7 +457,6 @@
     background: white;
 }
 
-/* Referral Box */
 .jadwal-praktik .referral-box {
     margin: 1.5rem 0;
     padding: 1rem;

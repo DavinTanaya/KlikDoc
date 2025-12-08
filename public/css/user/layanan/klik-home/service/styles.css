@@ -1,19 +1,11 @@
-/* =========================================
-   KLIKHOME PAGE SPECIFIC CSS
-   File ini khusus untuk halaman KlikHome
-   Namespace: .klikhome-page
-   ========================================= */
-
 .klikhome-page {
     --bg-sidebar: #1c274c;
     --text-sidebar: #ffffff;
     --accent: #ff4867;
     --bg-content: #f4f7fe;
     --card-bg: #ffffff;
-
     width: 100%;
     min-height: 100vh;
-    font-family: "Inter", sans-serif;
     background-color: var(--bg-content);
 }
 
@@ -23,7 +15,6 @@
     min-height: 100vh;
 }
 
-/* Sidebar Layout */
 .klikhome-page .split-sidebar {
     background-color: var(--bg-sidebar);
     color: var(--text-sidebar);
@@ -33,14 +24,12 @@
     gap: 2rem;
 }
 
-/* Content Layout */
 .klikhome-page .split-content {
     background-color: var(--bg-content);
     flex: 1;
     padding: 2rem;
 }
 
-/* Responsive Desktop */
 @media (min-width: 1024px) {
     .klikhome-page .split-container {
         flex-direction: row;
@@ -61,11 +50,6 @@
     }
 }
 
-/* =========================================
-   SIDEBAR COMPONENTS
-   ========================================= */
-
-/* Header */
 .klikhome-page .sidebar-header h2 {
     font-size: 1.8rem;
     margin: 0;
@@ -82,7 +66,6 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Search Widget */
 .klikhome-page .input-icon-wrapper {
     position: relative;
     background: rgba(255, 255, 255, 0.1);
@@ -112,7 +95,6 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Category List (Custom Radio Button Style) */
 .klikhome-page .category-widget .widget-header {
     font-weight: 600;
     margin-bottom: 1rem;
@@ -146,7 +128,6 @@
     cursor: pointer;
 }
 
-/* Active State for Category */
 .klikhome-page .cat-item:has(input:checked) {
     background: rgba(255, 255, 255, 0.1);
 }
@@ -170,7 +151,6 @@
     transition: color 0.2s;
 }
 
-/* Icon Background Colors */
 .klikhome-page .bg-blue-soft {
     background: #e3f2fd;
     color: #1565c0;
@@ -196,7 +176,6 @@
     color: #00838f;
 }
 
-/* Trust Banner */
 .klikhome-page .trust-banner {
     background: rgba(46, 125, 50, 0.2);
     border: 1px solid rgba(76, 175, 80, 0.3);
@@ -228,10 +207,6 @@
     margin: 0;
 }
 
-/* =========================================
-   MAIN CONTENT
-   ========================================= */
-
 .klikhome-page .content-header {
     display: flex;
     justify-content: space-between;
@@ -251,7 +226,6 @@
     outline: none;
 }
 
-/* Service Grid */
 .klikhome-page .service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -272,7 +246,6 @@
     box-shadow: 0 10px 20px rgba(28, 39, 76, 0.08);
 }
 
-/* Card Thumb */
 .klikhome-page .card-thumb {
     height: 160px;
     position: relative;
@@ -305,7 +278,6 @@
     background: #e3f2fd;
 }
 
-/* Floating Tags */
 .klikhome-page .service-tag {
     position: absolute;
     top: 12px;
@@ -320,7 +292,6 @@
     letter-spacing: 0.5px;
 }
 
-/* Specific Tag Colors */
 .klikhome-page .tag-vitamin {
     background: #ffe0b2;
     color: #ef6c00;
@@ -346,7 +317,6 @@
     color: #1565c0;
 }
 
-/* Card Body */
 .klikhome-page .card-body {
     padding: 1.25rem;
     display: flex;
@@ -411,7 +381,6 @@
     background: var(--accent);
 }
 
-/* ===== CUSTOM CHECKBOX ===== */
 .checkbox-item {
     display: flex;
     align-items: center;
@@ -453,16 +422,11 @@
     font-weight: 700;
 }
 
-/* ===============================
-   KlikHome - Sidebar History
-   =============================== */
-
 .klikhome .history-widget {
     padding: 0;
     margin-top: 1.5rem;
 }
 
-/* ---------- Header ---------- */
 .klikhome .history-widget .widget-header {
     padding: 10px 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -482,14 +446,12 @@
     opacity: 0.7;
 }
 
-/* ---------- List ---------- */
 .klikhome .history-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* ---------- Item ---------- */
 .klikhome .history-item {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
@@ -505,7 +467,6 @@
     transform: translateY(-1px);
 }
 
-/* ---------- Info ---------- */
 .klikhome .history-info {
     display: flex;
     flex-direction: column;
@@ -526,7 +487,6 @@
     text-overflow: ellipsis;
 }
 
-/* ---------- Status Pill ---------- */
 .klikhome .status-pill {
     font-size: 0.65rem;
     padding: 3px 8px;
@@ -537,42 +497,36 @@
     white-space: nowrap;
 }
 
-/* Belum Bayar */
 .klikhome .status-pill.warning {
     background: rgba(255, 193, 7, 0.2);
     color: #ffd54f;
     border: 1px solid rgba(255, 193, 7, 0.35);
 }
 
-/* Terjadwal */
 .klikhome .status-pill.info {
     background: rgba(33, 150, 243, 0.2);
     color: #64b5f6;
     border: 1px solid rgba(33, 150, 243, 0.35);
 }
 
-/* Berjalan */
 .klikhome .status-pill.primary {
     background: rgba(255, 152, 0, 0.2);
     color: #ffb74d;
     border: 1px solid rgba(255, 152, 0, 0.35);
 }
 
-/* Selesai */
 .klikhome .status-pill.success {
     background: rgba(76, 175, 80, 0.2);
     color: #81c784;
     border: 1px solid rgba(76, 175, 80, 0.35);
 }
 
-/* Dibatalkan */
 .klikhome .status-pill.danger {
     background: rgba(244, 67, 54, 0.2);
     color: #e57373;
     border: 1px solid rgba(244, 67, 54, 0.35);
 }
 
-/* ---------- Footer Button ---------- */
 .klikhome .btn-history-more {
     display: block;
     text-align: center;
@@ -588,11 +542,18 @@
     color: var(--accent);
 }
 
-.klikhome .history-item { overflow: hidden; }
-.klikhome .history-info { flex:1; min-width:0; }
-.klikhome .history-name {
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.klikhome .history-item {
+    overflow: hidden;
 }
-.klikhome .status-pill { flex-shrink:0; }
+.klikhome .history-info {
+    flex: 1;
+    min-width: 0;
+}
+.klikhome .history-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.klikhome .status-pill {
+    flex-shrink: 0;
+}

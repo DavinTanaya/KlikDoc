@@ -1,5 +1,4 @@
 :root {
-    /* Color Palette */
     --chat-primary: #0088cc;
     --chat-primary-light: #e3f2fd;
     --chat-bg-body: #f0f2f5;
@@ -121,7 +120,6 @@
     color: var(--chat-text-dark);
 }
 
-/* List Chat Scrollable */
 .chat-list {
     flex: 1;
     overflow-y: auto;
@@ -220,7 +218,6 @@
     padding: 0 4px;
 }
 
-/* --- MAIN CHAT AREA --- */
 .chat-area {
     display: flex;
     flex-direction: column;
@@ -230,7 +227,6 @@
     position: relative;
     height: 100%;
     overflow: hidden;
-    /* Penting! Mencegah area chat meluber keluar grid */
 }
 
 .chat-room-header {
@@ -242,7 +238,6 @@
     justify-content: space-between;
     z-index: 5;
     flex-shrink: 0;
-    /* Header tetap fix */
 }
 
 .header-left {
@@ -304,17 +299,15 @@
     margin-right: 6px;
 }
 
-/* Status Aktif */
 .status-active {
-    background: #e7f8ee; /* hijau soft */
-    color: #1b9c4b; /* hijau teks */
+    background: #e7f8ee;
+    color: #1b9c4b;
     border-bottom: 1px solid #c6ecd5;
 }
 
-/* Status Selesai / Closed */
 .status-closed {
-    background: #fff4e5; /* oranye soft */
-    color: #d97706; /* oranye teks */
+    background: #fff4e5;
+    color: #d97706;
     border-bottom: 1px solid #fde6c7;
 }
 
@@ -328,7 +321,6 @@
     gap: 8px;
 }
 
-/* Bubbles */
 .message-row {
     display: flex;
     margin-bottom: 4px;
@@ -393,7 +385,6 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Input Area Logic */
 .input-area {
     background: var(--chat-bg-white);
     padding: 10px 16px;
@@ -406,7 +397,6 @@
     justify-content: center;
 }
 
-/* Layout ketika input aktif */
 .input-wrapper-active {
     display: flex;
     align-items: center;
@@ -414,7 +404,6 @@
     width: 100%;
 }
 
-/* Layout ketika chat closed */
 .input-closed-message {
     display: none;
     color: var(--chat-text-grey);
@@ -484,7 +473,6 @@
     cursor: pointer;
 }
 
-/* Scrollbar Styling */
 .chat-list::-webkit-scrollbar,
 .messages-container::-webkit-scrollbar {
     width: 6px;
@@ -501,7 +489,6 @@
     border-radius: 3px;
 }
 
-/* --- RESPONSIVE LOGIC --- */
 @media (max-width: 900px) {
     .chat-wrapper {
         padding: 0;

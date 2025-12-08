@@ -1,8 +1,3 @@
-/* =========================================
-   KLIKHOME DETAIL PAGE
-   Namespace: .klikhome-detail-page
-   ========================================= */
-
 .klikhome-detail-page {
     --bg-page: #f4f7fe;
     --card-bg: #ffffff;
@@ -25,8 +20,6 @@
     padding: 0 1.5rem;
 }
 
-/* 1. NAVIGATION
-   ========================================= */
 .klikhome-detail-page .top-nav {
     padding: 2rem 0;
 }
@@ -46,8 +39,6 @@
     color: var(--text-primary);
 }
 
-/* 2. LAYOUT GRID
-   ========================================= */
 .klikhome-detail-page .content-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -56,16 +47,12 @@
 
 @media (min-width: 1024px) {
     .klikhome-detail-page .content-grid {
-        grid-template-columns: 1.8fr 1fr; /* Kiri lebih lebar */
+        grid-template-columns: 1.8fr 1fr;
         gap: 3rem;
         align-items: start;
     }
 }
 
-/* 3. MAIN CONTENT (LEFT COLUMN)
-   ========================================= */
-
-/* Content Wrapper Styling */
 .klikhome-detail-page .main-content {
     background: white;
     padding: 2.5rem;
@@ -74,7 +61,6 @@
     border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
-/* Hero Image */
 .klikhome-detail-page .service-hero-image {
     width: 100%;
     height: 250px;
@@ -104,7 +90,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Header Info */
 .klikhome-detail-page .service-header h1 {
     font-size: 2rem;
     font-weight: 800;
@@ -146,7 +131,6 @@
     margin: 2rem 0;
 }
 
-/* Sections */
 .klikhome-detail-page .info-section {
     margin-bottom: 2.5rem;
 }
@@ -164,7 +148,6 @@
     color: var(--text-body);
 }
 
-/* Check List */
 .klikhome-detail-page .check-list {
     list-style: none;
     padding: 0;
@@ -187,7 +170,6 @@
     font-weight: 900;
 }
 
-/* Inclusion Card */
 .klikhome-detail-page .inclusion-card {
     background: #fcfcfc;
     border: 1px solid #eee;
@@ -214,7 +196,6 @@
     border-radius: 50%;
 }
 
-/* Safety Box */
 .klikhome-detail-page .safety-box {
     display: grid;
     grid-template-columns: 1fr;
@@ -245,8 +226,6 @@
     color: #1b5e20;
 }
 
-/* 4. BOOKING SIDEBAR (RIGHT COLUMN)
-   ========================================= */
 .klikhome-detail-page .booking-sidebar {
     position: sticky;
     top: 2rem;
@@ -279,7 +258,6 @@
     color: var(--text-primary);
 }
 
-/* Forms */
 .klikhome-detail-page .form-group {
     margin-bottom: 1.5rem;
 }
@@ -299,7 +277,6 @@
     margin-bottom: 0;
 }
 
-/* Add Address Button */
 .klikhome-detail-page .btn-add-address {
     background: none;
     border: none;
@@ -318,7 +295,6 @@
     text-decoration: underline;
 }
 
-/* Inputs */
 .klikhome-detail-page .form-control {
     width: 100%;
     padding: 12px 14px;
@@ -336,13 +312,11 @@
     background: white;
 }
 
-/* Textarea Specific */
 .klikhome-detail-page textarea.form-control {
     resize: vertical;
     min-height: 80px;
 }
 
-/* Location Preview Box */
 .klikhome-detail-page .location-preview {
     font-size: 0.9rem;
     line-height: 1.5;
@@ -385,7 +359,6 @@
     overflow: hidden;
 }
 
-/* Button Ubah (di dalam box) */
 .klikhome-detail-page .btn-change {
     background: white;
     border: 1px solid #ddd;
@@ -402,7 +375,6 @@
     border-color: #ccc;
 }
 
-/* Button Pilih Alamat Lain (di bawah box) */
 .klikhome-detail-page .btn-select-other {
     width: 100%;
     background: white;
@@ -428,7 +400,6 @@
     margin: 2rem 0;
 }
 
-/* Summary */
 .klikhome-detail-page .summary-row {
     display: flex;
     justify-content: space-between;
@@ -446,7 +417,6 @@
     border-top: 1px solid #f0f0f0;
 }
 
-/* Payment Button */
 .klikhome-detail-page .btn-payment {
     width: 100%;
     background: var(--text-primary);
@@ -480,8 +450,6 @@
     font-weight: 500;
 }
 
-/* 5. MODAL POPUP STYLES
-   ========================================= */
 .klikhome-detail-page .modal-overlay {
     position: fixed;
     top: 0;
@@ -506,7 +474,7 @@
 .klikhome-detail-page .modal-content {
     background: white;
     width: 100%;
-    max-width: 700px; /* Lebar diperbesar dari 500px ke 700px */
+    max-width: 700px;
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -556,7 +524,6 @@
     overflow-y: auto;
 }
 
-/* Address List Item */
 .klikhome-detail-page .address-item {
     border: 1px solid #eee;
     border-radius: 10px;
@@ -626,14 +593,12 @@
     background: var(--accent);
 }
 
-/* Edit Form Layout */
 .klikhome-detail-page .form-row.two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-/* Footer Actions */
 .klikhome-detail-page .modal-footer {
     padding: 1rem 1.5rem;
     border-top: 1px solid #eee;
@@ -674,19 +639,11 @@
     background: var(--accent);
 }
 
-/* =====================================================
-   ADDRESS SECTION — KLIKHOME (APOTEK STYLE)
-===================================================== */
-
 .booking-form .form-group {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-
-/* -------------------------------
-   ADDRESS CARD
--------------------------------- */
 
 .address-card {
     display: flex;
@@ -704,17 +661,12 @@
     box-shadow: 0 6px 18px rgba(28, 39, 76, 0.06);
 }
 
-/* Empty state */
 .address-card.empty-address {
     border: 2px dashed #cbd5e1;
     background: #f8fafc;
     text-align: center;
     justify-content: center;
 }
-
-/* -------------------------------
-   ICON
--------------------------------- */
 
 .address-icon {
     width: 36px;
@@ -727,10 +679,6 @@
     justify-content: center;
     flex-shrink: 0;
 }
-
-/* -------------------------------
-   DETAILS
--------------------------------- */
 
 .address-details {
     flex: 1;
@@ -761,10 +709,6 @@
     margin: 0;
 }
 
-/* -------------------------------
-   CHANGE BUTTON
--------------------------------- */
-
 .address-card .btn-change {
     align-self: flex-start;
     background: transparent;
@@ -783,17 +727,12 @@
     border-color: #1c274c;
 }
 
-/* -------------------------------
-   ACTION BUTTONS BELOW CARD
--------------------------------- */
-
 .address-actions {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-/* shared button */
 .btn-address-action,
 .btn-add-address {
     width: 100%;
@@ -818,7 +757,6 @@
     height: 18px;
 }
 
-/* Hover */
 .btn-address-action:hover,
 .btn-add-address:hover {
     background: #f4f7fe;
@@ -826,15 +764,10 @@
     color: #1c274c;
 }
 
-/* Tambah address = solid */
 .btn-add-address {
     border-style: solid;
     background: #f8fafc;
 }
-
-/* -------------------------------
-   MOBILE TWEAK
--------------------------------- */
 
 @media (max-width: 640px) {
     .address-card {

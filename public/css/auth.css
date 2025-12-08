@@ -25,15 +25,13 @@
     --grey4: 249, 250, 251;
 }
 
-/* Override Body Background */
 body {
     background-color: rgb(var(--bg-content)) !important;
-    background-image: none !important; /* Menghapus gradient Tailwind */
-    font-family: 'Inter', sans-serif !important;
+    background-image: none !important;
+    font-family: "Inter", sans-serif !important;
     color: rgb(var(--grey3));
 }
 
-/* Card Container Styling */
 .animate-fade-in {
     background-color: rgb(var(--bg-white)) !important;
     border-radius: 20px !important;
@@ -43,7 +41,6 @@ body {
     max-width: 480px !important;
 }
 
-/* Typography Overrides */
 h2 {
     font-size: 1.6rem !important;
     font-weight: 800 !important;
@@ -57,7 +54,6 @@ p.text-sm {
     line-height: 1.6 !important;
 }
 
-/* Tab Styling */
 .bg-gray-100 {
     background-color: transparent !important;
     border: 1px solid rgb(var(--grey1));
@@ -66,8 +62,8 @@ p.text-sm {
     margin-bottom: 2rem !important;
 }
 
-button.tab-active, 
-button#login-tab.bg-white, /* Fallback jika class tab-active tidak ada di JS */
+button.tab-active,
+button#login-tab.bg-white,
 button#login-tab.shadow {
     background-color: rgb(var(--blue5)) !important;
     color: rgb(var(--blue1)) !important;
@@ -88,7 +84,6 @@ button:not(.tab-active):not([type="submit"]):not(.absolute):hover {
     color: rgb(var(--blue1)) !important;
 }
 
-/* Input Fields */
 input[type="email"],
 input[type="password"],
 input[type="text"],
@@ -97,7 +92,6 @@ input[type="tel"] {
     border: 1px solid rgb(var(--grey1)) !important;
     padding-top: 0.9rem !important;
     padding-bottom: 0.9rem !important;
-    /* Padding kiri sudah dihandle tailwind (pl-10), padding kanan perlu disesuaikan */
     background-color: rgb(var(--bg-white)) !important;
     color: rgb(var(--grey3)) !important;
     font-size: 1rem !important;
@@ -109,19 +103,17 @@ input:focus {
     border-color: rgb(var(--blue4)) !important;
     box-shadow: 0 0 0 4px rgba(var(--blue4), 0.15) !important;
     outline: none !important;
-    ring: 0 !important; /* Reset tailwind ring */
+    ring: 0 !important;
 }
 
 input::placeholder {
     color: rgb(var(--grey1)) !important;
 }
 
-/* SVG Icons inside Input */
 .absolute svg {
     color: rgb(var(--grey2)) !important;
 }
 
-/* Submit Button */
 button[type="submit"] {
     background-color: rgb(var(--blue1)) !important;
     color: rgb(var(--white)) !important;
@@ -140,7 +132,6 @@ button[type="submit"]:hover {
     box-shadow: 0 6px 20px rgba(var(--blue1), 0.3) !important;
 }
 
-/* Checkbox & Links */
 input[type="checkbox"] {
     border-radius: 4px !important;
     border-color: rgb(var(--grey1)) !important;
@@ -158,8 +149,8 @@ a.text-blue-600:hover {
     text-decoration: underline !important;
 }
 
-/* Social Login Buttons */
-a[href*="google"], a[href="#"] {
+a[href*="google"],
+a[href="#"] {
     border-radius: 12px !important;
     border: 1px solid rgb(var(--grey1)) !important;
     color: rgb(var(--grey2)) !important;
@@ -170,12 +161,12 @@ a[href*="google"], a[href="#"] {
     padding: 0.8rem !important;
 }
 
-a[href*="google"]:hover, a[href="#"]:hover {
+a[href*="google"]:hover,
+a[href="#"]:hover {
     border-color: rgb(var(--blue4)) !important;
     background-color: rgb(var(--bg-content)) !important;
 }
 
-/* Divider */
 .border-t {
     border-color: rgb(var(--grey1)) !important;
 }
@@ -185,13 +176,11 @@ a[href*="google"]:hover, a[href="#"]:hover {
     background-color: rgb(var(--bg-white)) !important;
 }
 
-/* Logo Image Styling (Optional) */
 img[alt=""] {
-    height: 40px !important; /* Sesuaikan ukuran logo */
+    height: 40px !important;
     object-fit: contain;
 }
 
-/* Error Alert */
 .bg-red-100 {
     background-color: rgb(var(--red1)) !important;
     color: rgb(var(--red2)) !important;
@@ -200,15 +189,14 @@ img[alt=""] {
     font-weight: 500 !important;
 }
 
-/* --- Email Verification Popup --- */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
-    backdrop-filter: blur(4px); /* Efek blur di belakang */
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,9 +245,15 @@ img[alt=""] {
 }
 
 @keyframes pulseIcon {
-    0% { box-shadow: 0 0 0 0 rgba(var(--blue1), 0.2); }
-    70% { box-shadow: 0 0 0 10px rgba(var(--blue1), 0); }
-    100% { box-shadow: 0 0 0 0 rgba(var(--blue1), 0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--blue1), 0.2);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(var(--blue1), 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--blue1), 0);
+    }
 }
 
 .popup-title {

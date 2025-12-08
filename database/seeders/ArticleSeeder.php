@@ -12,7 +12,6 @@ class ArticleSeeder extends Seeder
 {
     public function run(): void
     {
-        // Ambil admin & dokter
         $admin   = User::where('role', 'admin')->first();
         $dokter  = Application::first();
 
@@ -42,7 +41,7 @@ class ArticleSeeder extends Seeder
                 'title'    => 'Vaksin Anak: Jadwal Terbaru IDAI 2024',
                 'category' => 'Kesehatan Anak',
                 'content'  => $this->dummyContent(),
-                'status'   => 'draft', // 👈 dokter publish → tetap draft
+                'status'   => 'draft',
                 'author'   => $dokter->user_id,
                 'author_role'=> 'doctor',
             ],
@@ -56,7 +55,7 @@ class ArticleSeeder extends Seeder
             ],
         ];
 
-        foreach ($articles as $item) {
+        foreach ($articles as $key => $item) {
             Article::create([
                 'title'       => $item['title'],
                 'slug'        => Str::slug($item['title']),
@@ -65,7 +64,7 @@ class ArticleSeeder extends Seeder
                 'status'      => $item['status'],
                 'author_id'   => $item['author'],
                 'author_role' => $item['author_role'],
-                'thumbnail'   => 'images/article/default.jpg', // opsional
+                'thumbnail'   => 'images/article/article-'. ($key + 1) . '.jpg',
                 'created_at'=> now(),
             ]);
         }

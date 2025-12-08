@@ -1,16 +1,12 @@
-/* --- Wrapper Utama (Scope) --- */
 .pendaftaran-dokter {
-    /* Variabel Lokal untuk Scope ini */
-    --bg-left: #1C274C; /* Blue1 */
-    --text-left: #FFFFFF;
-    --accent: #FF4867; /* Red2 */
-    --accent-hover: #DC2626; /* Red3 */
-    --input-bg: #F9FAFB;
-    --input-border: #E0E0E0;    
-    --input-focus: #4FC3F7; /* Blue4 */
-
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: #FFFFFF;
+    --bg-left: #1c274c;
+    --text-left: #ffffff;
+    --accent: #ff4867;
+    --accent-hover: #dc2626;
+    --input-bg: #f9fafb;
+    --input-border: #e0e0e0;
+    --input-focus: #4fc3f7;
+    background-color: #ffffff;
     width: 100%;
 }
 
@@ -26,7 +22,6 @@
     }
 }
 
-/* --- Left Side (Hero) --- */
 .pendaftaran-dokter .split-left {
     background-color: var(--bg-left);
     color: var(--text-left);
@@ -103,21 +98,23 @@
     color: var(--text-left);
 }
 
-/* Decoration */
 .pendaftaran-dokter .decoration-circle {
     position: absolute;
     bottom: -100px;
     right: -100px;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(79,195,247,0.2) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(
+        circle,
+        rgba(79, 195, 247, 0.2) 0%,
+        rgba(0, 0, 0, 0) 70%
+    );
     border-radius: 50%;
     pointer-events: none;
 }
 
-/* --- Right Side (Form) --- */
 .pendaftaran-dokter .split-right {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     flex: 1;
     padding: 2rem 1.5rem;
     display: flex;
@@ -141,7 +138,6 @@
     margin-bottom: 2.5rem;
 }
 
-/* --- Form Styling --- */
 .pendaftaran-dokter .form-section {
     margin-bottom: 2.5rem;
 }
@@ -152,7 +148,7 @@
     letter-spacing: 1px;
     color: #999;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #eee;
     padding-bottom: 10px;
     font-weight: 600;
 }
@@ -186,11 +182,10 @@
 .pendaftaran-dokter .input-group select:focus {
     outline: none;
     border-color: var(--input-focus);
-    background-color: #FFF;
+    background-color: #fff;
     box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.15);
 }
 
-/* Grid Layout for Inputs */
 .pendaftaran-dokter .row-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -203,7 +198,6 @@
     }
 }
 
-/* Custom File Upload Box */
 .pendaftaran-dokter .file-upload-box {
     position: relative;
     border: 2px dashed var(--input-border);
@@ -247,7 +241,6 @@
     color: #999;
 }
 
-/* Submit Button */
 .pendaftaran-dokter .btn-submit {
     display: flex;
     align-items: center;
@@ -301,7 +294,7 @@
 }
 
 .pendaftaran-dokter .popup-content {
-    background: #FFFFFF;
+    background: #ffffff;
     width: 100%;
     max-width: 480px;
     padding: 3rem 2rem;
@@ -315,12 +308,11 @@
     gap: 1rem;
 }
 
-/* Icon Lingkaran Checkmark */
 .pendaftaran-dokter .popup-icon {
     width: 90px;
     height: 90px;
-    background-color: #DEF7EC; /* Hijau Pastel */
-    color: #0E9F6E; /* Hijau Sukses */
+    background-color: #def7ec;
+    color: #0e9f6e;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -330,31 +322,30 @@
 
 .pendaftaran-dokter .popup-content h2 {
     font-size: 1.75rem;
-    color: var(--bg-left); /* Pakai warna biru brand */
+    color: var(--bg-left);
     margin: 0;
     font-weight: 700;
 }
 
 .pendaftaran-dokter .popup-content p {
-    color: #4B5563;
+    color: #4b5563;
     line-height: 1.6;
     margin: 0;
 }
 
 .pendaftaran-dokter .popup-content .sub-text {
     font-size: 0.9rem;
-    color: #9CA3AF;
+    color: #9ca3af;
     margin-bottom: 1.5rem;
 }
 
-/* Tombol Kembali ke Home */
 .pendaftaran-dokter .btn-popup-home {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 16px;
-    background-color: var(--bg-left); /* Konsisten dengan warna brand */
+    background-color: var(--bg-left);
     color: white;
     text-decoration: none;
     border-radius: 16px;
@@ -364,15 +355,18 @@
 }
 
 .pendaftaran-dokter .btn-popup-home:hover {
-    background-color: #141d38; /* Warna hover sedikit lebih gelap */
+    background-color: #141d38;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(28, 39, 76, 0.2);
 }
 
-/* Keyframe Animations */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideUp {

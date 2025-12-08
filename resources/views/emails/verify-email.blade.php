@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Verifikasi Email</title>
 </head>
+
 <body style="font-family: Inter, Arial, sans-serif; background-color: #f1f5f9; padding: 40px;">
 
     <table align="center" width="100%" style="max-width: 520px; background: white; border-radius: 16px; padding: 32px;">
@@ -29,7 +31,7 @@
         <tr>
             <td align="center" style="padding: 24px 0;">
                 <a href="{{ $verifyUrl }}"
-                   style="
+                    style="
                        display: inline-block;
                        padding: 12px 24px;
                        background-color: #3b82f6;
@@ -60,4 +62,5 @@
     </table>
 
 </body>
+
 </html>
