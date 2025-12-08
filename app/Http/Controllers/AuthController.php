@@ -80,6 +80,14 @@ class AuthController extends Controller
         }
     }
 
+    public function forgot() {
+        return view('auth.forgot');
+    }
+
+    public function newPassword() {
+        return view('auth.new-password');
+    }
+
     // public function handleGoogleCallback(): RedirectResponse
     // {
     //     try {

@@ -205,4 +205,65 @@ class DoctorController extends Controller
         );
     }
 
+    public function profile() {
+        return view('dokter.profile.index');
+    }
+
+    public function update(Request $request){
+        $user = auth()->user();
+
+        if ($user->role !== 'doctor') {
+            abort(403, 'Unauthorized');
+        }
+
+        $validated = $request->validate([
+            'name'   => ['nullable', 'string', 'max:255'],
+            'phone'  => ['nullable', 'string', 'max:20'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        ]);
+
+        $doctor = $user->application;
+        if (!$doctor) {
+            return back()->with('error', 'Data Dokter tidak ditemukan.');
+        }
+
+        $applicationUpdate = [];
+        $userUpdate = [];
+
+        if (!empty($validated['name'])) {
+            $applicationUpdate['full_name'] = $validated['name'];
+        }
+
+        if (!empty($validated['phone'])) {
+            $userUpdate['phone_number'] = $validated['phone'];
+        }
+
+        if ($request->hasFile('avatar')) {
+            if ($doctor->avatar && !str_contains($doctor->avatar, 'ui-avatars.com')) {
+                $oldPath = public_path($doctor->avatar);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+
+            $extension = $request->avatar->extension();
+            $filename = 'dokter-profile_' . now() . '.' . $extension;
+            $request->avatar->move(public_path('images/profile/dokter'), $filename);
+            $applicationUpdate['avatar'] = 'images/profile/dokter/' . $filename;
+        }
+
+        if (!empty($applicationUpdate)) {
+            $doctor->update($applicationUpdate);
+        }
+
+        if (!empty($userUpdate)) {
+            $user->update($userUpdate);
+        }
+
+        if (empty($applicationUpdate) && empty($userUpdate)) {
+            return back()->with('success', 'Tidak ada perubahan yang dilakukan.');
+        }
+
+        return back()->with('success', 'Profil berhasil diperbarui!');
+    }
 }

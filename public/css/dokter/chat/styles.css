@@ -1,35 +1,11 @@
-:root {
-    /* Color Palette */
-    --chat-primary: #0088cc;
-    --chat-primary-light: #e3f2fd;
-    --chat-bg-body: #f0f2f5;
-    --chat-bg-white: #ffffff;
-    --chat-text-dark: #111b21;
-    --chat-text-grey: #667781;
-    --chat-border: #e9edef;
-    --chat-bubble-in: #ffffff;
-    --chat-bubble-out: #d9fdd3;
-
-    /* Doctor Specific Colors */
-    --btn-finish: #ef4444; /* Merah Legacy (Fallback) */
-    --btn-recipe: #10b981; /* Hijau Legacy (Fallback) */
-
-    /* New Colors Requested */
-    --primary-navy: #0f172a;
-    --accent: #ff4867;
-    --accent-hover: #e03552;
-}
-
-/* Reset Box Sizing dalam Scope */
 .dokter-chat * {
     box-sizing: border-box;
 }
 
-/* --- LAYOUT UTAMA --- */
 .dokter-chat .chat-wrapper {
-    background-color: rgb(var(--white));
-    padding: 20px;
-    height: 85vh;
+    background-color: rgb(var(--bg-content));
+    padding: 20px 40px;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +25,6 @@
     font-family: "Inter", sans-serif;
 }
 
-/* --- SIDEBAR --- */
 .dokter-chat .sidebar {
     background: rgb(var(--white));
     border-right: 1px solid rgb(var(--grey1));
@@ -61,9 +36,9 @@
 }
 
 .dokter-chat .sidebar-header {
-    padding: 16px;
-    background-color: rgba(var(--blue3), 0.3);
-    border-bottom: 1px solid rgb(var(--grey1));
+    padding: 20px;
+    background-color: rgba(var(--blue4), 0.2);
+    border-bottom: 1.5px solid rgba(var(--grey1), 0.5);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -78,7 +53,7 @@
 
 .dokter-chat .btn-home-back {
     color: rgb(var(--blue1));
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     cursor: pointer;
     transition: color 0.2s;
     display: flex;
@@ -87,7 +62,7 @@
 }
 
 .dokter-chat .sidebar-title {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 600;
     color: rgb(var(--blue1));
     margin: 0;
@@ -96,7 +71,7 @@
 .dokter-chat .sidebar-tools {
     display: flex;
     gap: 1rem;
-    color: #64748b;
+    color: rgb(var(--blue1));
 }
 
 .dokter-chat .sidebar-tools i {
@@ -104,14 +79,19 @@
     transition: color 0.2s;
 }
 
+.dokter-chat .sidebar-tools i:hover {
+    opacity: 0.5;
+}
+
 .dokter-chat .search-box {
     padding: 10px 16px;
-    border-bottom: 1px solid var(--chat-border);
+    border-bottom: 1.5px solid rgba(var(--grey1), 0.5);
     flex-shrink: 0;
 }
 
 .dokter-chat .search-input-wrapper {
-    background: var(--chat-bg-body);
+    background: rgb(var(--grey4));
+    border: 1.25px solid rgb(var(--grey1));
     border-radius: 8px;
     padding: 8px 12px;
     display: flex;
@@ -125,7 +105,7 @@
     outline: none;
     width: 100%;
     font-size: 14px;
-    color: var(--chat-text-dark);
+    color: rgb(var(--grey3));
 }
 
 .dokter-chat .chat-list {
@@ -142,20 +122,22 @@
     padding: 12px 16px;
     cursor: pointer;
     transition: background 0.2s;
-    border-bottom: 1px solid #f5f6f6;
+    border-bottom: 1.25px solid rgba(var(--grey1), 0.75);
     gap: 12px;
 }
 
 .dokter-chat .chat-item:hover {
-    background-color: #f5f6f6;
+    background-color: rgba(var(--blue3), 0.3);
 }
+
 .dokter-chat .chat-item.active {
-    background-color: var(--chat-primary-light);
+    background-color: rgba(var(--blue4), 0.5);
 }
 
 .dokter-chat .avatar-container {
     position: relative;
 }
+
 .dokter-chat .avatar {
     width: 48px;
     height: 48px;
@@ -167,51 +149,43 @@
     flex: 1;
     min-width: 0;
 }
+
 .dokter-chat .chat-header-info {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
 }
+
 .dokter-chat .chat-name {
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--chat-text-dark);
+    font-weight: 550;
+    font-size: 0.95rem;
+    color: rgb(var(--grey3));
 }
+
 .dokter-chat .chat-time {
-    font-size: 11px;
-    color: var(--chat-text-grey);
+    font-size: 0.7rem;
+    color: rgb(var(--grey2));
+    font-weight: 500;
 }
+
 .dokter-chat .chat-preview {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .dokter-chat .last-message {
-    font-size: 13px;
-    color: var(--chat-text-grey);
+    font-size: 0.8rem;
+    color: rgb(var(--grey2));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.dokter-chat .unread-badge {
-    background: var(--chat-primary);
-    color: white;
-    font-size: 10px;
-    min-width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    padding: 0 4px;
-}
 
-/* --- MAIN CHAT AREA --- */
 .dokter-chat .chat-area {
     display: flex;
     flex-direction: column;
-    background-color: #efeae2;
+    background-color: rgba(var(--grey1), 0.2);
     background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
     background-blend-mode: overlay;
     position: relative;
@@ -220,9 +194,9 @@
 }
 
 .dokter-chat .chat-room-header {
-    padding: 10px 16px;
-    background: var(--chat-bg-white);
-    border-bottom: 1px solid var(--chat-border);
+    padding: 10px 25px;
+    background: rgb(var(--white));
+    border-bottom: 1.5px solid rgba(var(--grey1), 0.5);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -234,145 +208,129 @@
     display: flex;
     align-items: center;
 }
+
 .dokter-chat .header-profile {
     display: flex;
     align-items: center;
     gap: 12px;
     cursor: pointer;
 }
+
 .dokter-chat .header-avatar {
     width: 40px;
     height: 40px;
 }
+
 .dokter-chat .header-name {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1.1rem;
     margin: 0;
-    color: var(--chat-text-dark);
+    color: rgb(var(--grey3));
 }
+
 .dokter-chat .header-status {
-    color: #16a34a;
-    font-size: 12px;
+    color: rgb(var(--green1));
+    font-size: 0.8rem;
     font-weight: 500;
 }
+
 .dokter-chat .header-actions {
     display: flex;
     gap: 20px;
-    color: var(--chat-primary);
-    font-size: 18px;
+    color: rgb(var(--blue1));
+    font-size: 1.25rem;
 }
+
 .dokter-chat .header-actions i {
     cursor: pointer;
     transition: 0.2s;
 }
 
-/* --- STATUS BAR (MODIFIED) --- */
+.dokter-chat .header-actions i:hover {
+    color: rgba(var(--blue1), 0.5);
+}
+
 .dokter-chat .chat-status-bar {
-    padding: 14px 24px; /* Padding lebih besar */
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 15px; /* Font lebih besar */
-    color: #334155;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Shadow halus */
+    align-items: center;
     z-index: 4;
 }
 
-.dokter-chat .status-left {
+.dokter-chat .status-content {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600; /* Font tebal */
+    gap: 10px;
 }
 
-/* Status Active: Biru (Tetap/Dikembalikan ke Biru) */
+.chat-status-bar.status-closed {
+    justify-content: center;
+    gap: 10px;
+}
+
 .dokter-chat .status-active {
-    background: #e6f7ff;
-    border-bottom: 1px solid #b5e2ff;
-    color: #0369a1;
+    background: rgb(var(--blue5));
+    border-bottom: 1px solid rgb(var(--blue4));
+    color: rgb(var(--blue1));
 }
 
 .dokter-chat .status-active i {
-    color: #0284c7;
-    font-size: 18px; /* Icon lebih besar */
-    animation: pulse 2s infinite;
+    color: rgb(var(--blue1));
 }
 
-/* Status Closed: Abu-abu netral */
 .dokter-chat .status-closed {
-    background: #f8fafc;
-    border-color: #e2e8f0;
-    color: #64748b;
+    background: rgb(var(--red1));
+    border-bottom: 1px solid rgb(var(--red3));
+    color: rgb(var(--red3));
 }
 
 .dokter-chat .status-closed i {
-    font-size: 18px;
+    color: rgb(var(--red3));
 }
 
-/* Tombol Khusus Dokter di Status Bar */
 .dokter-chat .doctor-controls {
     display: flex;
-    gap: 12px; /* Jarak antar tombol lebih lega */
+    gap: 8px;
 }
 
 .dokter-chat .btn-doc-action {
     border: none;
-    padding: 10px 24px; /* Tombol lebih besar dan lebar */
-    border-radius: 8px;
-    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    color: white;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 6px;
+    color: rgb(var(--white));
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .dokter-chat .btn-doc-action:hover {
-    transform: translateY(-2px); /* Efek naik saat hover */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+    opacity: 0.9;
 }
 
-/* Rule khusus agar icon di dalam button tetap putih dan tidak ikut style status bar */
 .dokter-chat .btn-doc-action i {
-    color: #ffffff !important;
-    animation: none; /* Hilangkan animasi pulse dari status bar */
+    color: rgb(var(--white)) !important;
 }
 
-/* Button Resep: Navy Blue */
 .dokter-chat .btn-resep {
-    background: var(--primary-navy);
-}
-.dokter-chat .btn-resep:hover {
-    background-color: #1e293b; /* Sedikit lebih terang dari navy saat hover */
+    background-color: rgb(var(--blue1));
 }
 
-/* Button Selesai: Accent Red/Pink */
+.dokter-chat .btn-rujukan {
+    background-color: rgb(var(--green1));
+}
+
 .dokter-chat .btn-selesai {
-    background: var(--accent);
-}
-.dokter-chat .btn-selesai:hover {
-    background: var(--accent-hover);
+    background-color: rgb(var(--red2));
 }
 
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.6;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* --- MESSAGES --- */
 .dokter-chat .messages-container {
     flex: 1;
     min-height: 0;
@@ -387,6 +345,7 @@
     display: flex;
     margin-bottom: 4px;
 }
+
 .dokter-chat .message-row.sent {
     justify-content: flex-end;
 }
@@ -408,14 +367,14 @@
 }
 
 .dokter-chat .message-row.sent .bubble {
-    background: rgba(var(--blue4), 0.5);
+    background: rgba(var(--blue3));
     border-top-right-radius: 0;
 }
 
 .dokter-chat .bubble-time {
     float: right;
     font-size: 10px;
-    color: #999;
+    color: rgb(var(--grey2));
     margin-top: 4px;
     margin-left: 10px;
     display: flex;
@@ -423,20 +382,6 @@
     gap: 4px;
 }
 
-.dokter-chat .date-divider {
-    text-align: center;
-    margin: 16px 0;
-}
-.dokter-chat .date-divider span {
-    background: rgba(225, 245, 254, 0.9);
-    padding: 5px 12px;
-    border-radius: 8px;
-    font-size: 11px;
-    color: #555;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* --- INPUT AREA --- */
 .dokter-chat .input-area {
     background: rgb(var(--white));
     padding: 10px 16px;
@@ -444,7 +389,7 @@
     align-items: center;
     gap: 12px;
     z-index: 5;
-    border-top: 1px solid var(--chat-border);
+    border-top: 1.5px solid rgb(var(--grey1));
     flex-shrink: 0;
 }
 
@@ -454,43 +399,51 @@
     width: 100%;
     gap: 12px;
 }
+
 .dokter-chat .input-actions {
     display: flex;
     gap: 16px;
-    color: rgba(var(--blue1), 0.5);
+    color: rgb(var(--blue1));
     font-size: 20px;
 }
+
 .dokter-chat .input-actions i:hover {
-    color: rgb(var(--blue1));
+    color: rgba(var(--blue1), 0.5);
     cursor: pointer;
 }
 
 .dokter-chat .chat-input {
     flex: 1;
-    background: rgba(var(--grey1), 0.2);
-    border: none;
+    background: rgb(var(--grey4));
+    border: 1.25px solid rgb(var(--grey1));
     padding: 12px 16px;
     border-radius: 8px;
     font-size: 15px;
     outline: none;
 }
+
 .dokter-chat .chat-input:focus {
     background: rgb(var(--white));
     box-shadow: inset 0 0 0 1px rgb(var(--grey1));
 }
 
 .dokter-chat .btn-send {
-    color: var(--chat-primary);
+    color: rgb(var(--blue1));
     font-size: 20px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
 }
+
+.dokter-chat .btn-send:hover {
+    color: rgba(var(--blue1), 0.5);
+}
+
 .dokter-chat .btn-back {
     display: none;
     margin-right: 10px;
-    color: var(--chat-text-dark);
+    color: rgb(var(--blue1));
     font-size: 18px;
     background: none;
     border: none;
@@ -500,17 +453,26 @@
 .dokter-chat .input-closed-message {
     display: none;
     width: 100%;
-    padding: 12px 16px;
-    background: #f3f4f6;
-    color: #6b7280;
-    border: 1px solid #e5e7eb;
+    padding: 12px 12px;
+    background: rgb(var(--grey4));
+    color: rgb(var(--grey2));
+    border: 1.5px solid rgb(var(--grey1));
     border-radius: 8px;
-    font-size: 14px;
-    text-align: center;
+    font-size: 0.9rem;
     font-style: italic;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-/* MODAL RESEP SCOPED */
+.dokter-chat .input-area.closed #inputWrapperActive {
+    display: none;
+}
+
+.dokter-chat .input-area.closed #inputClosedMessage {
+    display: block;
+}
+
 .dokter-chat .modal-overlay {
     display: none;
     position: fixed;
@@ -523,239 +485,224 @@
     align-items: center;
     justify-content: center;
 }
+
 .dokter-chat .modal-box {
-    background-color: #fff;
-    padding: 20px;
+    background-color: rgb(var(--white));
+    padding: 24px;
     border-radius: 12px;
     width: 90%;
     max-width: 500px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     font-family: "Inter", sans-serif;
 }
+
 .dokter-chat .modal-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgb(var(--grey1));
     padding-bottom: 10px;
 }
+
 .dokter-chat .modal-title {
     font-weight: 600;
     font-size: 18px;
+    color: rgb(var(--blue1));
 }
+
 .dokter-chat .close-modal {
     cursor: pointer;
     font-size: 24px;
-    color: #aaa;
+    color: rgb(var(--grey2));
+    transition: color 0.2s;
 }
+
+.dokter-chat .close-modal:hover {
+    color: rgb(var(--red2));
+}
+
 .dokter-chat .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
+
 .dokter-chat .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: 500;
     font-size: 14px;
+    color: rgb(var(--grey3));
 }
+
 .dokter-chat .form-group input,
 .dokter-chat .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid rgb(var(--grey1));
+    border-radius: 8px;
     font-family: inherit;
-}
-.dokter-chat .btn-submit-resep {
-    width: 100%;
-    background: var(--btn-recipe);
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
+    background: rgb(var(--grey4));
+    outline: none;
 }
 
-/* Responsive */
+.dokter-chat .form-group input:focus,
+.dokter-chat .form-group textarea:focus {
+    border-color: rgb(var(--blue4));
+    background: rgb(var(--white));
+}
+
+.dokter-chat .btn-submit-resep {
+    width: 100%;
+    background: rgb(var(--blue1));
+    color: rgb(var(--white));
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dokter-chat .btn-submit-resep:hover {
+    opacity: 0.9;
+}
+
+.dokter-chat .drug-result-list {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    border: 1px solid rgb(var(--grey1));
+    border-radius: 6px;
+    max-height: 160px;
+    overflow-y: auto;
+    background: rgb(var(--white));
+}
+
+.dokter-chat .drug-result-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(var(--grey1));
+}
+
+.dokter-chat .drug-result-list li:last-child {
+    border-bottom: none;
+}
+
+.dokter-chat .drug-result-list li:hover {
+    background: rgba(var(--blue3), 0.5);
+}
+
+.dokter-chat .drug-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(var(--grey4));
+    border: 1px solid rgb(var(--grey1));
+    margin-bottom: 8px;
+}
+
+.dokter-chat .drug-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(var(--blue1));
+}
+
+.dokter-chat .remove-drug {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: rgb(var(--red1));
+    color: rgb(var(--red3));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dokter-chat .remove-drug:hover {
+    background: rgb(var(--red2));
+    color: rgb(var(--white));
+}
+
 @media (max-width: 900px) {
     .dokter-chat .chat-wrapper {
         padding: 0;
-        height: calc(100vh - 56px);
+        height: 90vh; 
     }
+
     .dokter-chat .app-container {
         max-width: 100%;
+        height: 100%;
         border-radius: 0;
         grid-template-columns: 1fr;
     }
+
     .dokter-chat .sidebar {
         width: 100%;
         display: flex;
     }
+
     .dokter-chat .chat-area {
         display: none;
+        width: 100%;
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
         height: 100%;
         z-index: 20;
     }
+
     .dokter-chat .app-container.chat-active .sidebar {
         display: none;
     }
+
     .dokter-chat .app-container.chat-active .chat-area {
         display: flex;
     }
+
     .dokter-chat .btn-back {
         display: block;
     }
 }
 
-.drug-result-list {
-    list-style: none;
-    margin: 6px 0 0;
-    padding: 0;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    max-height: 160px;
-    overflow-y: auto;
-}
-
-.drug-result-list li {
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-.drug-result-list li:hover {
-    background: #f3f4f6;
-}
-
-/* ===============================
-   SELECTED DRUG LIST
-================================ */
-.selected-drug-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 8px;
-}
-
-/* Card item */
-.drug-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-
-    padding: 14px 16px;
-    border-radius: 12px;
-
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
-
-    transition: all 0.2s ease;
-}
-
-.drug-item:hover {
-    border-color: #c7d2fe;
-    background: #f1f5ff;
-}
-
-/* Left content */
-.drug-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.drug-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1f2937;
-}
-
-/* Qty input */
-.drug-item input[type="number"] {
-    width: 90px;
-    padding: 6px 10px;
-
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-
-    font-size: 14px;
-    color: #111827;
-
-    background: white;
-}
-
-.drug-item input[type="number"]:focus {
-    outline: none;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
-}
-
-/* Remove button */
-.remove-drug {
-    width: 34px;
-    height: 34px;
-
-    border-radius: 8px;
-    border: none;
-
-    font-size: 18px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    color: #ef4444;
-    background: #fee2e2;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: all 0.15s ease;
-}
-
-.remove-drug:hover {
-    background: #fecaca;
-    transform: scale(1.05);
-}
-
-.call-container {
+.dokter-chat .call-container {
     display: none;
-    background: #050505;
+    background: rgb(var(--white));
     padding: 10px;
     border-radius: 10px;
     margin-top: 10px;
-    border: 1px solid #222;
+    border: 1px solid rgb(var(--grey1));
 }
 
-.video-wrapper {
+.dokter-chat .video-wrapper {
     display: flex;
-    gap: 8px;
+    gap: 20px;
     width: 100%;
+    justify-content: center;
 }
 
-.video-local,
-.video-remote {
+.dokter-chat .video-local,
+.dokter-chat .video-remote {
     background: #000;
     border-radius: 8px;
     width: 100%;
     max-width: 320px;
-    height: 200px;
+    aspect-ratio: 16/9;
     object-fit: cover;
 }
 
-.call-controls {
+.dokter-chat .call-controls {
     margin-top: 8px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 8px;
 }
 
-.incoming-call-backdrop {
+.dokter-chat .incoming-call-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
@@ -765,53 +712,53 @@
     z-index: 9999;
 }
 
-.incoming-call-box {
-    background: #111827;
+.dokter-chat .incoming-call-box {
+    background: rgb(var(--blue1));
     border-radius: 16px;
     padding: 20px 22px;
     width: 100%;
     max-width: 360px;
-    color: #f9fafb;
+    color: rgb(var(--white));
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
-.incoming-call-avatar {
+.dokter-chat .incoming-call-avatar {
     width: 72px;
     height: 72px;
     border-radius: 999px;
     overflow: hidden;
     margin: 0 auto 10px;
-    border: 2px solid #10b981;
+    border: 3px solid rgb(var(--green1));
 }
 
-.incoming-call-avatar img {
+.dokter-chat .incoming-call-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.incoming-call-title {
+.dokter-chat .incoming-call-title {
     font-size: 16px;
     font-weight: 600;
 }
 
-.incoming-call-subtitle {
+.dokter-chat .incoming-call-subtitle {
     font-size: 13px;
-    color: #9ca3af;
+    color: rgb(var(--grey1));
     margin-top: 4px;
     margin-bottom: 12px;
 }
 
-.incoming-call-actions {
+.dokter-chat .incoming-call-actions {
     display: flex;
     justify-content: center;
     gap: 12px;
     margin-top: 10px;
 }
 
-.btn-call-accept,
-.btn-call-reject {
+.dokter-chat .btn-call-accept,
+.dokter-chat .btn-call-reject {
     border-radius: 999px;
     border: none;
     padding: 8px 18px;
@@ -820,75 +767,165 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
-    color: #fff;
+    color: rgb(var(--white));
 }
 
-.btn-call-accept {
-    background: #10b981;
+.dokter-chat .btn-call-accept {
+    background: rgb(var(--green1));
 }
 
-.btn-call-reject {
-    background: #ef4444;
+.dokter-chat .btn-call-reject {
+    background: rgb(var(--red2));
 }
 
-.chat-status-bar {
-    padding: 10px 16px;
-    background: #fffbe6;
-    border-bottom: 1px solid #f0e6a0;
-    font-size: 13px;
-    color: #8a6d3b;
+.dokter-chat .chat-list::-webkit-scrollbar,
+.dokter-chat .messages-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dokter-chat .chat-list::-webkit-scrollbar-track,
+.dokter-chat .messages-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dokter-chat .chat-list::-webkit-scrollbar-thumb,
+.dokter-chat .messages-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.chat-card.prescription {
+    background-color: rgb(var(--white));
+    border-radius: 12px;
+    border: 1px solid rgb(var(--grey1));
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    max-width: 300px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.chat-card.prescription h4 {
+    background-color: rgb(var(--green2));
+    color: rgb(var(--white));
+    margin: 0;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.chat-status-bar i {
-    color: #d4a017;
+.chat-card.prescription p {
+    margin: 16px 16px 12px 16px;
+    color: rgb(var(--grey2));
+    line-height: 1.5;
 }
 
-.status-active {
-    background: #e6f7ff;
-    border-bottom: 1px solid #b5e2ff;
-    color: #0369a1;
-    justify-content: center;
+.prescription-actions {
+    padding: 0 16px 16px 16px;
 }
 
-.status-active i {
-    color: #0284c7;
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.status-ended {
-    background: #ffecec;
-    border-bottom: 1px solid #ffb8b8;
-    color: #b91c1c;
+@media (max-width: 640px) {
+    .chat-card.prescription {
+        max-width: 90%;
+    }
+
+    .chat-card.prescription a {
+        display: block;
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .chat-card.prescription a:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
-.status-ended i {
-    color: #dc2626;
-}
-
-.input-wrapper-active {
-    display: flex;
-    align-items: center;
+.chat-card.referral {
+    background-color: rgb(var(--white));
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    max-width: 300px;
     width: 100%;
-    gap: 12px;
-}
-
-.input-closed-message {
-    display: none;
-    width: 100%;
-    padding: 12px 16px;
-    background: #f8d7da;
-    color: #842029;
-    border: 1px solid #f5c2c7;
-    border-radius: 8px;
     font-size: 14px;
 }
 
-.input-area.closed #inputWrapperActive {
-    display: none;
+.chat-card.referral h4 {
+    background-color: rgb(var(--green2));
+    color: #ffffff;
+    margin: 0;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.input-area.closed #inputClosedMessage {
+.chat-card.referral p {
+    margin: 16px 16px 8px 16px;
+    color: rgb(var(--blue1));
+    line-height: 1.4;
+}
+
+.referral-info {
+    background-color: rgb(var(--green4));
+    margin: 8px 16px 16px 16px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px dashed rgb(var(--green2));
+    color: rgb(var(--blue1));
+    line-height: 1.6;
+}
+
+.referral-info strong {
+    color: rgb(var(--green2));
+    font-weight: 600;
+    min-width: 60px;
+    display: inline-block;
+}
+
+.referral-actions {
+    padding: 0 16px 16px 16px;
+}
+
+.btn-secondary {
     display: block;
+    width: 100%;
+    text-align: center;
+    background-color: rgb(var(--white));
+    color: rgb(var(--green2));
+    border: 1px solid rgb(var(--green2));
+    padding: 8px 0;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: rgb(var(--green2));
+    color: rgb(var(--white));
+    box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.2);
+}
+
+.btn-secondary:active {
+    transform: translateY(1px);
 }

@@ -1,17 +1,3 @@
-:root {
-    /* Color Palette */
-    --chat-primary: #0088cc;
-    --chat-primary-light: #e3f2fd;
-    --chat-bg-body: #f0f2f5;
-    --chat-bg-white: #ffffff;
-    --chat-text-dark: #111b21;
-    --chat-text-grey: #667781;
-    --chat-border: #e9edef;
-    --chat-bubble-in: #ffffff;
-    --chat-bubble-out: #d9fdd3;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
 * {
     box-sizing: border-box;
 }
@@ -440,7 +426,7 @@
 @media (max-width: 900px) {
     .chat-wrapper {
         padding: 0;
-        height: calc(100vh - 56px);
+        height: 80vh;
     }
 
     .app-container {
@@ -521,7 +507,7 @@
     object-fit: cover;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 900px) {
     .chat-wrapper {
         padding: 10px 20px 10px 20px;
     }
@@ -636,14 +622,24 @@
     color: rgb(var(--red3));
 }
 
+.status-closed {
+    background: rgb(var(--red1));
+    border-bottom: 1px solid rgb(var(--red3));
+    color: rgb(var(--red3));
+}
+
+.status-closed i {
+    color: rgb(var(--red3));
+}
+
 .status-active {
     background: rgb(var(--blue5));
-    border-bottom: 1px solid rgb(var(--blue4));
-    color: rgb(var(--blue4));
+    border-bottom: 1px solid rgb(var(--blue1));
+    color: rgb(var(--blue1));
 }
 
 .status-active i {
-    color: rgb(var(--blue4));
+    color: rgb(var(--blue1));
 }
 
 .input-wrapper-active {
