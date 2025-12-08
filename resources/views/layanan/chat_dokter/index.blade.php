@@ -453,23 +453,30 @@
     }
 
     function subscribeCall(chatId) {
-      if (!chatId) return console.warn("[CALL] No chatId");
+      if (!chatId) return;
+
+      if (callChannel) {
+        callChannel.stopListeningForWhisper("rtc-signal");
+        window.Echo.leave("calls." + activeChatId);
+      }
+
+      endCallLocal();
 
       console.log("[CALL] Subscribing calls." + chatId);
 
       callChannel = window.Echo.private("calls." + chatId);
 
-      callChannel.subscribed(() => console.log("[CALL] ✔ Subscribed calls." + chatId));
+      callChannel.subscribed(() =>
+        console.log("[CALL] ✔ Subscribed calls." + chatId)
+      );
 
-      callChannel.error(e => console.error("[CALL] Channel error:", e));
+      callChannel.error(e =>
+        console.error("[CALL] Channel error:", e)
+      );
 
       callChannel.listenForWhisper("rtc-signal", async payload => {
-        console.log("[CALL] Signal:", payload);
-
-        if (payload.to && String(payload.to) !== String(authUserId)) {
-          console.log("[CALL] Signal ignored (not for me)");
-          return;
-        }
+        if (String(payload.from) === String(authUserId)) return;
+        if (payload.to && String(payload.to) !== String(authUserId)) return;
 
         switch (payload.type) {
           case "incoming-call":
@@ -515,7 +522,7 @@
     async function getLocalStream(type) {
       if (localStream) return localStream;
 
-      const constraints = type === "audio" ? {
+      const constraints = type === 'audio' ? {
         audio: true,
         video: false
       } : {
@@ -523,20 +530,18 @@
         video: true
       };
 
-      if (type === "audio") {
-        document.getElementById("audioWrapper").style.display = "flex";
-        document.getElementById("videoWrapper").style.display = "none";
-      } else {
-        document.getElementById("audioWrapper").style.display = "none";
-        document.getElementById("videoWrapper").style.display = "flex";
-      }
-
-      console.log("[RTC] getUserMedia:", constraints);
-
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
       localVideo.srcObject = localStream;
+
+      Object.values(pcs).forEach(pc => {
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+        });
+      });
+
       return localStream;
     }
+
 
     function videoElementFor(id) {
       if (id == chatUserId) return remoteVideoUser;
@@ -564,18 +569,21 @@
       };
 
       pc.ontrack = (e) => {
-        if (!remoteStreams[remoteId]) remoteStreams[remoteId] = new MediaStream();
+        if (!remoteStreams[remoteId]) {
+          remoteStreams[remoteId] = new MediaStream();
+        }
 
-        e.streams[0].getTracks().forEach(t => {
-          remoteStreams[remoteId].addTrack(t);
+        e.streams[0].getTracks().forEach(track => {
+          remoteStreams[remoteId].addTrack(track);
         });
 
-        videoElementFor(remoteId).srcObject = remoteStreams[remoteId];
-      };
+        const video = videoElementFor(remoteId);
+        video.srcObject = remoteStreams[remoteId];
 
-      if (localStream) {
-        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-      }
+        video.play().catch(err => {
+          console.warn('[RTC] autoplay blocked, retrying...', err);
+        });
+      };
 
       return pc;
     }
@@ -589,17 +597,25 @@
       await getLocalStream(type);
       callContainer.style.display = "block";
 
-      const targets = [chatUserId, chatDoctorId].filter(id => id && id != authUserId);
+      const targetId =
+        authRole === 'doctor' ?
+        chatUserId :
+        chatDoctorId;
 
-      targets.forEach(rid => {
-        console.log("[CALL] Whisper incoming-call →", rid);
-
-        callChannel.whisper("rtc-signal", {
-          type: "incoming-call",
-          from: authUserId,
-          to: rid,
-          call_type: type
+      if (!targetId || targetId === authUserId) {
+        console.error("[CALL] Invalid target", {
+          authUserId,
+          chatUserId,
+          chatDoctorId
         });
+        return;
+      }
+
+      callChannel.whisper("rtc-signal", {
+        type: "incoming-call",
+        from: authUserId,
+        to: targetId,
+        call_type: type
       });
     }
 

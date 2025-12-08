@@ -584,18 +584,15 @@
         video: true
       };
 
-      if (type === "audio") {
-        document.getElementById("audioWrapper").style.display = "flex";
-        document.getElementById("videoWrapper").style.display = "none";
-      } else {
-        document.getElementById("audioWrapper").style.display = "none";
-        document.getElementById("videoWrapper").style.display = "flex";
-      }
-
-      console.log('[RTC] getUserMedia(dokter):', constraints);
-
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
-      if (localVideo) localVideo.srcObject = localStream;
+      localVideo.srcObject = localStream;
+
+      Object.values(pcs).forEach(pc => {
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+        });
+      });
+
       return localStream;
     }
 
@@ -622,15 +619,17 @@
           remoteStreams[remoteId] = new MediaStream();
         }
 
-        e.streams[0].getTracks().forEach(t => remoteStreams[remoteId].addTrack(t));
+        e.streams[0].getTracks().forEach(track => {
+          remoteStreams[remoteId].addTrack(track);
+        });
 
-        const vid = videoElementFor(remoteId);
-        if (vid) vid.srcObject = remoteStreams[remoteId];
+        const video = videoElementFor(remoteId);
+        video.srcObject = remoteStreams[remoteId];
+
+        video.play().catch(err => {
+          console.warn('[RTC] autoplay blocked, retrying...', err);
+        });
       };
-
-      if (localStream) {
-        localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-      }
 
       return pc;
     }
@@ -806,13 +805,22 @@
     async function onIce(payload) {
       const pc = pcs[payload.from];
       if (!pc || !payload.candidate) return;
-      await pc.addIceCandidate(new RTCIceCandidate(payload.candidate));
+
+      try {
+        await pc.addIceCandidate(new RTCIceCandidate(payload.candidate));
+      } catch (e) {
+        console.warn('[RTC] addIceCandidate failed:', e);
+      }
     }
+
 
     function onRemoteReject(payload) {
       console.log('[CALL] remote reject', payload.from);
+      incomingCall = null;
+      isCaller = false;
       endCallLocal();
     }
+
 
     function hangupCall() {
       if (callChannel) {
