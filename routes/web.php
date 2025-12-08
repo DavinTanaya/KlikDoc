@@ -126,12 +126,12 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/pendaftaran', [DoctorController::class, 'registerIndex'])->name('dokter.pendaftaran');
         Route::post('/pendaftaran', [DoctorController::class, 'register'])->name('dokter.register');
+        Route::get('/rujukan/{referral}/download', [DoctorController::class, 'downloadRefferal'])->name('referral.download');
         Route::middleware(['isDoctor'])->group(function () {
             Route::get('/', [DoctorController::class, 'index'])->name('dokter.dashboard');
             Route::get('/riwayat', [DoctorController::class, 'getHistory'])->name('dokter.riwayat');
             Route::get('/rujukan', [DoctorController::class, 'getRefferal'])->name('dokter.rujukan');
             Route::post('/rujukan/store', [DoctorController::class, 'storeRefferal'])->name('dokter.rujukan.store');
-            Route::get('/rujukan/{referral}/download', [DoctorController::class, 'downloadRefferal'])->name('referral.download');
             Route::get('/chat', [ChatDokterController::class, 'index'])->name('dokter.chat.index');
             Route::post('/prescription-chat/{consultationId}', [ConsultationController::class, 'createPrescriptionChat'])->name('dokter.prescription.chat');
             Route::post('/finish/{consultationId}', [ConsultationController::class, 'finishConsultation'])->name('dokter.consultation.finish');
