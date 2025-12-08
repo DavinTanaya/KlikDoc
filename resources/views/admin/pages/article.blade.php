@@ -73,7 +73,7 @@
                 {{ strtoupper(substr($article->author->name,0,2)) }}
               </div>
               {{ $article->author->application?->full_name ?: $article->author->name }} •
-              {{ $article->created_at->diffForHumans() }}
+              {{ $article->created_at?->translatedFormat('d F Y H:i') }}
             </small>
 
             <div class="d-flex justify-content-between align-items-center">

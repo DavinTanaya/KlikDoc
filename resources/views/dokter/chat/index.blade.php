@@ -316,8 +316,8 @@
         window.Echo = new Echo({
             broadcaster: "pusher",
             key: "{{ config('broadcasting.connections.pusher.key') }}",
-            wsHost: "5.175.183.160",
-            wsPort: 6001,
+            wsHost: "ws.klikdoc.online",
+            wsPort: 443,
             forceTLS: false,
             encrypted: false,
             disableStats: true,

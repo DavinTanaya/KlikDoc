@@ -66,7 +66,7 @@ class ArticleSeeder extends Seeder
                 'author_id'   => $item['author'],
                 'author_role' => $item['author_role'],
                 'thumbnail'   => 'images/article/default.jpg', // opsional
-                'created_at'=> $item['status'] === 'published' ? now() : null,
+                'created_at'=> now(),
             ]);
         }
     }

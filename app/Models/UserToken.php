@@ -10,7 +10,7 @@ class UserToken extends Model
     [
         'user_id',
         'token',
-        'expires_at',
+        'expired_at',
         'type',
     ];
     public function user()
