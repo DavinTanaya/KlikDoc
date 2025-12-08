@@ -17,22 +17,19 @@ class DoctorController extends Controller
     {
         $doctor = auth()->user();
         $doctorId = Application::where('user_id', $doctor->id)->firstOrFail()->id;
-        // ✅ Total pasien unik
+
         $totalPasien = Consultation::where('doctor_id', $doctorId)
             ->distinct('user_id')
             ->count('user_id');
 
-        // ✅ Chat konsultasi AKTIF
         $aktifConsultation = Consultation::where('doctor_id', $doctorId)
             ->where('status', 'AKTIF')
             ->count();
 
-        // ✅ Konsultasi selesai
         $selesaiConsultation = Consultation::where('doctor_id', $doctorId)
             ->where('status', 'SELESAI')
             ->count();
 
-        // ✅ Chat aktif terbaru (sidebar / highlight)
         $activeChats = Chat::where('doctor_id', $doctor->id)
             ->whereHas('consultation', fn ($q) =>
                 $q->where('status', 'AKTIF')
