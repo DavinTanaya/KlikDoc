@@ -146,8 +146,8 @@
         <div id="callContainer" class="call-container">
           <div class="video-wrapper" id="videoWrapper">
             <video id="localVideo" class="video-local" autoplay playsinline muted></video>
-            <video id="remoteVideoUser" class="video-remote" autoplay playsinline style="display: none;"></video>
-            <video id="remoteVideoDoctor" class="video-remote" autoplay playsinline></video>
+            <video id="remoteVideoUser" class="video-remote" autoplay playsinline></video>
+            <video id="remoteVideoDoctor" class="video-remote" autoplay playsinline style="display: none;"></video>
           </div>
           <audio id="remoteAudio" autoplay></audio>
           <div class="audio-wrapper" id="audioWrapper">
