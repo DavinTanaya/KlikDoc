@@ -24,9 +24,15 @@
             <div class="vr d-none d-lg-block" style="height: 30px; align-self: center; width: 1.5px;"></div>
 
             @guest
-                <div class="d-flex gap-2">
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary rounded-pill px-4 fw-semibold">Masuk</a>
-                    <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-4 fw-semibold">Daftar</a>
+               <div class="d-flex gap-2">
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary rounded-pill px-3 py-1 px-md-4 py-md-2 fw-semibold"
+                        style="--bs-btn-color: #1c274c; --bs-btn-border-color: #1c274c; --bs-btn-hover-bg: #1c274c; --bs-btn-hover-border-color: #1c274c; --bs-btn-active-bg: #1c274c; --bs-btn-active-border-color: #1c274c; font-size: 0.875rem;">
+                        Masuk
+                    </a>
+                    <a href="{{ route('login') }}" class="btn btn-primary rounded-pill px-3 py-1 px-md-4 py-md-2 fw-semibold"
+                        style="--bs-btn-bg: #1c274c; --bs-btn-border-color: #1c274c; --bs-btn-hover-bg: #151d38; --bs-btn-hover-border-color: #151d38; --bs-btn-active-bg: #151d38; --bs-btn-active-border-color: #151d38; font-size: 0.875rem;">
+                        Daftar
+                    </a>
                 </div>
             @else
                 <div class="dropdown">
@@ -91,7 +97,7 @@
             @endguest
         </div>
 
-        <button class="navbar-toggler border-0 ms-3" type="button" data-bs-toggle="collapse"
+        <button class="navbar-toggler border-0 ms-3 py-1 px-1" style="font-size: 0.85rem;" type="button" data-bs-toggle="collapse"
             data-bs-target="#userNavbar" aria-controls="userNavbar" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
