@@ -31,6 +31,23 @@ Route::prefix('auth')->group(function () {
         Route::get('google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
         Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
     });
+    Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])
+    ->name('verify.email');
+    Route::get('/verify-notice/{email}', [AuthController::class, 'verifyNotice'])->name('auth.verify.notice');
+    Route::post('/verify-resend', [AuthController::class, 'resendVerification'])->name('verify.resend');
+
+    Route::get('/forgot-password', [AuthController::class, 'forgot'])
+    ->name('auth.forgot');
+
+    Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])
+        ->name('password.email');
+
+    Route::get('/reset-password/{token}', [AuthController::class, 'resetForm'])
+        ->name('password.reset');
+
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])
+        ->name('password.update');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
@@ -78,15 +95,19 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('artikel')->group(function () {
-        Route::get('/create', [ArticleController::class, 'create'])->name('article.create');
         Route::post('/', [ArticleController::class, 'store'])->name('article.store');
         Route::get('/list', [ArticleController::class, 'articleList'])->name('article.index');
-        Route::prefix('{article}')->group(function () {
-            Route::get('/edit', [ArticleController::class, 'edit'])->name('article.edit');
-            Route::put('/', [ArticleController::class, 'update'])->name('article.update');
-            Route::post('/approve', [ArticleController::class, 'approve'])->name('article.approve');
-            Route::post('/unpublish', [ArticleController::class, 'unpublish'])->name('article.unpublish');
+        Route::middleware('isAdminOrDoctor')->group(function () {
+            Route::get('/create', [ArticleController::class, 'create'])->name('article.create');
+            Route::prefix('{article}')->middleware('isAdmin')->group(function () {
+                Route::get('/edit', [ArticleController::class, 'edit'])->name('article.edit');
+                Route::put('/', [ArticleController::class, 'update'])->name('article.update');
+                Route::post('/approve', [ArticleController::class, 'approve'])->name('article.approve');
+                Route::post('/unpublish', [ArticleController::class, 'unpublish'])->name('article.unpublish');
+            });
         });
+
+        
     });
 
     Route::prefix('klik-home')->group(function () {
@@ -102,16 +123,20 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('dokter')->group(function () {
-        Route::get('/', [DoctorController::class, 'index'])->name('dokter.dashboard');
+
         Route::get('/pendaftaran', [DoctorController::class, 'registerIndex'])->name('dokter.pendaftaran');
         Route::post('/pendaftaran', [DoctorController::class, 'register'])->name('dokter.register');
-        Route::get('/riwayat', [DoctorController::class, 'getHistory'])->name('dokter.riwayat');
-        Route::get('/rujukan', [DoctorController::class, 'getRefferal'])->name('dokter.rujukan');
-        Route::post('/rujukan/store', [DoctorController::class, 'storeRefferal'])->name('dokter.rujukan.store');
-        Route::get('/rujukan/{referral}/download', [DoctorController::class, 'downloadRefferal'])->name('referral.download');
-        Route::get('/chat', [ChatDokterController::class, 'index'])->name('dokter.chat.index');
-        Route::post('/prescription-chat/{consultationId}', [ConsultationController::class, 'createPrescriptionChat'])->name('dokter.prescription.chat');
-        Route::post('/finish/{consultationId}', [ConsultationController::class, 'finishConsultation'])->name('dokter.consultation.finish');
+        Route::middleware(['isDoctor'])->group(function () {
+            Route::get('/', [DoctorController::class, 'index'])->name('dokter.dashboard');
+            Route::get('/riwayat', [DoctorController::class, 'getHistory'])->name('dokter.riwayat');
+            Route::get('/rujukan', [DoctorController::class, 'getRefferal'])->name('dokter.rujukan');
+            Route::post('/rujukan/store', [DoctorController::class, 'storeRefferal'])->name('dokter.rujukan.store');
+            Route::get('/rujukan/{referral}/download', [DoctorController::class, 'downloadRefferal'])->name('referral.download');
+            Route::get('/chat', [ChatDokterController::class, 'index'])->name('dokter.chat.index');
+            Route::post('/prescription-chat/{consultationId}', [ConsultationController::class, 'createPrescriptionChat'])->name('dokter.prescription.chat');
+            Route::post('/finish/{consultationId}', [ConsultationController::class, 'finishConsultation'])->name('dokter.consultation.finish');
+        });
+        
     });
 
     Route::middleware(['isAdmin'])->group(function () {
@@ -178,7 +203,3 @@ Route::middleware('auth')->group(function () {
     Route::get('/dokter/profil', [DoctorController::class, 'profile'])->name('dokter.profile');
     Route::put('/dokter/profil', [DoctorController::class, 'update'])->name('dokter.profile.update');
 });
-
- Route::get('/lupa-password', [AuthController::class, 'forgot'])->name('auth.forgot');
- Route::get('/lupa-password/otp', [AuthController::class, 'otp'])->name('auth.forgot.otp');
- Route::get('/lupa-password/password-baru', [AuthController::class, 'newPassword'])->name('auth.new-password');

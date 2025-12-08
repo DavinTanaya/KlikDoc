@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\isAdminOrDoctor;
 use App\Http\Middleware\isDoctor;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias(['isAdmin' => isAdmin::class, 'isDoctor' => isDoctor::class]);
+        $middleware->alias(['isAdmin' => isAdmin::class, 'isDoctor' => isDoctor::class, 'isAdminOrDoctor' => isAdminOrDoctor::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
