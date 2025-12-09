@@ -63,23 +63,23 @@
                 <div class="divider"></div>
 
                 <div class="receipt-row">
-                    <span>Konsultasi</span>
-                    <span>Rp {{ number_format($consultation->consultation_fee) }}</span>
+                    <span class="label">Konsultasi</span>
+                    <span class="value">Rp {{ number_format($consultation->consultation_fee) }}</span>
                 </div>
 
                 <div class="receipt-row">
-                    <span>Biaya Layanan</span>
-                    <span>Rp {{ number_format($consultation->service_fee) }}</span>
+                    <span class="label">Biaya Layanan</span>
+                    <span class="value">Rp {{ number_format($consultation->service_fee) }}</span>
                 </div>
 
                 <div class="receipt-row">
-                    <span>Platform Fee</span>
-                    <span>Rp {{ number_format($consultation->platform_fee) }}</span>
+                    <span class="label">Platform Fee</span>
+                    <span class="value">Rp {{ number_format($consultation->platform_fee) }}</span>
                 </div>
 
                 <div class="receipt-row total">
-                    <span>Total Dibayar</span>
-                    <span>Rp {{ number_format($consultation->total) }}</span>
+                    <span class="label">Total Dibayar</span>
+                    <span class="value">Rp {{ number_format($consultation->total) }}</span>
                 </div>
             </div>
             <div class="action-buttons">

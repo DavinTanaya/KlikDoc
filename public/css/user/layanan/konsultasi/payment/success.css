@@ -9,8 +9,7 @@
     --border: #e0e0e0;
     background-color: var(--bg-page);
     min-height: 100vh;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -133,6 +132,7 @@
 
 .success-page .receipt-row .label {
     color: var(--text-grey);
+    text-align: left;
 }
 .success-page .receipt-row .value {
     color: var(--text-main);
@@ -165,7 +165,7 @@
 }
 
 .success-page .receipt-row.total .value {
-    color: var(--primary);
+    color: var(--accent);
     font-size: 1.2rem;
     font-weight: 800;
 }

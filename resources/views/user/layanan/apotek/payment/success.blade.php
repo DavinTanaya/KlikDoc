@@ -46,8 +46,8 @@
 
                 @foreach ($order->items as $item)
                     <div class="receipt-row small">
-                        <span>{{ $item->drug->name }} (x{{ $item->quantity }})</span>
-                        <span>Rp {{ number_format($item->total, 0, ',', '.') }}</span>
+                        <span class="value">{{ $item->drug->name }} (x{{ $item->quantity }})</span>
+                        <span class="value">Rp {{ number_format($item->total, 0, ',', '.') }}</span>
                     </div>
                 @endforeach
 

@@ -43,18 +43,22 @@
 }
 
 .jadwal-praktik .btn-back-pill {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--text-main);
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: color 0.2s;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
     width: fit-content;
 }
 .jadwal-praktik .btn-back-pill:hover {
-    color: var(--primary-navy);
+    transform: translateX(-3px);
 }
 
 .jadwal-praktik .title-block {

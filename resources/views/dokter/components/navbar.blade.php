@@ -29,7 +29,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="text-end d-none d-xl-block lh-1">
                             <span class="d-block fw-bold text-dark pb-1" style="font-size: 1rem;">
-                                {{ Auth::user()->name ?? 'dr. Andi Setiawan' }}
+                                {{ Auth::user()->application?->full_name ?? 'Dr. -' }}
                             </span>
                             <span class="d-block text-muted" style="font-size: 0.8rem;">
                                 {{ Auth()->user()->application?->spesialisasi ?? '' }}

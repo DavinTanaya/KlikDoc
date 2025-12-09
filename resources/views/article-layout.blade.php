@@ -51,6 +51,8 @@
     </style>
 @endsection
 
+@stack('styles')
+
 @section('body')
     <div class="toast-container">
 
