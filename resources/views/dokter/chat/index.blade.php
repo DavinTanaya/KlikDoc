@@ -982,7 +982,7 @@
         return;
       }
 
-      const consultationId = document.getElementById('consultationId').value;
+      const consultationId = chatId;
 
       const payload = {
         diagnosis: document.getElementById('diagnosis').value,
@@ -1021,7 +1021,7 @@
       if (!confirm('Selesaikan sesi konsultasi ini?')) return;
 
       const url = "{{ route('dokter.consultation.finish', ':id') }}"
-        .replace(':id', consultationId);
+        .replace(':id', chatId);
 
       fetch(url, {
           method: 'POST',
@@ -1073,7 +1073,7 @@
 
     function submitReferral() {
       const payload = {
-        consultation_id: document.getElementById('refConsultationId').value,
+        consultation_id: chatId,
         destination: document.getElementById('refDestination').value,
         department: document.getElementById('refDepartment').value,
         reason: document.getElementById('refReason').value,
