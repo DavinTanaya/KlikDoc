@@ -172,17 +172,17 @@
                             <div class="col-md-6 col-12">
                                 <ul class="list-unstyled">
                                     <li><a href="#" class="footer-link">Tentang Kami</a></li>
-                                    <li><a href="#" class="footer-link">Booking</a></li>
-                                    <li><a href="#" class="footer-link">Apotek</a></li>
+                                    <li><a href="{{ route('klik-home') }}" class="footer-link">KlikHome</a></li>
+                                    <li><a href="#" class="footer-link">Apotek Online</a></li>
                                     <li><a href="#" class="footer-link">Promo Hari Ini</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-6 col-12">
                                 <ul class="list-unstyled">
-                                    <li><a href="#" class="footer-link">Artikel Kesehatan</a></li>
-                                    <li><a href="#" class="footer-link">Layanan Kesehatan</a></li>
-                                    <li><a href="#" class="footer-link">Konsultasi</a></li>
-                                    <li><a href="#" class="footer-link">Pendaftaran Dokter</a></li>
+                                    <li><a href="{{ route('artikel') }}" class="footer-link">Artikel Kesehatan</a></li>
+                                    <li><a href="{{ route('konsultasi') }}" class="footer-link">Konsultasi</a></li>
+                                    <li><a href="{{ route('dokter.pendaftaran') }}" class="footer-link">Pendaftaran
+                                            Dokter</a></li>
                                 </ul>
                             </div>
                         </div>
