@@ -1,6 +1,6 @@
 # KlikDoc
 
-**KlikDoc** adalah platform layanan kesehatan digital yang dirancang untuk mempermudah akses layanan kesehatan secara online. Aplikasi ini menjembatani interaksi antara pasien dan tenaga medis secara efisien, menyediakan layanan mulai dari konsultasi hingga manajemen pengobatan dalam satu platform terintegrasi.
+**KlikDoc** adalah platform layanan kesehatan digital yang dirancang untuk mempermudah akses layanan kesehatan secara online. Aplikasi ini menjembatani interaksi antara pasien dan tenaga medis secara efisien, menyediakan layanan mulai dari konsultasi hingga manajemen pengobatan dalam satu platform terintegrasi. Seluruh antarmuka (frontend) dibangun murni menggunakan templating engine **Blade** bawaan Laravel.
 
 ## 🚀 Fitur Utama
 
@@ -8,13 +8,17 @@
 - **Dashboard Terpisah:** Antarmuka khusus dan terpersonalisasi untuk Pasien maupun Mitra Dokter.
 - **Chat Konsultasi:** Fitur komunikasi interaktif untuk sesi konsultasi medis antara pasien dan dokter.
 - **Pengingat Obat:** Sistem pengingat otomatis untuk membantu pasien mematuhi jadwal minum obat mereka.
+- **Kalkulator BMI:** Penghitung BMI bagi para pengguna yang ingin hidup lebih sehat.
+- **Kalender Menstruasi:** Untuk membantu para pengguna wanita melihat jadwal menstruasi yang baik.
 - **Artikel Kesehatan:** Pusat informasi yang memuat berbagai artikel medis dan tips kesehatan terkini.
-- **Sistem Pembayaran:** Halaman checkout dan pembayaran yang terintegrasi untuk layanan konsultasi.
+- **Apotek Online:** Apotek online bagi pengguna yang tidak dapat keluar rumah.
+- **Klik Home:** Layanan kunjungan dokter ke rumah untuk melakukan pemeriksaan kesehatan dan layanan kesehatan lainnya.
+- **Sistem Pembayaran:** Halaman checkout dan pembayaran yang terintegrasi untuk layanan konsultasi, apotek online, dan KlikHome.
 - **Registrasi Mitra Dokter:** Alur pendaftaran mandiri bagi dokter yang ingin bergabung sebagai mitra di platform KlikDoc.
 
 ## 🛠️ Cara Menjalankan Project (Local Development)
 
-Project ini dibangun menggunakan framework Laravel. Ikuti langkah-langkah berikut untuk menjalankan aplikasi di lingkungan lokal Anda:
+Project ini dibangun secara monolitik menggunakan framework **Laravel** dengan **Blade.php** sebagai frontend. Ikuti langkah-langkah berikut untuk menjalankan aplikasi di lingkungan lokal Anda:
 
 ### 1. Clone Repositori
 ```bash
@@ -23,11 +27,9 @@ cd klikdoc
 ```
 
 ### 2. Install Dependencies
-Pastikan Anda telah menginstal Composer dan Node.js.
+Pastikan Anda telah menginstal Composer. (Node.js/NPM tidak diwajibkan karena frontend murni menggunakan Blade).
 ```bash
 composer install
-npm install
-npm run build
 ```
 
 ### 3. Konfigurasi Environment
